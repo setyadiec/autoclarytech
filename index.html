@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AutoClaryTech — Solusi Kasir Suara & CS WhatsApp AI UMKM</title>
-  <meta name="description" content="Platform otomasi kasir digital, CS WhatsApp AI 24 jam, dan verifikasi pembayaran otomatis untuk UMKM dan bisnis modern di Indonesia.">
+  <meta name="description" content="Cara paling simpel kelola toko: kasir cukup bicara lewat voice note, chat WhatsApp dibalas AI 24 jam, dan laporan omzet harian otomatis.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg">
   <link rel="alternate icon" type="image/png" href="assets/favicon/favicon-32x32.png">
 
   <!-- Apple & Modern SaaS Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #000000;
-      --card-bg: #0a0a0e;
+      --card-bg: #0b0b10;
       --card-border: rgba(255, 255, 255, 0.08);
       --cyan: #00D2B4;
       --blue: #22d3ee;
@@ -87,7 +87,7 @@
     /* Sections */
     .section {
       width: 100%;
-      padding: 100px 24px;
+      padding: 90px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -109,8 +109,8 @@
 
     .headline {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(36px, 5.5vw, 72px);
-      line-height: 1.05;
+      font-size: clamp(34px, 5.2vw, 68px);
+      line-height: 1.08;
       letter-spacing: -0.03em;
       margin-bottom: 20px;
       max-width: 900px;
@@ -118,25 +118,95 @@
     }
 
     .sub-headline {
-      font-size: clamp(16px, 1.8vw, 19px);
+      font-size: clamp(15px, 1.8vw, 19px);
       color: var(--text-muted);
-      max-width: 700px;
+      max-width: 720px;
       margin-bottom: 40px;
       line-height: 1.6;
     }
 
-    /* Visual Edge */
-    .visual-core {
+    /* SIMULATOR CHAT PHONE MOCKUP */
+    .phone-simulator-wrapper {
       width: 100%;
-      max-width: 1080px;
-      margin: 40px auto 0;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid var(--card-border);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+      max-width: 860px;
+      background: #0d0d12;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+      margin-top: 20px;
+      text-align: left;
     }
 
-    .visual-core img { width: 100%; height: auto; display: block; }
+    .sim-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 16px;
+    }
+
+    .sim-tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      color: #a1a1aa;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 18px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sim-tab-btn.active, .sim-tab-btn:hover {
+      background: var(--cyan);
+      color: #000;
+      border-color: var(--cyan);
+    }
+
+    /* Screen Inside Mockup */
+    .chat-screen {
+      background: #07090e;
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .chat-bubble {
+      max-width: 82%;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    .chat-user {
+      align-self: flex-end;
+      background: #005c4b;
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-ai {
+      align-self: flex-start;
+      background: #202c33;
+      color: #e9edef;
+      border-bottom-left-radius: 4px;
+      border: 1px solid rgba(0, 210, 180, 0.2);
+    }
+
+    .chat-time {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: right;
+      margin-top: 4px;
+    }
 
     /* Grid Features */
     .grid-cards {
@@ -159,30 +229,6 @@
     .feature-card:hover {
       transform: translateY(-4px);
       border-color: rgba(0, 210, 180, 0.4);
-    }
-
-    /* 3 Steps Section */
-    .step-box {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 32px 28px;
-      text-align: left;
-    }
-
-    .step-num {
-      display: inline-block;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: rgba(0, 210, 180, 0.15);
-      color: var(--cyan);
-      font-family: 'Outfit', sans-serif;
-      font-size: 18px;
-      font-weight: 800;
-      line-height: 36px;
-      text-align: center;
-      margin-bottom: 16px;
     }
 
     /* FAQ */
@@ -215,21 +261,22 @@
     @media (max-width: 768px) {
       .nav-menu { display: none; }
       .nav-bar { padding: 0 16px; }
-      .section { padding: 80px 16px; }
+      .section { padding: 70px 16px; }
+      .chat-bubble { max-width: 92%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header Navigasi Elegan (Standar SaaS Global) -->
+  <!-- Header Navigasi -->
   <nav class="nav-bar">
     <a href="#" class="brand">
       <img src="assets/Logo-AUTOCLARYtech.png" alt="AutoClaryTech" style="height: 22px; width: auto;">
     </a>
 
     <div class="nav-menu">
+      <a href="#cara-pakai">Cara Pakai Simpel</a>
       <a href="#fitur">Solusi & Fitur</a>
-      <a href="#cara-kerja">Cara Kerja</a>
       <a href="#harga">Paket Harga</a>
       <a href="#faq">FAQ</a>
     </div>
@@ -241,11 +288,11 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="section" style="padding-top: 140px;">
+  <section class="section" style="padding-top: 135px;">
     <div class="badge-pill">
       <span style="color: #10b981; font-weight: 700;">●</span>
       <span style="font-weight: 700; color: #fff;">AutoClaryTech</span>
-      <span style="color: #71717a;">• Tenaga Kerja AI Otonom UMKM</span>
+      <span style="color: #71717a;">• Cara Paling Simpel Mengelola Usaha</span>
     </div>
 
     <h1 class="headline">
@@ -254,82 +301,99 @@
     </h1>
 
     <p class="sub-headline">
-      Otomasi kasir digital, balasan chat otomatis dari katalog toko Anda, dan verifikasi bukti transfer anti-bodong. Tanpa deposit token, tanpa komisi penjualan.
+      Kasir cukup bicara lewat Voice Note, chat pembeli malam hari dibalas otomatis dari katalog toko Anda, dan omzet harian dilaporkan rapi ke WhatsApp.
     </p>
 
-    <!-- Tombol CTA -->
-    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
+    <!-- Tombol Aksi -->
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px;">
       <a href="#daftar" style="background: linear-gradient(135deg, #00D2B4 0%, #06b6d4 100%); color: #000; font-weight: 800; padding: 16px 36px; border-radius: 9999px; text-decoration: none; font-size: 15px; box-shadow: 0 10px 30px rgba(0, 210, 180, 0.35); transition: transform 0.2s;">
-        ✦ Mulai Gratis 100 Balasan
+        ✦ Coba Gratis 100 Balasan
       </a>
       <a href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20mau%20konsultasi%20layanan%20CS%20AI" target="_blank" style="background: rgba(255, 255, 255, 0.08); border: 1px solid var(--card-border); color: #fff; font-weight: 600; padding: 16px 30px; border-radius: 9999px; text-decoration: none; font-size: 15px; backdrop-filter: blur(10px);">
         Konsultasi WA: 0857-2724-0341
       </a>
     </div>
+  </section>
 
-    <!-- Visual Banner -->
-    <div class="visual-core">
-      <img src="assets/apple_style_ai_core_1791117362953.jpg" alt="Autonomous AI Core">
+  <!-- SEKSI CARA PAKAI SIMPEL (SIMULASI INTERAKTIF LANGSUNG DI PONSEL) -->
+  <section id="cara-pakai" class="section" style="background: #040407; border-top: 1px solid var(--card-border); padding-top: 60px;">
+    <div class="badge-pill" style="border-color: rgba(0, 210, 180, 0.4);">
+      <span style="color: var(--cyan); font-weight: 700;">▶</span>
+      <span style="font-weight: 700; color: #fff;">CARA PENGGUNAAN SANGAT SIMPEL</span>
+      <span style="color: #71717a;">• Lihat Sendiri Cara Kerjanya</span>
+    </div>
+
+    <h2 class="headline" style="font-size: clamp(30px, 4.5vw, 54px);">Lihat Betapa Simpelnya di HP Anda</h2>
+    <p class="sub-headline">Tidak perlu belajar aplikasi rumit. Semua berjalan langsung di aplikasi WhatsApp yang sudah Anda pakai sehari-hari:</p>
+
+    <!-- Interactive Phone Mockup -->
+    <div class="phone-simulator-wrapper">
+      <div style="font-size: 12px; color: #71717a; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px;">
+        PILIH CONTOH SKENARIO:
+      </div>
+
+      <!-- Tab Menu Pilihan Skenario -->
+      <div class="sim-tabs">
+        <button class="sim-tab-btn active" onclick="pilihSkenario(1, this)">🎙️ 1. Kasir Suara (Voice POS)</button>
+        <button class="sim-tab-btn" onclick="pilihSkenario(2, this)">🌙 2. CS Chat Malam 24/7</button>
+        <button class="sim-tab-btn" onclick="pilihSkenario(3, this)">👁️ 3. Cek Bukti Transfer</button>
+        <button class="sim-tab-btn" onclick="pilihSkenario(4, this)">📊 4. Rekap Laporan Jam 21.00</button>
+      </div>
+
+      <!-- Kotak Layar WhatsApp Simpel -->
+      <div class="chat-screen" id="layarChat">
+        <!-- Default Skenario 1: Kasir Suara -->
+        <div class="chat-bubble chat-user">
+          <div style="font-weight: 600; font-size: 12px; margin-bottom: 4px; color: #34d399;">Kasir Toko (Kirim Voice Note):</div>
+          <div>🎙️ <em>"Bikinkan nota: 3 Es Kopi Susu, 2 Croissant, total 95 ribu, bayar QRIS lunas."</em></div>
+          <div class="chat-time">14:15 WIB</div>
+        </div>
+
+        <div class="chat-bubble chat-ai">
+          <div style="font-weight: 700; font-size: 12px; color: #22d3ee; margin-bottom: 4px;">⚡ AutoClaryTech AI:</div>
+          <div>
+            <strong>✓ NOTA PENJUALAN #ACT-108 TERBIT:</strong><br>
+            • 3x Es Kopi Susu @ Rp 20.000 = Rp 60.000<br>
+            • 2x Butter Croissant @ Rp 17.500 = Rp 35.000<br>
+            ------------------------------------<br>
+            <strong>TOTAL: Rp 95.000 (LUNAS via QRIS)</strong><br><br>
+            📄 <em>[File Kuitansi_ACT108.pdf siap cetak Bluetooth]</em>
+          </div>
+          <div class="chat-time">14:15 WIB • Respon dalam 0.8 detik</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 18px; font-size: 13px; color: #a1a1aa; display: flex; align-items: center; gap: 8px;">
+        <span style="color: var(--cyan); font-weight: 700;">💡 Keuntungan:</span>
+        <span>Kasir tidak perlu menyentuh layar saat antrean ramai. Cukup sebutkan pesanan sambil melayani pembeli.</span>
+      </div>
     </div>
   </section>
 
-  <!-- 3 Langkah Mudah (Pola Kompetitor) -->
-  <section id="cara-kerja" class="section" style="background: #040406; border-top: 1px solid var(--card-border);">
-    <div class="badge-pill" style="border-color: rgba(34, 211, 238, 0.3);">
-      <span style="color: #22d3ee; font-weight: 700;">★</span>
-      <span>PRAKTIS & CEPAT</span>
-      <span style="color: #71717a;">• Aktif Dalam 3 Menit</span>
-    </div>
-
-    <h2 class="headline" style="font-size: clamp(30px, 4.5vw, 54px);">Cara Mudah Memulai</h2>
-    <p class="sub-headline">Tidak perlu keahlian teknis atau coding. Cukup 3 langkah sederhana:</p>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; width: 100%; max-width: 1140px;">
-      <div class="step-box">
-        <div class="step-num">1</div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">Daftar Akun Toko</h3>
-        <p style="font-size: 14px; color: var(--text-muted);">Isi nama toko dan nomor WhatsApp aktif Anda. Langsung dapat kuota gratis tanpa kartu kredit.</p>
-      </div>
-
-      <div class="step-box">
-        <div class="step-num">2</div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">Isi Katalog Singkat</h3>
-        <p style="font-size: 14px; color: var(--text-muted);">Masukkan daftar menu, harga, jam buka, dan FAQ toko Anda. AI hanya akan menjawab sesuai data ini.</p>
-      </div>
-
-      <div class="step-box">
-        <div class="step-num">3</div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">AI Mulai Bekerja</h3>
-        <p style="font-size: 14px; color: var(--text-muted);">Setiap chat pelanggan langsung dibalas dalam hitungan detik. Laporan rekap harian masuk ke WA Anda tiap malam.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5 Modalitas Unggulan -->
+  <!-- 5 Modalitas Lengkap -->
   <section id="fitur" class="section" style="border-top: 1px solid var(--card-border);">
-    <div class="badge-pill" style="border-color: rgba(0, 210, 180, 0.3);">
+    <div class="badge-pill">
       <span style="color: var(--cyan); font-weight: 700;">⚡</span>
-      <span>MODALITAS LENGKAP</span>
-      <span style="color: #71717a;">• Sesuai Kebutuhan Lapangan</span>
+      <span>SEMUA DALAM SATU SISTEM</span>
     </div>
 
-    <h2 class="headline" style="font-size: clamp(32px, 5vw, 60px);">Semua Kebutuhan Toko dalam 1 Platform</h2>
-    <p class="sub-headline">Menggantikan kerepotan admin manual dan kasir antrean panjang.</p>
+    <h2 class="headline" style="font-size: clamp(32px, 5vw, 60px);">Solusi Lengkap untuk Semua Jenis Usaha</h2>
+    <p class="sub-headline">Dari warung kopi, rental kendaraan, hingga toko online dan grosir.</p>
 
     <div class="grid-cards">
       <div class="feature-card">
         <div style="font-size: 28px; margin-bottom: 16px;">🎙️</div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">Kasir Suara Kilat (Voice POS)</h3>
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">Kasir Suara Kilat</h3>
         <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Cukup rekam suara via voice note saat antrean ramai: '2 Kopi Susu, 1 Roti Bakar'. Pesanan otomatis tercatat dan kuitansi langsung tercetak tanpa repot ketik layar.
+          Cukup rekam suara via voice note WhatsApp saat antrean ramai. Pesanan otomatis tercatat di sistem dan nota instan langsung dicetak tanpa mengetik.
         </p>
       </div>
 
       <div class="feature-card">
         <div style="font-size: 28px; margin-bottom: 16px;">💬</div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">CS WhatsApp AI 24 Jam</h3>
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">CS WhatsApp 24 Jam</h3>
         <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Pelanggan yang chat tengah malam tetap dibalas ramah dalam 2 detik. AI menjawab ketersediaan stok, harga grosir, dan cara pemesanan dari katalog resmi toko Anda.
+          Pelanggan yang chat jam 1 malam tetap dibalas santun dalam 2 detik. AI hafal daftar harga, mengecek stok, dan mengunci transaksi pesanan seketika.
         </p>
       </div>
 
@@ -337,7 +401,7 @@
         <div style="font-size: 28px; margin-bottom: 16px;">👁️</div>
         <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">Vision AI Anti-Bodong</h3>
         <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Pemeriksa keaslian bukti transfer bank & QRIS secara otomatis. Memastikan nominal, tanggal, dan nomor referensi valid sebelum pesanan dikirimkan.
+          Pemeriksa keaslian bukti transfer bank & QRIS secara otomatis. Membaca nomor referensi, tanggal, dan nominal asli pencegah struk palsu.
         </p>
       </div>
 
@@ -345,7 +409,7 @@
         <div style="font-size: 28px; margin-bottom: 16px;">🎬</div>
         <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">Video Promosi Produk</h3>
         <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Buat video showcase produk otomatis format vertikal 9:16 untuk TikTok dan Instagram Reels dengan musik ASMR menggugah selera tanpa perlu tampil di kamera.
+          Buat video showcase vertikal 9:16 untuk TikTok & Reels otomatis lengkap dengan audio ASMR menggugah selera tanpa pemilik harus tampil di kamera.
         </p>
       </div>
 
@@ -353,7 +417,7 @@
         <div style="font-size: 28px; margin-bottom: 16px;">📊</div>
         <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px;">Laporan Omzet Harian</h3>
         <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Rangkuman penjualan harian dan laba kotor toko otomatis terkirim ke WhatsApp pemilik toko setiap jam 21.00 WIB. Pengingat piutang terkirim sopan ke pelanggan.
+          Rangkuman penjualan harian dan laba kotor toko otomatis dikirim ke WhatsApp pemilik setiap jam 21.00 WIB. Pengingat kasbon terkirim sopan ke pelanggan.
         </p>
       </div>
     </div>
@@ -364,7 +428,6 @@
     <div class="badge-pill" style="border-color: rgba(0, 210, 180, 0.4);">
       <span style="color: var(--cyan); font-weight: 700;">✦</span>
       <span>HARGA TRANSPARAN</span>
-      <span style="color: #71717a;">• Kuota Pasti, Tanpa Saldo Menguap</span>
     </div>
 
     <h2 class="headline" style="font-size: clamp(32px, 5vw, 64px);">Pilihan Paket Fleksibel</h2>
@@ -456,7 +519,7 @@
     </div>
   </section>
 
-  <!-- FAQ Praktis (Standar Kompetitor SaaS) -->
+  <!-- FAQ -->
   <section id="faq" class="section" style="border-top: 1px solid var(--card-border);">
     <div class="badge-pill">
       <span>PERTANYAAN UMUM</span>
@@ -487,12 +550,11 @@
     </div>
   </section>
 
-  <!-- Formulir Pendaftaran Mandiri Terintegrasi (Langsung di Landing Page) -->
+  <!-- Pendaftaran Cepat -->
   <section id="daftar" class="section" style="background: radial-gradient(circle at center, #0a1f1c 0%, #000 70%); border-top: 1px solid rgba(0,210,180,0.25);">
     <div class="badge-pill" style="border-color: rgba(0,210,180,0.4);">
       <span style="color: var(--cyan); font-weight: 700;">✦</span>
       <span style="color: #fff; font-weight: 700;">PENDAFTARAN CEPAT</span>
-      <span style="color: #71717a;">• Aktif Seketika</span>
     </div>
 
     <h2 class="headline" style="font-size: clamp(32px, 5vw, 60px); max-width: 800px;">Buka Akun Toko Anda Sekarang</h2>
@@ -533,18 +595,56 @@
     </div>
   </section>
 
-  <!-- Footer Bersih & Profesional -->
+  <!-- Footer Bersih -->
   <footer style="padding: 40px 32px; border-top: 1px solid var(--card-border); font-size: 12px; color: #71717a; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
     <div>&copy; 2026 AutoClaryTech. Hak cipta dilindungi undang-undang.</div>
     <div style="display: flex; gap: 20px;">
+      <a href="#cara-pakai" style="color: #71717a; text-decoration: none;">Cara Pakai</a>
       <a href="#fitur" style="color: #71717a; text-decoration: none;">Fitur</a>
       <a href="#harga" style="color: #71717a; text-decoration: none;">Harga</a>
-      <a href="#faq" style="color: #71717a; text-decoration: none;">FAQ</a>
       <a href="https://wa.me/6285727240341" target="_blank" style="color: #71717a; text-decoration: none;">Bantuan WhatsApp</a>
     </div>
   </footer>
 
+  <!-- SCRIPT SIMULASI INTERAKTIF -->
   <script>
+    var dataSkenario = {
+      1: {
+        user: '<strong>Kasir Toko (Kirim Voice Note):</strong><br>🎙️ <em>"Bikinkan nota: 3 Es Kopi Susu, 2 Croissant, total 95 ribu, bayar QRIS lunas."</em>',
+        ai: '<strong>✓ NOTA PENJUALAN #ACT-108 TERBIT:</strong><br>• 3x Es Kopi Susu @ Rp 20.000 = Rp 60.000<br>• 2x Butter Croissant @ Rp 17.500 = Rp 35.000<br>------------------------------------<br><strong>TOTAL: Rp 95.000 (LUNAS via QRIS)</strong><br><br>📄 <em>[File Kuitansi_ACT108.pdf siap cetak Bluetooth]</em>',
+        timeUser: '14:15 WIB',
+        timeAi: '14:15 WIB • Respon dalam 0.8 detik'
+      },
+      2: {
+        user: '<strong>Calon Pembeli (Chat Jam 01.30 Malam):</strong><br><em>"Halo Kak, gamis maroon ukuran L masih ready gak ya? Mau kirim ke Solo besok bisa?"</em>',
+        ai: '<strong>⚡ AutoClaryTech CS AI:</strong><br><em>"Halo Kak! Untuk Gamis Maroon size L masih ready 3 pcs ya. Bisa banget dikirim besok pagi ke Solo pakai kurir kilat (estimasi 1 hari sampai).<br><br>Mau dibantu amankan stok dan isi data pengirimannya sekarang Kak?"</em>',
+        timeUser: '01:30 WIB',
+        timeAi: '01:30 WIB • Respon dalam 1.2 detik'
+      },
+      3: {
+        user: '<strong>Pembeli (Upload Bukti Transfer Bank):</strong><br>🖼️ <em>[Kirim Foto Screenshot Transfer M-Banking BCA Rp 250.000]</em><br><em>"Sudah ditransfer ya Kak, tolong diproses."</em>',
+        ai: '<strong>✓ VERIFIKASI PEMBAYARAN VALID:</strong><br>• Bank Pengirim: BCA (an Rian Pratama)<br>• Nominal: Rp 250.000 (SESUAI TAGIHAN)<br>• No. Ref: 20261005882910<br><br><em>"Terima kasih Kak! Pembayaran sudah tervalidasi asli di mutasi rekening. Pesanan langsung masuk antrean kemas gudang ya."</em>',
+        timeUser: '16:04 WIB',
+        timeAi: '16:04 WIB • Terverifikasi otomatis'
+      },
+      4: {
+        user: '<strong>Sistem Otomatis (Jadwal Malam):</strong><br>⏰ <em>[Pukul 21.00 WIB - Penutupan Kasir Toko]</em>',
+        ai: '<strong>📊 LAPORAN OMZET HARIAN TOKO:</strong><br>Halo Bos! Rangkuman usaha hari ini:<br>• Total Chat Masuk: 56 pelanggan<br>• Transaksi Berhasil: 48 order<br>• <strong>Total Omzet Hari Ini: Rp 3.820.000</strong><br>• Metode: 32 QRIS, 11 Transfer, 5 Tunai<br>• Sisa Kuota Balasan AI: 4.120 chat<br><br><em>Semoga besok makin laris dan berkah!</em>',
+        timeUser: '21:00 WIB',
+        timeAi: '21:00 WIB • Laporan otomatis'
+      }
+    };
+
+    function pilihSkenario(no, btn) {
+      document.querySelectorAll(".sim-tab-btn").forEach(function(b){ b.classList.remove("active"); });
+      btn.classList.add("active");
+
+      var d = dataSkenario[no];
+      var screen = document.getElementById("layarChat");
+      screen.innerHTML = '<div class="chat-bubble chat-user">' + d.user + '<div class="chat-time">' + d.timeUser + '</div></div>' +
+                         '<div class="chat-bubble chat-ai">' + d.ai + '<div class="chat-time">' + d.timeAi + '</div></div>';
+    }
+
     function prosesDaftar(e) {
       e.preventDefault();
       var toko = document.getElementById("regToko").value.trim();
