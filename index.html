@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aplikasi Usaha Bercabang</title>
+<meta name="description" content="Aplikasi siap pakai untuk usaha rental kendaraan, parkir, dan usaha bercabang, plus CS WhatsApp dan otomasi konten. Sistem pasang sekali, lalu langganan bulanan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script src="config.js"></script>
+<style>
+:root{
+  --kertas:#F3F5F9;      /* latar: kertas nota dingin */
+  --lembar:#FFFFFF;
+  --tinta:#16205A;       /* tinta pulpen biru tua */
+  --karbon:#3450C8;      /* biru kertas karbon */
+  --cap:#C2362B;         /* merah stempel */
+  --garis:#D5DBEA;
+  --redup:#5A6385;
+  --hijau:#1F7A4D;
+  --rad:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --kertas:#0E1328; --lembar:#161D3A; --tinta:#E6EAFA; --karbon:#7F97FF;
+    --cap:#FF6B5E; --garis:#2A3462; --redup:#A3ACCF; --hijau:#4FD08F;
+  }
+}
+:root[data-theme="dark"]{
+  --kertas:#0E1328; --lembar:#161D3A; --tinta:#E6EAFA; --karbon:#7F97FF;
+  --cap:#FF6B5E; --garis:#2A3462; --redup:#A3ACCF; --hijau:#4FD08F;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--kertas);color:var(--tinta);font:16px/1.6 Figtree,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--karbon);outline-offset:3px;border-radius:6px}
+.wadah{max-width:1120px;margin:0 auto;padding:0 16px}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;line-height:1.08;margin:0;letter-spacing:-.02em}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.ikon{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- kepala ---------- */
+.kepala{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--kertas) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--garis)}
+.kepala .wadah{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.merek{font-family:"Bricolage Grotesque";font-weight:800;font-size:19px;text-decoration:none;display:flex;align-items:center;gap:8px}
+.merek .titik{width:12px;height:12px;border-radius:3px;background:var(--cap);transform:rotate(45deg)}
+.nav{display:flex;gap:18px;font-weight:600;font-size:14px}
+.nav a{text-decoration:none;color:var(--redup)}
+.nav a:hover{color:var(--tinta)}
+@media (max-width:720px){.nav{display:none}}
+
+/* ---------- tombol ---------- */
+.tombol{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:12px;font-weight:700;text-decoration:none;border:2px solid var(--tinta);transition:transform .15s}
+.tombol:hover{transform:translateY(-2px)}
+.tombol.utama{background:var(--tinta);color:var(--kertas)}
+.tombol.wa{background:#1E8E4E;border-color:#1E8E4E;color:#fff}
+.tombol.kecil{min-height:40px;padding:0 14px;font-size:14px}
+[data-wa][hidden]{display:none!important}
+
+/* ---------- pembuka ---------- */
+.pembuka{padding:56px 0 64px;overflow-x:clip}
+.pembuka .wadah{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+@media (max-width:900px){.pembuka .wadah{grid-template-columns:1fr;gap:36px}.pembuka{padding:36px 0 48px}}
+.alis{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--karbon)}
+.pembuka h1{font-size:clamp(38px,5.2vw,60px);font-weight:800;margin:14px 0 18px}
+.pembuka h1 em{font-style:normal;color:var(--cap)}
+.pembuka p.lead{font-size:18px;color:var(--redup);max-width:34em;margin:0 0 26px}
+.aksi{display:flex;flex-wrap:wrap;gap:12px}
+
+/* nota = elemen khas */
+.nota{position:relative;background:var(--lembar);border-radius:6px;padding:22px 22px 70px;
+  box-shadow:0 1px 0 var(--garis),0 18px 40px -18px rgba(22,32,90,.35);transform:rotate(-1.2deg)}
+.nota::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px;
+  background:radial-gradient(circle at 8px 0,transparent 6px,var(--lembar) 6.5px) 0 0/16px 8px repeat-x}
+.nota-kop{display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px dashed var(--garis);padding-bottom:10px;margin-bottom:6px}
+.nota-kop b{font-family:"Bricolage Grotesque";font-size:20px}
+.nota-kop span{font-size:12px;color:var(--redup)}
+.nota ul{list-style:none;margin:0;padding:0}
+.nota li{display:flex;justify-content:space-between;gap:12px;min-height:40px;padding:8px 0;align-items:center;font-size:15px;line-height:1.35;border-bottom:1px solid var(--garis)}
+.nota li s{text-decoration-color:var(--cap);text-decoration-thickness:2px;color:var(--redup)}
+.nota li .mono{font-size:12px;color:var(--hijau);font-weight:700;white-space:nowrap}
+.cap{position:absolute;right:22px;bottom:16px;border:3px solid var(--cap);color:var(--cap);border-radius:8px;
+  padding:4px 12px;font:800 22px/1 "Bricolage Grotesque";letter-spacing:.1em;transform:rotate(-12deg);opacity:.9;
+  animation:tempel .5s cubic-bezier(.2,1.6,.4,1) .6s both}
+@keyframes tempel{from{transform:rotate(-12deg) scale(2.2);opacity:0}to{transform:rotate(-12deg) scale(1);opacity:.9}}
+
+/* ---------- bagian umum ---------- */
+section{padding:64px 0}
+@media (max-width:720px){section{padding:48px 0}}
+.judul-bagian{max-width:40em;margin-bottom:32px}
+.judul-bagian h2{font-size:clamp(28px,4vw,42px);font-weight:800;margin:8px 0 10px}
+.judul-bagian p{color:var(--redup);margin:0}
+
+/* daftar produk */
+.produk{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:900px){.produk{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.produk{grid-template-columns:1fr}}
+.kartu{background:var(--lembar);border:1px solid var(--garis);border-radius:var(--rad);padding:22px;display:flex;flex-direction:column;gap:10px;text-decoration:none}
+.kartu:hover{border-color:var(--karbon)}
+.kartu .ik{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--karbon) 12%,transparent);color:var(--karbon)}
+.kartu h3{font-size:21px;font-weight:700}
+.kartu p{margin:0;color:var(--redup);font-size:15px}
+.kartu .harga-mini{margin-top:auto;padding-top:10px;border-top:1px dashed var(--garis);font-size:13px;color:var(--redup)}
+.kartu .harga-mini b{color:var(--tinta)}
+.label-status{align-self:flex-start;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--hijau) 14%,transparent);color:var(--hijau)}
+.label-status.rakit{background:color-mix(in srgb,var(--karbon) 12%,transparent);color:var(--karbon)}
+
+.kartu.materi .jenis{font:700 12px "JetBrains Mono";color:var(--redup);text-transform:uppercase;letter-spacing:.06em}
+.kartu.ebook{background:var(--tinta);color:var(--kertas);border-color:var(--tinta)}
+.kartu.ebook p,.kartu.ebook .harga-mini{color:color-mix(in srgb,var(--kertas) 75%,transparent)}
+.kartu.ebook .harga-mini b{color:var(--kertas)}
+.kartu.ebook .harga-mini{border-top-color:color-mix(in srgb,var(--kertas) 25%,transparent)}
+div.kartu:hover{border-color:var(--garis)}
+.kartu.ebook:hover{border-color:var(--tinta)}
+/* rincian produk */
+.rinci{border-top:1px solid var(--garis)}
+.rinci-kepala{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;margin-bottom:26px}
+@media (max-width:720px){.rinci-kepala{grid-template-columns:1fr}}
+.masalah{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.pasangan{background:var(--lembar);border:1px solid var(--garis);border-radius:var(--rad);overflow:hidden}
+.pasangan .dulu{padding:14px 18px;font-size:14px;color:var(--redup);border-bottom:1px dashed var(--garis);display:flex;gap:10px}
+.pasangan .dulu .ikon{color:var(--cap);margin-top:2px}
+.pasangan .kini{padding:14px 18px 18px;display:flex;gap:10px}
+.pasangan .kini .ikon{color:var(--hijau);margin-top:3px}
+.pasangan .kini b{display:block;margin-bottom:2px}
+.pasangan .kini span{font-size:14px;color:var(--redup)}
+.fitur-lain{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.fitur-lain span{font-size:13.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--garis);background:var(--lembar)}
+.daftar{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 24px;margin:0;padding:0;list-style:none}
+.daftar li{display:flex;gap:10px;padding:12px 0;border-bottom:1px dashed var(--garis)}
+.daftar li .ikon{color:var(--karbon);margin-top:3px}
+.daftar li span{color:var(--redup);font-size:14.5px}
+.daftar li b{display:block;color:var(--tinta);font-size:15.5px}
+.catatan{margin-top:18px;font-size:13.5px;color:var(--redup);border-left:3px solid var(--garis);padding-left:12px}
+
+/* harga */
+.tabel-harga{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:900px){.tabel-harga{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.tabel-harga{grid-template-columns:1fr}}
+.paket{background:var(--lembar);border:1px solid var(--garis);border-radius:var(--rad);padding:20px;display:flex;flex-direction:column;gap:8px}
+.paket.sorot{border:2px solid var(--tinta)}
+.paket h3{font-size:18px}
+.paket .angka{font-family:"JetBrains Mono";font-weight:700;font-size:24px}
+.paket .angka small{font-family:Figtree;font-size:13px;font-weight:500;color:var(--redup)}
+.paket ul{margin:6px 0 0;padding:0 0 0 18px;font-size:14px;color:var(--redup)}
+.harga-lain{margin-top:26px;background:var(--lembar);border:1px solid var(--garis);border-radius:var(--rad);overflow:hidden}
+.baris{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:12px;padding:14px 18px;border-bottom:1px solid var(--garis);align-items:center}
+.baris:last-child{border-bottom:0}
+.baris.kop{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--redup);background:color-mix(in srgb,var(--kertas) 60%,var(--lembar))}
+.baris .mono{font-size:14px}
+@media (max-width:640px){
+  .baris{grid-template-columns:1fr 1fr}
+  .baris>:first-child{grid-column:1/-1;font-weight:700}
+  .baris.kop{display:none}
+  .baris [data-k]::before{content:attr(data-k);display:block;font:600 11px Figtree;text-transform:uppercase;letter-spacing:.06em;color:var(--redup)}
+}
+
+/* langkah */
+.langkah{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:l}
+@media (max-width:800px){.langkah{grid-template-columns:1fr}}
+.langkah div{border-top:3px solid var(--tinta);padding-top:14px}
+.langkah div::before{counter-increment:l;content:"Langkah " counter(l);font:700 12px "JetBrains Mono";color:var(--karbon)}
+.langkah h3{font-size:20px;margin:6px 0}
+.langkah p{margin:0;color:var(--redup);font-size:15px}
+
+/* penutup */
+.penutup{background:var(--tinta);color:var(--kertas);border-radius:20px;padding:40px 28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.penutup h2{font-size:clamp(26px,3.6vw,38px)}
+.penutup p{margin:8px 0 0;opacity:.8}
+.penutup .tombol{border-color:var(--kertas);color:var(--kertas)}
+.penutup .tombol.utama{background:var(--kertas);color:var(--tinta)}
+@media (max-width:720px){.penutup{grid-template-columns:1fr;padding:30px 20px}}
+footer{padding:28px 0 90px;font-size:13px;color:var(--redup)}
+
+/* tombol WA melayang di HP */
+.wa-melayang{position:fixed;left:16px;right:16px;bottom:14px;z-index:30;display:none}
+@media (max-width:720px){.wa-melayang{display:flex}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- ikon: Lucide (ISC License), disalin jalurnya -->
+  <symbol id="i-mobil" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></symbol>
+  <symbol id="i-kamera" viewBox="0 0 24 24"><path d="M16.75 12h3.632a1 1 0 0 1 .894 1.447l-2.034 4.069a1 1 0 0 1-1.708.134l-2.124-2.97"/><path d="M17.106 9.053a1 1 0 0 1 .447 1.341l-3.106 6.211a1 1 0 0 1-1.342.447L3.61 12.3a2.92 2.92 0 0 1-1.3-3.91L3.69 5.6a2.92 2.92 0 0 1 3.92-1.3z"/><path d="M2 19h3.76a2 2 0 0 0 1.8-1.1L9 15"/><path d="M2 21v-4"/><path d="M7 9h.01"/></symbol>
+  <symbol id="i-toko" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/></symbol>
+  <symbol id="i-pesan" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/></symbol>
+  <symbol id="i-kalender" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+  <symbol id="i-kunci" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="i-silang" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></symbol>
+  <symbol id="i-cek" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-titik" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></symbol>
+  <symbol id="i-panah" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-layar" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></symbol>
+</svg>
+
+<header class="kepala">
+  <div class="wadah">
+    <a class="merek" href="#atas"><span class="titik" aria-hidden="true"></span><span data-merek>Aplikasi Usaha</span></a>
+    <nav class="nav" aria-label="Navigasi">
+      <a href="#belajar">Belajar gratis</a>
+      <a href="#layanan">Layanan</a>
+      <a href="#rentalkita">Rental</a>
+      <a href="#harga">Harga</a>
+      <a href="#cara">Konsultasi</a>
+    </nav>
+    <a class="tombol wa kecil" data-wa data-pesan="Halo, saya ingin tanya soal aplikasi untuk usaha saya." hidden><svg class="ikon"><use href="#i-wa"/></svg>Konsultasi gratis</a>
+  </div>
+</header>
+
+<main id="atas">
+<section class="pembuka">
+  <div class="wadah">
+    <div>
+      <div class="alis">Belajar merapikan usaha dengan aplikasi</div>
+      <h1>Buku nota pensiun.<br>Usaha Anda <em>tetap jalan</em>.</h1>
+      <p class="lead">Kami bagikan cara usaha rental, parkir, dan usaha bercabang yang nyata merapikan catatan, setoran, dan layanan pelanggannya dengan aplikasi. Pelajari gratis lebih dulu. Kalau Anda ingin dipasangkan, kami siap membantu.</p>
+      <div class="aksi">
+        <a class="tombol utama" href="#belajar">Mulai belajar gratis<svg class="ikon"><use href="#i-panah"/></svg></a>
+        <a class="tombol" href="#layanan">Lihat aplikasinya</a>
+        <a class="tombol wa" data-wa data-pesan="Halo, saya ingin konsultasi aplikasi untuk usaha saya." hidden><svg class="ikon"><use href="#i-wa"/></svg>Konsultasi gratis</a>
+      </div>
+    </div>
+    <div class="nota" aria-label="Contoh masalah yang dibereskan aplikasi">
+      <div class="nota-kop"><b>Nota hari ini</b><span class="mono">No. 0412</span></div>
+      <ul>
+        <li><s>Sewa dicatat di buku, sering terselip</s><span class="mono">TERCATAT</span></li>
+        <li><s>Komisi OTA dihitung manual</s><span class="mono">OTOMATIS</span></li>
+        <li><s>Setoran cabang telat dicek</s><span class="mono">DICOCOKKAN</span></li>
+        <li><s>Kendaraan di parkiran dihitung kira-kira</s><span class="mono">DIHITUNG</span></li>
+        <li><s>Chat pelanggan malam tak terbalas</s><span class="mono">DIBALAS</span></li>
+        <li><s>Lupa jadwal posting medsos</s><span class="mono">TERJADWAL</span></li>
+      </ul>
+      <div class="cap" aria-hidden="true">BERES</div>
+    </div>
+  </div>
+</section>
+
+<section class="rinci" id="belajar">
+  <div class="wadah">
+    <div class="judul-bagian">
+      <div class="alis">Belajar gratis</div>
+      <h2>Tutorial dan studi kasus dari usaha sungguhan</h2>
+      <p>Cara kerja yang kami pelajari saat memasang aplikasi di usaha rental, parkir, dan usaha bercabang. Boleh Anda tiru, dengan atau tanpa aplikasi kami.</p>
+    </div>
+    <div class="produk">
+      <div class="kartu materi">
+        <span class="label-status rakit">Segera terbit</span>
+        <span class="jenis">Tutorial</span>
+        <h3>Mencatat sewa kendaraan supaya tidak ada yang terselip</h3>
+        <p>Data apa saja yang wajib dicatat sejak penyewa datang sampai unit kembali.</p>
+      </div>
+      <div class="kartu materi">
+        <span class="label-status rakit">Segera terbit</span>
+        <span class="jenis">Tutorial</span>
+        <h3>Menghitung potongan komisi OTA dengan benar</h3>
+        <p>Membaca voucher, memisahkan potongan platform, dan melihat margin sesungguhnya.</p>
+      </div>
+      <div class="kartu materi">
+        <span class="label-status rakit">Segera terbit</span>
+        <span class="jenis">Studi kasus</span>
+        <h3>Mencocokkan setoran parkir dengan hitungan kamera</h3>
+        <p>Bagaimana sebuah kafe membandingkan setoran petugas per shift dengan jumlah kendaraan yang tercatat.</p>
+      </div>
+      <div class="kartu materi">
+        <span class="label-status rakit">Segera terbit</span>
+        <span class="jenis">Studi kasus</span>
+        <h3>Setoran harian dari banyak cabang dan mitra</h3>
+        <p>Pola konfirmasi setoran, tutup buku bulanan, dan bagi hasil mitra yang dipakai usaha bercabang.</p>
+      </div>
+      <div class="kartu materi">
+        <span class="label-status rakit">Segera terbit</span>
+        <span class="jenis">Tutorial</span>
+        <h3>Menyusun jawaban baku untuk CS WhatsApp</h3>
+        <p>Daftar pertanyaan yang paling sering datang, dan cara menulis jawabannya sekali untuk seterusnya.</p>
+      </div>
+      <div class="kartu ebook">
+        <span class="label-status">E-book</span>
+        <h3>Panduan merapikan usaha bercabang</h3>
+        <p>Rangkuman tutorial dan studi kasus di atas dalam satu buku ringkas.</p>
+        <div class="harga-mini"><b>Segera hadir</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="layanan">
+  <div class="wadah">
+    <div class="judul-bagian">
+      <div class="alis">Layanan</div>
+      <h2>Kalau ingin dipasangkan: aplikasi yang sudah berjalan</h2>
+      <p>Tiga aplikasi pertama sudah dipasang di usaha sungguhan. Tiga lainnya kami rakit dari komponen yang sudah berjalan, menyesuaikan usaha Anda.</p>
+    </div>
+    <div class="produk">
+      <a class="kartu" href="#rentalkita">
+        <div class="ik"><svg class="ikon"><use href="#i-mobil"/></svg></div>
+        <span class="label-status">Siap pakai</span>
+        <h3>Rental mobil &amp; motor</h3>
+        <p>Sewa, voucher OTA, pengantaran unit, GPS armada, sampai laporan keuangan per cabang.</p>
+        <div class="harga-mini">Langganan mulai <b class="mono">Rp199rb</b>/cabang/bulan</div>
+      </a>
+      <a class="kartu" href="#parkir">
+        <div class="ik"><svg class="ikon"><use href="#i-kamera"/></svg></div>
+        <span class="label-status">Siap pakai</span>
+        <h3>Parkir berbasis kamera</h3>
+        <p>Kamera menghitung kendaraan dan membaca plat, lalu dicocokkan dengan setoran petugas per shift.</p>
+        <div class="harga-mini">Pasang <b class="mono">Rp3,5 jt</b> + <b class="mono">Rp300rb</b>/bulan</div>
+      </a>
+      <a class="kartu" href="#cabang">
+        <div class="ik"><svg class="ikon"><use href="#i-toko"/></svg></div>
+        <span class="label-status">Siap pakai</span>
+        <h3>Usaha bercabang &amp; kemitraan</h3>
+        <p>Penjualan harian, setoran, stok bahan, dan bagi hasil mitra untuk banyak cabang sekaligus.</p>
+        <div class="harga-mini">Langganan mulai <b class="mono">Rp600rb</b>/cabang/bulan</div>
+      </a>
+      <a class="kartu" href="#cs">
+        <div class="ik"><svg class="ikon"><use href="#i-pesan"/></svg></div>
+        <span class="label-status rakit">Dirakit untuk Anda</span>
+        <h3>CS WhatsApp 24 jam</h3>
+        <p>Membalas pelanggan dari jawaban baku Anda. Pertanyaan di luar itu diteruskan ke Anda atau staf.</p>
+        <div class="harga-mini">Harga sesuai kebutuhan</div>
+      </a>
+      <a class="kartu" href="#konten">
+        <div class="ik"><svg class="ikon"><use href="#i-kalender"/></svg></div>
+        <span class="label-status rakit">Dirakit untuk Anda</span>
+        <h3>Jadwal konten medsos</h3>
+        <p>Antrean posting TikTok, Instagram, dan Facebook terjadwal, dengan pengingat kalau slot besok masih kosong.</p>
+        <div class="harga-mini">Harga sesuai kebutuhan</div>
+      </a>
+      <a class="kartu" href="#custom">
+        <div class="ik"><svg class="ikon"><use href="#i-kunci"/></svg></div>
+        <span class="label-status rakit">Dirakit untuk Anda</span>
+        <h3>Aplikasi sesuai kebutuhan</h3>
+        <p>Alur kerja Anda belum ada di daftar ini? Kami buatkan, dengan pola pasang lalu langganan yang sama.</p>
+        <div class="harga-mini">Harga sesuai kebutuhan</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =============== RENTALKITA =============== -->
+<section class="rinci" id="rentalkita">
+  <div class="wadah">
+    <div class="rinci-kepala">
+      <div class="judul-bagian" style="margin:0">
+        <div class="alis">RentalKita &middot; rental mobil &amp; motor</div>
+        <h2>Yang biasanya bikin pusing pemilik rental</h2>
+        <p>Lima masalah yang paling sering kami dengar, dan cara RentalKita menanganinya.</p>
+      </div>
+      <a class="tombol utama" data-demo href="https://rentalkita-demo.vercel.app" target="_blank" rel="noopener"><svg class="ikon"><use href="#i-layar"/></svg>Coba demo</a>
+    </div>
+
+    <div class="masalah">
+      <div class="pasangan">
+        <div class="dulu"><svg class="ikon"><use href="#i-silang"/></svg>Catatan sewa tersebar di buku, chat, dan ingatan admin.</div>
+        <div class="kini"><svg class="ikon"><use href="#i-cek"/></svg><div><b>Satu tempat untuk semua sewa</b><span>Sewa lepas kunci atau dengan driver, paket harian, mingguan, dan bulanan, pelunasan, deposit, dan pengingat jatuh tempo.</span></div></div>
+      </div>
+      <div class="pasangan">
+        <div class="dulu"><svg class="ikon"><use href="#i-silang"/></svg>Voucher OTA diketik ulang, potongan komisi dihitung manual.</div>
+        <div class="kini"><svg class="ikon"><use href="#i-cek"/></svg><div><b>Voucher OTA jadi sewa otomatis</b><span>Unggah gambar voucher, isinya terbaca otomatis dan potongan platform langsung terhitung (contoh: Movbee 25%, Traveloka 20%, Trip.com 13,5%). Margin dan piutang OTA ikut terekap.</span></div></div>
+      </div>
+      <div class="pasangan">
+        <div class="dulu"><svg class="ikon"><use href="#i-silang"/></svg>Antar-jemput unit lepas kunci diatur lewat telepon, driver lupa jadwal.</div>
+        <div class="kini"><svg class="ikon"><use href="#i-cek"/></svg><div><b>Jadwal pengantaran &amp; driver</b><span>Driver pengantar dan penjemput dipasang per sewa, tiap driver melihat tugasnya sendiri, dan ada ruang lelang trip untuk driver mitra.</span></div></div>
+      </div>
+      <div class="pasangan">
+        <div class="dulu"><svg class="ikon"><use href="#i-silang"/></svg>Data karyawan dan gaji tercatat di tempat terpisah.</div>
+        <div class="kini"><svg class="ikon"><use href="#i-cek"/></svg><div><b>Karyawan, gaji, dan buku kas</b><span>Data karyawan beserta gaji bulanan, buku kas umum, laba rugi, pajak, serta hutang dan piutang dalam satu aplikasi.</span></div></div>
+      </div>
+      <div class="pasangan">
+        <div class="dulu"><svg class="ikon"><use href="#i-silang"/></svg>Tidak tahu posisi armada, takut unit digadaikan penyewa.</div>
+        <div class="kini"><svg class="ikon"><use href="#i-cek"/></svg><div><b>Peta GPS &amp; deteksi gadai</b><span>Posisi armada dari perangkat GPS tampil di peta. Unit yang diam lama sementara penyewa terus minta perpanjangan ditandai mencurigakan.</span></div></div>
+      </div>
+    </div>
+
+    <div class="fitur-lain" aria-label="Fitur lain RentalKita">
+      <span>Pemesanan online oleh penyewa</span><span>Portal penyewa</span><span>Verifikasi KTP/paspor &amp; SIM</span>
+      <span>Daftar hitam penyewa</span><span>Inspeksi serah terima unit</span><span>Riwayat servis</span>
+      <span>Kontrak armada untuk instansi</span><span>Bagi hasil investor &amp; mitra</span><span>Banyak cabang</span>
+      <span>Hak akses per peran</span><span>Bahasa Indonesia &amp; Inggris</span>
+    </div>
+  </div>
+</section>
+
+<!-- =============== PARKIR =============== -->
+<section class="rinci" id="parkir">
+  <div class="wadah">
+    <div class="judul-bagian">
+      <div class="alis">Parkir berbasis kamera</div>
+      <h2>Setoran parkir bisa dicocokkan dengan hitungan kamera</h2>
+      <p>Untuk kafe, ruko, atau lahan parkir yang dijaga petugas. Kamera mencatat, petugas menyetor, pemilik melihat selisihnya.</p>
+    </div>
+    <ul class="daftar">
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Hitung kendaraan otomatis</b><span>Kamera menghitung motor dan mobil yang melintasi garis masuk.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Baca plat nomor</b><span>Plat keluar dicocokkan dengan plat masuk, lengkap dengan foto bukti. Plat karyawan bisa dikecualikan.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Shift &amp; setoran petugas</b><span>Buka-tutup shift, setoran tunai, potongan, dan selisih terhadap hitungan kamera.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Tarif per jenis kendaraan</b><span>Tarif motor dan mobil diatur sendiri, riwayat perubahannya tersimpan.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Bagi hasil petugas</b><span>Upah dihitung dari upah dasar ditambah persentase setoran.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Pantau langsung &amp; rekaman</b><span>Tonton kamera dari aplikasi, rekaman per menit tersimpan, grafik harian dan laporan per shift.</span></div></li>
+    </ul>
+    <p class="catatan">Butuh perangkat kamera dan komputer kecil di lokasi. Kebutuhan alat kami hitung sesudah melihat lokasi Anda.</p>
+  </div>
+</section>
+
+<!-- =============== CABANG =============== -->
+<section class="rinci" id="cabang">
+  <div class="wadah">
+    <div class="judul-bagian">
+      <div class="alis">Usaha bercabang &amp; kemitraan</div>
+      <h2>Setiap cabang menyetor, pusat langsung tahu</h2>
+      <p>Untuk usaha makanan, minuman, atau produk yang dijual lewat banyak cabang, cabang pembantu, dan mitra.</p>
+    </div>
+    <ul class="daftar">
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Penjualan harian per penjual</b><span>Omzet dihitung otomatis dari harga yang berlaku di tanggal itu, bisa dikoreksi bila salah input.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Konfirmasi &amp; cek silang setoran</b><span>Setoran tiap cabang dikonfirmasi dan dicek silang, dengan pengingat lewat WhatsApp.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Stok bahan &amp; opname</b><span>Stok masuk, pemakaian, opname, batas stok kritis, dan pembelian tempo.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Bagi hasil mitra &amp; tutup buku</b><span>Hitung bagi hasil harian, rekap bulanan, tutup buku per cabang dan per wilayah.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Pusat, cabang, dan cabang pembantu</b><span>Kiriman dari pusat dicatat sampai dikonfirmasi diterima, termasuk ongkos kurir.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Akses berjenjang</b><span>Tiap orang hanya melihat cabang atau wilayah yang menjadi tanggung jawabnya.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Misi, liga, dan poin karyawan</b><span>Target harian dengan bukti foto, peringkat tim, dan penukaran poin hadiah.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Absensi &amp; upah produksi</b><span>Absen, hitung upah, dan rekap mingguan untuk tim dapur atau produksi.</span></div></li>
+    </ul>
+    <p class="catatan">Fokusnya pencatatan penjualan harian dan setoran, bukan mesin kasir cetak struk per transaksi.</p>
+  </div>
+</section>
+
+<!-- =============== CS WA =============== -->
+<section class="rinci" id="cs">
+  <div class="wadah">
+    <div class="judul-bagian">
+      <div class="alis">CS WhatsApp 24 jam</div>
+      <h2>Pelanggan bertanya jam 11 malam, tetap dapat jawaban</h2>
+      <p>Anda menulis jawaban baku sekali: jam buka, harga, lokasi, syarat. Pesan yang masuk dijawab dari situ, kapan saja.</p>
+    </div>
+    <ul class="daftar">
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Menjawab dari jawaban baku Anda</b><span>AI hanya memakai bahan yang Anda tulis, bukan mengarang sendiri.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Meneruskan yang tidak tercakup</b><span>Pertanyaan di luar jawaban baku diteruskan ke Anda atau staf yang bertugas.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Mencatat nomor yang masuk</b><span>Setiap nomor yang menghubungi tercatat, jadi calon pembeli tidak hilang.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Tidak membanjiri pelanggan</b><span>Sapaan otomatis dibatasi supaya pelanggan yang sama tidak menerima balasan berulang.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- =============== KONTEN =============== -->
+<section class="rinci" id="konten">
+  <div class="wadah">
+    <div class="judul-bagian">
+      <div class="alis">Jadwal konten medsos</div>
+      <h2>Posting rutin tanpa harus ingat setiap hari</h2>
+      <p>Konten masuk antrean, tayang sesuai jadwal di TikTok, Instagram, dan Facebook.</p>
+    </div>
+    <ul class="daftar">
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Slot tayang per kanal</b><span>Jam tayang diatur per hari dan per kanal, mengikuti kebiasaan penonton Anda.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Pengingat tiap malam</b><span>Kalau slot besok masih kosong, Anda diberi tahu lewat Telegram.</span></div></li>
+      <li><svg class="ikon"><use href="#i-titik"/></svg><div><b>Persetujuan sebelum tayang</b><span>Konten dikirim ke Anda untuk disetujui atau direvisi lebih dulu. Tidak ada yang tayang tanpa izin Anda.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- =============== CUSTOM =============== -->
+<section class="rinci" id="custom">
+  <div class="wadah">
+    <div class="judul-bagian">
+      <div class="alis">Aplikasi sesuai kebutuhan</div>
+      <h2>Alur kerja Anda unik? Kami rakitkan</h2>
+      <p>Ceritakan cara usaha Anda berjalan hari ini. Kami petakan bagian yang paling banyak makan waktu, buatkan aplikasinya, lalu pasang di usaha Anda. Pembayarannya sama: biaya pasang sekali, lalu langganan bulanan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============== HARGA =============== -->
+<section class="rinci" id="harga">
+  <div class="wadah">
+    <div class="judul-bagian">
+      <div class="alis">Harga</div>
+      <h2>Biaya, dijelaskan terbuka sejak awal</h2>
+      <p>Polanya sama untuk semua layanan: biaya pasang sekali untuk penyiapan aplikasi, pengisian data awal, dan pelatihan tim, lalu langganan bulanan selama dipakai.</p>
+    </div>
+
+    <h3 style="font-size:20px;margin-bottom:14px">RentalKita, dihitung per cabang per bulan</h3>
+    <div class="tabel-harga">
+      <div class="paket">
+        <h3>Gratis</h3>
+        <div class="angka">Rp0</div>
+        <ul><li>1 cabang</li><li>Maks. 15 transaksi/bulan</li><li>Semua fitur inti untuk mencoba</li></ul>
+      </div>
+      <div class="paket">
+        <h3>Starter</h3>
+        <div class="angka">Rp199rb<small> /cabang/bln</small></div>
+        <ul><li>Transaksi tanpa batas</li><li>Sewa, pemesanan online, GPS</li><li>Buku kas, kontrak, daftar hitam</li></ul>
+      </div>
+      <div class="paket sorot">
+        <h3>Bisnis</h3>
+        <div class="angka">Rp349rb<small> /cabang/bln</small></div>
+        <ul><li>Semua isi Starter</li><li>Laba rugi &amp; estimasi pajak</li><li>Paket mingguan/bulanan, penyewa instansi</li></ul>
+      </div>
+      <div class="paket">
+        <h3>Profesional</h3>
+        <div class="angka">Rp499rb<small> /cabang/bln</small></div>
+        <ul><li>Semua isi Bisnis</li><li>Bahasa Indonesia &amp; Inggris</li><li>Modal &amp; bagi hasil investor, nama dan logo usaha sendiri</li></ul>
+      </div>
+    </div>
+
+    <div class="harga-lain" role="table" aria-label="Harga layanan lain">
+      <div class="baris kop" role="row"><span role="columnheader">Layanan</span><span role="columnheader">Biaya pasang</span><span role="columnheader">Langganan</span></div>
+      <div class="baris" role="row"><span role="cell">RentalKita</span><span class="mono" role="cell" data-k="Pasang">mulai Rp3 jt</span><span class="mono" role="cell" data-k="Langganan">lihat paket di atas</span></div>
+      <div class="baris" role="row"><span role="cell">Parkir berbasis kamera</span><span class="mono" role="cell" data-k="Pasang">Rp3,5 jt</span><span class="mono" role="cell" data-k="Langganan">Rp300rb/bulan</span></div>
+      <div class="baris" role="row"><span role="cell">Usaha bercabang &amp; kemitraan</span><span class="mono" role="cell" data-k="Pasang">sesuai jumlah cabang</span><span class="mono" role="cell" data-k="Langganan">mulai Rp600rb/cabang/bln</span></div>
+      <div class="baris" role="row"><span role="cell">CS WhatsApp, jadwal konten, aplikasi khusus</span><span class="mono" role="cell" data-k="Pasang">sesuai kebutuhan</span><span class="mono" role="cell" data-k="Langganan">sesuai kebutuhan</span></div>
+    </div>
+    <p class="catatan">Harga belum termasuk perangkat keras (kamera, komputer, GPS kendaraan). Perubahan harga langganan diumumkan 30 hari sebelumnya.</p>
+  </div>
+</section>
+
+<!-- =============== CARA =============== -->
+<section class="rinci" id="cara">
+  <div class="wadah">
+    <div class="judul-bagian">
+      <div class="alis">Cara mulai</div>
+      <h2>Dari belajar sampai tim Anda memakainya</h2>
+    </div>
+    <div class="langkah">
+      <div><h3>Konsultasi gratis</h3><p>Ceritakan cara usaha Anda berjalan. Kami tunjukkan demonya dengan data contoh, sesuai jenis usaha Anda.</p></div>
+      <div><h3>Pasang &amp; isi data</h3><p>Kami siapkan aplikasi untuk usaha Anda, masukkan data awal, dan latih tim.</p></div>
+      <div><h3>Pakai, bayar bulanan</h3><p>Usaha berjalan dengan aplikasi. Perbaikan dan pertanyaan ditangani selama berlangganan.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wadah">
+    <div class="penutup">
+      <div>
+        <h2>Masih ragu? Pelajari dulu, tanya kemudian</h2>
+        <p>Mulai dari materi gratis. Kalau ada yang ingin ditanyakan, konsultasi tidak dipungut biaya.</p>
+      </div>
+      <div class="aksi">
+        <a class="tombol utama" href="#belajar">Belajar gratis</a>
+        <a class="tombol" data-demo href="https://rentalkita-demo.vercel.app" target="_blank" rel="noopener"><svg class="ikon"><use href="#i-layar"/></svg>Coba demo RentalKita</a>
+        <a class="tombol wa" data-wa data-pesan="Halo, saya ingin konsultasi aplikasi untuk usaha saya." hidden><svg class="ikon"><use href="#i-wa"/></svg>Konsultasi gratis</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wadah">&copy; 2026 <span data-merek>Aplikasi Usaha</span>. Data pada halaman dan demo adalah data contoh.</div>
+</footer>
+
+<div class="wa-melayang">
+  <a class="tombol wa" style="flex:1" data-wa data-pesan="Halo, saya ingin konsultasi aplikasi untuk usaha saya." hidden><svg class="ikon"><use href="#i-wa"/></svg>Konsultasi gratis lewat WhatsApp</a>
+</div>
+
+<script>
+(function(){
+  var S = window.SITUS || {};
+  var merek = (S.merek || "").trim();
+  if (merek) {
+    document.querySelectorAll("[data-merek]").forEach(function(el){ el.textContent = merek; });
+    document.title = merek + " | Aplikasi Usaha Bercabang";
+  }
+  if (S.demoRentalKita) {
+    document.querySelectorAll("[data-demo]").forEach(function(el){ el.href = S.demoRentalKita; });
+  }
+  var nomor = String(S.waNomor || "").replace(/\D/g, "");
+  var tanda = S.penandaSumber || "LP";
+  document.querySelectorAll("[data-wa]").forEach(function(el){
+    if (!nomor) { el.hidden = true; return; }
+    // Penanda sumber per bagian, misalnya [LP-SaaS/rentalkita]
+    var bagian = el.closest("section");
+    var sub = bagian && bagian.id ? "/" + bagian.id : "";
+    var teks = "[" + tanda + sub + "] " + (el.getAttribute("data-pesan") || "Halo");
+    el.href = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(teks);
+    el.target = "_blank"; el.rel = "noopener";
+    el.hidden = false;
+  });
+  // tombol melayang hanya tampil bila nomor ada
+  var mel = document.querySelector(".wa-melayang");
+  if (!nomor && mel) mel.remove();
+})();
+</script>
+</body>
+</html>
