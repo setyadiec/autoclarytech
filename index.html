@@ -1,56 +1,57 @@
-<!DOCTYPE html>
-<html lang="id" class="dark scroll-smooth">
+<!doctype html>
+<html lang="id">
 <head>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="alternate icon" href="favicon.ico">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoClaryTech — The Autonomous Commerce Platform</title>
-  <meta name="description" content="Autonomous. Direct. Instant. Clarity. Secure. Platform Kasir & Karyawan AI Otonom 24 Jam.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AutoClaryTech — Solusi Kasir Suara & CS WhatsApp AI UMKM</title>
+  <meta name="description" content="Platform otomasi kasir digital, CS WhatsApp AI 24 jam, dan verifikasi pembayaran otomatis untuk UMKM dan bisnis modern di Indonesia.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="assets/favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="assets/favicon/favicon-256x256.png">
+
+  <!-- Apple Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800;900&family=Outfit:wght@200;300;400;600;800;900&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --black: #000000;
-      --dark-gray: #0a0a0c;
-      --card-gray: #121216;
-      --indigo: #6366f1;
-      --cyan: #06b6d4;
-      --emerald: #10b981;
-      --amber: #f59e0b;
-      --text-white: #ffffff;
-      --text-dim: #71717a;
+      --bg: #000000;
+      --card-bg: #09090b;
+      --border: rgba(255, 255, 255, 0.08);
+      --cyan: #00D2B4;
+      --blue: #22d3ee;
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    body {
-      background-color: var(--black);
-      color: var(--text-white);
-      overflow-x: hidden;
-      line-height: 1.4;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Apple-Style Navigation */
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Apple Minimal Header */
     .apple-nav {
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      height: 52px;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      z-index: 100;
+      width: 100%;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -58,29 +59,28 @@
     }
 
     .brand-title {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 900;
-      font-size: 18px;
-      letter-spacing: -0.5px;
-      color: #fff;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #fff;
       text-decoration: none;
+      letter-spacing: -0.5px;
     }
 
     .nav-links {
       display: flex;
       gap: 28px;
+      font-size: 14px;
+      font-weight: 500;
     }
 
     .nav-links a {
-      color: #a1a1aa;
-      font-size: 12px;
-      font-weight: 400;
+      color: var(--text-muted);
       text-decoration: none;
       transition: color 0.2s ease;
-      letter-spacing: -0.2px;
     }
 
     .nav-links a:hover {
@@ -90,9 +90,9 @@
     .btn-apple {
       background: #fff;
       color: #000;
-      padding: 6px 16px;
+      padding: 8px 18px;
       border-radius: 9999px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.2s ease;
@@ -100,302 +100,266 @@
 
     .btn-apple:hover {
       background: #e4e4e7;
-      transform: scale(1.03);
+      transform: scale(1.02);
     }
 
-    /* Section Styles */
+    /* Main Container Sections */
     .screen-section {
-      min-height: 100vh;
+      width: 100%;
+      padding: 100px 24px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 80px 24px;
-      position: relative;
     }
 
-    /* Apple-Style Monumental Typography Contrast */
-    .hero-eyebrow {
-      font-size: clamp(14px, 1.8vw, 20px);
-      font-weight: 600;
-      color: #818cf8;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      font-size: 13px;
+      color: #d4d4d8;
+      margin-bottom: 24px;
     }
 
     .hero-headline {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(44px, 7.5vw, 92px);
-      line-height: 1.02;
-      letter-spacing: -0.04em;
-      max-width: 1080px;
+      font-size: clamp(38px, 6vw, 76px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
       margin-bottom: 24px;
+      max-width: 960px;
     }
 
-    .font-heavy {
-      font-weight: 900;
-      color: #ffffff;
-    }
-
-    .font-thin {
-      font-weight: 200;
-      color: #a1a1aa;
-    }
+    .font-heavy { font-weight: 800; color: #fff; }
+    .font-thin { font-weight: 300; color: #a1a1aa; }
 
     .hero-sub {
-      font-size: clamp(18px, 2.4vw, 24px);
-      font-weight: 300;
-      color: #71717a;
-      max-width: 680px;
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 400;
+      color: #a1a1aa;
+      max-width: 720px;
       margin-bottom: 40px;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    /* Edge-to-Edge Visual Showcases */
+    /* Visual Core */
     .edge-visual-container {
       width: 100%;
-      max-width: 1280px;
+      max-width: 1100px;
       margin: 40px auto 0;
-      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
     }
 
     .edge-img {
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 0;
-      box-shadow: none;
     }
 
-    /* 5 Logo Core Values Showcase (Full Bleed) */
-    .logo-gallery-grid {
+    /* Cards & Grids */
+    .grid-modalitas {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
       width: 100%;
       max-width: 1200px;
-      margin: 60px auto 0;
+      text-align: left;
     }
 
-    .logo-item {
-      text-align: center;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    .card-mod {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
 
-    .logo-item:hover {
-      transform: translateY(-8px) scale(1.02);
+    .card-mod:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 210, 180, 0.4);
     }
 
-    .logo-item img {
-      width: 100%;
-      max-width: 240px;
-      height: auto;
-      border-radius: 28px;
-      display: block;
-      margin: 0 auto;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
-    }
-
-    .logo-label-heavy {
-      font-family: 'Outfit', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-top: 16px;
-    }
-
-    .logo-label-thin {
-      font-size: 13px;
-      font-weight: 300;
-      color: #71717a;
-      margin-top: 4px;
-      line-height: 1.4;
-    }
-
-    /* Badges */
-    .trust-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 24px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 9999px;
-      font-size: 13px;
-      font-weight: 400;
-      color: #d4d4d8;
-      margin-bottom: 24px;
+    /* Responsif */
+    @media (max-width: 768px) {
+      .apple-nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .screen-section { padding: 80px 16px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Minimal Apple-Style Navigation -->
+  <!-- Navigasi Bersih & Ringkas -->
   <nav class="apple-nav">
     <a href="#" class="brand-title">
-      <img src="assets/icon_penta_mark.jpg" alt="Logo" style="width: 28px; height: 28px; border-radius: 6px;">
-      <span>AutoClary<span style="font-weight: 300; color: #a1a1aa;">Tech</span></span>
+      <img src="assets/Logo-AUTOCLARYtech.png" alt="AutoClaryTech" style="height: 24px; width: auto;">
     </a>
 
     <div class="nav-links">
-      <a href="#modalitas">5 Modalitas UMKM</a>
-      <a href="#harga">Tangga Harga</a>
-      <a href="#logo">Identitas Visual</a>
-      <a href="#legal">Legalitas PT</a>
+      <a href="#solusi">Fitur & Modalitas</a>
+      <a href="#harga">Paket Harga</a>
+      <a href="#legalitas">Legalitas Resmi</a>
     </div>
 
-    <a href="https://autoclarytech.com/daftar" class="btn-apple" style="background: #22d3ee; color: #000; font-weight: 700;">Daftar Gratis</a>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <a href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20dengan%20solusi%20ini" target="_blank" style="color: #fff; font-size: 13px; text-decoration: none; font-weight: 500;">Uji Demo WA</a>
+      <a href="https://autoclarytech.com/daftar" class="btn-apple" style="background: var(--cyan); color: #000; font-weight: 700;">Daftar Gratis</a>
+    </div>
   </nav>
 
-  <!-- Hero Section: Apple Keynote Style -->
-  <section class="screen-section" style="padding-top: 120px;">
+  <!-- Hero Section -->
+  <section class="screen-section" style="padding-top: 130px;">
     <div class="trust-pill">
       <span style="color: #10b981; font-weight: 700;">●</span>
-      <span class="font-heavy" style="color:#fff;">autoclarytech.com</span>
-      <span class="font-thin">• Resmi Aktif 3 Tahun</span>
+      <span class="font-heavy" style="color:#fff;">AutoClaryTech</span>
+      <span class="font-thin">• Kedaulatan Usaha & Otomasi Digital UMKM</span>
     </div>
 
     <h1 class="hero-headline">
       <span class="font-heavy">Otonom.</span> <span class="font-thin">Jelas.</span><br>
-      <span class="font-thin">Bekerja Saat</span> <span class="font-heavy" style="background: linear-gradient(135deg, #fff 0%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Dunia Terlelap.</span>
+      <span class="font-thin">Bekerja Saat</span> <span class="font-heavy" style="background: linear-gradient(135deg, #fff 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Dunia Terlelap.</span>
     </h1>
 
     <p class="hero-sub">
-      Platform kasir digital & tenaga kerja AI otonom pertama yang menggabungkan <strong>Kedaulatan Usaha (Autonomy)</strong> dan <strong>Kejelasan Finansial (Clarity)</strong> tanpa potongan komisi sepeser pun.
+      Platform kasir digital & tenaga kerja AI otonom pertama di Indonesia yang menggabungkan kemudahan kasir suara, respon chat WhatsApp 24 jam, dan perlindungan transaksi tanpa potongan komisi sepeser pun.
     </p>
 
-    <!-- Hero CTA Buttons -->
+    <!-- Tombol Aksi Utama -->
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; z-index: 10;">
-      <a href="https://autoclarytech.com/daftar" style="background: linear-gradient(135deg, #00D2B4 0%, #06b6d4 100%); color: #000; font-weight: 700; padding: 14px 32px; border-radius: 9999px; text-decoration: none; font-size: 15px; box-shadow: 0 10px 30px rgba(0, 210, 180, 0.35); transition: transform 0.2s;">
+      <a href="https://autoclarytech.com/daftar" style="background: linear-gradient(135deg, #00D2B4 0%, #06b6d4 100%); color: #000; font-weight: 800; padding: 16px 36px; border-radius: 9999px; text-decoration: none; font-size: 15px; box-shadow: 0 10px 30px rgba(0, 210, 180, 0.35); transition: transform 0.2s;">
         ✦ Coba Paket Gratis Sekarang
       </a>
-      <a href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20dengan%20solusi%20CS%20AI%20WhatsApp" target="_blank" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; font-weight: 600; padding: 14px 28px; border-radius: 9999px; text-decoration: none; font-size: 15px; backdrop-filter: blur(10px); transition: background 0.2s;">
-        Uji Chat WA: 0857-2724-0341
+      <a href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20mau%20konsultasi%20layanan%20CS%20AI" target="_blank" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; font-weight: 600; padding: 16px 30px; border-radius: 9999px; text-decoration: none; font-size: 15px; backdrop-filter: blur(10px);">
+        Konsultasi WA: 0857-2724-0341
       </a>
     </div>
 
-    <!-- Edge-to-Edge AI Core Graphic -->
+    <!-- Visual AI Engine -->
     <div class="edge-visual-container">
-      <img src="assets/apple_style_ai_core_1791117362953.jpg" alt="Autonomous AI Core" class="edge-img">
+      <img src="assets/apple_style_ai_core_1791117362953.jpg" alt="Autonomous AI Commerce Engine" class="edge-img">
     </div>
   </section>
 
-  
-  <!-- SECTION 5 MODALITAS UMKM KANON -->
-  <section id="modalitas" class="screen-section" style="background: #08080c; border-top: 1px solid rgba(255,255,255,0.06); padding: 90px 24px;">
-    <div class="trust-pill" style="border-color: rgba(99,102,241,0.4); margin-bottom: 20px;">
-      <span style="color: #818cf8; font-weight: 700;">★</span>
-      <span class="font-heavy" style="color: #fff;">5 MODALITAS OTONOM UMKM</span>
-      <span class="font-thin">• Solusi Riil Masalah Lapangan</span>
+  <!-- 5 Modalitas Solusi Riil UMKM -->
+  <section id="solusi" class="screen-section" style="background: #050508; border-top: 1px solid var(--border);">
+    <div class="trust-pill" style="border-color: rgba(34, 211, 238, 0.3); margin-bottom: 20px;">
+      <span style="color: #22d3ee; font-weight: 700;">★</span>
+      <span class="font-heavy" style="color: #fff;">SOLUSI PRAKTIS UMKM</span>
+      <span class="font-thin">• Menjawab Kerepotan Operasional Lapangan</span>
     </div>
 
-    <h2 class="hero-headline" style="font-size: clamp(32px, 5vw, 64px);">
+    <h2 class="hero-headline" style="font-size: clamp(32px, 5vw, 60px);">
       <span class="font-heavy">Bukan Sekadar Chatbot.</span><br>
       <span class="font-thin">Ekosistem Tenaga Kerja Digital Lengkap.</span>
     </h2>
 
     <p class="hero-sub" style="max-width: 780px; margin-bottom: 50px;">
-      Didesain khusus untuk mengatasi kerepotan nyata 64 juta UMKM Indonesia: mulai dari pedagang yang malas mengetik teks, struk transfer bodong, hingga video promosi media sosial.
+      Didesain khusus untuk menyelesaikan masalah harian pemilik usaha: kasir repot ketik saat antrean ramai, chat pelanggan yang tidak terbalas di malam hari, hingga risiko struk transfer palsu.
     </p>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; width: 100%; max-width: 1200px; text-align: left;">
-      
+    <div class="grid-modalitas">
       <!-- Modalitas 1 -->
-      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; transition: transform 0.3s;">
+      <div class="card-mod">
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
           <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(99,102,241,0.15); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #818cf8;">🎙️</div>
           <div>
-            <h3 style="font-size: 18px; font-weight: 700; color: #fff;">1. Kasir Suara (Voice-to-Action)</h3>
-            <span style="font-size: 12px; color: #818cf8;">faster-whisper-large-v3 Lokal</span>
+            <h3 style="font-size: 18px; font-weight: 700; color: #fff;">1. Kasir Suara Kilat (Voice POS)</h3>
+            <span style="font-size: 12px; color: #818cf8;">Catat Pesanan Cukup Bicara</span>
           </div>
         </div>
         <p style="font-size: 14px; color: #a1a1aa; line-height: 1.6;">
-          Pedagang cukup rekam Voice Note WhatsApp saat sibuk melayani pembeli. AI langsung mentranskripsi dalam 0.8 detik, mengekstrak item pesanan, dan otomatis menerbitkan Nota & Kuitansi PDF rapi.
+          Kasir tidak perlu mengetik layar sentuh saat antrean memanjang. Cukup sebutkan pesanan via voice note ponsel: pesanan terekam dalam hitungan detik dan kuitansi instan langsung tercetak rapi.
         </p>
       </div>
 
       <!-- Modalitas 2 -->
-      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; transition: transform 0.3s;">
+      <div class="card-mod">
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
           <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16,185,129,0.15); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #34d399;">👁️</div>
           <div>
-            <h3 style="font-size: 18px; font-weight: 700; color: #fff;">2. Vision Anti-Bodong</h3>
-            <span style="font-size: 12px; color: #34d399;">Pemeriksa Struk Transfer M-Banking</span>
+            <h3 style="font-size: 18px; font-weight: 700; color: #fff;">2. Vision AI Anti-Bodong</h3>
+            <span style="font-size: 12px; color: #34d399;">Pemeriksa Bukti Transfer QRIS & Bank</span>
           </div>
         </div>
         <p style="font-size: 14px; color: #a1a1aa; line-height: 1.6;">
-          Melindungi warung dari bahaya struk editan Canva. Vision AI memverifikasi keaslian font, nomor referensi, dan konsistensi tanggal bukti transfer bank dalam 3 detik sebelum pesanan diproses.
+          Melindungi toko Anda dari bahaya bukti transfer palsu. AI membaca keaslian nominal, konsistensi tanggal, dan nomor referensi bukti transfer bank secara real-time sebelum barang diserahkan.
         </p>
       </div>
 
       <!-- Modalitas 3 -->
-      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; transition: transform 0.3s;">
+      <div class="card-mod">
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
           <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(6,182,212,0.15); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #22d3ee;">⚡</div>
           <div>
-            <h3 style="font-size: 18px; font-weight: 700; color: #fff;">3. CS WhatsApp Teks 24 Jam</h3>
-            <span style="font-size: 12px; color: #22d3ee;">Respon Kilat &lt;3 Detik Nonstop</span>
+            <h3 style="font-size: 18px; font-weight: 700; color: #fff;">3. CS WhatsApp 24 Jam Nonstop</h3>
+            <span style="font-size: 12px; color: #22d3ee;">Respon Kilat &lt;3 Detik Malam Hari</span>
           </div>
         </div>
         <p style="font-size: 14px; color: #a1a1aa; line-height: 1.6;">
-          Pembeli tidak pernah kabur meski chat jam 23.00 malam. AI menjawab santun khas CS Indonesia, hafal detail katalog, mengecek ketersediaan barang, dan mengunci transaksi seketika.
+          Calon pembeli tidak kabur meski chat jam 2 malam. AI membalas ramah dan sopan dari katalog resmi toko Anda, menjawab ketersediaan produk, dan mengunci transaksi pesanan seketika.
         </p>
       </div>
 
       <!-- Modalitas 4 -->
-      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; transition: transform 0.3s;">
+      <div class="card-mod">
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
           <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(245,158,11,0.15); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fbbf24;">🎬</div>
           <div>
-            <h3 style="font-size: 18px; font-weight: 700; color: #fff;">4. Video Faceless (ASMR)</h3>
-            <span style="font-size: 12px; color: #fbbf24;">Pabrik Konten Vertikal 9:16</span>
+            <h3 style="font-size: 18px; font-weight: 700; color: #fff;">4. Video Promosi Faceless</h3>
+            <span style="font-size: 12px; color: #fbbf24;">Konten Medsos Otomatis 9:16</span>
           </div>
         </div>
         <p style="font-size: 14px; color: #a1a1aa; line-height: 1.6;">
-          Pemilik toko sering malu tampil di depan kamera. Mesin render FFmpeg memproduksi video promosi harian TikTok & IG Reels dengan visual produk sinematik dan audio ASMR menggugah selera.
+          Pemilik usaha tidak perlu malu tampil di depan kamera. Generator konten kami memproduksi video showcase vertikal untuk TikTok & Instagram Reels lengkap dengan audio ASMR menggugah selera.
         </p>
       </div>
 
       <!-- Modalitas 5 -->
-      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; transition: transform 0.3s;">
+      <div class="card-mod">
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
           <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(236,72,153,0.15); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #f472b6;">🔄</div>
           <div>
-            <h3 style="font-size: 18px; font-weight: 700; color: #fff;">5. Otomasi Rekap & Penagihan</h3>
-            <span style="font-size: 12px; color: #f472b6;">Engine n8n Terintegrasi</span>
+            <h3 style="font-size: 18px; font-weight: 700; color: #fff;">5. Laporan Harian & Rekap Omzet</h3>
+            <span style="font-size: 12px; color: #f472b6;">Notifikasi Malam ke WA Pemilik</span>
           </div>
         </div>
         <p style="font-size: 14px; color: #a1a1aa; line-height: 1.6;">
-          Laporan rekap laba kotor harian dikirim otomatis ke WA pemilik setiap jam 21.00 WIB. Pengingat tagihan kasbon otomatis terkirim H-3 dengan sopan tanpa merusak hubungan dengan pelanggan.
+          Rangkuman penjualan harian dan laba kotor toko otomatis dikirim ke nomor WhatsApp pemilik setiap jam 21.00 WIB. Pengingat invoice dan tagihan jatuh tempo terkirim sopan ke pelanggan.
         </p>
       </div>
-
     </div>
   </section>
 
-  <!-- SECTION 7 TANGGA HARGA KANON RESMI -->
-  <section id="harga" class="screen-section" style="background: #030305; padding: 100px 24px; border-top: 1px solid rgba(255,255,255,0.06);">
-    <div class="trust-pill" style="border-color: rgba(34,211,238,0.4); margin-bottom: 20px;">
-      <span style="color: #22d3ee; font-weight: 700;">✦</span>
+  <!-- Tangga Harga Kanon -->
+  <section id="harga" class="screen-section" style="background: #020204; border-top: 1px solid var(--border);">
+    <div class="trust-pill" style="border-color: rgba(0, 210, 180, 0.4); margin-bottom: 20px;">
+      <span style="color: var(--cyan); font-weight: 700;">✦</span>
       <span class="font-heavy" style="color: #fff;">TANGGA HARGA TRANSPARAN</span>
-      <span class="font-thin">• Tanpa Deposit Token • Ramah Kantong UMKM</span>
+      <span class="font-thin">• Tanpa Deposit Token • Tanpa Biaya Tersembunyi</span>
     </div>
 
     <h2 class="hero-headline" style="font-size: clamp(34px, 5.5vw, 68px);">
       <span class="font-heavy">Mulai Gratis,</span><br>
-      <span class="font-thin">Naik Sesuai</span> <span class="font-heavy" style="background: linear-gradient(135deg, #00D2B4 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Laju Ramainya Toko.</span>
+      <span class="font-thin">Naik Sesuai</span> <span class="font-heavy" style="background: linear-gradient(135deg, #00D2B4 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Laju Ramainya Usaha.</span>
     </h2>
 
     <p class="hero-sub" style="max-width: 780px; margin-bottom: 60px;">
-      Tidak ada hitungan token per huruf yang memusingkan. Cukup pilih kuota balasan bulanan yang pas untuk usaha Anda.
+      Tidak ada saldo token yang membingungkan atau menguap. Cukup pilih kuota balasan per bulan yang paling sesuai dengan kebutuhan usaha Anda.
     </p>
 
-    <!-- Pricing Grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; width: 100%; max-width: 1240px; text-align: left;">
+    <!-- Pricing 4 Kolom Utama -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; width: 100%; max-width: 1240px; text-align: left;">
       
       <!-- Tier 1: GRATIS -->
-      <div style="background: #0d0d12; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div style="background: #0d0d12; border: 1px solid var(--border); border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
           <span style="display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.06); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a1a1aa; margin-bottom: 16px;">Uji Coba Awal</span>
           <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #fff;">Gratis</h3>
@@ -403,21 +367,21 @@
             <span style="font-size: 38px; font-weight: 900; color: #fff;">Rp 0</span>
             <span style="color: #71717a; font-size: 13px;"> / bulan</span>
           </div>
-          <p style="font-size: 13px; color: #a1a1aa; margin-bottom: 24px; line-height: 1.5;">Coba dulu tanpa kartu kredit & tanpa deposit token.</p>
+          <p style="font-size: 13px; color: #a1a1aa; margin-bottom: 24px; line-height: 1.5;">Coba langsung tanpa kartu kredit & tanpa komitmen.</p>
           <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #d4d4d8; line-height: 2;">
             <li>✓ <strong>100 balasan AI</strong> / bulan</li>
-            <li>✓ Jalur Nomor Bersama ACT</li>
+            <li>✓ Jalur Nomor WhatsApp Bersama</li>
             <li>✓ Laporan ringkas malam ke pemilik</li>
-            <li>✓ Label "dibuat dengan AutoClaryTech"</li>
+            <li>✓ Label "Didukung oleh AutoClaryTech"</li>
           </ul>
         </div>
         <a href="https://autoclarytech.com/daftar" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.08); color: #fff; font-weight: 600; text-decoration: none; font-size: 13px;">Daftar Mandiri Gratis</a>
       </div>
 
       <!-- Tier 2: MIKRO -->
-      <div style="background: #0d0d12; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div style="background: #0d0d12; border: 1px solid var(--border); border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <span style="display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.06); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a1a1aa; margin-bottom: 16px;">Harga 5 Biji Bakpao</span>
+          <span style="display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.06); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a1a1aa; margin-bottom: 16px;">Usaha Rintisan</span>
           <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #fff;">Mikro</h3>
           <div style="margin-top: 14px; margin-bottom: 20px;">
             <span style="font-size: 38px; font-weight: 900; color: #fff;">Rp 25.000</span>
@@ -426,19 +390,19 @@
           <p style="font-size: 13px; color: #a1a1aa; margin-bottom: 24px; line-height: 1.5;">Sangat pas untuk toko yang baru mulai laris.</p>
           <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #d4d4d8; line-height: 2;">
             <li>✓ <strong>1.000 balasan AI</strong> / bulan</li>
-            <li>✓ Jalur Nomor Bersama</li>
-            <li>✓ <strong>Tanpa label merek</strong> (putih bersih)</li>
+            <li>✓ Jalur Nomor WhatsApp Bersama</li>
+            <li>✓ <strong>Tanpa label merek</strong> (label putih bersih)</li>
             <li>✓ Eskalasi otomatis ke pemilik bila AI ragu</li>
           </ul>
         </div>
-        <a href="https://autoclarytech.com/bayar/mikro" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.08); color: #fff; font-weight: 600; text-decoration: none; font-size: 13px;">Pilih Mikro</a>
+        <a href="https://autoclarytech.com/daftar" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.08); color: #fff; font-weight: 600; text-decoration: none; font-size: 13px;">Pilih Mikro</a>
       </div>
 
       <!-- Tier 3: HEMAT (TERPOPULER) -->
-      <div style="background: linear-gradient(180deg, #101924 0%, #0d0d14 100%); border: 2px solid #00D2B4; border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 0 50px rgba(0, 210, 180, 0.15);">
-        <div style="position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: #00D2B4; color: #000; font-size: 11px; font-weight: 800; padding: 3px 16px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.5px;">Paling Diminati</div>
+      <div style="background: linear-gradient(180deg, #101c22 0%, #0d0d14 100%); border: 2px solid #00D2B4; border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 0 50px rgba(0, 210, 180, 0.15);">
+        <div style="position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: #00D2B4; color: #000; font-size: 11px; font-weight: 800; padding: 3px 16px; border-radius: 9999px; text-transform: uppercase;">Paling Diminati</div>
         <div>
-          <span style="display: inline-block; padding: 4px 12px; background: rgba(0,210,180,0.15); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #00D2B4; margin-bottom: 16px;">Nomor WA Sendiri</span>
+          <span style="display: inline-block; padding: 4px 12px; background: rgba(0,210,180,0.15); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #00D2B4; margin-bottom: 16px;">Nomor WA Usaha Sendiri</span>
           <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #fff;">Hemat</h3>
           <div style="margin-top: 14px; margin-bottom: 20px;">
             <span style="font-size: 38px; font-weight: 900; color: #00D2B4;">Rp 75.000</span>
@@ -447,162 +411,80 @@
           <p style="font-size: 13px; color: #a1a1aa; margin-bottom: 24px; line-height: 1.5;">Untuk toko yang sudah ramai chat setiap hari.</p>
           <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #d4d4d8; line-height: 2;">
             <li>✓ <strong>5.000 balasan AI</strong> / bulan</li>
-            <li>✓ <strong>Nomor WA Usaha Sendiri</strong> (scan QR)</li>
-            <li>✓ Katalog & FAQ lebih panjang</li>
+            <li>✓ <strong>Nomor WA Usaha Sendiri</strong> (scan QR mudah)</li>
+            <li>✓ Katalog & daftar menu lebih leluasa</li>
             <li>✓ Laporan harian performa chat</li>
           </ul>
         </div>
-        <a href="https://autoclarytech.com/bayar/hemat" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: #00D2B4; color: #000; font-weight: 800; text-decoration: none; font-size: 13px;">Pilih Hemat</a>
+        <a href="https://autoclarytech.com/daftar" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: #00D2B4; color: #000; font-weight: 800; text-decoration: none; font-size: 13px;">Pilih Hemat</a>
       </div>
 
       <!-- Tier 4: USAHA -->
-      <div style="background: #0d0d12; border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between;">
+      <div style="background: #0d0d12; border: 1px solid var(--border); border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between;">
         <div>
-          <span style="display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.06); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a1a1aa; margin-bottom: 16px;">Semua Modalitas</span>
+          <span style="display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.06); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a1a1aa; margin-bottom: 16px;">Semua Modalitas Lengkap</span>
           <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #fff;">Usaha</h3>
           <div style="margin-top: 14px; margin-bottom: 20px;">
             <span style="font-size: 38px; font-weight: 900; color: #fff;">Rp 199.000</span>
             <span style="color: #71717a; font-size: 13px;"> / bulan</span>
           </div>
-          <p style="font-size: 13px; color: #a1a1aa; margin-bottom: 24px; line-height: 1.5;">3 Pengguna, CS AI + Kasir Suara + Kuitansi.</p>
+          <p style="font-size: 13px; color: #a1a1aa; margin-bottom: 24px; line-height: 1.5;">Multi staf, Kasir Suara, dan Kuitansi instan.</p>
           <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #d4d4d8; line-height: 2;">
             <li>✓ <strong>5.000 balasan AI</strong> / bulan</li>
-            <li>✓ Termasuk Kasir Suara VN & Vision</li>
-            <li>✓ 3 Akses Staf / Admin toko</li>
+            <li>✓ Termasuk Kasir Suara VN & Vision Anti-Bodong</li>
+            <li>✓ 3 Akun Akses Staf / Kasir toko</li>
             <li>✓ Generator Kuitansi & Faktur instan</li>
           </ul>
         </div>
-        <a href="https://autoclarytech.com/bayar/usaha" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.08); color: #fff; font-weight: 600; text-decoration: none; font-size: 13px;">Pilih Usaha</a>
+        <a href="https://autoclarytech.com/daftar" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.08); color: #fff; font-weight: 600; text-decoration: none; font-size: 13px;">Pilih Usaha</a>
       </div>
 
     </div>
 
-    <!-- Tier Tambahan: Bisnis, Juragan, Khusus -->
+    <!-- Paket Tambahan (Bisnis & Korporat) -->
     <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; width: 100%; max-width: 1240px; text-align: left;">
-      <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 24px 28px;">
-        <h4 style="font-size: 18px; font-weight: 700; color: #fff;">Bisnis (Rp 349.000 /cabang)</h4>
-        <p style="font-size: 13px; color: #71717a; margin-top: 6px;">Multi-cabang, laporan gabungan pusat, kontrol per cabang.</p>
+      <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 18px; padding: 24px 28px;">
+        <h4 style="font-size: 18px; font-weight: 700; color: #fff;">Paket Bisnis (Rp 349.000 /cabang)</h4>
+        <p style="font-size: 13px; color: #71717a; margin-top: 6px;">Multi-cabang, laporan gabungan kantor pusat, kontrol terpusat.</p>
       </div>
-      <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 24px 28px;">
-        <h4 style="font-size: 18px; font-weight: 700; color: #fff;">Juragan (Rp 999.000 /bln)</h4>
-        <p style="font-size: 13px; color: #71717a; margin-top: 6px;">Kuota lapang tanpa batas, server didahulukan, setup katalog gratis oleh tim.</p>
+      <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 18px; padding: 24px 28px;">
+        <h4 style="font-size: 18px; font-weight: 700; color: #fff;">Paket Juragan (Rp 999.000 /bln)</h4>
+        <p style="font-size: 13px; color: #71717a; margin-top: 6px;">Kuota lapang prioritas, pendampingan katalog oleh tim teknis kami.</p>
       </div>
-      <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 24px 28px;">
-        <h4 style="font-size: 18px; font-weight: 700; color: #fff;">Khusus (Ditawar)</h4>
-        <p style="font-size: 13px; color: #71717a; margin-top: 6px;">Integrasi korporasi, lembaga, atau pemda dengan API khusus.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Official Final Master Logo (Disempurnakan Langsung Oleh Bapak) -->
-  <section id="logo" class="screen-section" style="background: #050507; border-top: 1px solid rgba(255,255,255,0.06); padding: 90px 24px;">
-    <div class="trust-pill" style="border-color: rgba(34,211,238,0.4); margin-bottom: 24px;">
-      <span style="color: #22d3ee; font-weight: 700;">★</span>
-      <span class="font-heavy" style="color: #fff;">IDENTITAS VISUAL RESMI</span>
-      <span class="font-thin">• Sentuhan Akhir Langsung Oleh Bapak</span>
-    </div>
-
-    <h2 class="hero-headline" style="font-size: clamp(34px, 5.5vw, 68px);">
-      <span class="font-heavy">Karya Sempurna.</span><br>
-      <span class="font-thin">Jernih di Segala Ukuran,</span> <span class="font-heavy" style="background: linear-gradient(135deg, #22d3ee 0%, #2dd4bf 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Abadi di 16 Piksel.</span>
-    </h2>
-
-    <p class="hero-sub" style="max-width: 860px; margin-bottom: 60px;">
-      Inilah lambang resmi <strong>AutoClaryTech</strong>. Faset prisma kristal huruf <strong>'C'</strong> dipertegas dengan garis pemisah putih solid dan paduan 2 warna murni <strong>Electric Cyan & Radiant Tosca</strong>. Membuktikan filosofi sejati: <em>logo yang hebat tetap terbaca tegas dan kuat bahkan pada ukuran mikro favicon 16×16 piksel</em>.
-    </p>
-
-    <!-- Side-by-side Dual Presentation: Dark Mode vs Light Mode -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; width: 100%; max-width: 1140px; margin-bottom: 60px;">
-      
-      <!-- Card 1: Dark Mode Keynote -->
-      <div style="background: #0a0a0d; border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 24px; padding: 40px 32px; text-align: center; box-shadow: 0 0 50px rgba(34, 211, 238, 0.08);">
-        <div style="font-size: 11px; font-weight: 700; color: #22d3ee; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 24px;">Dark Mode Edition (Aplikasi & Web)</div>
-        <div style="padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 280px;">
-          <img src="assets/Logo-AUTOCLARYtech-dark.png" alt="AutoClaryTech Dark Official" style="max-width: 280px; width: 100%; height: auto; display: block; filter: drop-shadow(0 0 20px rgba(34,211,238,0.25));">
-        </div>
-        <div style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-top: 16px;">Kristal Neon di Atas Obsidian</div>
-        <div style="font-size: 14px; color: #a1a1aa; margin-top: 6px; line-height: 1.5;">Standar tampilan utama website autoclarytech.com, layar kasir malam hari, dan video presentasi investor.</div>
-      </div>
-
-      <!-- Card 2: Light Mode Corporate -->
-      <div style="background: #ffffff; border: 1px solid #e4e4e7; border-radius: 24px; padding: 40px 32px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.15); color: #09090b;">
-        <div style="font-size: 11px; font-weight: 700; color: #0d9488; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 24px;">Light Mode Edition (Kop Surat & Cetak)</div>
-        <div style="padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 280px;">
-          <img src="assets/Logo-AUTOCLARYtech-light.png" alt="AutoClaryTech Light Official" style="max-width: 280px; width: 100%; height: auto; display: block;">
-        </div>
-        <div style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: #09090b; margin-top: 16px;">Prisma Bersih di Kertas Putih</div>
-        <div style="font-size: 14px; color: #52525b; margin-top: 6px; line-height: 1.5;">Standar dokumen invoice legal PT Artareksa Teknologi Ekonomi, materai fisik, dan struk kasir siang hari.</div>
-      </div>
-
-    </div>
-
-    <!-- Micro Favicon Readability Grid Proof -->
-    <div style="max-width: 980px; width: 100%; margin: 0 auto; background: #0c0c10; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px 28px; text-align: center;">
-      <div style="font-size: 12px; font-weight: 700; color: #2dd4bf; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Uji Keterbacaan Nyata Skala Mikro (Optical Size Engine)</div>
-      <div style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px;">Terbukti Tajam Sempurna di 16 Piksel Tab Browser</div>
-      <div style="font-size: 14px; color: #71717a; max-width: 680px; margin: 0 auto 28px;">
-        Garis batas putih dan paduan 2 warna solid (Cyan & Tosca) buatan Bapak terbukti tidak buyar. Huruf 'C' tetap terbaca kokoh dari resolusi 128px hingga 16px asli.
-      </div>
-      <div style="border-radius: 12px; overflow: hidden; background: #000; border: 1px solid rgba(255,255,255,0.06); padding: 14px;">
-        <img src="assets/uji_favicon_bapak_grid.png" alt="Uji Favicon Karya Bapak" style="max-width: 900px; width: 100%; height: auto; display: block; margin: 0 auto;">
+      <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 18px; padding: 24px 28px;">
+        <h4 style="font-size: 18px; font-weight: 700; color: #fff;">Solusi Kustom & Enterprise</h4>
+        <p style="font-size: 13px; color: #71717a; margin-top: 6px;">Integrasi ERP khusus, distributor grosir, atau armada sewa skala besar.</p>
       </div>
     </div>
   </section>
 
-  <!-- Pilihan Alternatif Logo Eksplorasi Sebelumnya (Collapsible / Compact) -->
-  <section class="screen-section" style="background: var(--dark-gray); padding: 60px 24px; border-top: 1px solid rgba(255,255,255,0.05);">
-    <div style="font-size: 12px; color: #71717a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Arsip Desain 5 Core Values</div>
-    <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 600; color: #a1a1aa; margin-bottom: 30px;">
-      4 Pilihan Alternatif Lainnya
-    </h3>
-    <div class="logo-gallery-grid" style="margin-top: 0; opacity: 0.65;">
-      <div class="logo-item">
-        <img src="assets/logo_1_autonomous.jpg" alt="Logo 1 Autonomous">
-        <div class="logo-label-heavy" style="color: #a5b4fc;">1. AUTONOMOUS</div>
-      </div>
-      <div class="logo-item">
-        <img src="assets/logo_2_direct.jpg" alt="Logo 2 Direct">
-        <div class="logo-label-heavy" style="color: #34d399;">2. DIRECT</div>
-      </div>
-      <div class="logo-item">
-        <img src="assets/logo_3_instant.jpg" alt="Logo 3 Instant">
-        <div class="logo-label-heavy" style="color: #fbbf24;">3. INSTANT</div>
-      </div>
-      <div class="logo-item">
-        <img src="assets/logo_5_secure.jpg" alt="Logo 5 Secure">
-        <div class="logo-label-heavy" style="color: #818cf8;">5. SECURE</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Legalitas PT Perorangan Section -->
-  <section id="legal" class="screen-section" style="padding: 100px 24px;">
-    <div class="hero-eyebrow" style="color: #10b981;">Legalitas Resmi Terdaftar</div>
-    <h2 class="hero-headline" style="font-size: clamp(32px, 5vw, 60px);">
+  <!-- Legalitas PT Resmi -->
+  <section id="legalitas" class="screen-section" style="padding: 100px 24px; border-top: 1px solid var(--border);">
+    <div class="hero-eyebrow" style="color: #10b981; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Legalitas Usaha Terdaftar</div>
+    <h2 class="hero-headline" style="font-size: clamp(30px, 4.5vw, 54px);">
       <span class="font-heavy">PT ARTAREKSA</span> <span class="font-thin">TEKNOLOGI EKONOMI</span>
     </h2>
     
-    <p class="hero-sub" style="max-width: 800px;">
-      Dioperasikan secara resmi di bawah payung hukum Perseroan Perorangan terdaftar di Kementerian Hukum RI.<br>
-      Settlement perbankan penampung Giro BRI resmi berizin Bank Indonesia via PT Duitku Siber Indonesia.
+    <p class="hero-sub" style="max-width: 800px; margin-bottom: 32px;">
+      Layanan AutoClaryTech dioperasikan secara resmi di bawah payung hukum Perseroan Terdaftar di Kementerian Hukum Republik Indonesia.
     </p>
 
-    <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 20px; font-size: 14px; color: #a1a1aa;">
-      <div><strong style="color:#fff;">NIB OSS BKPM:</strong> 0510260027696 (Resmi Terbit 5 Okt 2026)</div>
+    <div style="display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; font-size: 14px; color: #a1a1aa; max-width: 900px;">
+      <div><strong style="color:#fff;">NIB OSS BKPM:</strong> 0510260027696</div>
       <div><strong style="color:#fff;">SK Kemenkumham:</strong> AHU-A106448.AH.01.30.Tahun 2026</div>
       <div><strong style="color:#fff;">NPWP Badan:</strong> 1000 0000 1045 9264</div>
       <div><strong style="color:#fff;">KBLI Resmi:</strong> 47403 (Perdagangan Eceran Perangkat Lunak)</div>
     </div>
   </section>
 
-    <!-- Closing Call to Action Banner -->
+  <!-- Closing Call to Action -->
   <section class="screen-section" style="background: radial-gradient(circle at center, #0c2020 0%, #000 70%); padding: 100px 24px; text-align: center; border-top: 1px solid rgba(0,210,180,0.2);">
-    <h2 class="hero-headline" style="font-size: clamp(36px, 6vw, 72px); max-width: 900px; margin: 0 auto 24px;">
-      <span class="font-heavy">Mulai Otomasi Toko Anda</span><br>
+    <h2 class="hero-headline" style="font-size: clamp(34px, 5.5vw, 68px); max-width: 900px; margin: 0 auto 24px;">
+      <span class="font-heavy">Mulai Otomasi Usaha Anda</span><br>
       <span class="font-thin">Malam Ini Juga.</span>
     </h2>
     <p class="hero-sub" style="margin: 0 auto 40px;">
-      Daftar mandiri dalam 2 menit. Dapatkan 100 balasan AI gratis tanpa kartu kredit, tanpa deposit token.
+      Daftar mandiri dalam 2 menit. Dapatkan 100 balasan AI gratis tanpa kartu kredit dan tanpa deposit saldo.
     </p>
     <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
       <a href="https://autoclarytech.com/daftar" style="background: #00D2B4; color: #000; font-weight: 800; padding: 16px 36px; border-radius: 9999px; text-decoration: none; font-size: 16px; box-shadow: 0 10px 30px rgba(0, 210, 180, 0.4);">
@@ -614,10 +496,10 @@
     </div>
   </section>
 
-  <!-- Footer Simple Apple Style -->
-  <footer style="padding: 40px 32px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: #52525b; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-    <div>&copy; 2026 AutoClaryTech.com. Hak cipta dilindungi undang-undang.</div>
-    <div>Sistem Komputasi Lokal RTX 3060 12GB & Google Workspace Standard.</div>
+  <!-- Footer Profesional -->
+  <footer style="padding: 40px 32px; border-top: 1px solid var(--border); font-size: 12px; color: #71717a; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+    <div>&copy; 2026 AutoClaryTech.com. Seluruh hak cipta dilindungi undang-undang.</div>
+    <div>Infrastruktur Cloud Berkecepatan Tinggi & Standar Enkripsi Transaksi Aman.</div>
   </footer>
 
 </body>
