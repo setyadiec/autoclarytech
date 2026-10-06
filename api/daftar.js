@@ -58,7 +58,7 @@ export default async function handler(req, res) {
     skala_usaha: String(skalaUsaha || 'UMKM').trim(),
     kuota_gratis: 1000,
     persetujuan_privasi: true,
-    skema_termin: 'DP mulai pengerjaan, pelunasan saat selesai, langganan bulan berikutnya',
+    skema_termin: 'Ya kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya',
     // Rincian Spesifikasi bila Custom App
     spesifikasi_kustom: isCustomApp ? {
       masalah_utama: String(masalahUtama || ''),

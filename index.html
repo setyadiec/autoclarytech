@@ -1604,7 +1604,7 @@
             <!-- Ketetapan Kebijakan Termin Pembayaran Kanon Bapak -->
             <div class="info-callout-box">
               <strong style="color: var(--cyan); display: block; margin-bottom: 4px;">Skema Pembayaran Transparan & Terpercaya:</strong>
-              Pengerjaan aplikasi segera kami proses setelah pembayaran uang muka (DP), dan pelunasan dilakukan setelah aplikasi selesai dan siap digunakan. Biaya langganan pemeliharaan cloud baru dikenakan mulai bulan berikutnya.
+              Ya, kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.
             </div>
 
             <div class="form-group" style="margin-bottom: 18px;">
@@ -1706,6 +1706,11 @@
         </div>
 
         <div class="faq-card">
+          <h4>Bagaimana skema pembayaran dan langganan untuk pembuatan aplikasi kustom?</h4>
+          <p>Ya, kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.</p>
+        </div>
+
+        <div class="faq-card">
           <h4>Apakah nomor WhatsApp pribadi saya aman dari blokir?</h4>
           <p>Sistem kami mematuhi batas kecepatan pengiriman (rate limiting) resmi dan menolak metode blast massal acak. Bot hanya membalas pesan masuk dari pelanggan yang menghubungi toko Anda.</p>
         </div>
@@ -1744,6 +1749,98 @@
 
   <!-- Interactivity Scripts -->
   <script>
+    // Inisialisasi tampilan wizard saat halaman selesai dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+      gantiKategoriAplikasi();
+    });
+
+    // Beralih antara mode Aplikasi Standar dan Wizard 7 Layar Kustom
+    function gantiKategoriAplikasi() {
+      const selectEl = document.getElementById('reqJenisAplikasi');
+      const val = selectEl ? selectEl.value : '';
+      const isCustom = val.includes('Kustom') || val.includes('Request Baru');
+
+      const wizardHeader = document.getElementById('wizardHeader');
+      const boxStandar = document.getElementById('boxKebutuhanStandar');
+      const btnStandar = document.getElementById('btnBoxLayar1Standar');
+      const btnCustom = document.getElementById('btnBoxLayar1Custom');
+
+      if (isCustom) {
+        if (wizardHeader) wizardHeader.style.display = 'block';
+        if (boxStandar) boxStandar.style.display = 'none';
+        if (btnStandar) btnStandar.style.display = 'none';
+        if (btnCustom) btnCustom.style.display = 'flex';
+        pindahLayar(1);
+      } else {
+        if (wizardHeader) wizardHeader.style.display = 'none';
+        if (boxStandar) boxStandar.style.display = 'block';
+        if (btnStandar) btnStandar.style.display = 'block';
+        if (btnCustom) btnCustom.style.display = 'none';
+        // Pastikan hanya layar 1 yang aktif
+        for (let i = 2; i <= 7; i++) {
+          const stepEl = document.getElementById('step' + i);
+          if (stepEl) stepEl.classList.remove('active');
+        }
+        const step1 = document.getElementById('step1');
+        if (step1) step1.classList.add('active');
+        perbaruiPanduanKebutuhan();
+      }
+    }
+
+    // Navigasi Antar-Layar Wizard (1 sampai 7)
+    function pindahLayar(targetLayar) {
+      // Validasi wajib untuk Layar 1 sebelum maju ke Layar 2
+      if (targetLayar > 1) {
+        const nama = document.getElementById('reqNamaOwner').value.trim();
+        const wa = document.getElementById('reqWaOwner').value.trim();
+        const usaha = document.getElementById('reqNamaToko').value.trim();
+        if (!nama || !wa || !usaha) {
+          alert('Mohon lengkapi Nama Anda, Nomor WhatsApp, dan Nama Usaha terlebih dahulu.');
+          targetLayar = 1;
+        }
+      }
+
+      // Atur class active pada step
+      for (let i = 1; i <= 7; i++) {
+        const stepEl = document.getElementById('step' + i);
+        if (stepEl) {
+          if (i === targetLayar) {
+            stepEl.classList.add('active');
+          } else {
+            stepEl.classList.remove('active');
+          }
+        }
+      }
+
+      // Judul dan persentase progress bar
+      const judulLayar = [
+        "",
+        "Langkah 1 dari 7: Identitas & Pilihan Solusi",
+        "Langkah 2 dari 7: Masalah Nyata & Kriteria Berhasil",
+        "Langkah 3 dari 7: Alur Transaksi & Baseline Sistem",
+        "Langkah 4 dari 7: Entitas Data & Logika Hitung",
+        "Langkah 5 dari 7: Hak Akses Pengguna & Perangkat",
+        "Langkah 6 dari 7: Dokumen Cetak & Integrasi Pihak Ketiga",
+        "Langkah 7 Terakhir: Prioritas, Anggaran, & Skema Pembayaran"
+      ];
+
+      const persenLayar = [0, 15, 30, 45, 60, 75, 90, 100];
+
+      const stepTitleEl = document.getElementById('wizardStepTitle');
+      const progressLabelEl = document.getElementById('wizardProgressLabel');
+      const progressFillEl = document.getElementById('wizardProgressFill');
+
+      if (stepTitleEl) stepTitleEl.innerText = judulLayar[targetLayar] || `Langkah ${targetLayar} dari 7`;
+      if (progressLabelEl) progressLabelEl.innerHTML = `Kelengkapan <strong>${persenLayar[targetLayar]}%</strong>`;
+      if (progressFillEl) progressFillEl.style.width = persenLayar[targetLayar] + '%';
+
+      // Scroll halus ke kartu formulir
+      const formWrapper = document.querySelector('.form-wrapper');
+      if (formWrapper) {
+        formWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
     // Pilih aplikasi langsung dari kartu katalog ke dropdown form
     function pilihAplikasiForm(namaAplikasi) {
       const selectEl = document.getElementById('reqJenisAplikasi');
@@ -1760,7 +1857,7 @@
         if (!matched) {
           selectEl.value = 'Solusi Kustom / Buat Aplikasi Baru';
         }
-        perbaruiPanduanKebutuhan();
+        gantiKategoriAplikasi();
       }
       
       const formTarget = document.getElementById('request-aplikasi');
@@ -1793,34 +1890,119 @@
       }
     }
 
-    // Tangani Submit Form Request Aplikasi
+    // Tangani Submit Form Request Aplikasi (Universal & Wizard Kustom)
     async function tanganiPengajuanAplikasi(event) {
       event.preventDefault();
       
-      const btn = document.getElementById('btnSubmitForm');
+      const btnStandar = document.querySelector('#btnBoxLayar1Standar button');
+      const btnFinal = document.getElementById('btnSubmitFinal');
+      const btnActive = btnFinal || btnStandar;
+      
       const alertBox = document.getElementById('statusAlertBox');
       const alertTeks = document.getElementById('statusAlertTeks');
       const alertAksi = document.getElementById('statusAlertAksi');
 
-      const namaOwner = document.getElementById('reqNamaOwner').value.trim();
-      const waOwner = document.getElementById('reqWaOwner').value.trim();
-      const namaToko = document.getElementById('reqNamaToko').value.trim();
-      const kota = document.getElementById('reqKota').value.trim();
-      const jenisAplikasi = document.getElementById('reqJenisAplikasi').value;
-      const pesanKebutuhan = document.getElementById('reqPesanKebutuhan').value.trim();
+      // Ambil nilai Layar 1 (Wajib)
+      const namaOwner = (document.getElementById('reqNamaOwner') ? document.getElementById('reqNamaOwner').value : '').trim();
+      const waOwner = (document.getElementById('reqWaOwner') ? document.getElementById('reqWaOwner').value : '').trim();
+      const namaToko = (document.getElementById('reqNamaToko') ? document.getElementById('reqNamaToko').value : '').trim();
+      const kota = (document.getElementById('reqKota') ? document.getElementById('reqKota').value : '').trim();
+      const jenisAplikasi = document.getElementById('reqJenisAplikasi') ? document.getElementById('reqJenisAplikasi').value : '';
+      const isCustom = jenisAplikasi.includes('Kustom') || jenisAplikasi.includes('Request Baru');
 
       if (!namaOwner || !waOwner || !namaToko) {
         alert('Mohon lengkapi Nama Anda, Nomor WhatsApp, dan Nama Usaha.');
+        pindahLayar(1);
         return;
       }
 
-      btn.disabled = true;
-      btn.innerHTML = '<span>Sedang Mengirim Permohonan...</span>';
+      // Ambil nilai Layar 2-7 jika Custom
+      let masalahUtama = '';
+      let alurTransaksi = '';
+      let kondisiSaatIni = '';
+      let dataDicatat = [];
+      let aturanHitung = '';
+      let penggunaSistem = [];
+      let perangkatPakai = '';
+      let dokumenKeluaran = [];
+      let integrasiWajib = [];
+      let fiturPrioritas = '';
+      let rentangAnggaran = '';
+      let jadwalKonsultasi = '';
+      let pesanKebutuhan = '';
+
+      if (isCustom) {
+        const elMasalah = document.getElementById('reqMasalahUtama');
+        const elKriteria = document.getElementById('reqKriteriaSukses');
+        const elUrgensi = document.getElementById('reqUrgensi');
+        masalahUtama = [
+          elMasalah ? elMasalah.value.trim() : '',
+          elKriteria ? 'Target Berhasil: ' + elKriteria.value.trim() : '',
+          elUrgensi ? 'Urgensi: ' + elUrgensi.value : ''
+        ].filter(Boolean).join(' | ');
+
+        const elAlur = document.getElementById('reqAlurTransaksi');
+        const elVolume = document.getElementById('reqVolumeHarian');
+        alurTransaksi = [
+          elAlur ? elAlur.value.trim() : '',
+          elVolume ? 'Volume Transaksi: ' + elVolume.value : ''
+        ].filter(Boolean).join(' | ');
+
+        const radBaseline = document.querySelector('input[name="baselineSistem"]:checked');
+        kondisiSaatIni = radBaseline ? radBaseline.value : '';
+
+        document.querySelectorAll('input[name="chkData"]:checked').forEach(cb => dataDicatat.push(cb.value));
+        const elAturan = document.getElementById('reqAturanHitung');
+        aturanHitung = elAturan ? elAturan.value.trim() : '';
+
+        document.querySelectorAll('input[name="chkUser"]:checked').forEach(cb => penggunaSistem.push(cb.value));
+        const elPerangkat = document.getElementById('reqPerangkat');
+        const elCabang = document.getElementById('reqCabang');
+        perangkatPakai = [
+          elPerangkat ? elPerangkat.value : '',
+          elCabang ? 'Jangkauan: ' + elCabang.value : ''
+        ].filter(Boolean).join(' | ');
+
+        document.querySelectorAll('input[name="chkDoc"]:checked').forEach(cb => dokumenKeluaran.push(cb.value));
+        document.querySelectorAll('input[name="chkInteg"]:checked').forEach(cb => integrasiWajib.push(cb.value));
+
+        const elPrioritas = document.getElementById('reqFiturPrioritas');
+        fiturPrioritas = elPrioritas ? elPrioritas.value.trim() : '';
+
+        const radBudget = document.querySelector('input[name="radAnggaran"]:checked');
+        rentangAnggaran = radBudget ? radBudget.value : 'Butuh Diskusi Estimasi Tim';
+
+        const elJadwal = document.getElementById('reqJadwalKonsultasi');
+        jadwalKonsultasi = elJadwal ? elJadwal.value : 'Fleksibel';
+
+        pesanKebutuhan = `[Aplikasi Kustom]
+Masalah: ${masalahUtama}
+Alur: ${alurTransaksi}
+Anggaran: ${rentangAnggaran}`;
+      } else {
+        const elStandar = document.getElementById('reqPesanKebutuhanStandar');
+        pesanKebutuhan = elStandar ? elStandar.value.trim() : '';
+      }
+
+      if (btnActive) {
+        btnActive.disabled = true;
+        btnActive.innerHTML = '<span>Sedang Memproses Permohonan...</span>';
+      }
       alertBox.style.display = 'none';
 
-      const waTextRaw = `Halo AutoClaryTech, saya ${namaOwner} dari ${namaToko}${kota ? ' (' + kota + ')' : ''}. Saya mengajukan permohonan untuk: ${jenisAplikasi}.
+      // Ringkasan untuk teks WhatsApp cepat
+      let waTextRaw = `Halo AutoClaryTech, saya ${namaOwner} dari ${namaToko}${kota ? ' (' + kota + ')' : ''}.
 
-Catatan kebutuhan: ${pesanKebutuhan || 'Mohon jadwalkan demonstrasi dan konsultasi.'}`;
+Saya mengajukan: *${jenisAplikasi}*`;
+      if (isCustom) {
+        waTextRaw += `
+- Masalah Utama: ${masalahUtama || '-'}
+- Estimasi Anggaran: ${rentangAnggaran}
+- Alur Singkat: ${alurTransaksi.slice(0, 160)}...`;
+      } else if (pesanKebutuhan) {
+        waTextRaw += `
+- Catatan Kebutuhan: ${pesanKebutuhan}`;
+      }
       const waLink = 'https://wa.me/6285727240341?text=' + encodeURIComponent(waTextRaw);
 
       try {
@@ -1834,40 +2016,67 @@ Catatan kebutuhan: ${pesanKebutuhan || 'Mohon jadwalkan demonstrasi dan konsulta
             kota,
             jenisAplikasi,
             pesanKebutuhan,
-            kategori: 'Request-Universal'
+            kategori: isCustom ? 'Request-Kustom' : 'Request-Universal',
+            masalahUtama,
+            alurTransaksi,
+            kondisiSaatIni,
+            dataDicatat,
+            aturanHitung,
+            penggunaSistem,
+            perangkatPakai,
+            dokumenKeluaran,
+            integrasiWajib,
+            fiturPrioritas,
+            rentangAnggaran,
+            jadwalKonsultasi
           })
         });
 
         alertBox.className = 'status-alert success';
         alertTeks.innerHTML = `
-          <strong>Permohonan Berhasil Dikirim!</strong><br>
-          Terima kasih, Bapak/Ibu ${namaOwner}. Permohonan aplikasi <strong>${jenisAplikasi}</strong> untuk <strong>${namaToko}</strong> telah tercatat di sistem AutoClaryTech.<br><br>
-          Konsultan kami akan segera menghubungi nomor WhatsApp <strong>${waOwner}</strong> untuk penyiapan akun dan demonstrasi.
+          <strong style="font-size: 16px; color: #4ade80; display: block; margin-bottom: 8px;">Permohonan Berhasil Dikirim!</strong>
+          Terima kasih, Bapak/Ibu <strong>${namaOwner}</strong>. Spesifikasi kebutuhan untuk <strong>${namaToko}</strong> telah tersimpan di sistem AutoClaryTech.<br><br>
+          <div style="background: rgba(0,229,255,0.08); border-left: 3px solid var(--cyan); padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 13.5px; color: #e2e8f0; line-height: 1.6;">
+            <strong style="color: var(--cyan); display: block; margin-bottom: 3px;">Ketetapan Pengerjaan & Termin:</strong>
+            Ya, kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.
+          </div>
+          Tim konsultan teknologi kami akan segera meninjau spesifikasi dan menghubungi WhatsApp <strong>${waOwner}</strong> untuk penjadwalan demonstrasi & penawaran resmi.
         `;
         alertAksi.innerHTML = `
-          <a href="${waLink}" target="_blank" class="btn-cta" style="display: inline-flex; font-size: 13.5px; padding: 9px 20px;">
-            Hubungi Konsultan Sekarang via WhatsApp
+          <a href="${waLink}" target="_blank" class="btn-cta" style="display: inline-flex; font-size: 13.5px; padding: 10px 22px;">
+            Konfirmasi Cepat via WhatsApp Resmi (0857-2724-0341)
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </a>
         `;
         alertBox.style.display = 'block';
+        alertBox.scrollIntoView({ behavior: 'smooth' });
 
       } catch (err) {
         alertBox.className = 'status-alert success';
         alertTeks.innerHTML = `
-          <strong>Permohonan Anda Telah Siap Diteruskan!</strong><br>
-          Formulir permohonan aplikasi <strong>${jenisAplikasi}</strong> untuk <strong>${namaToko}</strong> telah siap. Anda dapat langsung melanjutkan ke tim konsultan kami lewat WhatsApp resmi berikut:
+          <strong style="font-size: 16px; color: #4ade80; display: block; margin-bottom: 8px;">Permohonan Anda Telah Siap Diteruskan!</strong>
+          Spesifikasi kebutuhan aplikasi untuk <strong>${namaToko}</strong> telah siap di perangkat Anda.<br><br>
+          <div style="background: rgba(0,229,255,0.08); border-left: 3px solid var(--cyan); padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 13.5px; color: #e2e8f0; line-height: 1.6;">
+            <strong style="color: var(--cyan); display: block; margin-bottom: 3px;">Ketetapan Pengerjaan & Termin:</strong>
+            Ya, kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.
+          </div>
+          Silakan teruskan langsung ke konsultan resmi AutoClaryTech via tombol WhatsApp di bawah:
         `;
         alertAksi.innerHTML = `
-          <a href="${waLink}" target="_blank" class="btn-cta" style="display: inline-flex; font-size: 13.5px; padding: 9px 20px;">
-            Kirimkan via WhatsApp AutoClaryTech Sekarang
+          <a href="${waLink}" target="_blank" class="btn-cta" style="display: inline-flex; font-size: 13.5px; padding: 10px 22px;">
+            Teruskan ke WhatsApp AutoClaryTech Sekarang
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </a>
         `;
         alertBox.style.display = 'block';
+        alertBox.scrollIntoView({ behavior: 'smooth' });
       } finally {
-        btn.disabled = false;
-        btn.innerHTML = '<span>Kirim Permohonan & Jadwalkan Demo</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+        if (btnActive) {
+          btnActive.disabled = false;
+          btnActive.innerHTML = isCustom 
+            ? '<span>Kirim Spesifikasi Kustom & Jadwalkan Konsultasi</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>'
+            : '<span>Kirim Permohonan & Jadwalkan Demo</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+        }
       }
     }
 
