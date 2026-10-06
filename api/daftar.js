@@ -32,6 +32,8 @@ export default async function handler(req, res) {
       whatsapp: String(waOwner).trim(),
       kategori: String(kategori || 'Umum').trim(),
       kuota_gratis: 100,
+      persetujuan_privasi: true,
+      versi_kebijakan_pdp: '2026-10-06',
       status: 'pending_verifikasi'
     };
 
