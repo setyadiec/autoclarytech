@@ -95,6 +95,17 @@ export default async function handler(req, res) {
     });
     clearTimeout(timeoutId);
 
+    // Jujur: sukses HANYA bila penampung menjawab ok (penampung menjawab 200 bila tersimpan, 422 bila tidak).
+    let hasilHulu = null;
+    try { hasilHulu = await upstreamResp.json(); } catch (_) { hasilHulu = null; }
+    if (!upstreamResp.ok || !hasilHulu || hasilHulu.status !== 'ok') {
+      console.error('Penampung menolak/gagal:', upstreamResp.status);
+      return res.status(502).json({
+        status: 'error',
+        message: 'Permohonan belum tersimpan di sistem kami. Mohon kirim lewat tombol WhatsApp.'
+      });
+    }
+
     return res.status(200).json({
       status: 'success',
       message: isCustomApp 
@@ -105,10 +116,9 @@ export default async function handler(req, res) {
   } catch (error) {
     clearTimeout(timeoutId);
     console.error('Fetch error to funnel webhook:', error.message);
-    return res.status(200).json({
-      status: 'success',
-      message: 'Permohonan berhasil tercatat di sistem kami. Anda juga dapat langsung konfirmasi cepat ke tim kami melalui tautan WhatsApp.',
-      data: payload,
+    return res.status(502).json({
+      status: 'error',
+      message: 'Permohonan belum tersimpan di sistem kami. Mohon kirim lewat tombol WhatsApp.',
       offline_fallback: true
     });
   }

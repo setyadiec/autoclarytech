@@ -2032,6 +2032,7 @@ Saya mengajukan: *${jenisAplikasi}*`;
           })
         });
 
+        if (!resp.ok) { throw new Error('penyimpanan gagal: ' + resp.status); }
         alertBox.className = 'status-alert success';
         alertTeks.innerHTML = `
           <strong style="font-size: 16px; color: #4ade80; display: block; margin-bottom: 8px;">Permohonan Berhasil Dikirim!</strong>
