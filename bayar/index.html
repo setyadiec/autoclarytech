@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aktivasi Paket Langganan — AutoClaryTech (ACT)</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0b0f19; color: #e2e8f0; line-height: 1.6; padding: 40px 20px; }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { color: #00d2b4; font-size: 28px; margin-bottom: 8px; text-align: center; }
+    p.sub { color: #94a3b8; font-size: 15px; margin-bottom: 36px; text-align: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; }
+    .card.highlight { border-color: #00d2b4; background: linear-gradient(180deg, #102220 0%, #111827 100%); }
+    .tier-name { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .price { font-size: 28px; font-weight: 800; color: #00d2b4; margin-bottom: 16px; }
+    .features { list-style: none; padding: 0; margin: 0 0 24px 0; font-size: 13px; color: #cbd5e1; line-height: 2; }
+    .btn { display: block; text-align: center; padding: 12px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 14px; background: #00d2b4; color: #0b0f19; }
+    .btn.outline { background: rgba(255,255,255,0.08); color: #fff; }
+    .back-btn { color: #94a3b8; font-size: 14px; text-decoration: none; margin-bottom: 24px; display: inline-block; }
+    .footer-note { text-align: center; margin-top: 40px; font-size: 12px; color: #64748b; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-btn">&larr; Kembali ke Beranda</a>
+    <h1>Pilih Paket Aktivasi Usaha Anda</h1>
+    <p class="sub">Metode pembayaran resmi transfer bank & QRIS terverifikasi PT Artareksa Teknologi Ekonomi.</p>
+
+    <div class="grid">
+      <!-- Paket Hemat -->
+      <div class="card">
+        <div>
+          <div class="tier-name">Paket Hemat</div>
+          <div class="price">Rp 75.000 <span style="font-size: 13px; color: #94a3b8; font-weight: 400;">/ bln</span></div>
+          <ul class="features">
+            <li>✓ 1 Nomor WhatsApp Bisnis Sendiri</li>
+            <li>✓ 1.000 balasan AI / bulan</li>
+            <li>✓ Respon otomatis katalog 24 jam</li>
+            <li>✓ Rekap laporan chat harian</li>
+          </ul>
+        </div>
+        <a href="hemat.html" class="btn outline">Aktivasi Hemat &rarr;</a>
+      </div>
+
+      <!-- Paket Bisnis -->
+      <div class="card highlight">
+        <div>
+          <div style="font-size: 11px; font-weight: 800; color: #00d2b4; text-transform: uppercase; margin-bottom: 6px;">Paling Populer</div>
+          <div class="tier-name">Paket Bisnis</div>
+          <div class="price">Rp 349.000 <span style="font-size: 13px; color: #94a3b8; font-weight: 400;">/ cabang / bln</span></div>
+          <ul class="features">
+            <li>✓ 1-2 Nomor WhatsApp Cabang / Staf</li>
+            <li>✓ 5.000 balasan AI / bulan</li>
+            <li>✓ Persona & gaya bahasa kustom</li>
+            <li>✓ Deteksi kuitansi bukti transfer</li>
+            <li>✓ Notifikasi prioritas pemilik</li>
+          </ul>
+        </div>
+        <a href="bisnis.html" class="btn">Aktivasi Bisnis &rarr;</a>
+      </div>
+
+      <!-- Paket Juragan -->
+      <div class="card">
+        <div>
+          <div class="tier-name">Paket Juragan</div>
+          <div class="price">Rp 999.000 <span style="font-size: 13px; color: #94a3b8; font-weight: 400;">/ bln</span></div>
+          <ul class="features">
+            <li>✓ Multi-Nomor Cabang Tanpa Batas</li>
+            <li>✓ 20.000 balasan AI / bulan</li>
+            <li>✓ Integrasi Basis Data / Google Sheets</li>
+            <li>✓ Laporan analitik penjualan mingguan</li>
+            <li>✓ Pendampingan teknis prioritas</li>
+          </ul>
+        </div>
+        <a href="juragan.html" class="btn outline">Aktivasi Juragan &rarr;</a>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Seluruh transaksi dikelola dan dijamin keamanannya oleh PT Artareksa Teknologi Ekonomi (NIB: 0510260027696).
+    </div>
+  </div>
+</body>
+</html>
