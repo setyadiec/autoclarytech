@@ -54,12 +54,24 @@ export default async function handler(req, res) {
     clearTimeout(timeoutId);
 
     if (!upstreamResp.ok) {
-      const errText = await upstreamResp.text().catch(() => '');
-      console.error('Webhook upstream error:', upstreamResp.status, errText);
-      return res.status(502).json({
+      let errMessage = 'Pendaftaran belum tercatat di sistem kami. Silakan hubungi kami langsung lewat WhatsApp di 0857-2724-0341.';
+      let errDetail = 'Upstream status ' + upstreamResp.status;
+      try {
+        const parsed = await upstreamResp.json();
+        if (parsed && parsed.message) {
+          errMessage = parsed.message;
+        }
+        errDetail = parsed;
+      } catch (e) {
+        const rawText = await upstreamResp.text().catch(() => '');
+        if (rawText) errDetail = rawText;
+      }
+      console.error('Webhook upstream error:', upstreamResp.status, errDetail);
+      const httpCode = (upstreamResp.status === 400 || upstreamResp.status === 422) ? upstreamResp.status : 502;
+      return res.status(httpCode).json({
         status: 'error',
-        message: 'Pendaftaran belum tercatat di sistem kami. Silakan hubungi kami langsung lewat WhatsApp di 0857-2724-0341.',
-        detail: 'Upstream webhook returned status ' + upstreamResp.status
+        message: errMessage,
+        detail: errDetail
       });
     }
 

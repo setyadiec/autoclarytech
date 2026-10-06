@@ -717,19 +717,21 @@
       var wa = document.getElementById("regWa").value.trim();
       var kat = document.getElementById("regKategori").value;
 
+      var isSuccess = false;
+      var errMessage = '';
       try {
         var resp = await fetch('/api/daftar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ namaToko: toko, namaOwner: owner, waOwner: wa, kategori: kat })
         });
-        if (resp.ok) {
-          btn.innerText = "Pendaftaran Berhasil Tercatat!";
-        } else {
-          btn.innerText = "Mengalihkan ke WhatsApp Admin...";
+        var res = await resp.json().catch(function() { return {}; });
+        isSuccess = resp.ok && res.status === 'success';
+        if (!isSuccess) {
+          errMessage = res.message || 'Pendaftaran otomatis belum berhasil tercatat.';
         }
       } catch (err) {
-        btn.innerText = "Mengalihkan ke WhatsApp Admin...";
+        errMessage = 'Koneksi ke peladen pendaftaran terkendala.';
       }
 
       var pesan = "Halo AutoClaryTech, saya mendaftar akun toko baru:\n\n" +
@@ -739,9 +741,16 @@
                   "• Kategori: " + kat + "\n\n" +
                   "Mohon diproses aktivasi kuota gratis 100 balasan.";
 
-      setTimeout(function() {
-        window.location.href = "https://wa.me/6285727240341?text=" + encodeURIComponent(pesan);
-      }, 800);
+      if (isSuccess) {
+        btn.innerText = "Pendaftaran Berhasil Tercatat!";
+        setTimeout(function() {
+          window.location.href = "https://wa.me/6285727240341?text=" + encodeURIComponent(pesan);
+        }, 1200);
+      } else {
+        btn.disabled = false;
+        btn.innerText = "Daftar Sekarang (Gratis 100 Chat)";
+        alert("Pendaftaran Belum Berhasil:\n" + errMessage + "\n\nSilakan periksa kembali isian form Anda, atau klik link bantuan WhatsApp jika ingin dibantu manual.");
+      }
     }
   </script>
 

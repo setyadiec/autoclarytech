@@ -91,6 +91,7 @@
       };
 
       var isSuccess = false;
+      var errMessage = '';
       try {
         var resp = await fetch('/api/daftar', {
           method: 'POST',
@@ -99,26 +100,12 @@
         });
         var res = await resp.json().catch(function() { return {}; });
         isSuccess = resp.ok && res.status === 'success';
+        if (!isSuccess) {
+          errMessage = res.message || 'Pendaftaran otomatis belum berhasil tercatat.';
+        }
       } catch (err) {
         console.warn('API fetch error:', err);
-      }
-
-      try {
-        localStorage.setItem('act_registrasi', JSON.stringify({
-          toko: toko, owner: owner, wa: wa, waktu: new Date().toISOString(), status: isSuccess ? 'tercatat' : 'pending_manual'
-        }));
-      } catch (e) {}
-
-      if (isSuccess) {
-        alertBox.className = 'alert-success';
-        alertBox.style.display = 'block';
-        alertBox.innerHTML = 'Pendaftaran Anda berhasil tercatat di sistem resmi! Mengalihkan ke WhatsApp admin untuk aktivasi...';
-      } else {
-        alertBox.style.display = 'block';
-        alertBox.style.background = 'rgba(239, 68, 68, 0.15)';
-        alertBox.style.borderColor = '#ef4444';
-        alertBox.style.color = '#fca5a5';
-        alertBox.innerHTML = 'Pendaftaran otomatis terkendala. Mengalihkan Anda langsung ke WhatsApp admin kami di 0857-2724-0341...';
+        errMessage = 'Koneksi ke peladen pendaftaran terkendala.';
       }
 
       var pesan = "Halo AutoClaryTech, saya mendaftar akun toko baru:\n\n" +
@@ -128,9 +115,35 @@
                   "• Kategori: " + kat + "\n\n" +
                   "Mohon diproses aktivasi kuota gratis 100 balasan.";
 
-      setTimeout(function() {
-        window.location.href = "https://wa.me/6285727240341?text=" + encodeURIComponent(pesan);
-      }, 1000);
+      if (isSuccess) {
+        try {
+          localStorage.setItem('act_registrasi', JSON.stringify({
+            toko: toko, owner: owner, wa: wa, waktu: new Date().toISOString(), status: 'tercatat'
+          }));
+        } catch (e) {}
+
+        alertBox.className = 'alert-success';
+        alertBox.style.display = 'block';
+        alertBox.style.background = 'rgba(16, 185, 129, 0.15)';
+        alertBox.style.borderColor = '#10b981';
+        alertBox.style.color = '#6ee7b7';
+        alertBox.innerHTML = '<strong>Pendaftaran Berhasil!</strong> Data toko Anda telah tercatat resmi di sistem kami. Mengalihkan ke WhatsApp admin untuk aktivasi...';
+        btn.innerText = 'Tercatat Resmi - Mengalihkan...';
+        setTimeout(function() {
+          window.location.href = "https://wa.me/6285727240341?text=" + encodeURIComponent(pesan);
+        }, 1500);
+      } else {
+        alertBox.className = 'alert-danger';
+        alertBox.style.display = 'block';
+        alertBox.style.background = 'rgba(239, 68, 68, 0.15)';
+        alertBox.style.borderColor = '#ef4444';
+        alertBox.style.color = '#fca5a5';
+        alertBox.innerHTML = '<strong>Pendaftaran Belum Berhasil:</strong> ' + errMessage + 
+          '<br><span style="display:inline-block;margin-top:6px;font-size:0.9em;color:#e2e8f0;">Silakan perbaiki isian data di atas, atau hubungi kami langsung via WhatsApp:</span>' +
+          '<div style="margin-top:10px;"><a href="https://wa.me/6285727240341?text=' + encodeURIComponent(pesan) + '" target="_blank" style="display:inline-block;padding:8px 14px;background:#25D366;color:#0b1120;font-weight:700;border-radius:6px;text-decoration:none;">Bantuan Pendaftaran via WhatsApp</a></div>';
+        btn.disabled = false;
+        btn.innerText = 'Coba Daftar Kembali';
+      }
     }
   </script>
 </body>
