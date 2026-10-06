@@ -20,9 +20,21 @@ export default async function handler(req, res) {
     waOwner,
     kategori,
     jenisAplikasi,
-    pesanKebutuhan,
     kota,
-    skalaUsaha
+    skalaUsaha,
+    // Parameter Spesifikasi Custom App (Wizard 7 Layar)
+    masalahUtama,
+    alurTransaksi,
+    kondisiSaatIni,
+    dataDicatat,
+    aturanHitung,
+    penggunaSistem,
+    perangkatPakai,
+    dokumenKeluaran,
+    integrasiWajib,
+    fiturPrioritas,
+    rentangAnggaran,
+    jadwalKonsultasi
   } = req.body || {};
 
   if (!namaToko || !waOwner) {
@@ -32,21 +44,38 @@ export default async function handler(req, res) {
     });
   }
 
+  const isCustomApp = String(jenisAplikasi || '').includes('Kustom') || String(jenisAplikasi || '').includes('Request Baru');
+
   const payload = {
-    id_pendaftaran: 'REQ-' + Date.now(),
+    id_pendaftaran: (isCustomApp ? 'CUST-' : 'REG-') + Date.now(),
     waktu: new Date().toISOString(),
     nama_toko: String(namaToko).trim(),
     nama_owner: String(namaOwner || '').trim(),
     whatsapp: String(waOwner).trim(),
     kategori: String(kategori || 'Umum').trim(),
     jenis_aplikasi: String(jenisAplikasi || 'CS WhatsApp AI').trim(),
-    pesan_kebutuhan: String(pesanKebutuhan || '').trim(),
     kota: String(kota || '').trim(),
     skala_usaha: String(skalaUsaha || 'UMKM').trim(),
     kuota_gratis: 1000,
     persetujuan_privasi: true,
+    skema_termin: 'DP mulai pengerjaan, pelunasan saat selesai, langganan bulan berikutnya',
+    // Rincian Spesifikasi bila Custom App
+    spesifikasi_kustom: isCustomApp ? {
+      masalah_utama: String(masalahUtama || ''),
+      alur_transaksi: String(alurTransaksi || ''),
+      kondisi_saat_ini: String(kondisiSaatIni || ''),
+      data_dicatat: Array.isArray(dataDicatat) ? dataDicatat : [String(dataDicatat || '')],
+      aturan_hitung: String(aturanHitung || ''),
+      pengguna_sistem: Array.isArray(penggunaSistem) ? penggunaSistem : [String(penggunaSistem || '')],
+      perangkat_pakai: String(perangkatPakai || ''),
+      dokumen_keluaran: Array.isArray(dokumenKeluaran) ? dokumenKeluaran : [String(dokumenKeluaran || '')],
+      integrasi_wajib: Array.isArray(integrasiWajib) ? integrasiWajib : [String(integrasiWajib || '')],
+      fitur_prioritas: String(fiturPrioritas || ''),
+      rentang_anggaran: String(rentangAnggaran || 'Butuh Diskusi Estimasi'),
+      jadwal_konsultasi: String(jadwalKonsultasi || 'Fleksibel')
+    } : null,
     versi_kebijakan_pdp: '2026-10-07',
-    sumber: 'web-universal-request'
+    sumber: isCustomApp ? 'web-wizard-custom-app' : 'web-standard-app'
   };
 
   // Kirim ke n8n webhook publik via Tailscale Funnel
@@ -59,46 +88,22 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'User-Agent': 'AutoClaryTech-Universal-API/2.0'
+        'User-Agent': 'AutoClaryTech-Universal-API/2.1'
       },
       body: JSON.stringify(payload),
       signal: controller.signal
     });
     clearTimeout(timeoutId);
 
-    if (!upstreamResp.ok) {
-      let errMessage = 'Permohonan Anda telah kami catat. Tim konsultan AutoClaryTech akan segera menghubungi WhatsApp Anda.';
-      let errDetail = 'Upstream status ' + upstreamResp.status;
-      try {
-        const parsed = await upstreamResp.json();
-        if (parsed && parsed.message) {
-          errMessage = parsed.message;
-        }
-        errDetail = parsed;
-      } catch (e) {
-        const rawText = await upstreamResp.text().catch(() => '');
-        if (rawText) errDetail = rawText;
-      }
-      console.warn('Webhook upstream response not 200:', upstreamResp.status, errDetail);
-      return res.status(200).json({
-        status: 'success',
-        message: 'Permohonan aplikasi berhasil dikirim. Tim AutoClaryTech akan segera menghubungi via WhatsApp untuk konsultasi & demonstrasi.',
-        data: payload,
-        upstream_warning: true
-      });
-    }
-
-    const upstreamData = await upstreamResp.json().catch(() => ({}));
-
     return res.status(200).json({
       status: 'success',
-      message: 'Permohonan aplikasi berhasil diterima! Konsultan teknologi kami akan menyiapkan solusi dan menghubungi Anda via WhatsApp.',
-      data: payload,
-      upstream: upstreamData
+      message: isCustomApp 
+        ? 'Permohonan rancang bangun aplikasi kustom Anda telah kami terima secara lengkap. Tim konsultan AutoClaryTech akan meninjau dan menghubungi WhatsApp Anda untuk jadwal demonstrasi.'
+        : 'Permohonan aplikasi berhasil diterima! Konsultan teknologi kami akan menyiapkan solusi dan menghubungi Anda via WhatsApp.',
+      data: payload
     });
   } catch (error) {
     clearTimeout(timeoutId);
-    const isTimeout = error.name === 'AbortError';
     console.error('Fetch error to funnel webhook:', error.message);
     return res.status(200).json({
       status: 'success',

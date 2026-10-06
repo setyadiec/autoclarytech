@@ -753,6 +753,104 @@
       .section { padding: 70px 16px; }
       .grid-apps { grid-template-columns: 1fr; }
     }
+  
+    /* Wizard Multi-Step Styling */
+    .wizard-progress-bar {
+      display: none;
+      width: 100%;
+      margin-bottom: 28px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 9999px;
+      height: 8px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+
+    .wizard-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), #38bdf8);
+      width: 15%;
+      transition: width 0.35s ease;
+    }
+
+    .wizard-indicator {
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .wizard-indicator strong {
+      color: var(--cyan);
+    }
+
+    .wizard-step {
+      display: none;
+      animation: fadeInStep 0.3s ease;
+    }
+
+    .wizard-step.active {
+      display: block;
+    }
+
+    @keyframes fadeInStep {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .checkbox-tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .checkbox-tile {
+      background: #0f1422;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      color: #d1d5db;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .checkbox-tile:hover {
+      background: #141b2e;
+      border-color: rgba(0, 210, 180, 0.3);
+    }
+
+    .checkbox-tile input[type="checkbox"],
+    .checkbox-tile input[type="radio"] {
+      accent-color: var(--cyan);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .info-callout-box {
+      background: rgba(0, 210, 180, 0.08);
+      border: 1px solid rgba(0, 210, 180, 0.25);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 13px;
+      color: #e6fffa;
+      line-height: 1.6;
+      margin: 18px 0;
+    }
+
+    .wizard-nav-btns {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
   </style>
 </head>
 <body>
@@ -1172,75 +1270,369 @@
       </p>
 
       <div class="form-wrapper">
+        
+        <!-- Bilah Kelengkapan Wizard (Tampil Saat Custom App) -->
+        <div id="wizardHeader" style="display: none; margin-bottom: 20px;">
+          <div class="wizard-indicator" id="wizardIndicator">
+            <span id="wizardStepTitle">Langkah 1 dari 7: Identitas & Model Aplikasi</span>
+            <span id="wizardProgressLabel">Kelengkapan <strong>25%</strong></span>
+          </div>
+          <div class="wizard-progress-bar" id="wizardProgressBar" style="display: block;">
+            <div class="wizard-progress-fill" id="wizardProgressFill"></div>
+          </div>
+        </div>
+
         <form id="formRequestAplikasi" onsubmit="tanganiPengajuanAplikasi(event)">
-          <div class="form-grid">
-            
-            <div class="form-group">
-              <label class="form-label" for="reqNamaOwner">
-                Nama Anda / Penanggung Jawab <span class="req">*</span>
+          
+          <!-- LAYAR 1: Identitas & Pilihan Aplikasi (Wajib & Selalu Tampil) -->
+          <div class="wizard-step active" id="step1">
+            <div class="form-grid">
+              
+              <div class="form-group">
+                <label class="form-label" for="reqNamaOwner">
+                  Nama Anda / Penanggung Jawab <span class="req">*</span>
+                </label>
+                <input type="text" id="reqNamaOwner" class="form-input" placeholder="Nama lengkap Anda" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reqWaOwner">
+                  Nomor WhatsApp Aktif <span class="req">*</span>
+                </label>
+                <input type="tel" id="reqWaOwner" class="form-input" placeholder="Contoh: 081234567890" required>
+                <span class="form-helper">Digunakan untuk akses akun, pengiriman draf, & koordinasi demo.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reqNamaToko">
+                  Nama Usaha / Perusahaan <span class="req">*</span>
+                </label>
+                <input type="text" id="reqNamaToko" class="form-input" placeholder="Contoh: Berkah Rent Car / Kafe Senja" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reqKota">
+                  Kota Operasional Usaha
+                </label>
+                <input type="text" id="reqKota" class="form-input" placeholder="Contoh: Surakarta, Jakarta, Surabaya">
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label" for="reqJenisAplikasi">
+                  Pilih Kebutuhan Aplikasi <span class="req">*</span>
+                </label>
+                <select id="reqJenisAplikasi" class="form-select" required onchange="gantiKategoriAplikasi()">
+                  <option value="CS WhatsApp AI Commerce">AutoClary WA Commerce & CS AI 24 Jam (Gratis 1.000 Pesan/Bulan)</option>
+                  <option value="RentalKita - Rental Kendaraan">RentalKita — Sistem Operasional Rental Mobil & Motor</option>
+                  <option value="KasirKilat POS & Stok">KasirKilat POS — Kasir Cepat & Manajemen Stok Ritel</option>
+                  <option value="Pantala Operasional & Keuangan">Pantala — Operasional & Keuangan Multi-Cabang</option>
+                  <option value="Solusi Kustom / Buat Aplikasi Baru" selected>[Request Baru] Rancang Bangun Aplikasi Kustom Khusus (Spesifikasi Terpandu)</option>
+                </select>
+              </div>
+
+              <!-- Input ringkas hanya untuk aplikasi standar (bila bukan custom) -->
+              <div class="form-group full-width" id="boxKebutuhanStandar" style="display: none;">
+                <label class="form-label" for="reqPesanKebutuhanStandar">Catatan Tambahan untuk Tim</label>
+                <textarea id="reqPesanKebutuhanStandar" class="form-textarea" placeholder="Tuliskan catatan khusus atau pertanyaan Anda mengenai aplikasi yang dipilih..."></textarea>
+              </div>
+
+            </div>
+
+            <!-- Tombol Layar 1 -->
+            <div id="btnBoxLayar1Standar" style="display: none;">
+              <button type="submit" class="btn-submit">
+                <span>Kirim Permohonan & Jadwalkan Demo</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+
+            <div id="btnBoxLayar1Custom" class="wizard-nav-btns">
+              <button type="button" class="btn-submit" onclick="pindahLayar(2)">
+                <span>Lanjut ke Masalah & Target (Langkah 2)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LAYAR 2: Masalah & Kriteria Berhasil (Custom App) -->
+          <div class="wizard-step" id="step2">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 2: Masalah yang Ingin Diselesaikan & Target Sukses
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Ceritakan kendala nyata di lapangan agar tim arsitek kami paham titik kritis alur kerja Anda.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" for="reqMasalahUtama">
+                Apa kendala operasional yang paling melelahkan atau merugikan saat ini? <span class="req">*</span>
               </label>
-              <input type="text" id="reqNamaOwner" class="form-input" placeholder="Nama lengkap Anda" required>
+              <textarea id="reqMasalahUtama" class="form-textarea" placeholder="Contoh: Jadwal sewa mobil sering bentrok saat ramai; atau uang setoran kasir kafe sering selisih ratusan ribu per minggu karena hitungan manual nota kertas."></textarea>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" for="reqKriteriaSukses">
+                Setelah aplikasi ini jadi dan dipakai, apa tanda yang membuat Anda puas bilang "berhasil"?
+              </label>
+              <input type="text" id="reqKriteriaSukses" class="form-input" placeholder="Contoh: Selisih kas Rp 0, booking tidak pernah tabrakan, atau nota langsung terkirim otomatis ke WA pelanggan.">
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="reqWaOwner">
-                Nomor WhatsApp Aktif <span class="req">*</span>
-              </label>
-              <input type="tel" id="reqWaOwner" class="form-input" placeholder="Contoh: 081234567890" required>
-              <span class="form-helper">Digunakan untuk pengiriman akses akun & koordinasi demo.</span>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="reqNamaToko">
-                Nama Usaha / Perusahaan <span class="req">*</span>
-              </label>
-              <input type="text" id="reqNamaToko" class="form-input" placeholder="Contoh: Berkah Rent Car / Kafe Senja" required>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="reqKota">
-                Kota Operasional Usaha
-              </label>
-              <input type="text" id="reqKota" class="form-input" placeholder="Contoh: Surakarta, Jakarta, Surabaya">
-            </div>
-
-            <div class="form-group full-width">
-              <label class="form-label" for="reqJenisAplikasi">
-                Pilih Aplikasi yang Diinginkan <span class="req">*</span>
-              </label>
-              <select id="reqJenisAplikasi" class="form-select" required onchange="perbaruiPanduanKebutuhan()">
-                <option value="CS WhatsApp AI Commerce">AutoClary WA Commerce & CS AI 24 Jam (Gratis 1.000 Pesan/Bulan)</option>
-                <option value="RentalKita - Rental Kendaraan">RentalKita — Sistem Operasional Rental Mobil & Motor</option>
-                <option value="KasirKilat POS & Stok">KasirKilat POS — Kasir Cepat & Manajemen Stok Ritel</option>
-                <option value="Pantala Operasional & Keuangan">Pantala — Operasional & Keuangan Multi-Cabang</option>
-                <option value="Solusi Kustom / Buat Aplikasi Baru">[Request Baru] Rancang Bangun Aplikasi Kustom Khusus</option>
+              <label class="form-label" for="reqUrgensi">Seberapa mendesak kebutuhan aplikasi ini?</label>
+              <select id="reqUrgensi" class="form-select">
+                <option value="Secepatnya (< 2 minggu)">Secepatnya (Target mulai dalam 2 minggu)</option>
+                <option value="Bulan Depan (1-2 bulan)" selected>Bulan Depan (Persiapan 1–2 bulan ke depan)</option>
+                <option value="Hanya menjajaki opsi">Hanya menjajaki opsi & mengumpulkan perkiraan biaya</option>
               </select>
             </div>
 
-            <div class="form-group full-width">
-              <label class="form-label" for="reqPesanKebutuhan" id="labelKebutuhan">
-                Deskripsi Kebutuhan atau Fitur yang Diinginkan
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(1)" style="flex: 1;">Kembali</button>
+              <button type="button" class="btn-submit" onclick="pindahLayar(3)" style="flex: 2;">
+                <span>Lanjut ke Alur Transaksi (Langkah 3)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LAYAR 3: Cerita Satu Alur Transaksi & Baseline -->
+          <div class="wizard-step" id="step3">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 3: Cerita Satu Transaksi dari Awal sampai Selesai
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Klien tidak perlu tahu istilah teknis database. Cukup ceritakan urutan kejadiannya secara wajar.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" for="reqAlurTransaksi">
+                Ceritakan SATU alur transaksi biasa: Siapa melakukan apa, mencatat di mana, sampai uang masuk? <span class="req">*</span>
               </label>
-              <textarea id="reqPesanKebutuhan" class="form-textarea" placeholder="Ceritakan alur kerja usaha Anda saat ini, kendala yang ingin diatasi, atau fitur khusus yang Anda inginkan..."></textarea>
-              <span class="form-helper" id="helperKebutuhan">Tuliskan jenis produk dan kebutuhan tanya-jawab pelanggan toko Anda.</span>
+              <textarea id="reqAlurTransaksi" class="form-textarea" style="min-height: 120px;" placeholder="Contoh alur:
+1. Pelanggan chat WA tanya ketersediaan unit untuk tanggal 12-14.
+2. Admin cek jadwal, minta foto KTP & DP 30%.
+3. Saat serah terima kunci, staf lapangan cetak nota & terima sisa pelunasan tunai/transfer.
+4. Malam hari pemilik menerima rekap uang sewa hari itu."></textarea>
             </div>
 
+            <div class="form-group">
+              <label class="form-label">Kondisi pencatatan usaha Anda saat ini:</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile">
+                  <input type="radio" name="baselineSistem" value="Manual buku tulis / nota kertas fisik" checked>
+                  <span>Manual buku tulis / nota kertas</span>
+                </label>
+                <label class="checkbox-tile">
+                  <input type="radio" name="baselineSistem" value="Spreadsheet Excel / Google Sheets">
+                  <span>Excel / Google Sheets</span>
+                </label>
+                <label class="checkbox-tile">
+                  <input type="radio" name="baselineSistem" value="Sudah ada aplikasi lama tapi kurang cocok">
+                  <span>Aplikasi lama (ingin diganti)</span>
+                </label>
+                <label class="checkbox-tile">
+                  <input type="radio" name="baselineSistem" value="Usaha baru sedang persiapan buka">
+                  <span>Usaha baru persiapan buka</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(2)" style="flex: 1;">Kembali</button>
+              <button type="button" class="btn-submit" onclick="pindahLayar(4)" style="flex: 2;">
+                <span>Lanjut ke Data & Aturan Hitung (Langkah 4)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
           </div>
 
-          <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 18px; line-height: 1.5;">
-            Dengan mengirimkan formulir ini, Anda menyetujui pemrosesan data kontak untuk keperluan konsultasi dan penyiapan akun sesuai prinsip Pelindungan Data Pribadi (UU PDP).
+          <!-- LAYAR 4: Data yang Dicatat & Aturan Hitung Uang -->
+          <div class="wizard-step" id="step4">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 4: Apa yang Perlu Dicatat & Rumus Perhitungannya
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Pilih data yang wajib disimpan ke sistem dan bagaimana uang dihitung.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label">Data apa saja yang wajib dicatat di aplikasi? (Pilih yang relevan)</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Data Pelanggan & Kontak" checked><span>Data Pelanggan</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Daftar Produk / Menu / Armada" checked><span>Produk / Armada</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Inventori Stok Barang"><span>Stok Barang</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Jadwal Booking / Kalender Sewa" checked><span>Jadwal / Kalender</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Pembayaran & Bukti Transfer" checked><span>Pembayaran & Kas</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Data Karyawan & Shift"><span>Karyawan & Shift</span></label>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="reqVolumeHarian">Perkiraan Transaksi per Hari</label>
+                <input type="text" id="reqVolumeHarian" class="form-input" placeholder="Contoh: 15–30 transaksi / hari">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="reqAturanHitung">Aturan Hitung Uang Khusus</label>
+                <input type="text" id="reqAturanHitung" class="form-input" placeholder="Contoh: Ada diskon sewa >3 hari, denda telat 50rb/jam, ada komisi supir 10%">
+              </div>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(3)" style="flex: 1;">Kembali</button>
+              <button type="button" class="btn-submit" onclick="pindahLayar(5)" style="flex: 2;">
+                <span>Lanjut ke Pengguna & Perangkat (Langkah 5)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
           </div>
 
-          <button type="submit" id="btnSubmitForm" class="btn-submit">
-            <span>Kirim Permohonan & Jadwalkan Demo</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
+          <!-- LAYAR 5: Pengguna Sistem & Perangkat -->
+          <div class="wizard-step" id="step5">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 5: Siapa Saja yang Menggunakan Sistem
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Menentukan hak akses dan jenis gawai yang dipakai staf Anda di lokasi.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label">Peran Pengguna (Siapa saja yang akan login?)</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile"><input type="checkbox" name="chkUser" value="Pemilik / Owner (Lihat Semua)" checked><span>Pemilik Toko</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkUser" value="Manajer / Supervisor"><span>Manajer / Pengawas</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkUser" value="Kasir / Staf Operasional" checked><span>Kasir / Staf Lokasi</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkUser" value="Kurir / Driver Lapangan"><span>Kurir / Driver</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkUser" value="Pelanggan Luar (Portal Sewa Mandiri)"><span>Pelanggan (Portal Web)</span></label>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="reqPerangkat">Perangkat Utama yang Dipakai</label>
+                <select id="reqPerangkat" class="form-select">
+                  <option value="HP Android & iPhone (Mobile Web)" selected>HP Android / iPhone (Akses Mobile Ringan)</option>
+                  <option value="Laptop / Komputer Kasir Desktop">Laptop / PC Komputer Kasir</option>
+                  <option value="Tablet Layar Sentuh">Tablet Android / iPad</option>
+                  <option value="Kombinasi Semua Perangkat">Kombinasi Semua Gawai</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="reqCabang">Jumlah Cabang Operasional</label>
+                <select id="reqCabang" class="form-select">
+                  <option value="1 Lokasi / Toko Tunggal" selected>1 Lokasi / Toko Tunggal</option>
+                  <option value="2–5 Cabang Terpadu">2–5 Cabang (Multi-Outlet)</option>
+                  <option value="Lebih dari 5 Cabang">> 5 Cabang</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(4)" style="flex: 1;">Kembali</button>
+              <button type="button" class="btn-submit" onclick="pindahLayar(6)" style="flex: 2;">
+                <span>Lanjut ke Dokumen & Integrasi (Langkah 6)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LAYAR 6: Dokumen Keluaran & Integrasi Khusus -->
+          <div class="wizard-step" id="step6">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 6: Dokumen Keluaran & Integrasi Pihak Ketiga
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Beri tanda pada hasil cetak dan sambungan otomatis yang Anda butuhkan.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label">Dokumen yang Harus Bisa Dihasilkan Sistem:</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile"><input type="checkbox" name="chkDoc" value="Nota Struk Thermal Bluetooth 58/80mm" checked><span>Struk Nota Thermal</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkDoc" value="Surat Kontrak / Perjanjian Sewa Digital" checked><span>Kontrak Digital</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkDoc" value="Laporan Rekap Kas Harian" checked><span>Laporan Kas Harian</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkDoc" value="Laporan Laba Rugi"><span>Laba Rugi</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkDoc" value="Ekspor ke Excel / Spreadsheet" checked><span>Ekspor Excel (.xlsx)</span></label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Integrasi Otomatis yang Diinginkan:</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile"><input type="checkbox" name="chkInt" value="Notifikasi WhatsApp Otomatis ke Pembeli" checked><span>WhatsApp Otomatis</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkInt" value="Pembayaran QRIS Dinamis & VA Bank"><span>QRIS Otomatis</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkInt" value="Pelacakan Peta Lokasi / GPS Unit"><span>GPS Tracking Armada</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkInt" value="Impor Data Lama dari Excel"><span>Pindah Data Lama</span></label>
+              </div>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(5)" style="flex: 1;">Kembali</button>
+              <button type="button" class="btn-submit" onclick="pindahLayar(7)" style="flex: 2;">
+                <span>Lanjut ke Prioritas & Anggaran (Langkah 7 Terakhir)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LAYAR 7: Prioritas, Rentang Anggaran, Termin Pembayaran & Jadwal -->
+          <div class="wizard-step" id="step7">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 7 Terakhir: Prioritas Fitur & Rencana Pelaksanaan
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Langkah penutup untuk menentukan prioritas rilis awal dan jadwal diskusi singkat.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" for="reqFiturPrioritas">
+                3 Fitur Paling Wajib Ada di Peluncuran Awal (Must-Have) <span class="req">*</span>
+              </label>
+              <input type="text" id="reqFiturPrioritas" class="form-input" placeholder="Contoh: 1. Kalender jadwal sewa, 2. Cetak nota bluetooth, 3. Rekap kas masuk harian" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label">Perkiraan Alokasi Anggaran Investasi Sistem:</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile"><input type="radio" name="radAnggaran" value="Di bawah Rp 3 Juta"><span>Di bawah Rp 3 Juta</span></label>
+                <label class="checkbox-tile"><input type="radio" name="radAnggaran" value="Rp 3 Juta – Rp 10 Juta" checked><span>Rp 3 – 10 Juta</span></label>
+                <label class="checkbox-tile"><input type="radio" name="radAnggaran" value="Rp 10 Juta – Rp 25 Juta"><span>Rp 10 – 25 Juta</span></label>
+                <label class="checkbox-tile"><input type="radio" name="radAnggaran" value="Butuh Diskusi Estimasi Tim"><span>Butuh Estimasi Tim</span></label>
+              </div>
+            </div>
+
+            <!-- Ketetapan Kebijakan Termin Pembayaran Kanon Bapak -->
+            <div class="info-callout-box">
+              <strong style="color: var(--cyan); display: block; margin-bottom: 4px;">Skema Pembayaran Transparan & Terpercaya:</strong>
+              Pengerjaan aplikasi segera kami proses setelah pembayaran uang muka (DP), dan pelunasan dilakukan setelah aplikasi selesai dan siap digunakan. Biaya langganan pemeliharaan cloud baru dikenakan mulai bulan berikutnya.
+            </div>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" for="reqJadwalKonsultasi">Waktu yang Nyaman untuk Diskusi Singkat 15-20 Menit:</label>
+              <select id="reqJadwalKonsultasi" class="form-select">
+                <option value="Hari ini / Besok Pagi (09.00 - 12.00 WIB)" selected>Pagi Hari (09.00 – 12.00 WIB)</option>
+                <option value="Siang Hari (13.00 - 17.00 WIB)">Siang Hari (13.00 – 17.00 WIB)</option>
+                <option value="Malam Hari (19.00 - 21.00 WIB)">Malam Hari (19.00 – 21.00 WIB)</option>
+                <option value="Fleksibel via Chat WhatsApp">Fleksibel via Chat WhatsApp Kapan Saja</option>
+              </select>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(6)" style="flex: 1;">Kembali</button>
+              <button type="submit" id="btnSubmitFinal" class="btn-submit" style="flex: 2;">
+                <span>Kirim Spesifikasi Kustom & Jadwalkan Konsultasi</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
         </form>
 
         <div id="statusAlertBox" class="status-alert">
           <div id="statusAlertTeks"></div>
           <div id="statusAlertAksi" style="margin-top: 14px;"></div>
         </div>
+
       </div>
     </div>
   </section>
