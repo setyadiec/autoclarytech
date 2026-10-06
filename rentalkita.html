@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RentalKita - Aplikasi Pengelola Usaha Rental Mobil dan Motor</title>
+<meta name="description" content="RentalKita: aplikasi web untuk usaha rental mobil dan motor. Pemesanan online, armada, keuangan, multi-cabang. Langganan per cabang per bulan.">
+<link rel="icon" type="image/png" href="aset/logo-rentalkita.png">
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#14213d;--mut:#55627a;--line:#e1e5ec;--pri:#1d4ed8;--pri-d:#1e3a8a;--wa:#128c4a;--soft:#eaf0ff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding-bottom:84px;-webkit-text-size-adjust:100%}
+a{color:var(--pri)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--ink);text-decoration:none}
+.brand img{width:34px;height:34px;border-radius:8px}
+nav.m{display:none;gap:22px;font-size:14px}
+nav.m a{color:var(--mut);text-decoration:none}
+nav.m a:hover{color:var(--pri)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;min-height:44px}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-wa:hover{background:#0e7a40}
+.btn-line{background:#fff;color:var(--pri-d);border-color:var(--line)}
+.btn-sm{padding:8px 14px;min-height:38px;font-size:14px}
+.hero{padding:40px 0 32px;background:linear-gradient(180deg,#fff,var(--soft))}
+.hero h1{font-size:30px;line-height:1.2;max-width:720px;letter-spacing:-.01em}
+.hero p.lead{margin-top:14px;color:var(--mut);font-size:17px;max-width:640px}
+.hero .cta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+.note{margin-top:14px;font-size:13px;color:var(--mut)}
+section{padding:40px 0}
+h2{font-size:24px;line-height:1.25;margin-bottom:8px}
+.sub{color:var(--mut);margin-bottom:22px;max-width:700px}
+.grid{display:grid;gap:14px;grid-template-columns:1fr}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card h3{font-size:16px;margin:10px 0 4px}
+.card p{font-size:14.5px;color:var(--mut)}
+.ic{width:38px;height:38px;border-radius:10px;background:var(--soft);color:var(--pri);display:grid;place-items:center}
+.ic svg{width:22px;height:22px}
+.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.roles{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.roles span{background:var(--soft);color:var(--pri-d);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600}
+.price{display:flex;flex-direction:column}
+.price .nm{font-weight:700;font-size:17px}
+.price .rp{font-size:26px;font-weight:800;margin:6px 0 2px}
+.price .rp small{font-size:13px;font-weight:500;color:var(--mut)}
+.price ul{list-style:none;margin:12px 0 16px;font-size:14px;color:var(--ink);flex:1}
+.price li{display:flex;gap:8px;padding:4px 0}
+.price li svg{width:16px;height:16px;color:var(--wa);flex:none;margin-top:5px}
+.price .btn{width:100%}
+.legend{font-size:13.5px;color:var(--mut);margin-top:14px}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin-top:8px;color:var(--mut);font-size:14.5px}
+.final{text-align:center;padding:44px 0}
+.final .btn{margin-top:14px}
+footer{padding:26px 0;color:var(--mut);font-size:13px;border-top:1px solid var(--line);background:#fff}
+.fab{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line)}
+.fab .btn{width:100%;max-width:520px;margin:0 auto;display:flex}
+@media(min-width:720px){
+ nav.m{display:flex}
+ .hero{padding:72px 0 56px}
+ .hero h1{font-size:44px}
+ .grid.c2{grid-template-columns:repeat(2,1fr)}
+ .grid.c3{grid-template-columns:repeat(3,1fr)}
+ .grid.c4{grid-template-columns:repeat(4,1fr)}
+ body{padding-bottom:0}
+ .fab{left:auto;right:20px;bottom:20px;width:auto;padding:0;background:none;border:0}
+ .fab .btn{width:auto;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.4 11.4 0 0 0 2.2 17.3L1 23l5.8-1.5A11.4 11.4 0 0 0 12 23h0a11.4 11.4 0 0 0 8.5-19.5zM12 21a9.4 9.4 0 0 1-4.8-1.3l-.3-.2-3.4.9.9-3.3-.2-.3A9.4 9.4 0 1 1 12 21zm5.2-7c-.3-.1-1.7-.8-1.9-.9s-.5-.1-.7.1-.8.9-.9 1.1-.3.2-.6.1a7.7 7.7 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.5a.6.6 0 0 0 0-.6l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 4.9c2.1.9 2.9.9 3.9.8a3.3 3.3 0 0 0 2.2-1.6 2.7 2.7 0 0 0 .2-1.6c-.1-.1-.3-.2-.6-.4z"/></symbol>
+ <symbol id="i-ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+ <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+ <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M3 12h18"/></symbol>
+ <symbol id="i-usr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+ <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></symbol>
+ <symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></symbol>
+ <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></symbol>
+ <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+ <symbol id="i-bld" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></symbol>
+ <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+ <symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></symbol>
+ <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
+ <symbol id="i-glb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
+</svg>
+
+<header class="top">
+ <div class="wrap">
+  <a class="brand" href="#atas"><img src="aset/logo-rentalkita.png" alt="" width="34" height="34">RentalKita</a>
+  <nav class="m" aria-label="Menu"><a href="#fitur">Fitur</a><a href="#peran">Peran pengguna</a><a href="#harga">Harga</a><a href="#tanya">Pertanyaan</a></nav>
+  <a class="btn btn-wa btn-sm" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20RentalKita%20%5BLP-RentalKita%5D" rel="noopener"><svg><use href="#i-wa"/></svg>Hubungi kami</a>
+ </div>
+</header>
+
+<main id="atas">
+<div class="hero"><div class="wrap">
+ <h1>Aplikasi untuk mengelola usaha rental mobil dan motor Anda</h1>
+ <p class="lead">RentalKita menyatukan pemesanan online, jadwal armada, kontrak, keuangan, dan beberapa cabang dalam satu aplikasi web. Dipakai oleh usaha rental di Bali.</p>
+ <div class="cta">
+  <a class="btn btn-wa" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20RentalKita%20%5BLP-RentalKita%5D" rel="noopener"><svg><use href="#i-wa"/></svg>Tanya lewat WhatsApp</a>
+  <a class="btn btn-line" href="#harga">Lihat harga</a>
+ </div>
+ <p class="note">Tersedia versi gratis untuk 1 cabang. Peragaan aplikasi dapat diminta lewat WhatsApp.</p>
+</div></div>
+
+<section id="fitur"><div class="wrap">
+ <h2>Yang bisa dikerjakan aplikasi ini</h2>
+ <p class="sub">Fitur di bawah sudah ada di aplikasi yang berjalan. Ketersediaan per paket ada di bagian harga.</p>
+ <div class="grid c3">
+  <div class="card"><div class="ic"><svg><use href="#i-cal"/></svg></div><h3>Pemesanan online dan jadwal</h3><p>Penyewa memesan sendiri lewat halaman web. Sistem menolak jadwal yang bentrok untuk unit yang sama.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-car"/></svg></div><h3>Armada mobil dan motor</h3><p>Data unit, status ketersediaan, katalog paket harga harian, mingguan, dan bulanan.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-usr"/></svg></div><h3>Portal penyewa</h3><p>Penyewa mendaftar sendiri, melihat riwayat sewa dan pesanannya. Tidak bercampur dengan akun staf.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-doc"/></svg></div><h3>Kontrak dan nota</h3><p>Kontrak sewa dan nota siap cetak dari data sewa yang sudah tercatat.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-shield"/></svg></div><h3>Pelanggan dan blacklist</h3><p>Data penyewa beserta daftar penyewa bermasalah, dan pencatatan deposit.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-cash"/></svg></div><h3>Keuangan</h3><p>Pemasukan dan pengeluaran, buku kas umum, laporan laba rugi, estimasi pajak, dan ekspor ke Excel.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-chart"/></svg></div><h3>Grafik pencapaian</h3><p>Dashboard grafik pencapaian dan keterisian armada per cabang.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-tool"/></svg></div><h3>Servis dan dokumen unit</h3><p>Riwayat servis armada dan pengingat jadwal servis serta dokumen kendaraan.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-bell"/></svg></div><h3>Notifikasi dalam aplikasi</h3><p>Pemberitahuan di dalam aplikasi untuk sewa terlambat, dokumen, servis, dan pesanan masuk.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-bld"/></svg></div><h3>Banyak cabang</h3><p>Beberapa cabang dikelola dalam satu aplikasi. Staf cabang hanya melihat data cabangnya.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-pin"/></svg></div><h3>Pelacakan GPS</h3><p>Menampilkan posisi unit dari perangkat GPS yang ditautkan oleh admin. Pada paket Custom.</p></div>
+  <div class="card"><div class="ic"><svg><use href="#i-glb"/></svg></div><h3>Halaman penyewa dwibahasa</h3><p>Halaman pemesanan dan portal penyewa dalam bahasa Indonesia dan Inggris.</p></div>
+ </div>
+</div></section>
+
+<section id="peran" class="alt"><div class="wrap">
+ <h2>Hak akses menurut peran</h2>
+ <p class="sub">Setiap akun punya peran. Pembatasan akses dijaga di sisi basis data, bukan hanya disembunyikan di tampilan.</p>
+ <div class="roles"><span>Owner</span><span>Manajer</span><span>Akunting</span><span>Admin</span><span>QC</span><span>Investor (hanya membaca)</span><span>Penyewa (portal sendiri)</span></div>
+</div></section>
+
+<section id="harga"><div class="wrap">
+ <h2>Harga langganan</h2>
+ <p class="sub">Harga per cabang per bulan. Untuk biaya pemasangan awal dan rincian lain, hubungi kami.</p>
+ <div class="grid c4">
+  <div class="card price"><div class="nm">Gratis</div><div class="rp">Rp0</div><div class="legend" style="margin:0">1 cabang</div>
+   <ul><li><svg><use href="#i-ck"/></svg>Maksimal 15 transaksi per bulan</li><li><svg><use href="#i-ck"/></svg>Armada, sewa, pelanggan</li><li><svg><use href="#i-ck"/></svg>Nota dan kontrak sewa siap cetak</li><li><svg><use href="#i-ck"/></svg>Portal pemesanan publik</li><li><svg><use href="#i-ck"/></svg>Pelacakan posisi staf</li></ul>
+   <a class="btn btn-line" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20RentalKita%20%5BLP-RentalKita%5D" rel="noopener">Tanya paket ini</a></div>
+  <div class="card price"><div class="nm">Starter</div><div class="rp">Rp199rb <small>/ cabang / bulan</small></div>
+   <ul><li><svg><use href="#i-ck"/></svg>Semua fitur paket Gratis tanpa batas transaksi</li><li><svg><use href="#i-ck"/></svg>Blacklist pelanggan</li><li><svg><use href="#i-ck"/></svg>Kas masuk dan keluar dasar</li></ul>
+   <a class="btn btn-line" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20RentalKita%20%5BLP-RentalKita%5D" rel="noopener">Tanya paket ini</a></div>
+  <div class="card price"><div class="nm">Bisnis</div><div class="rp">Rp349rb <small>/ cabang / bulan</small></div>
+   <ul><li><svg><use href="#i-ck"/></svg>Semua fitur Starter</li><li><svg><use href="#i-ck"/></svg>Buku kas umum dan laba rugi</li><li><svg><use href="#i-ck"/></svg>Estimasi pajak PPh final 0,5%</li><li><svg><use href="#i-ck"/></svg>Grafik pencapaian</li><li><svg><use href="#i-ck"/></svg>Katalog paket harga</li><li><svg><use href="#i-ck"/></svg>Notifikasi dalam aplikasi</li><li><svg><use href="#i-ck"/></svg>Penyewa instansi (NPWP dan PIC)</li><li><svg><use href="#i-ck"/></svg>Deposit dan klaim kerusakan</li><li><svg><use href="#i-ck"/></svg>Servis armada</li></ul>
+   <a class="btn btn-line" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20RentalKita%20%5BLP-RentalKita%5D" rel="noopener">Tanya paket ini</a></div>
+  <div class="card price"><div class="nm">Profesional</div><div class="rp">Rp499rb <small>/ cabang / bulan</small></div>
+   <ul><li><svg><use href="#i-ck"/></svg>Semua fitur Bisnis</li><li><svg><use href="#i-ck"/></svg>Portal dwibahasa Indonesia dan Inggris</li><li><svg><use href="#i-ck"/></svg>Laporan modal dan estimasi ROI investor</li><li><svg><use href="#i-ck"/></svg>Nama dan logo usaha sendiri</li><li><svg><use href="#i-ck"/></svg>Formulir BAST cek fisik kendaraan</li></ul>
+   <a class="btn btn-line" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20RentalKita%20%5BLP-RentalKita%5D" rel="noopener">Tanya paket ini</a></div>
+ </div>
+ <div class="card price" style="margin-top:14px"><div class="nm">Custom</div><p style="margin:6px 0 10px">Untuk usaha dengan banyak cabang atau kontrak armada jangka panjang. Mencakup semua fitur Profesional, ditambah kontrak fleet-lease untuk instansi, pengelolaan multi-cabang terpadu, rekonsiliasi margin mitra OTA, dan integrasi pelacak GPS. Harga: hubungi kami.</p>
+  <a class="btn btn-wa" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20RentalKita%20%5BLP-RentalKita%5D" rel="noopener"><svg><use href="#i-wa"/></svg>Hubungi kami</a></div>
+ <p class="legend">Harga dapat berubah. Perubahan harga diumumkan kepada pelanggan aktif 30 hari sebelumnya.</p>
+</div></section>
+
+<section id="tanya" class="alt"><div class="wrap">
+ <h2>Pertanyaan umum</h2>
+ <details><summary>Apakah ada versi gratis?</summary><p>Ada. Untuk 1 cabang, dengan batas 15 transaksi per bulan.</p></details>
+ <details><summary>Harganya dihitung bagaimana?</summary><p>Per cabang per bulan. Usaha dengan beberapa cabang membayar sesuai jumlah cabang.</p></details>
+ <details><summary>Berapa biaya pemasangan awal?</summary><p>Hubungi kami lewat WhatsApp. Biaya disampaikan sesuai kebutuhan usaha Anda.</p></details>
+ <details><summary>Bagaimana kalau saya ingin melihat aplikasinya dulu?</summary><p>Minta peragaan lewat WhatsApp. Kami tunjukkan aplikasinya dan menjawab pertanyaan Anda.</p></details>
+</div></section>
+
+<section class="final"><div class="wrap">
+ <h2>Ingin mencoba untuk usaha rental Anda?</h2>
+ <p class="sub" style="margin:0 auto">Ceritakan jumlah cabang dan jenis armada Anda. Kami jelaskan paket yang sesuai.</p>
+ <a class="btn btn-wa" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20RentalKita%20%5BLP-RentalKita%5D" rel="noopener"><svg><use href="#i-wa"/></svg>Chat WhatsApp AutoClaryTech</a>
+</div></section>
+</main>
+
+<footer><div class="wrap">RentalKita ditawarkan oleh AutoClaryTech. WhatsApp 0857-2724-0341.</div></footer>
+
+<div class="fab"><a class="btn btn-wa" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20RentalKita%20%5BLP-RentalKita%5D" rel="noopener" aria-label="Hubungi AutoClaryTech lewat WhatsApp"><svg><use href="#i-wa"/></svg>Hubungi lewat WhatsApp</a></div>
+</body>
+</html>
