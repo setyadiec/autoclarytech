@@ -718,12 +718,19 @@
       var kat = document.getElementById("regKategori").value;
 
       try {
-        await fetch('/api/daftar', {
+        var resp = await fetch('/api/daftar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ namaToko: toko, namaOwner: owner, waOwner: wa, kategori: kat })
         });
-      } catch (err) {}
+        if (resp.ok) {
+          btn.innerText = "Pendaftaran Berhasil Tercatat!";
+        } else {
+          btn.innerText = "Mengalihkan ke WhatsApp Admin...";
+        }
+      } catch (err) {
+        btn.innerText = "Mengalihkan ke WhatsApp Admin...";
+      }
 
       var pesan = "Halo AutoClaryTech, saya mendaftar akun toko baru:\n\n" +
                   "• Usaha: " + toko + "\n" +
@@ -732,7 +739,9 @@
                   "• Kategori: " + kat + "\n\n" +
                   "Mohon diproses aktivasi kuota gratis 100 balasan.";
 
-      window.location.href = "https://wa.me/6285727240341?text=" + encodeURIComponent(pesan);
+      setTimeout(function() {
+        window.location.href = "https://wa.me/6285727240341?text=" + encodeURIComponent(pesan);
+      }, 800);
     }
   </script>
 

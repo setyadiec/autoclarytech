@@ -1,12 +1,9 @@
 // Vercel Serverless Function: /api/daftar
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  // CORS Headers (Valid tanpa Allow-Credentials saat Origin *)
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -17,46 +14,71 @@ export default async function handler(req, res) {
     return res.status(405).json({ status: 'error', message: 'Method Not Allowed' });
   }
 
-  try {
-    const { namaToko, namaOwner, waOwner, kategori } = req.body || {};
+  const { namaToko, namaOwner, waOwner, kategori } = req.body || {};
 
-    if (!namaToko || !waOwner) {
-      return res.status(400).json({ status: 'error', message: 'Nama toko dan nomor WhatsApp wajib diisi' });
+  if (!namaToko || !waOwner) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'Nama toko dan nomor WhatsApp wajib diisi'
+    });
+  }
+
+  const payload = {
+    id_pendaftaran: 'REG-' + Date.now(),
+    waktu: new Date().toISOString(),
+    nama_toko: String(namaToko).trim(),
+    nama_owner: String(namaOwner || '').trim(),
+    whatsapp: String(waOwner).trim(),
+    kategori: String(kategori || 'Umum').trim(),
+    kuota_gratis: 100,
+    persetujuan_privasi: true,
+    versi_kebijakan_pdp: '2026-10-06',
+    sumber: 'web-daftar'
+  };
+
+  // Kirim ke n8n webhook publik via Tailscale Funnel
+  const FUNNEL_WEBHOOK_URL = 'https://bey-pc.tail594b32.ts.net/webhook/act-pendaftaran';
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+  try {
+    const upstreamResp = await fetch(FUNNEL_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': 'AutoClaryTech-Vercel-API/1.0'
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+
+    if (!upstreamResp.ok) {
+      const errText = await upstreamResp.text().catch(() => '');
+      console.error('Webhook upstream error:', upstreamResp.status, errText);
+      return res.status(502).json({
+        status: 'error',
+        message: 'Pendaftaran belum tercatat di sistem kami. Silakan hubungi kami langsung lewat WhatsApp di 0857-2724-0341.',
+        detail: 'Upstream webhook returned status ' + upstreamResp.status
+      });
     }
 
-    const payload = {
-      id_pendaftaran: 'REG-' + Date.now(),
-      waktu: new Date().toISOString(),
-      nama_toko: String(namaToko).trim(),
-      nama_owner: String(namaOwner || '').trim(),
-      whatsapp: String(waOwner).trim(),
-      kategori: String(kategori || 'Umum').trim(),
-      kuota_gratis: 100,
-      persetujuan_privasi: true,
-      versi_kebijakan_pdp: '2026-10-06',
-      status: 'pending_verifikasi'
-    };
-
-    // Forward ke webhook n8n jika aktif (non-blocking)
-    try {
-      const webhookUrl = 'http://100.113.198.75:5678/webhook/act-pendaftaran';
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2000);
-      await fetch(webhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        signal: controller.signal
-      }).catch(() => {});
-      clearTimeout(timeoutId);
-    } catch (e) {}
+    const upstreamData = await upstreamResp.json().catch(() => ({}));
 
     return res.status(200).json({
       status: 'success',
-      message: 'Pendaftaran berhasil tercatat. Kuota 100 chat gratis siap diaktifkan.',
-      data: payload
+      message: 'Pendaftaran berhasil tercatat secara resmi. Kuota 100 chat gratis siap diaktifkan.',
+      data: payload,
+      upstream: upstreamData
     });
   } catch (error) {
-    return res.status(500).json({ status: 'error', message: error.message });
+    clearTimeout(timeoutId);
+    const isTimeout = error.name === 'AbortError';
+    console.error('Fetch error to funnel webhook:', error.message);
+    return res.status(504).json({
+      status: 'error',
+      message: 'Pendaftaran belum tercatat di sistem kami. Silakan hubungi kami langsung lewat WhatsApp di 0857-2724-0341.',
+      detail: isTimeout ? 'Koneksi ke peladen pendaftaran melebihi batas waktu (8 detik)' : error.message
+    });
   }
 }

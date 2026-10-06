@@ -90,6 +90,7 @@
         kategori: kat
       };
 
+      var isSuccess = false;
       try {
         var resp = await fetch('/api/daftar', {
           method: 'POST',
@@ -97,18 +98,28 @@
           body: JSON.stringify(payload)
         });
         var res = await resp.json().catch(function() { return {}; });
+        isSuccess = resp.ok && res.status === 'success';
       } catch (err) {
-        console.warn('API error, lanjut ke pencatatan lokal', err);
+        console.warn('API fetch error:', err);
       }
 
-      // Simpan di localStorage sebagai cadangan
       try {
         localStorage.setItem('act_registrasi', JSON.stringify({
-          toko: toko, owner: owner, wa: wa, waktu: new Date().toISOString()
+          toko: toko, owner: owner, wa: wa, waktu: new Date().toISOString(), status: isSuccess ? 'tercatat' : 'pending_manual'
         }));
       } catch (e) {}
 
-      alertBox.style.display = 'block';
+      if (isSuccess) {
+        alertBox.className = 'alert-success';
+        alertBox.style.display = 'block';
+        alertBox.innerHTML = 'Pendaftaran Anda berhasil tercatat di sistem resmi! Mengalihkan ke WhatsApp admin untuk aktivasi...';
+      } else {
+        alertBox.style.display = 'block';
+        alertBox.style.background = 'rgba(239, 68, 68, 0.15)';
+        alertBox.style.borderColor = '#ef4444';
+        alertBox.style.color = '#fca5a5';
+        alertBox.innerHTML = 'Pendaftaran otomatis terkendala. Mengalihkan Anda langsung ke WhatsApp admin kami di 0857-2724-0341...';
+      }
 
       var pesan = "Halo AutoClaryTech, saya mendaftar akun toko baru:\n\n" +
                   "• Usaha: " + toko + "\n" +
