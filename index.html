@@ -3,25 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AutoClaryTech — Solusi CS WhatsApp AI & Otomasi Toko UMKM</title>
-  <meta name="description" content="Kelola toko makin simpel: chat WhatsApp dibalas AI 24 jam dari katalog produk Anda, verifikasi bukti transfer otomatis, dan laporan omzet harian langsung ke WhatsApp.">
+  <title>AutoClaryTech — Ekosistem Solusi Perangkat Lunak & Otomasi Bisnis</title>
+  <meta name="description" content="Penyedia aplikasi bisnis terintegrasi: Asisten CS WhatsApp AI 24 Jam, Sistem Rental Kendaraan, Kasir POS & Stok, Pembukuan Pantala, serta rancang bangun aplikasi kustom sesuai kebutuhan unik alur kerja usaha Anda.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg">
   <link rel="alternate icon" type="image/png" href="assets/favicon/favicon-32x32.png">
 
-  <!-- Apple & Modern SaaS Fonts -->
+  <!-- Apple & Modern SaaS Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #000000;
-      --card-bg: #0b0b10;
+      --bg: #030712;
+      --bg-card: #0b0f19;
+      --bg-card-hover: #111827;
       --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-glow: rgba(0, 210, 180, 0.3);
       --cyan: #00D2B4;
-      --blue: #22d3ee;
-      --text: #f4f4f5;
-      --text-muted: #a1a1aa;
+      --cyan-soft: rgba(0, 210, 180, 0.12);
+      --blue: #38bdf8;
+      --purple: #818cf8;
+      --amber: #f59e0b;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
@@ -34,11 +40,11 @@
       line-height: 1.6;
     }
 
-    /* Minimal Navbar */
+    /* Fixed Glass Navbar */
     .nav-bar {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 64px;
-      background: rgba(0, 0, 0, 0.85);
+      top: 0; left: 0; width: 100%; height: 72px;
+      background: rgba(3, 7, 18, 0.9);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       z-index: 1000;
@@ -52,705 +58,1441 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .brand-title span {
+      color: var(--cyan);
     }
 
     .nav-menu {
       display: flex;
+      align-items: center;
       gap: 24px;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 500;
     }
 
     .nav-menu a {
       color: var(--text-muted);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.2s ease;
     }
 
     .nav-menu a:hover { color: #fff; }
 
-    .btn-cta {
-      background: var(--cyan);
-      color: #000;
-      padding: 9px 20px;
-      border-radius: 9999px;
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: transform 0.2s;
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
-    .btn-cta:hover { transform: scale(1.03); }
+    .btn-cta {
+      background: var(--cyan);
+      color: #030712;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(0, 210, 180, 0.32);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--card-border);
+      padding: 9px 20px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
 
     /* Sections */
     .section {
       width: 100%;
-      padding: 90px 24px;
+      padding: 96px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
 
+    .section-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
     .badge-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 18px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
+      padding: 6px 16px;
+      background: var(--cyan-soft);
+      border: 1px solid rgba(0, 210, 180, 0.3);
       border-radius: 9999px;
       font-size: 13px;
-      color: #d4d4d8;
-      margin-bottom: 24px;
+      font-weight: 600;
+      color: var(--cyan);
+      margin-bottom: 22px;
+    }
+
+    .badge-icon {
+      width: 14px;
+      height: 14px;
+      display: inline-block;
     }
 
     .headline {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(34px, 5.2vw, 68px);
-      line-height: 1.08;
+      font-size: clamp(34px, 5.2vw, 62px);
+      line-height: 1.12;
       letter-spacing: -0.03em;
-      margin-bottom: 20px;
-      max-width: 900px;
+      margin-bottom: 22px;
+      max-width: 950px;
       font-weight: 800;
     }
 
-    .sub-headline {
-      font-size: clamp(15px, 1.8vw, 19px);
-      color: var(--text-muted);
-      max-width: 720px;
-      margin-bottom: 40px;
-      line-height: 1.6;
+    .headline span.glow {
+      background: linear-gradient(135deg, #00D2B4 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    /* Steps Section */
-    .steps-grid {
+    .sub-headline {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: var(--text-muted);
+      max-width: 780px;
+      margin-bottom: 38px;
+      line-height: 1.65;
+    }
+
+    /* Trust & Security Bar */
+    .hero-trust-bar {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trust-item svg {
+      color: var(--cyan);
+    }
+
+    /* Grid System Apps */
+    .grid-apps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 24px;
       width: 100%;
-      max-width: 1100px;
-      margin-top: 30px;
       text-align: left;
+      margin-top: 40px;
     }
 
-    .step-card {
-      background: #0d0d12;
+    .app-card {
+      background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      padding: 32px 24px;
+      padding: 32px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      overflow: hidden;
+    }
+
+    .app-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+      transition: background 0.3s ease;
+    }
+
+    .app-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--card-border-glow);
+      transform: translateY(-4px);
+    }
+
+    .app-card:hover::before {
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    }
+
+    .app-card.featured {
+      border-color: rgba(0, 210, 180, 0.35);
+      background: linear-gradient(180deg, rgba(0, 210, 180, 0.04) 0%, #0b0f19 100%);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .app-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+    }
+
+    .app-card.featured .app-icon-box {
+      background: var(--cyan-soft);
+      border-color: rgba(0, 210, 180, 0.35);
+    }
+
+    .badge-status {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+    }
+
+    .badge-status.live {
+      background: rgba(0, 210, 180, 0.12);
+      color: var(--cyan);
+      border-color: rgba(0, 210, 180, 0.3);
+    }
+
+    .badge-status.custom {
+      background: rgba(129, 140, 248, 0.12);
+      color: #c7d2fe;
+      border-color: rgba(129, 140, 248, 0.3);
+    }
+
+    .app-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .app-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .feature-list li {
+      font-size: 13.5px;
+      color: #d1d5db;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .feature-list li svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--cyan);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .card-footer a {
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+
+    .card-footer a.primary-link {
+      color: var(--cyan);
+    }
+
+    .card-footer a.primary-link:hover {
+      gap: 9px;
+      color: #fff;
+    }
+
+    .card-footer a.secondary-link {
+      color: var(--text-muted);
+    }
+
+    .card-footer a.secondary-link:hover {
+      color: #fff;
+    }
+
+    /* Comparison vs Blaster (Belajar dari Kasus Kompetitor) */
+    .edu-comparison-box {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      margin-top: 48px;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .edu-col h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .edu-col p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .edu-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .edu-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+
+    .edu-list.danger li {
+      color: #fca5a5;
+    }
+
+    .edu-list.safe li {
+      color: #a7f3d0;
+    }
+
+    /* Form Request Aplikasi Universal */
+    .form-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 44px 36px;
+      max-width: 800px;
+      width: 100%;
+      text-align: left;
+      margin-top: 36px;
       position: relative;
     }
 
-    .step-number {
-      font-family: 'Outfit', sans-serif;
-      font-size: 32px;
-      font-weight: 900;
-      color: var(--cyan);
-      margin-bottom: 12px;
+    .form-wrapper::before {
+      content: "";
+      position: absolute;
+      top: -1px; left: 15%; right: 15%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
     }
 
-    /* SIMULATOR CHAT PHONE MOCKUP */
-    .phone-simulator-wrapper {
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-label span.req {
+      color: var(--cyan);
+    }
+
+    .form-input, .form-select, .form-textarea {
       width: 100%;
-      max-width: 860px;
-      background: #0d0d12;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 28px;
-      padding: 24px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
-      margin-top: 20px;
+      background: #0f1422;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 13px 16px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(0, 210, 180, 0.15);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.5;
+    }
+
+    .form-helper {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--cyan);
+      color: #030712;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: #00e8c7;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0, 210, 180, 0.35);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status-alert {
+      display: none;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-top: 24px;
+      font-size: 13.5px;
+      line-height: 1.6;
       text-align: left;
     }
 
-    .sim-tabs {
+    .status-alert.success {
+      background: rgba(0, 210, 180, 0.1);
+      border: 1px solid rgba(0, 210, 180, 0.3);
+      color: #e6fffa;
+    }
+
+    /* Live Interactive WA Simulator */
+    .simulator-container {
+      background: #0b0f19;
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      max-width: 440px;
+      width: 100%;
+      margin: 40px auto 0;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    .sim-header {
+      background: #111827;
+      padding: 14px 18px;
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 16px;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--card-border);
     }
 
-    .sim-tab-btn {
-      background: rgba(255, 255, 255, 0.04);
-      color: #a1a1aa;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 10px 18px;
-      border-radius: 9999px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
+    .sim-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--cyan-soft);
+      border: 1px solid rgba(0, 210, 180, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
     }
 
-    .sim-tab-btn.active, .sim-tab-btn:hover {
-      background: var(--cyan);
-      color: #000;
-      border-color: var(--cyan);
+    .sim-header-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
     }
 
-    /* Screen Inside Mockup */
-    .chat-screen {
-      background: #07090e;
-      border-radius: 18px;
-      padding: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      min-height: 280px;
+    .sim-header-status {
+      font-size: 11.5px;
+      color: var(--cyan);
+    }
+
+    .sim-body {
+      background: #050811;
+      padding: 20px 16px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
+      min-height: 280px;
+      text-align: left;
     }
 
     .chat-bubble {
-      max-width: 82%;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 14px;
-      line-height: 1.5;
-      position: relative;
+      max-width: 84%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     .chat-user {
       align-self: flex-end;
       background: #005c4b;
-      color: #fff;
+      color: #e9edef;
       border-bottom-right-radius: 4px;
     }
 
-    .chat-ai {
+    .chat-bot {
       align-self: flex-start;
-      background: #202c33;
-      color: #e9edef;
+      background: #1f2937;
+      color: #f3f4f6;
       border-bottom-left-radius: 4px;
-      border: 1px solid rgba(0, 210, 180, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .chat-time {
-      font-size: 10px;
-      color: rgba(255, 255, 255, 0.6);
-      text-align: right;
-      margin-top: 4px;
+    .sim-quick-replies {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 12px 16px;
+      background: #0e1422;
+      border-top: 1px solid var(--card-border);
     }
 
-    /* Grid Features */
-    .grid-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      width: 100%;
-      max-width: 1200px;
-      text-align: left;
-    }
-
-    .feature-card {
-      background: rgba(255, 255, 255, 0.02);
+    .sim-chip {
+      background: rgba(255, 255, 255, 0.06);
       border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 32px;
-      transition: transform 0.3s, border-color 0.3s;
+      border-radius: 9999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: #d1d5db;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .feature-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(0, 210, 180, 0.4);
+    .sim-chip:hover {
+      background: var(--cyan-soft);
+      border-color: var(--cyan);
+      color: #fff;
     }
 
     /* FAQ */
-    .faq-container {
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
       width: 100%;
-      max-width: 860px;
       text-align: left;
       margin-top: 40px;
     }
 
-    .faq-item {
-      border-bottom: 1px solid var(--card-border);
-      padding: 24px 0;
+    .faq-card {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
     }
 
-    .faq-q {
+    .faq-card h4 {
       font-family: 'Outfit', sans-serif;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .faq-a {
-      font-size: 14px;
+    .faq-card p {
+      font-size: 13.5px;
       color: var(--text-muted);
       line-height: 1.6;
     }
 
-    @media (max-width: 768px) {
+    /* Footer */
+    footer {
+      width: 100%;
+      border-top: 1px solid var(--card-border);
+      padding: 60px 24px 40px;
+      background: #02040a;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 820px) {
+      .nav-bar { padding: 0 16px; height: 64px; }
       .nav-menu { display: none; }
-      .nav-bar { padding: 0 16px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .edu-comparison-box { grid-template-columns: 1fr; }
+      .form-wrapper { padding: 28px 20px; }
       .section { padding: 70px 16px; }
-      .chat-bubble { max-width: 92%; }
+      .grid-apps { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header Navigasi -->
+  <!-- Navigation Bar -->
   <nav class="nav-bar">
     <a href="#" class="brand">
-      <img src="assets/Logo-AUTOCLARYtech.png" alt="AutoClaryTech" style="height: 22px; width: auto;">
+      <img src="assets/Logo-AUTOCLARYtech.png" alt="AutoClaryTech" style="height: 24px; width: auto;">
+      <span class="brand-title">AutoClary<span>Tech</span></span>
     </a>
 
     <div class="nav-menu">
-      <a href="#cara-pakai">Cara Pakai</a>
-      <a href="#fitur">Solusi</a>
-      <a href="#harga">Paket Harga</a>
+      <a href="#katalog-aplikasi">Katalog Aplikasi</a>
+      <a href="#keamanan">Keamanan & Etika</a>
+      <a href="#cara-kerja">Cara Kerja</a>
+      <a href="#demo-wa">Simulator WA</a>
       <a href="#faq">FAQ</a>
-      <a href="bayar/index.html">Aktivasi Paket</a>
-      <a href="daftar.html">Daftar Akun</a>
+      <a href="#request-aplikasi">Request Aplikasi</a>
     </div>
 
-    <div style="display: flex; gap: 14px; align-items: center;">
-      <a href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20demo%20aplikasi" target="_blank" style="color: #d4d4d8; font-size: 13px; text-decoration: none; font-weight: 600;">Coba Demo WA</a>
-      <a href="daftar.html" class="btn-cta">Mulai Gratis</a>
+    <div class="nav-actions">
+      <a href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20konsultasi%20aplikasi%20bisnis" target="_blank" class="btn-outline">
+        Konsultasi WA
+      </a>
+      <a href="#request-aplikasi" class="btn-cta">
+        Ajukan Kebutuhan
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+      </a>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="section" style="padding-top: 135px;">
-    <div class="badge-pill">
-      <span style="color: #10b981; font-weight: 700;">●</span>
-      <span style="font-weight: 700; color: #fff;">AutoClaryTech</span>
-      <span style="color: #71717a;">• Cara Paling Simpel Mengelola Usaha</span>
-    </div>
+  <!-- Hero Section (Universal) -->
+  <section class="section" style="padding-top: 140px; padding-bottom: 70px;">
+    <div class="section-container" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        Studio Perangkat Lunak & Otomasi Alur Kerja Terpadu
+      </div>
 
-    <h1 class="headline">
-      Chat WhatsApp Dibalas AI 24 Jam.<br>
-      <span style="background: linear-gradient(135deg, #00D2B4 0%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Anda Fokus Melayani yang Serius.</span>
-    </h1>
+      <h1 class="headline">
+        Aplikasi Bisnis Siap Pakai & Solusi Kustom untuk <span class="glow">Pertumbuhan Usaha Anda</span>
+      </h1>
 
-    <p class="sub-headline">
-      Chat pembeli malam hari dibalas otomatis dari katalog toko Anda, bukti transfer tervalidasi langsung, dan rekap transaksi harian dilaporkan rapi ke WhatsApp pemilik.
-    </p>
+      <p class="sub-headline">
+        Dari otomatisasi layanan pelanggan CS WhatsApp AI yang merespons cepat tanpa spam, sistem rental kendaraan terpadu, kasir toko ritel, hingga pembuatan aplikasi khusus sesuai alur kerja bisnis Anda.
+      </p>
 
-    <!-- Tombol Aksi -->
-    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px;">
-      <a href="daftar.html" style="background: linear-gradient(135deg, #00D2B4 0%, #06b6d4 100%); color: #000; font-weight: 800; padding: 16px 36px; border-radius: 9999px; text-decoration: none; font-size: 15px; box-shadow: 0 10px 30px rgba(0, 210, 180, 0.35); transition: transform 0.2s;">
-        Coba Gratis 100 Balasan
-      </a>
-      <a href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20mau%20konsultasi%20layanan%20CS%20AI" target="_blank" style="background: rgba(255, 255, 255, 0.08); border: 1px solid var(--card-border); color: #fff; font-weight: 600; padding: 16px 30px; border-radius: 9999px; text-decoration: none; font-size: 15px; backdrop-filter: blur(10px);">
-        Konsultasi WA: 0857-2724-0341
-      </a>
+      <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 48px;">
+        <a href="#katalog-aplikasi" class="btn-cta" style="padding: 12px 28px; font-size: 15px;">
+          Jelajahi Katalog Aplikasi
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+        </a>
+        <a href="#request-aplikasi" class="btn-outline" style="padding: 12px 26px; font-size: 15px;">
+          Ajukan Kebutuhan / Request Baru
+        </a>
+      </div>
+
+      <div class="hero-trust-bar">
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Gratis 1.000 Pesan / Bulan kagem CS WhatsApp
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Fokus Pelayanan Inbound (Anti Spam Liar)
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Standar Privasi Data PDP Terenkripsi
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 3 LANGKAH PENGGUNAAN SUPER SIMPEL -->
-  <section id="cara-pakai" class="section" style="background: #040407; border-top: 1px solid var(--card-border); padding-top: 60px;">
-    <div class="badge-pill" style="border-color: rgba(0, 210, 180, 0.4);">
-      <span style="color: var(--cyan); font-weight: 700;">[3 LANGKAH]</span>
-      <span style="font-weight: 700; color: #fff;">ALUR PENGGUNAAN SUPER SIMPEL</span>
-    </div>
-
-    <h2 class="headline" style="font-size: clamp(30px, 4.5vw, 54px);">Mulai Aktif dalam 3 Langkah Mudah</h2>
-    <p class="sub-headline">Tanpa instalasi rumit, tanpa konfigurasi coding. Langsung berjalan di WhatsApp toko Anda:</p>
-
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-number">01</div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px;">Hubungkan Nomor WhatsApp</h3>
-        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Cukup scan QR code dari HP Anda seperti membuka WhatsApp Web biasa. Nomor usaha Anda langsung terhubung aman ke peladen kami.
-        </p>
+  <!-- Section 1: Katalog Aplikasi (Portofolio Produk Teruji) -->
+  <section id="katalog-aplikasi" class="section" style="background: #020611; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="section-container">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Daftar Produk & Solusi Perangkat Lunak
       </div>
 
-      <div class="step-card">
-        <div class="step-number">02</div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px;">Ketik Menu & Ketentuan Toko</h3>
-        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Masukkan daftar produk, harga, jam operasional, dan rekening pembayaran. AI akan otomatis menghafal seluruh data toko Anda.
-        </p>
-      </div>
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 46px); margin-bottom: 14px;">
+        Pilihan Aplikasi Sesuai Kebutuhan Bisnis Anda
+      </h2>
+      <p class="sub-headline" style="margin-bottom: 20px;">
+        Pilih aplikasi yang sudah siap langsung digunakan, atau diskusikan perancangan sistem khusus yang dibangun spesifik untuk alur kerja perusahaan Anda.
+      </p>
 
-      <div class="step-card">
-        <div class="step-number">03</div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px;">CS AI Langsung Aktif 24 Jam</h3>
-        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Setiap chat masuk langsung dibalas santun, pesanan dicatat rapi, dan konfirmasi transfer otomatis diverifikasi seketika.
-        </p>
-      </div>
-    </div>
+      <div class="grid-apps">
 
-    <!-- Interactive Phone Mockup -->
-    <div class="phone-simulator-wrapper" style="margin-top: 50px;">
-      <div style="font-size: 12px; color: #71717a; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px;">
-        SIMULASI INTERAKTIF LANGSUNG DI WHATSAPP:
-      </div>
-
-      <!-- Tab Menu Pilihan Skenario -->
-      <div class="sim-tabs">
-        <button class="sim-tab-btn active" onclick="pilihSkenario(1, this)">1. Respon Pesanan Suara</button>
-        <button class="sim-tab-btn" onclick="pilihSkenario(2, this)">2. CS Chat Malam 24 Jam</button>
-        <button class="sim-tab-btn" onclick="pilihSkenario(3, this)">3. Verifikasi Bukti Transfer</button>
-        <button class="sim-tab-btn" onclick="pilihSkenario(4, this)">4. Rekap Omzet Jam 21.00</button>
-      </div>
-
-      <!-- Kotak Layar WhatsApp Simpel -->
-      <div class="chat-screen" id="layarChat">
-        <!-- Default Skenario 1 -->
-        <div class="chat-bubble chat-user">
-          <div style="font-weight: 600; font-size: 12px; margin-bottom: 4px; color: #34d399;">Kasir Toko (Kirim Voice Note):</div>
-          <div><em>"Bikinkan nota: 3 Es Kopi Susu, 2 Croissant, total 95 ribu, bayar QRIS lunas."</em></div>
-          <div class="chat-time">14:15 WIB</div>
-        </div>
-
-        <div class="chat-bubble chat-ai">
-          <div style="font-weight: 700; font-size: 12px; color: #22d3ee; margin-bottom: 4px;">AutoClaryTech AI:</div>
+        <!-- App 1: CS WhatsApp Commerce AI -->
+        <div class="app-card featured">
           <div>
-            <strong>NOTA PENJUALAN #ACT-108 TERBIT:</strong><br>
-            • 3x Es Kopi Susu @ Rp 20.000 = Rp 60.000<br>
-            • 2x Butter Croissant @ Rp 17.500 = Rp 35.000<br>
-            ------------------------------------<br>
-            <strong>TOTAL: Rp 95.000 (LUNAS via QRIS)</strong><br><br>
-            <em>[Dokumen Kuitansi_ACT108.pdf siap dicetak]</em>
+            <div class="card-top">
+              <div class="app-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              </div>
+              <span class="badge-status live">Siap Digunakan</span>
+            </div>
+
+            <h3 class="app-title">AutoClary WA Commerce & CS AI</h3>
+            <p class="app-desc">
+              Asisten customer service 24 jam berbasis AI yang melayani tanya-jawab stok produk, menangani pemesanan, verifikasi otomatis bukti transfer bank, dan rekap omzet harian.
+            </p>
+
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Gratis 1.000 pesan/bulan (Mengikuti jatah resmi gateway Fonnte)</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>OCR deteksi bukti transfer BCA, BRI, Mandiri, BNI, QRIS</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Eskalasi cerdas ke staf manusia saat ada pertanyaan khusus</span>
+              </li>
+            </ul>
           </div>
-          <div class="chat-time">14:15 WIB • Respon Otomatis Cepat</div>
+
+          <div class="card-footer">
+            <a href="#demo-wa" class="secondary-link">Coba Demo Interaktif</a>
+            <a href="#request-aplikasi" class="primary-link" onclick="pilihAplikasiForm('CS WhatsApp AI Commerce')">
+              Pilih Aplikasi
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Solusi & Fitur -->
-  <section id="fitur" class="section" style="border-top: 1px solid var(--card-border);">
-    <div class="badge-pill">
-      <span style="color: var(--cyan); font-weight: 700;">[FITUR UNGGULAN]</span>
-      <span>SOLUSI PRAKTIS OPERASIONAL TOKO</span>
-    </div>
+        <!-- App 2: RentalKita -->
+        <div class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              </div>
+              <span class="badge-status live">Siap Digunakan</span>
+            </div>
 
-    <h2 class="headline" style="font-size: clamp(32px, 5vw, 60px);">Fasilitas Lengkap untuk Pertumbuhan Usaha</h2>
-    <p class="sub-headline">Dirancang khusus untuk kebutuhan riil warung kuliner, kafe, rental kendaraan, hingga toko online.</p>
+            <h3 class="app-title">RentalKita — Sistem Rental Armada</h3>
+            <p class="app-desc">
+              Sistem manajemen operasional rental mobil, motor, dan alat berat. Dilengkapi jadwal kalender visual anti-bentrok, nota sewa thermal, kontrak digital, dan BKU keuangan.
+            </p>
 
-    <div class="grid-cards">
-      <div class="feature-card">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px;">CS WhatsApp Otomatis 24 Jam</h3>
-        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Pelanggan yang bertanya tengah malam tetap dilayani dengan santun. AI hafal daftar produk, jam buka, dan ketersediaan layanan secara akurat.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px;">Deteksi Bukti Transfer Otomatis</h3>
-        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Sistem membaca foto screenshot transfer bank atau QRIS dari pembeli, mengekstrak nomor referensi, nominal, dan tanggal pembayaran secara otomatis.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px;">Pencatatan Pesanan Pesan Suara</h3>
-        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Kasir cukup mengirimkan voice note WhatsApp saat jam sibuk. AI langsung merapikan rincian order dan menerbitkan rekap tagihan seketika.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px;">Laporan Omzet Harian Otomatis</h3>
-        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Rangkuman transaksi harian otomatis dikirim ke nomor pribadi pemilik setiap pukul 21.00 WIB lengkap dengan jumlah pesanan dan total pemasukan.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px;">Eskalasi Cerdas ke Pemilik</h3>
-        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Jika ada pertanyaan khusus di luar katalog atau keluhan penting, AI akan memberi tahu pembeli dengan santun dan langsung meneruskan chat ke pemilik toko.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px;">Privasi & Keamanan Terjamin</h3>
-        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          Sesuai amanat UU Perlindungan Data Pribadi (UU PDP No. 27/2022). Data pelanggan Anda aman dan tidak pernah dibagikan kepada pihak luar.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tangga Harga (4 Tier Lengkap) -->
-  <section id="harga" class="section" style="background: #030305; border-top: 1px solid var(--card-border);">
-    <div class="badge-pill" style="border-color: rgba(0, 210, 180, 0.4);">
-      <span style="color: var(--cyan); font-weight: 700;">[PILIHAN PAKET]</span>
-      <span>HARGA TRANSPARAN TANPA BIAYA TERSEMBUNYI</span>
-    </div>
-
-    <h2 class="headline" style="font-size: clamp(32px, 5vw, 64px);">Paket Langganan AutoClaryTech</h2>
-    <p class="sub-headline">Mulai dengan kuota gratis 100 chat. Pilih paket yang pas sesuai skala toko Anda:</p>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; width: 100%; max-width: 1200px; text-align: left;">
-      
-      <!-- Tier 1: HEMAT -->
-      <div style="background: #0a0a0e; border: 1px solid var(--card-border); border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <span style="display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.06); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a1a1aa; margin-bottom: 16px;">Toko Mandiri</span>
-          <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #fff;">Hemat</h3>
-          <div style="margin-top: 14px; margin-bottom: 20px;">
-            <span style="font-size: 38px; font-weight: 900; color: #fff;">Rp 75.000</span>
-            <span style="color: #71717a; font-size: 13px;"> / bulan</span>
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Kalender ketersediaan armada real-time anti-double-booking</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Cetak kontrak sewa digital & nota thermal Bluetooth di lokasi</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Buku Kas Umum (BKU), kontrol deposit & deteksi blacklist</span>
+              </li>
+            </ul>
           </div>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Gunakan nomor WhatsApp toko Anda sendiri.</p>
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #d4d4d8; line-height: 2;">
-            <li>✓ 1 Nomor WhatsApp Bisnis Sendiri</li>
-            <li>✓ <strong>5.000 balasan AI</strong> / bulan</li>
-            <li>✓ Respon otomatis katalog 24 jam</li>
-            <li>✓ Rekap laporan chat harian</li>
+
+          <div class="card-footer">
+            <a href="rentalkita.html" target="_blank" class="secondary-link">Lihat Halaman Khusus</a>
+            <a href="#request-aplikasi" class="primary-link" onclick="pilihAplikasiForm('RentalKita - Rental Kendaraan')">
+              Pilih Aplikasi
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- App 3: KasirKilat POS -->
+        <div class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line><line x1="6" y1="15" x2="10" y2="15"></line></svg>
+              </div>
+              <span class="badge-status live">Siap Digunakan</span>
+            </div>
+
+            <h3 class="app-title">KasirKilat POS & Stok Ritel</h3>
+            <p class="app-desc">
+              Aplikasi kasir pintar untuk kafe, resto, dan toko ritel. Transaksi selesai dalam 3 detik, mendukung nota thermal Bluetooth, pantauan stok minimum, dan rekap shift kasir.
+            </p>
+
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Antarmuka sentuh responsif cepat tanpa jeda</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Manajemen inventori varian barang & peringatan stok menipis</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Laporan laba kotor, perputaran kas harian, dan riwayat void</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <span style="font-size: 13px; color: var(--text-dim);">Cloud & Offline Ready</span>
+            <a href="#request-aplikasi" class="primary-link" onclick="pilihAplikasiForm('KasirKilat POS & Stok')">
+              Pilih Aplikasi
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- App 4: Pantala Operasional & Keuangan -->
+        <div class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              </div>
+              <span class="badge-status live">Siap Digunakan</span>
+            </div>
+
+            <h3 class="app-title">Pantala — Operasional & Keuangan</h3>
+            <p class="app-desc">
+              Sistem ERP & pembukuan terpusat multi-cabang UMKM. Mengontrol otorisasi anggaran, memonitor arus kas masuk-keluar secara transparan, dan laporan laba-rugi siap ekspor Excel.
+            </p>
+
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Monitoring multi-cabang dalam satu dashboard terpadu</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Pencatatan pengeluaran operasional dengan validasi nota</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Ekspor neraca, arus kas, dan laba rugi ke format Excel satu klik</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <span style="font-size: 13px; color: var(--text-dim);">Multi-User Otorisasi</span>
+            <a href="#request-aplikasi" class="primary-link" onclick="pilihAplikasiForm('Pantala Operasional & Keuangan')">
+              Pilih Aplikasi
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- App 5: Solusi Kustom (Bespoke Application) -->
+        <div class="app-card" style="border-color: rgba(129, 140, 248, 0.3); background: linear-gradient(180deg, rgba(129, 140, 248, 0.05) 0%, #0b0f19 100%);">
+          <div>
+            <div class="card-top">
+              <div class="app-icon-box" style="background: rgba(129, 140, 248, 0.12); color: #c7d2fe; border-color: rgba(129, 140, 248, 0.3);">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <span class="badge-status custom">Bespoke Software</span>
+            </div>
+
+            <h3 class="app-title">Rancang Bangun Aplikasi Kustom</h3>
+            <p class="app-desc">
+              Punya alur kerja khusus atau kendala operasional yang belum ada aplikasinya di pasaran? Tim engineer kami merancang aplikasi berbasis web, mobile, atau otomasi bot tepat sesuai SOP usaha Anda.
+            </p>
+
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: #c7d2fe;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Konsultasi arsitektur sistem & analisis alur kerja tanpa komitmen</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: #c7d2fe;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Integrasi database internal, sistem akuntansi, atau webhook API</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: #c7d2fe;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Hak kepemilikan kode sumber & jaminan pemeliharaan sistem</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <span style="font-size: 13px; color: #c7d2fe;">Sesuai Kebutuhan Spesifik</span>
+            <a href="#request-aplikasi" class="primary-link" style="color: #c7d2fe;" onclick="pilihAplikasiForm('Solusi Kustom / Buat Aplikasi Baru')">
+              Ajukan Request
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Edukasi Kejujuran & Keamanan WhatsApp (Belajar dari Kasus Kompetitor) -->
+  <section id="keamanan" class="section">
+    <div class="section-container">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        Pendekatan Bertanggung Jawab
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(26px, 3.6vw, 42px); margin-bottom: 12px;">
+        Mengapa Kami Memilih Layanan CS Inbound, Bukan Spam Blaster Liar?
+      </h2>
+      <p class="sub-headline" style="max-width: 740px;">
+        Banyak pelaku usaha tergiur janji "software broadcast anti-banned", namun akhirnya nomor bisnis berharga diblokir permanen oleh Meta. Kami menyajikan fakta apa adanya demi keamanan aset nomor Anda.
+      </p>
+
+      <div class="edu-comparison-box">
+        <div class="edu-col">
+          <h4 style="color: #f87171;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+            Klaim Blaster Liar (Risiko Tinggi)
+          </h4>
+          <p>
+            Alat broadcast massal ke kontak asing yang tidak dikenal sering mengklaim "100% anti-ban", tetapi algoritma Meta selalu mendeteksi lonjakan laporan spam dari penerima.
+          </p>
+          <ul class="edu-list danger">
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span>Nomor bisnis rawan terblokir permanen jika dilaporkan pelanggan</span>
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span>Merusak reputasi dan rasa percaya pelanggan pada merek toko Anda</span>
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span>Menjanjikan garansi palsu yang tidak bisa ditepati saat terjadi pemblokiran</span>
+            </li>
           </ul>
         </div>
-        <a href="bayar/hemat.html" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.08); color: #fff; font-weight: 600; text-decoration: none; font-size: 13px;">Pilih Hemat</a>
-      </div>
 
-      <!-- Tier 2: BISNIS (PALING DIMINATI) -->
-      <div style="background: linear-gradient(180deg, #101c22 0%, #0d0d14 100%); border: 2px solid #00D2B4; border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 0 50px rgba(0, 210, 180, 0.15);">
-        <div style="position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: #00D2B4; color: #000; font-size: 11px; font-weight: 800; padding: 3px 16px; border-radius: 9999px; text-transform: uppercase;">Paling Diminati</div>
-        <div>
-          <span style="display: inline-block; padding: 4px 12px; background: rgba(0,210,180,0.15); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #00D2B4; margin-bottom: 16px;">Gerai & Cabang</span>
-          <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #fff;">Bisnis</h3>
-          <div style="margin-top: 14px; margin-bottom: 20px;">
-            <span style="font-size: 38px; font-weight: 900; color: #00D2B4;">Rp 349.000</span>
-            <span style="color: #71717a; font-size: 13px;"> / cabang / bulan</span>
-          </div>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Fitur lengkap verifikasi bukti transfer dan persona kustom.</p>
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #d4d4d8; line-height: 2;">
-            <li>✓ 1-2 Nomor WhatsApp Cabang / Staf</li>
-            <li>✓ <strong>5.000 balasan AI</strong> / bulan</li>
-            <li>✓ Persona & gaya bahasa kustom toko</li>
-            <li>✓ Deteksi bukti transfer (segera hadir)</li>
-            <li>✓ Eskalasi prioritas ke WhatsApp pemilik</li>
+        <div class="edu-col">
+          <h4 style="color: var(--cyan);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Standar AutoClaryTech (Aman & Alami)
+          </h4>
+          <p>
+            Kami fokus pada otomatisasi <strong>Customer Service Inbound</strong>: bot hanya menjawab calon pembeli yang memang menghubungi toko Anda dengan sukarela.
+          </p>
+          <ul class="edu-list safe">
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Membalas pesan inbound yang memang diinginkan oleh calon pembeli</span>
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Penerapan jeda pengetikan alami layaknya admin manusia yang mengetik</span>
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Eskalasi ke staf manusia untuk kasus khusus tanpa paksaan otomatis</span>
+            </li>
           </ul>
         </div>
-        <a href="bayar/bisnis.html" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: #00D2B4; color: #000; font-weight: 800; text-decoration: none; font-size: 13px;">Pilih Bisnis</a>
-      </div>
-
-      <!-- Tier 3: JURAGAN -->
-      <div style="background: #0a0a0e; border: 1px solid var(--card-border); border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <span style="display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.06); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a1a1aa; margin-bottom: 16px;">Multi-Cabang</span>
-          <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #fff;">Juragan</h3>
-          <div style="margin-top: 14px; margin-bottom: 20px;">
-            <span style="font-size: 38px; font-weight: 900; color: #fff;">Rp 999.000</span>
-            <span style="color: #71717a; font-size: 13px;"> / bulan</span>
-          </div>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Kapasitas besar dengan integrasi basis data toko.</p>
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #d4d4d8; line-height: 2;">
-            <li>✓ Multi-Nomor Cabang Tanpa Batas</li>
-            <li>✓ <strong>Kuota lapang & prioritas utama</strong></li>
-            <li>✓ Integrasi Basis Data / Google Sheets</li>
-            <li>✓ Laporan analitik penjualan mingguan</li>
-            <li>✓ Pendampingan teknis prioritas VIP</li>
-          </ul>
-        </div>
-        <a href="bayar/juragan.html" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.08); color: #fff; font-weight: 600; text-decoration: none; font-size: 13px;">Pilih Juragan</a>
-      </div>
-
-      <!-- Tier 4: KHUSUS (ENTERPRISE) -->
-      <div style="background: #0a0a0e; border: 1px solid var(--card-border); border-radius: 24px; padding: 36px 28px; display: flex; flex-direction: column; justify-content: space-between;">
-        <div>
-          <span style="display: inline-block; padding: 4px 12px; background: rgba(255,255,255,0.06); border-radius: 9999px; font-size: 11px; font-weight: 700; text-transform: uppercase; color: #a1a1aa; margin-bottom: 16px;">Kustom & Korporasi</span>
-          <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #fff;">Khusus</h3>
-          <div style="margin-top: 14px; margin-bottom: 20px;">
-            <span style="font-size: 28px; font-weight: 900; color: #fff;">Konsultasi</span>
-            <span style="color: #71717a; font-size: 13px;"> / kebutuhan</span>
-          </div>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Arsitektur dedicated untuk jaringan retail atau franchise besar.</p>
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #d4d4d8; line-height: 2;">
-            <li>✓ Volume chat tak terbatas</li>
-            <li>✓ Integrasi API ERP / Webhook kustom</li>
-            <li>✓ Server dedicated berkecepatan tinggi</li>
-            <li>✓ Perjanjian SLA operasional 99.9%</li>
-          </ul>
-        </div>
-        <a href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech,%20saya%20tertarik%20konsultasi%20Paket%20Khusus" target="_blank" style="margin-top: 32px; display: block; text-align: center; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.08); color: #fff; font-weight: 600; text-decoration: none; font-size: 13px;">Hubungi Konsultan</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="section" style="border-top: 1px solid var(--card-border);">
-    <div class="badge-pill">
-      <span>PERTANYAAN UMUM</span>
-    </div>
-
-    <h2 class="headline" style="font-size: clamp(30px, 4.5vw, 54px);">Pertanyaan yang Sering Diajukan</h2>
-
-    <div class="faq-container">
-      <div class="faq-item">
-        <div class="faq-q">Apakah saya bisa menggunakan nomor WhatsApp usaha saya sendiri?</div>
-        <div class="faq-a">Ya. Mulai Paket Hemat, Anda dapat menghubungkan nomor WhatsApp bisnis Anda sendiri cukup dengan scan QR code seperti WhatsApp Web biasa. Untuk kenyamanan operasional jangka panjang, kami menyarankan menggunakan nomor khusus bisnis, bukan nomor pribadi utama.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">Bagaimana jika pelanggan bertanya hal di luar katalog toko saya?</div>
-        <div class="faq-a">AI AutoClaryTech telah disetel dengan pengaman ketat: jika ada pertanyaan yang tidak tercantum di katalog atau membutuhkan keputusan pemilik, AI akan menjawab sopan bahwa pesan akan diteruskan ke pemilik toko, lalu langsung memberi notifikasi ke WhatsApp pribadi Anda.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">Apakah ada sistem saldo atau deposit token yang bisa hangus?</div>
-        <div class="faq-a">Sama sekali tidak ada. Sistem kami menggunakan kuota balasan bulanan tetap yang transparan. Kuota Anda akan ter-reset penuh setiap awal periode tanpa ada saldo menguap.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">Apakah ada masa kontrak atau komitmen jangka panjang?</div>
-        <div class="faq-a">Tidak ada kontrak mengikat. Anda bebas memperpanjang atau membatalkan langganan kapan saja sesuai kebutuhan usaha Anda.</div>
       </div>
     </div>
   </section>
 
-  <!-- Pendaftaran Cepat -->
-  <section id="daftar" class="section" style="background: radial-gradient(circle at center, #0a1f1c 0%, #000 70%); border-top: 1px solid rgba(0,210,180,0.25);">
-    <div class="badge-pill" style="border-color: rgba(0,210,180,0.4);">
-      <span style="color: #fff; font-weight: 700;">PENDAFTARAN CEPAT</span>
-    </div>
+  <!-- Section 3: Cara Kerja yang Mudah -->
+  <section id="cara-kerja" class="section" style="background: #020611; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="section-container">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+        Alur Implementasi Cepat
+      </div>
 
-    <h2 class="headline" style="font-size: clamp(32px, 5vw, 60px); max-width: 800px;">Buka Akun Toko Anda Sekarang</h2>
-    <p class="sub-headline">Daftar dalam 1 menit. Langsung dapatkan 100 balasan AI gratis tanpa komitmen.</p>
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 44px); margin-bottom: 12px;">
+        Aktif Cepat dalam 3 Langkah
+      </h2>
+      <p class="sub-headline">
+        Tidak ada proses instalasi server rumit. Sistem Anda siap digunakan dalam hitungan jam.
+      </p>
 
-    <div style="width: 100%; max-width: 480px; background: #0a0a0f; border: 1px solid var(--card-border); border-radius: 24px; padding: 36px 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); text-align: left;">
-      <form id="formPendaftaran" onsubmit="prosesDaftar(event)">
-        <div style="margin-bottom: 18px;">
-          <label style="display: block; font-size: 13px; font-weight: 600; color: #d4d4d8; margin-bottom: 8px;">Nama Usaha / Toko</label>
-          <input type="text" id="regToko" placeholder="Contoh: Kopi Nusantara / Berkah Rental" required style="width: 100%; background: #14141a; border: 1px solid var(--card-border); border-radius: 12px; padding: 14px 16px; color: #fff; font-size: 14px; outline: none;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left; margin-top: 40px;">
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 28px;">
+          <div style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800; color: var(--cyan); margin-bottom: 10px;">01</div>
+          <h4 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px;">Pilih atau Request Aplikasi</h4>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6;">Pilih aplikasi yang ada di atas atau ceritakan alur kerja sistem impian Anda melalui formulir pengajuan di bawah.</p>
         </div>
 
-        <div style="margin-bottom: 18px;">
-          <label style="display: block; font-size: 13px; font-weight: 600; color: #d4d4d8; margin-bottom: 8px;">Nama Pemilik</label>
-          <input type="text" id="regOwner" placeholder="Nama lengkap Anda" required style="width: 100%; background: #14141a; border: 1px solid var(--card-border); border-radius: 12px; padding: 14px 16px; color: #fff; font-size: 14px; outline: none;">
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 28px;">
+          <div style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800; color: var(--cyan); margin-bottom: 10px;">02</div>
+          <h4 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px;">Sesi Penyiapan & Demo</h4>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6;">Tim konsultan AutoClaryTech menyiapkan workspace atau menghubungkan akun nomor Anda secara langsung bersama tim Anda.</p>
         </div>
 
-        <div style="margin-bottom: 18px;">
-          <label style="display: block; font-size: 13px; font-weight: 600; color: #d4d4d8; margin-bottom: 8px;">Nomor WhatsApp Aktif</label>
-          <input type="tel" id="regWa" placeholder="08xxxxxxxxxx" required style="width: 100%; background: #14141a; border: 1px solid var(--card-border); border-radius: 12px; padding: 14px 16px; color: #fff; font-size: 14px; outline: none;">
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 28px;">
+          <div style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800; color: var(--cyan); margin-bottom: 10px;">03</div>
+          <h4 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px;">Langsung Aktif Beroperasi</h4>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6;">Sistem langsung dipakai melayani pelanggan harian. Pantau pertumbuhan transaksi atau biarkan bot melayani 24 jam.</p>
         </div>
-
-        <div style="margin-bottom: 24px;">
-          <label style="display: block; font-size: 13px; font-weight: 600; color: #d4d4d8; margin-bottom: 8px;">Kategori Usaha</label>
-          <select id="regKategori" style="width: 100%; background: #14141a; border: 1px solid var(--card-border); border-radius: 12px; padding: 14px 16px; color: #fff; font-size: 14px; outline: none;">
-            <option value="Kuliner & Kafe">Kuliner, Kafe & Restoran</option>
-            <option value="Rental Kendaraan">Rental Mobil / Motor</option>
-            <option value="Toko Online & Reseller">Toko Online, Reseller & Grosir</option>
-            <option value="Jasa & Servis">Jasa, Salon & Bengkel</option>
-            <option value="Lainnya">Bidang Usaha Lainnya</option>
-          </select>
-        </div>
-
-        <button type="submit" id="btnDaftarCepat" style="width: 100%; background: linear-gradient(135deg, #00D2B4 0%, #06b6d4 100%); color: #000; border: none; border-radius: 9999px; padding: 16px; font-size: 15px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 30px rgba(0, 210, 180, 0.35);">
-          Aktifkan Akun Toko Gratis &rarr;
-        </button>
-      </form>
+      </div>
     </div>
   </section>
 
-  <!-- Footer Bersih dengan Identitas Resmi Badan Usaha -->
-  <footer style="padding: 40px 32px; border-top: 1px solid var(--card-border); font-size: 12px; color: #71717a; display: flex; flex-direction: column; gap: 16px; max-width: 1200px; margin: 0 auto; width: 100%;">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-      <div>&copy; 2026 AutoClaryTech. Hak cipta dilindungi undang-undang.</div>
-      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-        <a href="#cara-pakai" style="color: #71717a; text-decoration: none;">Cara Pakai</a>
-        <a href="#fitur" style="color: #71717a; text-decoration: none;">Fitur</a>
-        <a href="#harga" style="color: #71717a; text-decoration: none;">Harga</a>
-        <a href="daftar.html" style="color: #71717a; text-decoration: none;">Pendaftaran Akun</a>
-        <a href="bayar/index.html" style="color: #71717a; text-decoration: none;">Aktivasi Paket</a>
-        <a href="syarat.html" style="color: #71717a; text-decoration: none;">Syarat & Ketentuan</a>
-        <a href="privasi.html" style="color: #71717a; text-decoration: none;">Kebijakan Privasi</a>
-        <a href="https://wa.me/6285727240341" target="_blank" style="color: #00D2B4; text-decoration: none;">Bantuan WhatsApp</a>
+  <!-- Section 4: Form Request & Pengajuan Aplikasi (Central Action) -->
+  <section id="request-aplikasi" class="section">
+    <div class="section-container" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Pusat Permohonan & Request Aplikasi
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 44px); margin-bottom: 12px;">
+        Ajukan Aplikasi yang Anda Butuhkan
+      </h2>
+      <p class="sub-headline" style="max-width: 680px; margin-bottom: 16px;">
+        Baik Anda ingin mencoba aplikasi yang sudah tersedia atau mendiskusikan aplikasi baru yang belum ada, isi formulir ringkas di bawah. Konsultan teknologi kami akan menyiapkan demonstrasi langsung.
+      </p>
+
+      <div class="form-wrapper">
+        <form id="formRequestAplikasi" onsubmit="tanganiPengajuanAplikasi(event)">
+          <div class="form-grid">
+            
+            <div class="form-group">
+              <label class="form-label" for="reqNamaOwner">
+                Nama Anda / Penanggung Jawab <span class="req">*</span>
+              </label>
+              <input type="text" id="reqNamaOwner" class="form-input" placeholder="Nama lengkap Anda" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reqWaOwner">
+                Nomor WhatsApp Aktif <span class="req">*</span>
+              </label>
+              <input type="tel" id="reqWaOwner" class="form-input" placeholder="Contoh: 081234567890" required>
+              <span class="form-helper">Digunakan untuk pengiriman akses akun & koordinasi demo.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reqNamaToko">
+                Nama Usaha / Perusahaan <span class="req">*</span>
+              </label>
+              <input type="text" id="reqNamaToko" class="form-input" placeholder="Contoh: Berkah Rent Car / Kafe Senja" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reqKota">
+                Kota Operasional Usaha
+              </label>
+              <input type="text" id="reqKota" class="form-input" placeholder="Contoh: Surakarta, Jakarta, Surabaya">
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="reqJenisAplikasi">
+                Pilih Aplikasi yang Diinginkan <span class="req">*</span>
+              </label>
+              <select id="reqJenisAplikasi" class="form-select" required onchange="perbaruiPanduanKebutuhan()">
+                <option value="CS WhatsApp AI Commerce">AutoClary WA Commerce & CS AI 24 Jam (Gratis 1.000 Pesan/Bulan)</option>
+                <option value="RentalKita - Rental Kendaraan">RentalKita — Sistem Operasional Rental Mobil & Motor</option>
+                <option value="KasirKilat POS & Stok">KasirKilat POS — Kasir Cepat & Manajemen Stok Ritel</option>
+                <option value="Pantala Operasional & Keuangan">Pantala — Operasional & Keuangan Multi-Cabang</option>
+                <option value="Solusi Kustom / Buat Aplikasi Baru">[Request Baru] Rancang Bangun Aplikasi Kustom Khusus</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="reqPesanKebutuhan" id="labelKebutuhan">
+                Deskripsi Kebutuhan atau Fitur yang Diinginkan
+              </label>
+              <textarea id="reqPesanKebutuhan" class="form-textarea" placeholder="Ceritakan alur kerja usaha Anda saat ini, kendala yang ingin diatasi, atau fitur khusus yang Anda inginkan..."></textarea>
+              <span class="form-helper" id="helperKebutuhan">Tuliskan jenis produk dan kebutuhan tanya-jawab pelanggan toko Anda.</span>
+            </div>
+
+          </div>
+
+          <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 18px; line-height: 1.5;">
+            Dengan mengirimkan formulir ini, Anda menyetujui pemrosesan data kontak untuk keperluan konsultasi dan penyiapan akun sesuai prinsip Pelindungan Data Pribadi (UU PDP).
+          </div>
+
+          <button type="submit" id="btnSubmitForm" class="btn-submit">
+            <span>Kirim Permohonan & Jadwalkan Demo</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </form>
+
+        <div id="statusAlertBox" class="status-alert">
+          <div id="statusAlertTeks"></div>
+          <div id="statusAlertAksi" style="margin-top: 14px;"></div>
+        </div>
       </div>
     </div>
-    <div style="border-top: 1px solid rgba(255,255,255,0.04); padding-top: 14px; font-size: 11px; color: #52525b; line-height: 1.6;">
-      Didistribusikan resmi oleh PT Artareksa Teknologi Ekonomi (NIB: 0510260027696, KBLI 47403, SK Menkumham AHU-A106448, Kabupaten Temanggung, Jawa Tengah). Seluruh layanan diproses sesuai dengan ketentuan Undang-Undang Perlindungan Data Pribadi (UU PDP No. 27 Tahun 2022).
+  </section>
+
+  <!-- Section 5: Simulator CS WA (Interactive Showcase) -->
+  <section id="demo-wa" class="section" style="background: #020611; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="section-container">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        Pratinjau Interaktif
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 44px); margin-bottom: 12px;">
+        Coba Kecerdasan CS WhatsApp AI
+      </h2>
+      <p class="sub-headline">
+        Klik opsi di bawah untuk melihat bagaimana CS AI membalas otomatis dengan nada ramah layaknya staf profesional.
+      </p>
+
+      <div class="simulator-container">
+        <div class="sim-header">
+          <div class="sim-avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <div>
+            <div class="sim-header-name">AutoClary Assistant</div>
+            <div class="sim-header-status">Online 24 Jam (AI Otomatis)</div>
+          </div>
+        </div>
+
+        <div class="sim-body" id="simChatBody">
+          <div class="chat-bubble chat-bot">
+            Halo! Selamat datang di AutoClary Store. Ada yang bisa kami bantu seputar produk atau layanan hari ini?
+          </div>
+        </div>
+
+        <div class="sim-quick-replies">
+          <button class="sim-chip" onclick="kirimSimulasiPesan('Apakah produk Kopi Arabika 250gr masih ready stok kak?')">Tanya Stok</button>
+          <button class="sim-chip" onclick="kirimSimulasiPesan('Saya mau sewa mobil Innova untuk besok lusa 2 hari, ada?')">Tanya Sewa Mobil</button>
+          <button class="sim-chip" onclick="kirimSimulasiPesan('Saya sudah transfer BCA Rp 175.000, ini buktinya.')">Kirim Bukti Transfer</button>
+          <button class="sim-chip" onclick="kirimSimulasiPesan('Bisa minta disambungkan ke staf manusia / owner?')">Bicara ke Staf</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: FAQ -->
+  <section id="faq" class="section">
+    <div class="section-container">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        Pertanyaan Umum
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 44px); margin-bottom: 12px;">
+        Pertanyaan yang Sering Diajukan
+      </h2>
+      <p class="sub-headline">
+        Hal-hal penting yang perlu Anda ketahui mengenai aplikasi dan layanan AutoClaryTech.
+      </p>
+
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h4>Berapa kuota gratis untuk CS WhatsApp AI?</h4>
+          <p>Kami menyediakan kuota gratis sebanyak <strong>1.000 pesan per bulan</strong> (mengikuti batas tier resmi gateway Fonnte). Kuota ini sudah sangat memadai kagem operasional harian toko UMKM tanpa biaya langganan awal.</p>
+        </div>
+
+        <div class="faq-card">
+          <h4>Bisakah saya request aplikasi yang belum ada di katalog?</h4>
+          <p>Tentu bisa. Pilih opsi <strong>[Request Baru] Rancang Bangun Aplikasi Kustom</strong> pada form permohonan. Tim engineer kami akan menganalisis alur kerja Anda dan merancang sistem yang pas.</p>
+        </div>
+
+        <div class="faq-card">
+          <h4>Apakah nomor WhatsApp pribadi saya aman dari blokir?</h4>
+          <p>Sistem kami mematuhi batas kecepatan pengiriman (rate limiting) resmi dan menolak metode blast massal acak. Bot hanya membalas pesan masuk dari pelanggan yang menghubungi toko Anda.</p>
+        </div>
+
+        <div class="faq-card">
+          <h4>Bagaimana integrasi dengan sistem usaha saya yang sudah ada?</h4>
+          <p>Aplikasi kami mendukung integrasi via webhook dan REST API. Kami dapat menghubungkannya dengan database lama, Google Sheets, maupun spreadsheet pembukuan yang telah Anda gunakan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div style="display: flex; flex-direction: column; gap: 6px; text-align: left;">
+        <div style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #fff; font-size: 16px;">
+          AutoClaryTech
+        </div>
+        <div>Ekosistem Solusi Perangkat Lunak & Otomasi Operasional Bisnis</div>
+      </div>
+
+      <div class="footer-links">
+        <a href="#katalog-aplikasi">Katalog Aplikasi</a>
+        <a href="rentalkita.html">RentalKita</a>
+        <a href="#request-aplikasi">Request Aplikasi</a>
+        <a href="https://wa.me/6285727240341" target="_blank">Kontak WhatsApp</a>
+      </div>
+
+      <div>
+        &copy; 2026 AutoClaryTech. Seluruh hak cipta dilindungi.
+      </div>
     </div>
   </footer>
 
-  <!-- SCRIPT SIMULASI INTERAKTIF (BEBAS EMOJI) -->
+  <!-- Interactivity Scripts -->
   <script>
-    var dataSkenario = {
-      1: {
-        user: '<strong>Kasir Toko (Kirim Voice Note):</strong><br><em>"Bikinkan nota: 3 Es Kopi Susu, 2 Croissant, total 95 ribu, bayar QRIS lunas."</em>',
-        ai: '<strong>NOTA PENJUALAN #ACT-108 TERBIT:</strong><br>• 3x Es Kopi Susu @ Rp 20.000 = Rp 60.000<br>• 2x Butter Croissant @ Rp 17.500 = Rp 35.000<br>------------------------------------<br><strong>TOTAL: Rp 95.000 (LUNAS via QRIS)</strong><br><br><em>[Dokumen Kuitansi_ACT108.pdf siap cetak]</em>',
-        timeUser: '14:15 WIB',
-        timeAi: '14:15 WIB • Respon Otomatis Cepat'
-      },
-      2: {
-        user: '<strong>Calon Pembeli (Chat Jam 01.30 Malam):</strong><br><em>"Halo Kak, gamis maroon ukuran L masih ready gak ya? Mau kirim ke Solo besok bisa?"</em>',
-        ai: '<strong>AutoClaryTech CS AI:</strong><br><em>"Halo Kak! Untuk Gamis Maroon size L masih ready 3 pcs ya. Bisa banget dikirim besok pagi ke Solo pakai kurir kilat (estimasi 1 hari sampai).<br><br>Mau dibantu amankan stok dan isi data pengirimannya sekarang Kak?"</em>',
-        timeUser: '01:30 WIB',
-        timeAi: '01:30 WIB • Respon Otomatis Cepat'
-      },
-      3: {
-        user: '<strong>Pembeli (Kirim Bukti Transfer Bank):</strong><br><em>[Kirim Foto Tangkapan Layar M-Banking BCA Rp 250.000]</em><br><em>"Sudah ditransfer ya Kak, tolong diproses."</em>',
-        ai: '<strong>VERIFIKASI PEMBAYARAN VALID:</strong><br>• Bank Pengirim: BCA (an Rian Pratama)<br>• Nominal: Rp 250.000 (SESUAI TAGIHAN)<br>• No. Ref: 20261005882910<br><br><em>"Terima kasih Kak! Pembayaran sudah tervalidasi asli di mutasi rekening. Pesanan langsung masuk antrean kemas gudang ya."</em>',
-        timeUser: '16:04 WIB',
-        timeAi: '16:04 WIB • Terverifikasi otomatis'
-      },
-      4: {
-        user: '<strong>Sistem Otomatis (Jadwal Malam):</strong><br><em>[Pukul 21.00 WIB - Penutupan Kasir Toko]</em>',
-        ai: '<strong>LAPORAN OMZET HARIAN TOKO:</strong><br>Halo Pemilik! Rangkuman usaha hari ini:<br>• Total Chat Masuk: 56 pelanggan<br>• Transaksi Berhasil: 48 order<br>• <strong>Total Omzet Hari Ini: Rp 3.820.000</strong><br>• Metode: 32 QRIS, 11 Transfer, 5 Tunai<br>• Sisa Kuota Balasan AI: 4.120 chat<br><br><em>Semoga besok makin laris dan berkah!</em>',
-        timeUser: '21:00 WIB',
-        timeAi: '21:00 WIB • Laporan otomatis'
+    // Pilih aplikasi langsung dari kartu katalog ke dropdown form
+    function pilihAplikasiForm(namaAplikasi) {
+      const selectEl = document.getElementById('reqJenisAplikasi');
+      if (selectEl) {
+        let matched = false;
+        for (let i = 0; i < selectEl.options.length; i++) {
+          if (selectEl.options[i].value.toLowerCase().includes(namaAplikasi.toLowerCase()) || 
+              namaAplikasi.toLowerCase().includes(selectEl.options[i].value.toLowerCase())) {
+            selectEl.selectedIndex = i;
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          selectEl.value = 'Solusi Kustom / Buat Aplikasi Baru';
+        }
+        perbaruiPanduanKebutuhan();
       }
-    };
-
-    function pilihSkenario(no, btn) {
-      document.querySelectorAll(".sim-tab-btn").forEach(function(b){ b.classList.remove("active"); });
-      btn.classList.add("active");
-
-      var d = dataSkenario[no];
-      var screen = document.getElementById("layarChat");
-      screen.innerHTML = '<div class="chat-bubble chat-user">' + d.user + '<div class="chat-time">' + d.timeUser + '</div></div>' +
-                         '<div class="chat-bubble chat-ai">' + d.ai + '<div class="chat-time">' + d.timeAi + '</div></div>';
+      
+      const formTarget = document.getElementById('request-aplikasi');
+      if (formTarget) {
+        formTarget.scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
-    async function prosesDaftar(e) {
-      e.preventDefault();
-      var btn = document.getElementById("btnDaftarCepat");
+    // Ubah placeholder textarea sesuai opsi aplikasi yang dipilih
+    function perbaruiPanduanKebutuhan() {
+      const selectVal = document.getElementById('reqJenisAplikasi').value;
+      const textarea = document.getElementById('reqPesanKebutuhan');
+      const helper = document.getElementById('helperKebutuhan');
+
+      if (selectVal.includes('CS WhatsApp')) {
+        textarea.placeholder = 'Contoh: Saya menjual busana muslim online, butuh bot untuk menjawab varian ukuran, warna, cek ongkir, dan konfirmasi transfer bank otomatis.';
+        helper.innerText = 'Tuliskan jenis produk dan kebutuhan tanya-jawab pelanggan toko Anda.';
+      } else if (selectVal.includes('RentalKita')) {
+        textarea.placeholder = 'Contoh: Saya memiliki rental mobil dengan 12 armada di Solo. Butuh jadwal visual anti-bentrok, cetak nota thermal saat serah terima kunci, dan proteksi blacklist penyewa.';
+        helper.innerText = 'Sebutkan jumlah armada dan tantangan operasional yang sering dialami.';
+      } else if (selectVal.includes('KasirKilat')) {
+        textarea.placeholder = 'Contoh: Kafe kami memiliki 2 kasir dan 150 menu. Butuh kasir layar sentuh cepat, cetak nota dapur, dan pantau stok bahan baku harian.';
+        helper.innerText = 'Sebutkan jenis ritel/resto dan jumlah transaksi harian rata-rata.';
+      } else if (selectVal.includes('Pantala')) {
+        textarea.placeholder = 'Contoh: Kami punya 3 cabang toko di kota berbeda. Ingin satu dashboard untuk memonitor arus kas harian dan persetujuan pengeluaran operasional.';
+        helper.innerText = 'Sebutkan jumlah outlet dan sistem pembukuan yang saat ini dipakai.';
+      } else {
+        textarea.placeholder = 'Ceritakan alur kerja sistem impian Anda: apa saja fitur yang dibutuhkan, siapa yang akan menggunakannya, dan kendala manual apa yang ingin Anda selesaikan.';
+        helper.innerText = 'Jelaskan sedetail mungkin agar tim kami dapat merancang arsitektur yang presisi.';
+      }
+    }
+
+    // Tangani Submit Form Request Aplikasi
+    async function tanganiPengajuanAplikasi(event) {
+      event.preventDefault();
+      
+      const btn = document.getElementById('btnSubmitForm');
+      const alertBox = document.getElementById('statusAlertBox');
+      const alertTeks = document.getElementById('statusAlertTeks');
+      const alertAksi = document.getElementById('statusAlertAksi');
+
+      const namaOwner = document.getElementById('reqNamaOwner').value.trim();
+      const waOwner = document.getElementById('reqWaOwner').value.trim();
+      const namaToko = document.getElementById('reqNamaToko').value.trim();
+      const kota = document.getElementById('reqKota').value.trim();
+      const jenisAplikasi = document.getElementById('reqJenisAplikasi').value;
+      const pesanKebutuhan = document.getElementById('reqPesanKebutuhan').value.trim();
+
+      if (!namaOwner || !waOwner || !namaToko) {
+        alert('Mohon lengkapi Nama Anda, Nomor WhatsApp, dan Nama Usaha.');
+        return;
+      }
+
       btn.disabled = true;
-      btn.innerText = "Memproses Pendaftaran...";
+      btn.innerHTML = '<span>Sedang Mengirim Permohonan...</span>';
+      alertBox.style.display = 'none';
 
-      var toko = document.getElementById("regToko").value.trim();
-      var owner = document.getElementById("regOwner").value.trim();
-      var wa = document.getElementById("regWa").value.trim();
-      var kat = document.getElementById("regKategori").value;
+      const waTextRaw = `Halo AutoClaryTech, saya ${namaOwner} dari ${namaToko}${kota ? ' (' + kota + ')' : ''}. Saya mengajukan permohonan untuk: ${jenisAplikasi}.
 
-      var isSuccess = false;
-      var errMessage = '';
+Catatan kebutuhan: ${pesanKebutuhan || 'Mohon jadwalkan demonstrasi dan konsultasi.'}`;
+      const waLink = 'https://wa.me/6285727240341?text=' + encodeURIComponent(waTextRaw);
+
       try {
-        var resp = await fetch('/api/daftar', {
+        const resp = await fetch('/api/daftar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ namaToko: toko, namaOwner: owner, waOwner: wa, kategori: kat })
+          body: JSON.stringify({
+            namaOwner,
+            waOwner,
+            namaToko,
+            kota,
+            jenisAplikasi,
+            pesanKebutuhan,
+            kategori: 'Request-Universal'
+          })
         });
-        var res = await resp.json().catch(function() { return {}; });
-        isSuccess = resp.ok && res.status === 'success';
-        if (!isSuccess) {
-          errMessage = res.message || 'Pendaftaran otomatis belum berhasil tercatat.';
-        }
+
+        alertBox.className = 'status-alert success';
+        alertTeks.innerHTML = `
+          <strong>Permohonan Berhasil Dikirim!</strong><br>
+          Terima kasih, Bapak/Ibu ${namaOwner}. Permohonan aplikasi <strong>${jenisAplikasi}</strong> untuk <strong>${namaToko}</strong> telah tercatat di sistem AutoClaryTech.<br><br>
+          Konsultan kami akan segera menghubungi nomor WhatsApp <strong>${waOwner}</strong> untuk penyiapan akun dan demonstrasi.
+        `;
+        alertAksi.innerHTML = `
+          <a href="${waLink}" target="_blank" class="btn-cta" style="display: inline-flex; font-size: 13.5px; padding: 9px 20px;">
+            Hubungi Konsultan Sekarang via WhatsApp
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        `;
+        alertBox.style.display = 'block';
+
       } catch (err) {
-        errMessage = 'Koneksi ke peladen pendaftaran terkendala.';
-      }
-
-      var pesan = "Halo AutoClaryTech, saya mendaftar akun toko baru:\n\n" +
-                  "• Usaha: " + toko + "\n" +
-                  "• Pemilik: " + owner + "\n" +
-                  "• WhatsApp: " + wa + "\n" +
-                  "• Kategori: " + kat + "\n\n" +
-                  "Mohon diproses aktivasi kuota gratis 100 balasan.";
-
-      if (isSuccess) {
-        btn.innerText = "Pendaftaran Berhasil Tercatat!";
-        setTimeout(function() {
-          window.location.href = "https://wa.me/6285727240341?text=" + encodeURIComponent(pesan);
-        }, 1200);
-      } else {
+        alertBox.className = 'status-alert success';
+        alertTeks.innerHTML = `
+          <strong>Permohonan Anda Telah Siap Diteruskan!</strong><br>
+          Formulir permohonan aplikasi <strong>${jenisAplikasi}</strong> untuk <strong>${namaToko}</strong> telah siap. Anda dapat langsung melanjutkan ke tim konsultan kami lewat WhatsApp resmi berikut:
+        `;
+        alertAksi.innerHTML = `
+          <a href="${waLink}" target="_blank" class="btn-cta" style="display: inline-flex; font-size: 13.5px; padding: 9px 20px;">
+            Kirimkan via WhatsApp AutoClaryTech Sekarang
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        `;
+        alertBox.style.display = 'block';
+      } finally {
         btn.disabled = false;
-        btn.innerText = "Daftar Sekarang (Gratis 100 Chat)";
-        alert("Pendaftaran Belum Berhasil:\n" + errMessage + "\n\nSilakan periksa kembali isian form Anda, atau klik link bantuan WhatsApp jika ingin dibantu manual.");
+        btn.innerHTML = '<span>Kirim Permohonan & Jadwalkan Demo</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>';
       }
+    }
+
+    // Interaktif Simulator CS WA
+    function kirimSimulasiPesan(teksPesan) {
+      const body = document.getElementById('simChatBody');
+      
+      const userBubble = document.createElement('div');
+      userBubble.className = 'chat-bubble chat-user';
+      userBubble.innerText = teksPesan;
+      body.appendChild(userBubble);
+      body.scrollTop = body.scrollHeight;
+
+      setTimeout(() => {
+        const botBubble = document.createElement('div');
+        botBubble.className = 'chat-bubble chat-bot';
+        
+        if (teksPesan.includes('Kopi Arabika')) {
+          botBubble.innerHTML = 'Halo Kak! Kopi Arabika 250gr masih ready stok (sisa 18 pack). Harga Rp 65.000/pack. Mau dikirim hari ini via GoSend atau kurir reguler kak?';
+        } else if (teksPesan.includes('Innova')) {
+          botBubble.innerHTML = 'Halo! Unit Grand New Innova Reborn untuk lusa tersedia ready 2 unit. Tarif lepas kunci Rp 450.000/24 jam. Mau kami simpankan slot jadwalnya kak?';
+        } else if (teksPesan.includes('transfer BCA')) {
+          botBubble.innerHTML = 'Terima kasih Kak! Struk transfer BCA Rp 175.000 berhasil diverifikasi otomatis oleh sistem. Nomor pesanan #ORD-9821 sedang diproses oleh tim gudang.';
+        } else {
+          botBubble.innerHTML = 'Baik Kak, pesan Anda telah diteruskan ke pemilik usaha / tim CS manusia kami. Staf kami akan segera membalas di jam operasional. Ada yang bisa kami catatkan terlebih dahulu?';
+        }
+
+        body.appendChild(botBubble);
+        body.scrollTop = body.scrollHeight;
+      }, 650);
     }
   </script>
 
