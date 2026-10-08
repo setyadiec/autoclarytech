@@ -163,6 +163,123 @@
     </figure>
   </section>
 
+  <!-- Interactive Shift Simulator Widget -->
+  <section class="bab" id="simulasi-interaktif" style="background: var(--kertas2); border-radius: 12px; padding: 32px 24px; margin: 32px 0; border: 1px solid var(--garis);">
+    <div class="label" style="color: var(--hijau); font-weight: 800;">Simulasi Interaktif</div>
+    <h2 style="font-size: clamp(22px, 5vw, 30px); margin: 8px 0 14px;">Coba Sendiri Bagaimana Komputer Kafe Menutup & Membuka Shift Mandiri</h2>
+    <p style="font-size: 15px; color: var(--tinta2); margin-bottom: 22px; max-width: 62ch;">Klik tombol simulasi di bawah untuk menguji bagaimana sistem Pantala menangani pergantian shift secara mandiri tanpa operator utak-atik angka:</p>
+
+    <!-- Simulator Screen -->
+    <div style="background: #101522; border: 1px solid #1f293d; border-radius: 10px; padding: 20px; color: #e2e8f0; font-family: monospace; font-size: 13.5px; box-shadow: 0 10px 25px rgba(0,0,0,0.25);">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f293d; padding-bottom: 12px; margin-bottom: 16px;">
+        <span style="color: #00d2b4; font-weight: bold;">● PANTALA WORKSTATION SIMULATOR</span>
+        <span id="sim-clock" style="color: #94a3b8;">16:59:50 WIB</span>
+      </div>
+
+      <div id="sim-status-box" style="background: #162032; border-left: 4px solid #38bdf8; padding: 14px; border-radius: 4px; margin-bottom: 14px;">
+        <div style="color: #94a3b8; font-size: 12px; text-transform: uppercase;">Status Shift Berjalan</div>
+        <div id="sim-status-title" style="color: #fff; font-size: 15px; font-weight: bold; margin-top: 2px;">Shift Sore Aktif (Shift ID #8)</div>
+        <div id="sim-status-desc" style="color: #cbd5e1; font-size: 13px; margin-top: 4px;">Pencatatan kendaraan & karcis aktif. Kas fisik dipegang kru shift sore.</div>
+      </div>
+
+      <div style="background: #0b0f19; border: 1px solid #1a2333; border-radius: 6px; padding: 12px; height: 110px; overflow-y: auto; font-size: 12px; color: #a0aec0; line-height: 1.6;" id="sim-log-box">
+        <div>[16:58:12] Kendaraan masuk: Karcis #0142 tercatat.</div>
+        <div>[16:59:05] Sistem bersiap pergantian shift otomatis pada jam operasional 17:00:00...</div>
+      </div>
+
+      <!-- Controls -->
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px;">
+        <button id="btn-sim-tutup" onclick="jalankanSimulasiTutup()" style="background: #e11d48; color: #fff; border: none; padding: 10px 16px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; transition: all 0.2s;">
+          1. Simulasikan Jam 17:00:00 (Tutup Shift Otomatis)
+        </button>
+        <button id="btn-sim-buka" onclick="jalankanSimulasiBuka()" style="background: #059669; color: #fff; border: none; padding: 10px 16px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; opacity: 0.5; transition: all 0.2s;" disabled>
+          2. Simulasikan Jam 17:00:52 (Buka Shift Baru)
+        </button>
+        <button onclick="resetSimulasi()" style="background: #374151; color: #d1d5db; border: none; padding: 10px 14px; border-radius: 6px; font-size: 13px; cursor: pointer;">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px; text-align: center;">
+      <p style="font-size: 14.5px; color: var(--tinta2); margin-bottom: 12px;">Ingin sistem anti-selisih ini beroperasi di komputer kafe Anda?</p>
+      <a class="tombol" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech,%20saya%20sudah%20mencoba%20simulasi%20shift%20Pantala%20di%20web%20dan%20ingin%20pasang%20di%20kafe%20saya">
+        Konsultasikan Pemasangan via WhatsApp &rarr;
+      </a>
+    </div>
+  </section>
+
+  <script>
+    function addSimLog(msg) {
+      const box = document.getElementById('sim-log-box');
+      const d = document.createElement('div');
+      d.innerHTML = msg;
+      box.appendChild(d);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function jalankanSimulasiTutup() {
+      document.getElementById('sim-clock').innerText = '17:00:00 WIB';
+      const sBox = document.getElementById('sim-status-box');
+      sBox.style.borderLeftColor = '#f59e0b';
+      sBox.style.background = '#271d0e';
+      
+      document.getElementById('sim-status-title').innerText = 'Status: MENUNGGU SETORAN (Shift #8 Ditutup Otomatis)';
+      document.getElementById('sim-status-title').style.color = '#fbbf24';
+      document.getElementById('sim-status-desc').innerText = 'Shift #8 selesai tepat waktu. Komputer mengunci transaksi shift lama dan menerbitkan kartu setoran fisik Rp 1.450.000.';
+      
+      addSimLog('<span style="color:#fbbf24">[17:00:00] ALARM: Jam operasional shift sore berakhir.</span>');
+      addSimLog('<span style="color:#fbbf24">[17:00:01] Shift #8 otomatis DITUTUP oleh sistem. Kartu Menunggu Setoran diterbitkan.</span>');
+      addSimLog('<span style="color:#a7f3d0">[17:00:02] Tidak ada angka yang dimanipulasi atau ditebak. Kru pulang dengan tenang.</span>');
+      
+      document.getElementById('btn-sim-tutup').disabled = true;
+      document.getElementById('btn-sim-tutup').style.opacity = '0.5';
+      
+      const bBtn = document.getElementById('btn-sim-buka');
+      bBtn.disabled = false;
+      bBtn.style.opacity = '1';
+    }
+
+    function jalankanSimulasiBuka() {
+      document.getElementById('sim-clock').innerText = '17:00:52 WIB';
+      const sBox = document.getElementById('sim-status-box');
+      sBox.style.borderLeftColor = '#10b981';
+      sBox.style.background = '#0e261a';
+      
+      document.getElementById('sim-status-title').innerText = 'Status: SHIFT MALAM TERBUKA MANDIRI (Shift #9)';
+      document.getElementById('sim-status-title').style.color = '#34d399';
+      document.getElementById('sim-status-desc').innerText = 'Shift baru terbuka sendiri tanpa staf menyentuh pengaturan komputer. Kru malam langsung siap melayani pengunjung.';
+      
+      addSimLog('<span style="color:#34d399">[17:00:52] Shift #9 (Malam) dibuka mandiri oleh background workstation.</span>');
+      addSimLog('<span style="color:#34d399">[17:00:53] Timer shift aktif. Komputer kafe siap mencatat transaksi berikutnya.</span>');
+      
+      document.getElementById('btn-sim-buka').disabled = true;
+      document.getElementById('btn-sim-buka').style.opacity = '0.5';
+    }
+
+    function resetSimulasi() {
+      document.getElementById('sim-clock').innerText = '16:59:50 WIB';
+      const sBox = document.getElementById('sim-status-box');
+      sBox.style.borderLeftColor = '#38bdf8';
+      sBox.style.background = '#162032';
+      
+      document.getElementById('sim-status-title').innerText = 'Shift Sore Aktif (Shift ID #8)';
+      document.getElementById('sim-status-title').style.color = '#fff';
+      document.getElementById('sim-status-desc').innerText = 'Pencatatan kendaraan & karcis aktif. Kas fisik dipegang kru shift sore.';
+      
+      document.getElementById('sim-log-box').innerHTML = '<div>[16:58:12] Kendaraan masuk: Karcis #0142 tercatat.</div><div>[16:59:05] Sistem bersiap pergantian shift otomatis pada jam operasional 17:00:00...</div>';
+      
+      const tBtn = document.getElementById('btn-sim-tutup');
+      tBtn.disabled = false;
+      tBtn.style.opacity = '1';
+      
+      const bBtn = document.getElementById('btn-sim-buka');
+      bBtn.disabled = true;
+      bBtn.style.opacity = '0.5';
+    }
+  </script>
+
+
   <section class="bab" id="bab5">
     <div class="nomor">5</div><div class="label">Skema terbuka sejak awal</div>
     <h2>Kami membuka seluruh ketentuan sejak awal, karena rasa percaya dibangun dari kejelasan hak dan kewajiban.</h2>
