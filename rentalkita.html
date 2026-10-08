@@ -9,7 +9,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RentalKita - Aplikasi Pengelola Usaha Rental Mobil dan Motor</title>
-<meta name="description" content="RentalKita: aplikasi web untuk usaha rental mobil dan motor. Pemesanan online, armada, keuangan, multi-cabang. Langganan per cabang per bulan.">
+  <meta property="og:title" content="RentalKita - Solusi Manajemen Usaha Rental Mobil & Motor">
+  <meta property="og:description" content="Sistem otomasi armada, kalender pemesanan anti-bentrok, portal pelanggan dwibahasa, dan laporan laba rugi otomatis untuk pengusaha rental.">
+  <meta property="og:image" content="https://autoclarytech.com/assets/og_autoclarytech.png">
+  <meta property="og:url" content="https://autoclarytech.com/rentalkita.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RentalKita",
+    "operatingSystem": "Web Browser (Cloud)",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "IDR"
+    },
+    "description": "Aplikasi pengelolaan usaha rental mobil dan motor terintegrasi dengan pemesanan online, jadwal armada anti-bentrok, dan buku kas."
+  }
+  </script>
+  <meta name="description" content="RentalKita: aplikasi web untuk usaha rental mobil dan motor. Pemesanan online, armada, keuangan, multi-cabang. Langganan per cabang per bulan.">
 <link rel="icon" type="image/png" href="aset/logo-rentalkita.png">
 <style>
 :root{--bg:#f7f8fa;--card:#fff;--ink:#14213d;--mut:#55627a;--line:#e1e5ec;--pri:#1d4ed8;--pri-d:#1e3a8a;--wa:#128c4a;--soft:#eaf0ff}
@@ -139,6 +160,99 @@ footer{padding:26px 0;color:var(--mut);font-size:13px;border-top:1px solid var(-
  <p class="sub">Setiap akun punya peran. Pembatasan akses dijaga di sisi basis data, bukan hanya disembunyikan di tampilan.</p>
  <div class="roles"><span>Owner</span><span>Manajer</span><span>Akunting</span><span>Admin</span><span>QC</span><span>Investor (hanya membaca)</span><span>Penyewa (portal sendiri)</span></div>
 </div></section>
+
+
+<section id="simulasi-armada" style="background:#0f172a; color:#f8fafc; padding:48px 0; border-top:1px solid #334155; border-bottom:1px solid #334155;">
+  <div class="wrap">
+    <div style="text-align:center; max-width:700px; margin:0 auto 28px;">
+      <span style="display:inline-block; background:rgba(29, 78, 216, 0.25); color:#60a5fa; border:1px solid #2563eb; padding:4px 12px; border-radius:999px; font-size:12.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:10px;">SIMULATOR SISTEM LANGSUNG</span>
+      <h2 style="color:#ffffff; font-size:26px;">Uji Coba Langsung: Deteksi Bentrok Jadwal Otomatis</h2>
+      <p style="color:#94a3b8; font-size:15px; margin-top:8px;">Pilih armada dan tanggal sewa untuk merasakan bagaimana RentalKita mencegah unit disewakan ganda secara otomatis.</p>
+    </div>
+
+    <div style="max-width:760px; margin:0 auto; background:#1e293b; border:1px solid #334155; border-radius:16px; padding:24px; box-shadow:0 10px 25px rgba(0,0,0,0.4);">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-bottom:20px;">
+        <div>
+          <label style="display:block; font-size:13px; color:#cbd5e1; margin-bottom:6px; font-weight:600;">1. Pilih Unit Armada:</label>
+          <select id="sim-unit" style="width:100%; background:#0f172a; border:1px solid #475569; color:#f8fafc; padding:10px; border-radius:8px; font-size:14px; outline:none;">
+            <option value="innova">Toyota Kijang Innova (DK 1024 XX) - Sewa Aktif</option>
+            <option value="avanza">Toyota All New Avanza (DK 1842 YY) - Tersedia</option>
+            <option value="nmax">Yamaha NMax 155 (DK 5519 ZZ) - Tersedia</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block; font-size:13px; color:#cbd5e1; margin-bottom:6px; font-weight:600;">2. Tanggal Mulai Sewa:</label>
+          <input type="date" id="sim-tgl-mulai" value="2026-10-09" style="width:100%; background:#0f172a; border:1px solid #475569; color:#f8fafc; padding:10px; border-radius:8px; font-size:14px; outline:none;">
+        </div>
+        <div>
+          <label style="display:block; font-size:13px; color:#cbd5e1; margin-bottom:6px; font-weight:600;">3. Durasi Sewa:</label>
+          <select id="sim-durasi" style="width:100%; background:#0f172a; border:1px solid #475569; color:#f8fafc; padding:10px; border-radius:8px; font-size:14px; outline:none;">
+            <option value="1">1 Hari (Harian)</option>
+            <option value="3">3 Hari (Liburan)</option>
+            <option value="7">7 Hari (Mingguan)</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-bottom:20px;">
+        <button id="sim-btn-cek" type="button" style="background:#2563eb; hover:background:#1d4ed8; color:#fff; border:none; padding:12px 28px; border-radius:10px; font-weight:700; font-size:15px; cursor:pointer; transition:0.2s; box-shadow:0 4px 12px rgba(37,99,235,0.4);">
+          Cek Ketersediaan & Validasi Jadwal
+        </button>
+      </div>
+
+      <!-- Kotak Hasil Simulator -->
+      <div id="sim-hasil" style="background:#0f172a; border-radius:12px; border:1px dashed #3b82f6; padding:18px; font-family:monospace; font-size:13.5px; line-height:1.6; color:#93c5fd;">
+        <div style="color:#64748b;">[STATUS SIMULATOR: Klik tombol di atas untuk menjalankan validasi anti-bentrok]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const btn = document.getElementById("sim-btn-cek");
+  const unitSelect = document.getElementById("sim-unit");
+  const hasil = document.getElementById("sim-hasil");
+
+  btn.addEventListener("click", function() {
+    const unit = unitSelect.value;
+    const durasi = document.getElementById("sim-durasi").value;
+    const tglMulai = document.getElementById("sim-tgl-mulai").value;
+    
+    hasil.innerHTML = "<div style='color:#38bdf8;'>[MEMERIKSA DATABASE ARMADA & JADWAL CABANG...]</div>";
+    
+    setTimeout(function() {
+      if (unit === "innova") {
+        hasil.innerHTML = `
+          <div style="color:#f87171; font-weight:bold; font-size:15px; margin-bottom:6px;">
+            &#10060; [SISTEM MENOLAK RESERVASI - JADWAL BENTROK TERDETEKSI]
+          </div>
+          <div style="color:#fca5a5; margin-bottom:8px;">
+            Unit <strong>Innova (DK 1024 XX)</strong> sudah terikat Kontrak No #RK-202610-042 hingga 11 Oktober 2026 pk 14:00 WITA.
+          </div>
+          <div style="background:rgba(239, 68, 68, 0.15); border-left:3px solid #ef4444; padding:8px 12px; color:#fecaca; font-size:12.5px;">
+            <strong>Proteksi Otomatis:</strong> Staf cabang maupun pemesan online tidak dapat melakukan double-booking pada unit yang sama. Rekomendasi alternatif dialihkan ke unit sekelas yang ready.
+          </div>
+        `;
+      } else {
+        const total = unit === "avanza" ? (350000 * parseInt(durasi)).toLocaleString("id-ID") : (120000 * parseInt(durasi)).toLocaleString("id-ID");
+        hasil.innerHTML = `
+          <div style="color:#4ade80; font-weight:bold; font-size:15px; margin-bottom:6px;">
+            &#9989; [UNIT TERSEDIA & SIAP DIKUNCI JADWAL]
+          </div>
+          <div style="color:#86efac; margin-bottom:8px;">
+            Unit <strong>${unitSelect.options[unitSelect.selectedIndex].text}</strong> status AMAN (QC Lolos & Servis Beres).<br>
+            Estimasi Biaya Sewa (${durasi} hari): <strong>Rp ${total}</strong>
+          </div>
+          <div style="background:rgba(34, 197, 94, 0.15); border-left:3px solid #22c55e; padding:8px 12px; color:#bbf7d0; font-size:12.5px;">
+            <strong>Langkah Selanjutnya:</strong> Kontrak digital, nota pembayaran, dan data SIM/KTP langsung terbit otomatis tanpa ketik ulang manual.
+          </div>
+        `;
+      }
+    }, 400);
+  });
+});
+</script>
 
 <section id="harga"><div class="wrap">
  <h2>Harga langganan</h2>
