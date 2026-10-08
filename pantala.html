@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pantala — Buku Bukti Lapangan & Studi Kasus Nyata Kafe Kajine</title>
+<meta name="description" content="Studi kasus nyata sistem operasional parkir & shift otomatis Pantala di KAJINE Social Space & Hub Pekalongan. Terbukti mandiri di lapangan.">
+<style>
+  :root{
+    --kertas:#f4efe6; --kertas2:#ebe4d6; --tinta:#1e1b16; --tinta2:#4a443a;
+    --hijau:#1f5a3b; --hijau-teks:#ffffff; --bata:#9a4420; --garis:#cfc5b2;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-tema="terang"]){
+      --kertas:#17140f; --kertas2:#211d16; --tinta:#f1ebdd; --tinta2:#c9bfab;
+      --hijau:#8fd1a8; --hijau-teks:#10231a; --bata:#f0a078; --garis:#3a3427;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--kertas);color:var(--tinta);
+    font:17px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  .bungkus{max-width:720px;margin:0 auto;padding:0 20px}
+  header{padding:18px 0;border-bottom:1px solid var(--garis)}
+  header .bungkus{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .merek{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .merek img{width:34px;height:34px;display:block}
+  .merek small{display:block;font-weight:500;color:var(--tinta2);font-size:12.5px;letter-spacing:0}
+  .tombol{display:inline-block;background:var(--hijau);color:var(--hijau-teks);text-decoration:none;
+    font-weight:700;padding:12px 20px;border-radius:6px;min-height:44px}
+  .tombol:focus-visible,a:focus-visible{outline:3px solid var(--bata);outline-offset:3px}
+  .pembuka{padding:56px 0 40px}
+  .pembuka .cap{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--bata);font-weight:700}
+  h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:700;line-height:1.25;margin:0}
+  h1{font-size:clamp(30px,7vw,46px);margin:14px 0 18px}
+  .pembuka p{color:var(--tinta2);margin:0 0 22px;max-width:56ch}
+  section.bab{padding:52px 0;border-top:1px solid var(--garis)}
+  .nomor{font-family:Georgia,serif;font-size:64px;line-height:1;color:var(--bata);opacity:.9;margin-bottom:6px}
+  .label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta2);font-weight:700}
+  h2{font-size:clamp(24px,5.6vw,34px);margin:10px 0 18px}
+  .bab p{margin:0 0 14px;max-width:60ch}
+  .lampiran{margin:26px 0 8px;background:var(--kertas2);border:1px solid var(--garis);border-radius:8px;padding:12px}
+  .lampiran img{width:100%;height:auto;display:block;border-radius:4px}
+  .lampiran figcaption{font-size:14px;color:var(--tinta2);margin-top:10px}
+  .cap-bukti{display:inline-block;border:2px solid var(--hijau);color:var(--hijau);font-weight:800;
+    font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:3px;transform:rotate(-2deg);margin-bottom:10px}
+  .kasus{margin:0 0 6px;padding:0;list-style:none}
+  .kasus li{margin:0 0 22px;padding-left:16px;border-left:3px solid var(--hijau)}
+  .kasus b{display:block;margin-bottom:4px}
+  .maskot{margin:28px 0;border:2px dashed var(--garis);border-radius:10px;padding:26px 16px;text-align:center;color:var(--tinta2);font-size:14.5px}
+  blockquote.termin{margin:20px 0;padding:16px 18px;background:var(--kertas2);border-left:4px solid var(--bata);
+    font-family:Georgia,serif;font-size:18px;line-height:1.6}
+  .penutup{padding:56px 0 64px;border-top:1px solid var(--garis)}
+  footer{padding:22px 0 40px;border-top:1px solid var(--garis);color:var(--tinta2);font-size:14px}
+  .catatan-draf{background:var(--kertas2);border:1px dashed var(--bata);padding:12px 14px;font-size:14px;margin:22px 0;color:var(--tinta2)}
+</style>
+</head>
+<body>
+<header><div class="bungkus">
+  <a href="index.html" class="merek" style="text-decoration: none; color: inherit;">
+    <img src="assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="34" height="34">
+    <span>AutoClaryTech<small>Your Simple, Reliable Partner</small></span>
+  </a>
+  <div style="display: flex; align-items: center; gap: 14px;">
+    <a href="index.html" style="font-size: 14px; color: var(--tinta2); text-decoration: none; font-weight: 600;">&larr; Beranda Utama</a>
+    <a class="tombol" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech,%20saya%20tertarik%20konsultasi%20sistem%20Pantala%20seperti%20di%20Kafe%20Kajine">Konsultasi WhatsApp</a>
+  </div>
+</div></header>
+
+<main class="bungkus">
+  
+
+  <div class="pembuka">
+    <div class="cap">Buku bukti lapangan &bull; Studi Kasus Nyata</div>
+<div style="display: inline-block; background: var(--kertas2); border: 1px solid var(--garis); padding: 4px 12px; border-radius: 999px; font-size: 13px; color: var(--tinta2); margin-bottom: 12px;">Lokasi: KAJINE Social Space & Hub, Pekalongan &bull; Mas Faishol</div>
+    <h1>Kami tidak menjanjikan angka. Kami menjamin setiap rupiah tercatat.</h1>
+    <p>Aplikasi untuk usaha yang uangnya berpindah tangan setiap jam. Cerita di bawah ini bukan rencana; semuanya pernah terjadi dan sudah ditangani di lapangan.</p>
+    <a class="tombol" href="#bab4">Lihat buktinya</a>
+  </div>
+
+  <section class="bab" id="bab1">
+    <div class="nomor">1</div><div class="label">Ketegangan</div>
+    <h2>Uang dan barang berpindah tangan setiap jam, tetapi ke mana selisihnya pergi baru disadari saat kas dihitung malam hari.</h2>
+    <p>Di lapangan, uang berpindah tangan langsung dari pelanggan ke petugas tanpa jejak kertas atau angka yang tercatat. Saat rekap dihitung di penghujung hari, pemilik usaha hanya menerima apa yang diserahkan.</p>
+    <p>Masalahnya bukan staf berniat curang, melainkan ketiadaan catatan seketika yang membuat selisih tidak pernah bisa dilacak sumbernya.</p>
+  </section>
+
+  <section class="bab" id="bab2">
+    <div class="nomor">2</div><div class="label">Tidak ada yang berhenti</div>
+    <h2>Sistem baru tidak boleh menghentikan transaksi yang sedang berjalan walau hanya satu jam.</h2>
+    <p>Kami tidak meminta usaha Anda tutup untuk pemasangan yang rumit. Pelanggan tetap dilayani seperti biasa, sementara pencatatan masuk ke sistem secara bertahap tanpa mengganggu ritme usaha.</p>
+  </section>
+
+  <section class="bab" id="bab3">
+    <div class="nomor">3</div><div class="label">Orang lapangan tidak digantikan</div>
+    <h2>Aplikasi kami hadir bukan untuk menggantikan orang lapangan, melainkan menjaga mereka agar tidak lagi disalahkan saat kas berselisih.</h2>
+    <p>Petugas kasir, staf gudang, dan pekerja lapangan adalah penggerak utama usaha. Tampilannya dibuat sederhana agar mudah dipakai dari ponsel. Setiap penerimaan tercatat atas nama mereka, sehingga mereka pulang dengan tenang dan terlindungi dari kecurigaan saat setoran diperiksa.</p>
+    
+  </section>
+
+  <section class="bab" id="bab4">
+    <div class="nomor">4</div><div class="label">Diuji di hari kacau</div>
+    <h2>Sistem yang baik tidak dinilai dari tenangnya hari biasa, melainkan bagaimana ia bertahan saat usaha sedang kacau.</h2>
+    <p>Tiga kejadian nyata di aplikasi parkir Pantala, dan apa yang kami lakukan:</p>
+    <ul class="kasus">
+      <li><b>Petugas tidak sempat membuka komputer.</b>
+        Shift ditutup sendiri oleh sistem pada jam selesainya dan ditandai &ldquo;menunggu setoran&rdquo;, lalu shift berikutnya dibuka sendiri. Tidak ada angka yang ditebak.</li>
+      <li><b>Langganan sudah dibayar, peringatan masih tampil.</b>
+        Status tagihan kini otomatis disamakan dengan catatan pembayaran agar peringatan keliru tidak muncul lagi.</li>
+      <li><b>Grafik harian tidak muncul tiap hari.</b>
+        Kini dipetakan per tanggal kalender, sehingga hari sepi pun tetap tampak.</li>
+    </ul>
+    <figure class="lampiran">
+      <span class="cap-bukti">Tampilan nyata</span>
+      <img src="aset-pantala/pantala-shift-menunggu-setoran.webp" width="1760" height="374" loading="lazy" alt="Tangkapan layar nyata kartu Menunggu Setoran pada aplikasi Pantala, nominal disamarkan">
+      <figcaption>Shift Sore 3 Oktober ditutup sendiri oleh sistem dan menunggu setoran. Nominal disamarkan.</figcaption>
+    </figure>
+    <figure class="lampiran">
+      <img src="aset-pantala/pantala-shift-berjalan-otomatis.webp" width="1760" height="398" loading="lazy" alt="Tangkapan layar nyata shift Pagi yang terbuka otomatis pukul 10.00 pada aplikasi Pantala">
+      <figcaption>Shift Pagi terbuka sendiri pukul 10.00, tanpa ada yang menyentuh komputer.</figcaption>
+    </figure>
+    <figure class="lampiran">
+      <img src="aset-pantala/pantala-grafik-tanggal.webp" width="1760" height="510" loading="lazy" alt="Tangkapan layar nyata grafik kendaraan masuk 14 hari terakhir, tiap tanggal terisi">
+      <figcaption>Kendaraan masuk 14 hari terakhir, tiap tanggal terisi.</figcaption>
+    </figure>
+  </section>
+
+  <section class="bab" id="bab5">
+    <div class="nomor">5</div><div class="label">Skema terbuka sejak awal</div>
+    <h2>Kami membuka seluruh ketentuan sejak awal, karena rasa percaya dibangun dari kejelasan hak dan kewajiban.</h2>
+    <p><b>Untuk aplikasi kustom:</b> ruang lingkup kebutuhan, estimasi pengerjaan, dan skema biaya disepakati bersama secara lugas sebelum pekerjaan teknis dimulai.</p>
+    <p><b>Tanpa biaya siluman:</b> tidak ada biaya di luar yang telah Anda setujui.</p>
+    <div class="lampiran" style="background: var(--kertas2); padding: 22px; border-radius: 8px; margin: 24px 0;">
+  <div style="font-family: Georgia, serif; font-size: 20px; font-weight: 700; margin-bottom: 8px;">Paket Sistem Pantala (Siap Pasang di Usaha Anda)</div>
+  <div style="font-size: 26px; font-weight: 800; color: var(--bata); margin-bottom: 12px;">Rp 3.500.000 <span style="font-size: 13px; font-weight: 500; color: var(--tinta2);">biaya pemasangan & lisensi awal</span></div>
+  <ul style="margin: 0 0 16px 18px; color: var(--tinta2); font-size: 14.5px; line-height: 1.8;">
+    <li>Pemasangan sistem langsung di komputer kafe/pos jaga Anda</li>
+    <li>Otomasi buka-tutup shift otomatis sesuai jadwal jam operasional</li>
+    <li>Sistem antarmuka pencatatan kendaraan/karcis anti-kebocoran</li>
+    <li>Laporan rekapitulasi setoran & kartu Menunggu Setoran</li>
+    <li>Pelatihan staf jaga sampai mandiri</li>
+    <li>Biaya pemeliharaan sistem: <strong>Rp 300.000 / bulan</strong> (mulai bulan berikutnya)</li>
+  </ul>
+  <a class="tombol" style="display: inline-block;" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech,%20saya%20ingin%20memasang%20sistem%20Pantala%20seperti%20di%20Kafe%20Kajine">Ajukan Pemasangan Pantala via WA &rarr;</a>
+</div>
+  </section>
+
+  <section class="bab" id="bab6">
+    <div class="nomor">6</div><div class="label">Jaminan jujur</div>
+    <h2>Yang kami jamin bukan omzet Anda pasti melipat ganda, melainkan bahwa setiap rupiah dan transaksi usaha Anda tercatat dengan benar.</h2>
+    <blockquote class="termin">Ya kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.</blockquote>
+  </section>
+
+  <div class="penutup">
+    <h2>Ceritakan alur usaha Anda.</h2>
+    <p>Diskusikan kebutuhan Anda langsung dengan tim AutoClaryTech, tanpa paksaan.</p>
+    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+  <a class="tombol" href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech,%20saya%20tertarik%20konsultasi%20sistem%20Pantala%20seperti%20di%20Kafe%20Kajine">Hubungi WhatsApp 0857-2724-0341</a>
+  <a class="tombol" style="background: transparent; color: var(--tinta); border: 1px solid var(--garis);" href="index.html#wizard">Rancang Aplikasi Kustom &rarr;</a>
+</div>
+  </div>
+</main>
+<footer><div class="bungkus">&copy; 2026 AutoClaryTech. Your Simple, Reliable Partner.</div></footer>
+</body>
+</html>
