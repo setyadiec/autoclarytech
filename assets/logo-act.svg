@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none" class="act-logo-svg">
+  <defs>
+    <linearGradient id="actGradMark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="50%" stop-color="#00d2b4" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <linearGradient id="actGradAccent" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(6, 6)">
+    <path d="M26 2 L48 14 L48 38 L26 50 L4 38 L4 14 Z" 
+          fill="#0b1329" 
+          stroke="url(#actGradMark)" 
+          stroke-width="2.5" 
+          stroke-linejoin="round" />
+    <path d="M26 12 L38 34 H32 L26 22 L20 34 H14 Z" 
+          fill="url(#actGradMark)" />
+    <circle cx="26" cy="27" r="2.5" fill="#ffffff" />
+    <path d="M26 29.5 L26 40" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" />
+    <circle cx="26" cy="41" r="2" fill="url(#actGradAccent)" />
+    <circle cx="42" cy="18" r="2" fill="#38bdf8" />
+  </g>
+
+  <text x="68" y="34" 
+        font-family="'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif" 
+        font-weight="800" 
+        font-size="22" 
+        letter-spacing="-0.03em" 
+        fill="#ffffff">
+    AutoClary<tspan fill="url(#actGradMark)">Tech</tspan>
+  </text>
+
+  <text x="69" y="48" 
+        font-family="'Plus Jakarta Sans', -apple-system, sans-serif" 
+        font-weight="600" 
+        font-size="9" 
+        letter-spacing="0.16em" 
+        text-transform="uppercase" 
+        fill="#94a3b8">
+    SOFTWARE SOLUSI UMKM
+  </text>
+</svg>
