@@ -34,10 +34,22 @@ export default async function handler(req, res) {
     integrasiWajib,
     fiturPrioritas,
     rentangAnggaran,
-    jadwalKonsultasi
+    jadwalKonsultasi,
+    // Halaman hitung per jalur (10 Okt 2026): /pantala /toko /rental /pondok /koperasi /desa /les
+    jalur,
+    kontak,
+    hasilHitung,
+    sumberHalaman
   } = req.body || {};
 
-  if (!namaToko || !waOwner) {
+  // Halaman jalur: kontak boleh kosong (nomor WA CS diblokir 10 Okt; pengunjung tidak wajib memberi WA)
+  const JALUR_SAH = ['pantala', 'toko', 'rental', 'pondok', 'koperasi', 'desa', 'les'];
+  const jalurLp = JALUR_SAH.includes(String(jalur || '')) ? String(jalur) : '';
+  const pesanGagal = jalurLp
+    ? 'Data belum tersimpan di sistem kami. Mohon coba kirim lagi beberapa saat lagi.'
+    : 'Permohonan belum tersimpan di sistem kami. Mohon kirim lewat tombol WhatsApp.';
+
+  if (!namaToko || (!waOwner && !jalurLp)) {
     return res.status(400).json({
       status: 'error',
       message: 'Nama usaha dan nomor WhatsApp wajib diisi'
@@ -51,7 +63,7 @@ export default async function handler(req, res) {
     waktu: new Date().toISOString(),
     nama_toko: String(namaToko).trim(),
     nama_owner: String(namaOwner || '').trim(),
-    whatsapp: String(waOwner).trim(),
+    whatsapp: String(waOwner || '').trim(),
     kategori: String(kategori || 'Umum').trim(),
     jenis_aplikasi: String(jenisAplikasi || 'CS WhatsApp AI').trim(),
     kota: String(kota || '').trim(),
@@ -75,7 +87,11 @@ export default async function handler(req, res) {
       jadwal_konsultasi: String(jadwalKonsultasi || 'Fleksibel')
     } : null,
     versi_kebijakan_pdp: '2026-10-07',
-    sumber: isCustomApp ? 'web-wizard-custom-app' : 'web-standard-app'
+    sumber: jalurLp ? 'web-lp-' + jalurLp : (isCustomApp ? 'web-wizard-custom-app' : 'web-standard-app'),
+    jalur: jalurLp || null,
+    kontak: jalurLp ? String(kontak || '').trim().slice(0, 80) : '',
+    hasil_hitung: (jalurLp && hasilHitung && typeof hasilHitung === 'object' && JSON.stringify(hasilHitung).length <= 4000) ? hasilHitung : null,
+    sumber_halaman: jalurLp ? String(sumberHalaman || '').slice(0, 60) : ''
   };
 
   // Kirim ke n8n webhook publik via Tailscale Funnel
@@ -102,7 +118,7 @@ export default async function handler(req, res) {
       console.error('Penampung menolak/gagal:', upstreamResp.status);
       return res.status(502).json({
         status: 'error',
-        message: 'Permohonan belum tersimpan di sistem kami. Mohon kirim lewat tombol WhatsApp.'
+        message: pesanGagal
       });
     }
 
@@ -118,7 +134,7 @@ export default async function handler(req, res) {
     console.error('Fetch error to funnel webhook:', error.message);
     return res.status(502).json({
       status: 'error',
-      message: 'Permohonan belum tersimpan di sistem kami. Mohon kirim lewat tombol WhatsApp.',
+      message: pesanGagal,
       offline_fallback: true
     });
   }

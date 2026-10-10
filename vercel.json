@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/rental", "destination": "/rentalkita" },
+    { "source": "/parkir", "destination": "/pantala" }
+  ]
+}

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hitung Usaha Les Sebulan — AutoClaryTech</title>
+<meta name="description" content="Hitung sendiri, gratis: iuran yang seharusnya masuk, yang tertunda, dan nilai satu jam tenaga Anda.">
+<link rel="canonical" href="https://autoclarytech.com/les">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://autoclarytech.com/les">
+<meta property="og:title" content="Hitung Usaha Les Sebulan">
+<meta property="og:description" content="Hitung sendiri, gratis: iuran yang seharusnya masuk, yang tertunda, dan nilai satu jam tenaga Anda.">
+<meta property="og:image" content="https://autoclarytech.com/assets/og_autoclarytech.png">
+<meta property="og:site_name" content="AutoClaryTech">
+<meta property="og:locale" content="id_ID">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+<style>
+  :root{
+    --kertas:#f4efe6; --kertas2:#ebe4d6; --tinta:#1e1b16; --tinta2:#4a443a;
+    --hijau:#1f5a3b; --hijau-teks:#ffffff; --bata:#9a4420; --garis:#cfc5b2;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-tema="terang"]){
+      --kertas:#17140f; --kertas2:#211d16; --tinta:#f1ebdd; --tinta2:#c9bfab;
+      --hijau:#8fd1a8; --hijau-teks:#10231a; --bata:#f0a078; --garis:#3a3427;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--kertas);color:var(--tinta);
+    font:17px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+  .bungkus{max-width:720px;margin:0 auto;padding:0 20px}
+  header{padding:18px 0;border-bottom:1px solid var(--garis)}
+  header .bungkus{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .merek{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .merek img{width:34px;height:34px;display:block}
+  .merek small{display:block;font-weight:500;color:var(--tinta2);font-size:12.5px;letter-spacing:0}
+  .tombol{display:inline-block;background:var(--hijau);color:var(--hijau-teks);text-decoration:none;
+    font-weight:700;padding:12px 20px;border-radius:6px;min-height:44px}
+  .tombol:focus-visible,a:focus-visible{outline:3px solid var(--bata);outline-offset:3px}
+  .pembuka{padding:56px 0 40px}
+  .pembuka .cap{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--bata);font-weight:700}
+  h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:700;line-height:1.25;margin:0}
+  h1{font-size:clamp(30px,7vw,46px);margin:14px 0 18px}
+  .pembuka p{color:var(--tinta2);margin:0 0 22px;max-width:56ch}
+  section.bab{padding:52px 0;border-top:1px solid var(--garis)}
+  .nomor{font-family:Georgia,serif;font-size:64px;line-height:1;color:var(--bata);opacity:.9;margin-bottom:6px}
+  .label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta2);font-weight:700}
+  h2{font-size:clamp(24px,5.6vw,34px);margin:10px 0 18px}
+  .bab p{margin:0 0 14px;max-width:60ch}
+  .lampiran{margin:26px 0 8px;background:var(--kertas2);border:1px solid var(--garis);border-radius:8px;padding:12px}
+  .lampiran img{width:100%;height:auto;display:block;border-radius:4px}
+  .lampiran figcaption{font-size:14px;color:var(--tinta2);margin-top:10px}
+  .cap-bukti{display:inline-block;border:2px solid var(--hijau);color:var(--hijau);font-weight:800;
+    font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:3px;transform:rotate(-2deg);margin-bottom:10px}
+  .kasus{margin:0 0 6px;padding:0;list-style:none}
+  .kasus li{margin:0 0 22px;padding-left:16px;border-left:3px solid var(--hijau)}
+  .kasus b{display:block;margin-bottom:4px}
+  .maskot{margin:28px 0;border:2px dashed var(--garis);border-radius:10px;padding:26px 16px;text-align:center;color:var(--tinta2);font-size:14.5px}
+  blockquote.termin{margin:20px 0;padding:16px 18px;background:var(--kertas2);border-left:4px solid var(--bata);
+    font-family:Georgia,serif;font-size:18px;line-height:1.6}
+  .penutup{padding:56px 0 64px;border-top:1px solid var(--garis)}
+  footer{padding:22px 0 40px;border-top:1px solid var(--garis);color:var(--tinta2);font-size:14px}
+  .catatan-draf{background:var(--kertas2);border:1px dashed var(--bata);padding:12px 14px;font-size:14px;margin:22px 0;color:var(--tinta2)}
+  .langkah{margin:0;padding-left:22px}.langkah li{margin:0 0 10px;max-width:60ch}
+  .kaki a{color:inherit}
+  header .tombol{white-space:nowrap;padding:10px 16px}
+</style>
+<script src="/hitung.js" defer></script>
+</head>
+<body>
+<header><div class="bungkus">
+  <a href="/" class="merek" style="text-decoration:none;color:inherit">
+    <img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="34" height="34">
+    <span>AutoClaryTech<small>Your Simple, Reliable Partner</small></span>
+  </a>
+  <a class="tombol" href="#hitung">Hitung gratis</a>
+</div></header>
+
+<main class="bungkus">
+  <div class="pembuka">
+    <div class="cap">Les &amp; bimbel rumahan &bull; Cek sendiri, gratis</div>
+    <h1>Les Anda sudah jadi usaha. Sudah dicatat seperti usaha?</h1>
+    <p>Sepulang mengajar, Anda membuka les di rumah. Muridnya bertambah.</p><p>Iuran ada yang dibayar awal bulan, ada yang tengah bulan, ada yang &quot;nanti ya, Bu&quot;.</p><p>Ada yang lupa ditagih. Ada yang berhenti tanpa kabar, iurannya menggantung.</p><p>Jadwal bergeser, dua kelompok datang di jam yang sama.</p><p>Akhir bulan: setelah fotokopi, alat tulis, listrik, dan tenaga Anda, berapa sebenarnya yang bersih?</p>
+    <a class="tombol" href="#hitung">Hitung sekarang</a>
+  </div>
+
+  <section class="bab" id="hitung">
+    <div data-hitung="les"><noscript><p>Alat hitung ini memerlukan JavaScript. Anda tetap bisa menghitung dengan kertas memakai langkah di bawah.</p></noscript></div>
+  </section>
+
+  <section class="bab" id="cara">
+    <div class="label">Tanpa alat pun bisa</div>
+    <h2>Hitung les Anda dalam satu malam</h2>
+    <ol class="langkah"><li>Malam ini, ambil satu kertas.</li><li>Tulis semua murid les bulan ini dan iuran masing-masing. Jumlahkan: itu yang seharusnya masuk.</li><li>Centang yang benar-benar sudah bayar. Jumlahkan: itu yang sudah masuk. Selisihnya, iuran yang tertunda.</li><li>Kurangi biaya: fotokopi, alat tulis, listrik, kuota, transport bila datang ke rumah murid.</li><li>Bagi dengan jumlah jam mengajar les sebulan. Itu nilai satu jam tenaga Anda.</li><li>Itu angka Anda sendiri, bukan kata kami. Dengan angka yang jelas, menagih tidak lagi terasa sungkan.</li></ol>
+  </section>
+
+  <section class="bab" id="kenapa">
+    <div class="label">Kenapa ini penting</div>
+    <h2>Sungkan menagih tetangga sendiri</h2>
+    <p>Orang tua murid les Anda: tetangga, kenalan, kadang saudara.</p><p>Iurannya telat. Anda ingin mengingatkan, tapi sungkan.</p><p>Takut dianggap hitung-hitungan. Takut hubungan baik jadi renggang.</p><p>Di sisi lain, orang tua ingin tahu perkembangan anaknya. Ada yang bertanya lewat chat, lewat anak, lewat tetangga lain.</p><p>Kalau jawabannya cuma &quot;baik, Bu&quot;, lama-lama orang tua ragu. Anaknya pindah ke bimbel lain yang laporannya jelas.</p><p>Menagih dengan rapi bukan berarti komersial. Laporan yang jelas justru membuat orang tua makin percaya.</p>
+  </section>
+
+  <div class="penutup">
+    <h2>Yang kurang biasanya catatannya, bukan orangnya.</h2>
+    <p>Sudah menghitung? Tinggalkan nama Anda, tim AutoClaryTech membantu membaca angkanya. Tanpa biaya, tanpa paksaan.</p>
+    <a class="tombol" href="#daftar">Tinggalkan nama</a>
+  </div>
+</main>
+<footer><div class="bungkus kaki">&copy; 2026 AutoClaryTech &bull; <a href="/privasi.html">Kebijakan Privasi</a> &bull; <a href="/syarat.html">Syarat</a></div></footer>
+</body>
+</html>
