@@ -1,0 +1,2304 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="facebook-domain-verification" content="wqdd5uxwpwydtm9kg0aiafuu0il2u8" />
+  <title>AutoClaryTech — Your Simple, Reliable Partner</title>
+  <meta name="description" content="Penyedia aplikasi bisnis terintegrasi: Asisten CS WhatsApp AI 24 Jam, Sistem Rental Kendaraan, Kasir POS & Stok, Pembukuan Pantala, serta rancang bangun aplikasi kustom sesuai kebutuhan unik alur kerja usaha Anda.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <!-- Primary SEO & Canonical -->
+  <link rel="canonical" href="https://autoclarytech.com/">
+  <meta name="keywords" content="aplikasi bisnis umkm, sistem kasir kafe, software rental mobil, cs whatsapp ai, sistem operasional shift, aplikasi parkir mandiri, autoclarytech">
+  <meta name="author" content="AutoClaryTech">
+  <meta name="robots" content="noindex">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://autoclarytech.com/">
+  <meta property="og:title" content="AutoClaryTech — Your Simple, Reliable Partner">
+  <meta property="og:description" content="Aplikasi bisnis siap pakai & solusi kustom: Sistem shift & kasir kafe anti-bocor, rental armada RentalKita, asisten CS WhatsApp AI 24 jam. Teruji aktif di lapangan.">
+  <meta property="og:image" content="https://autoclarytech.com/assets/og_autoclarytech.png">
+  <meta property="og:site_name" content="AutoClaryTech">
+  <meta property="og:locale" content="id_ID">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://autoclarytech.com/">
+  <meta name="twitter:title" content="AutoClaryTech — Your Simple, Reliable Partner">
+  <meta name="twitter:description" content="Aplikasi bisnis siap pakai & solusi kustom: Sistem shift & kasir kafe anti-bocor, rental armada RentalKita, asisten CS WhatsApp AI 24 jam. Teruji aktif di lapangan.">
+  <meta name="twitter:image" content="https://autoclarytech.com/assets/og_autoclarytech.png">
+
+  <!-- JSON-LD Structured Data Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "AutoClaryTech",
+    "operatingSystem": "All, Web, Android, iOS, Windows",
+    "applicationCategory": "BusinessApplication",
+    "description": "Penyedia aplikasi bisnis terpadu: Sistem Operasional Kafe Pantala, Sistem Rental Kendaraan RentalKita, dan Asisten CS WhatsApp AI 24 Jam.",
+    "url": "https://autoclarytech.com/",
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "IDR",
+      "lowPrice": "75000",
+      "highPrice": "3500000",
+      "offerCount": "5"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "AutoClaryTech",
+      "url": "https://autoclarytech.com/",
+      "logo": "https://autoclarytech.com/assets/og_autoclarytech.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+6285727240341",
+        "contactType": "customer service"
+      }
+    }
+  }
+  </script>
+
+  <!-- Apple & Modern SaaS Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #030712;
+      --bg-card: #0b0f19;
+      --bg-card-hover: #111827;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-glow: rgba(0, 210, 180, 0.3);
+      --cyan: #00D2B4;
+      --cyan-soft: rgba(0, 210, 180, 0.12);
+      --blue: #38bdf8;
+      --purple: #818cf8;
+      --amber: #f59e0b;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Fixed Glass Navbar */
+    .nav-bar {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 72px;
+      background: rgba(3, 7, 18, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .brand-title span {
+      color: var(--cyan);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 13.5px;
+      font-weight: 500;
+    }
+
+    .nav-menu a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-menu a:hover { color: #fff; }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-cta {
+      background: var(--cyan);
+      color: #030712;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(0, 210, 180, 0.32);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--card-border);
+      padding: 9px 20px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Sections */
+    .section {
+      width: 100%;
+      padding: 96px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: var(--cyan-soft);
+      border: 1px solid rgba(0, 210, 180, 0.3);
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cyan);
+      margin-bottom: 22px;
+    }
+
+    .badge-icon {
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+    }
+
+    .headline {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(34px, 5.2vw, 62px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 22px;
+      max-width: 950px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .headline span.glow {
+      background: linear-gradient(135deg, #00D2B4 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sub-headline {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: var(--text-muted);
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 38px;
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    /* Trust & Security Bar */
+    .hero-trust-bar {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trust-item svg {
+      color: var(--cyan);
+    }
+
+    /* Grid System Apps */
+    .grid-apps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      width: 100%;
+      text-align: left;
+      margin-top: 40px;
+    }
+
+    .app-card {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      overflow: hidden;
+    }
+
+    .app-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+      transition: background 0.3s ease;
+    }
+
+    .app-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--card-border-glow);
+      transform: translateY(-4px);
+    }
+
+    .app-card:hover::before {
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    }
+
+    .app-card.featured {
+      border-color: rgba(0, 210, 180, 0.35);
+      background: linear-gradient(180deg, rgba(0, 210, 180, 0.04) 0%, #0b0f19 100%);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .app-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+    }
+
+    .app-card.featured .app-icon-box {
+      background: var(--cyan-soft);
+      border-color: rgba(0, 210, 180, 0.35);
+    }
+
+    .badge-status {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+    }
+
+    .badge-status.live {
+      background: rgba(0, 210, 180, 0.12);
+      color: var(--cyan);
+      border-color: rgba(0, 210, 180, 0.3);
+    }
+
+    .badge-status.custom {
+      background: rgba(129, 140, 248, 0.12);
+      color: #c7d2fe;
+      border-color: rgba(129, 140, 248, 0.3);
+    }
+
+    .app-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .app-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .feature-list li {
+      font-size: 13.5px;
+      color: #d1d5db;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .feature-list li svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--cyan);
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .card-footer a {
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s ease, color 0.2s ease;
+    }
+
+    .card-footer a.primary-link {
+      color: var(--cyan);
+    }
+
+    .card-footer a.primary-link:hover {
+      gap: 9px;
+      color: #fff;
+    }
+
+    .card-footer a.secondary-link {
+      color: var(--text-muted);
+    }
+
+    .card-footer a.secondary-link:hover {
+      color: #fff;
+    }
+
+    /* Comparison vs Blaster (Belajar dari Kasus Kompetitor) */
+    .edu-comparison-box {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      margin-top: 48px;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .edu-col h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .edu-col p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .edu-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .edu-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.5;
+    }
+
+    .edu-list.danger li {
+      color: #fca5a5;
+    }
+
+    .edu-list.safe li {
+      color: #a7f3d0;
+    }
+
+    /* Form Request Aplikasi Universal */
+    .form-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 44px 36px;
+      max-width: 800px;
+      width: 100%;
+      text-align: left;
+      margin-top: 36px;
+      position: relative;
+    }
+
+    .form-wrapper::before {
+      content: "";
+      position: absolute;
+      top: -1px; left: 15%; right: 15%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .form-label span.req {
+      color: var(--cyan);
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: #0f1422;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 13px 16px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(0, 210, 180, 0.15);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.5;
+    }
+
+    .form-helper {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--cyan);
+      color: #030712;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: #00e8c7;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0, 210, 180, 0.35);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status-alert {
+      display: none;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-top: 24px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .status-alert.success {
+      background: rgba(0, 210, 180, 0.1);
+      border: 1px solid rgba(0, 210, 180, 0.3);
+      color: #e6fffa;
+    }
+
+    /* Live Interactive WA Simulator */
+    .simulator-container {
+      background: #0b0f19;
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      max-width: 440px;
+      width: 100%;
+      margin: 40px auto 0;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    .sim-header {
+      background: #111827;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .sim-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--cyan-soft);
+      border: 1px solid rgba(0, 210, 180, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+    }
+
+    .sim-header-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .sim-header-status {
+      font-size: 11.5px;
+      color: var(--cyan);
+    }
+
+    .sim-body {
+      background: #050811;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 280px;
+      text-align: left;
+    }
+
+    .chat-bubble {
+      max-width: 84%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .chat-user {
+      align-self: flex-end;
+      background: #005c4b;
+      color: #e9edef;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-bot {
+      align-self: flex-start;
+      background: #1f2937;
+      color: #f3f4f6;
+      border-bottom-left-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sim-quick-replies {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 12px 16px;
+      background: #0e1422;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .sim-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: #d1d5db;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .sim-chip:hover {
+      background: var(--cyan-soft);
+      border-color: var(--cyan);
+      color: #fff;
+    }
+
+    /* FAQ */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      width: 100%;
+      text-align: left;
+      margin-top: 40px;
+    }
+
+    .faq-card {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .faq-card h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .faq-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      width: 100%;
+      border-top: 1px solid var(--card-border);
+      padding: 60px 24px 40px;
+      background: #02040a;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 820px) {
+      .nav-bar { padding: 0 16px; height: 64px; }
+      .nav-menu { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+      .edu-comparison-box { grid-template-columns: 1fr; }
+      .form-wrapper { padding: 28px 20px; }
+      .section { padding: 70px 16px; }
+      .grid-apps { grid-template-columns: 1fr; }
+    }
+  
+    /* Wizard Multi-Step Styling */
+    .wizard-progress-bar {
+      display: none;
+      width: 100%;
+      margin-bottom: 28px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 9999px;
+      height: 8px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+
+    .wizard-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), #38bdf8);
+      width: 15%;
+      transition: width 0.35s ease;
+    }
+
+    .wizard-indicator {
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .wizard-indicator strong {
+      color: var(--cyan);
+    }
+
+    .wizard-step {
+      display: none;
+      animation: fadeInStep 0.3s ease;
+    }
+
+    .wizard-step.active {
+      display: block;
+    }
+
+    @keyframes fadeInStep {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .checkbox-tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .checkbox-tile {
+      background: #0f1422;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      color: #d1d5db;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .checkbox-tile:hover {
+      background: #141b2e;
+      border-color: rgba(0, 210, 180, 0.3);
+    }
+
+    .checkbox-tile input[type="checkbox"],
+    .checkbox-tile input[type="radio"] {
+      accent-color: var(--cyan);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .info-callout-box {
+      background: rgba(0, 210, 180, 0.08);
+      border: 1px solid rgba(0, 210, 180, 0.25);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 13px;
+      color: #e6fffa;
+      line-height: 1.6;
+      margin: 18px 0;
+    }
+
+    .wizard-nav-btns {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="nav-bar">
+    <a href="#" class="brand" title="AutoClaryTech - Software Solusi UMKM">
+      <img src="assets/logo-act.svg" alt="AutoClaryTech" style="height: 38px; width: auto; max-width: 220px;">
+    </a>
+
+    <div class="nav-menu">
+      <a href="#katalog-aplikasi">Katalog Aplikasi</a>
+      <a href="#artikel">Artikel & Direktori</a>
+      <a href="#keamanan">Keamanan & Etika</a>
+      <a href="#cara-kerja">Cara Kerja</a>
+      <a href="#demo-wa">Simulator WA</a>
+      <a href="#faq">FAQ</a>
+      <a href="#request-aplikasi">Request Aplikasi</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="https://wa.me/6285727240341?text=Halo%20AutoClaryTech%2C%20saya%20tertarik%20konsultasi%20aplikasi%20bisnis" target="_blank" class="btn-outline">
+        Konsultasi WA
+      </a>
+      <a href="#request-aplikasi" class="btn-cta">
+        Ajukan Kebutuhan
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section (Universal) -->
+  <section class="section" style="padding-top: 140px; padding-bottom: 70px;">
+    <div class="section-container" style="display: flex; flex-direction: column; align-items: center;">
+      <a href="pantala.html" style="text-decoration: none; margin-bottom: 20px;">
+        <div class="badge-pill" style="border-color: rgba(0, 210, 180, 0.45); background: rgba(0, 210, 180, 0.12); padding: 7px 18px; cursor: pointer; transition: all 0.2s ease;">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span>
+          <span style="color: #fff; font-weight: 700;">Buku Bukti Lapangan:</span>
+          <span style="color: var(--cyan);">Lihat bagaimana sebuah Kafe di Pekalongan otomatisasi shift tanpa operator &rarr;</span>
+        </div>
+      </a>
+
+      <h1 class="headline">
+        Aplikasi Bisnis Siap Pakai & Solusi Kustom untuk <span class="glow">Pertumbuhan Usaha Anda</span>
+      </h1>
+
+      <div style="font-family: 'Outfit', sans-serif; font-size: clamp(20px, 2.4vw, 26px); font-weight: 700; color: var(--cyan); margin-top: -6px; margin-bottom: 20px; letter-spacing: -0.01em;">
+        Your Simple, Reliable Partner
+      </div>
+
+      <p class="sub-headline">
+        Dari otomatisasi layanan pelanggan CS WhatsApp AI yang merespons cepat tanpa spam, sistem rental kendaraan terpadu, kasir toko ritel, hingga pembuatan aplikasi khusus sesuai alur kerja bisnis Anda.
+      </p>
+
+      <div class="hero-actions" style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 48px;">
+        <a href="#katalog-aplikasi" class="btn-cta" style="padding: 12px 28px; font-size: 15px;">
+          Jelajahi Katalog Aplikasi
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+        </a>
+        <a href="#request-aplikasi" class="btn-outline" style="padding: 12px 26px; font-size: 15px;">
+          Ajukan Kebutuhan / Request Baru
+        </a>
+      </div>
+
+      <div class="hero-trust-bar">
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Terbukti Aktif Berjalan di Berbagai Cabang Usaha (F&B, Rental, Kafe, Ritel)
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Gratis 1.000 Pesan / Bulan kagem CS WhatsApp
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Fokus Pelayanan Inbound (Anti Spam Liar)
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Standar Privasi Data PDP Terenkripsi
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Katalog Aplikasi (Portofolio Produk Teruji) -->
+  <section id="katalog-aplikasi" class="section" style="background: #020611; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="section-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Daftar Produk & Solusi Perangkat Lunak
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 46px); margin-bottom: 14px;">
+        Pilihan Aplikasi Sesuai Kebutuhan Bisnis Anda
+      </h2>
+      <p class="sub-headline" style="margin-bottom: 20px;">
+        Pilih aplikasi yang sudah siap langsung digunakan, atau diskusikan perancangan sistem khusus yang dibangun spesifik untuk alur kerja perusahaan Anda.
+      </p>
+
+      <div class="grid-apps">
+
+        <!-- App 1: CS WhatsApp Commerce AI -->
+        <div class="app-card featured">
+          <div>
+            <div class="card-top">
+              <div class="app-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              </div>
+              <span class="badge-status live">Siap Digunakan</span>
+            </div>
+
+            <h3 class="app-title">AutoClary WA Commerce & CS AI</h3>
+            <p class="app-desc">
+              Asisten customer service 24 jam berbasis AI yang melayani tanya-jawab stok produk, menangani pemesanan, verifikasi otomatis bukti transfer bank, dan rekap omzet harian.
+            </p>
+
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Gratis 1.000 pesan/bulan (Mengikuti jatah resmi gateway Fonnte)</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>OCR deteksi bukti transfer BCA, BRI, Mandiri, BNI, QRIS</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Eskalasi cerdas ke staf manusia saat ada pertanyaan khusus</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <a href="#demo-wa" class="secondary-link">Coba Demo Interaktif</a>
+            <a href="#request-aplikasi" class="primary-link" onclick="pilihAplikasiForm('CS WhatsApp AI Commerce')">
+              Pilih Aplikasi
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- App 2: RentalKita -->
+        <div class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              </div>
+              <span class="badge-status live">Siap Digunakan</span>
+            </div>
+
+            <h3 class="app-title">RentalKita — Sistem Rental Armada</h3>
+            <p class="app-desc">
+              Sistem manajemen operasional rental mobil, motor, dan alat berat. Dilengkapi jadwal kalender visual anti-bentrok, nota sewa thermal, kontrak digital, dan BKU keuangan.
+            </p>
+
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Kalender ketersediaan armada real-time anti-double-booking</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Cetak kontrak sewa digital & nota thermal standar di lokasi</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Buku Kas Umum (BKU), kontrol deposit & deteksi blacklist</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <a href="rentalkita.html" target="_blank" class="secondary-link">Lihat Halaman Khusus</a>
+            <a href="#request-aplikasi" class="primary-link" onclick="pilihAplikasiForm('RentalKita - Rental Kendaraan')">
+              Pilih Aplikasi
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- App 3: KasirKilat POS -->
+        <div class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line><line x1="6" y1="15" x2="10" y2="15"></line></svg>
+              </div>
+              <span class="badge-status live">Siap Digunakan</span>
+            </div>
+
+            <h3 class="app-title">KasirKilat POS & Stok Ritel</h3>
+            <p class="app-desc">
+              Aplikasi kasir pintar untuk kafe, resto, dan toko ritel. Antarmuka cepat dan praktis, mendukung cetak nota struk kasir standar, pantauan stok minimum, dan rekap shift kasir.
+            </p>
+
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Antarmuka sentuh responsif cepat tanpa jeda</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Manajemen inventori varian barang & peringatan stok menipis</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Laporan laba kotor, perputaran kas harian, dan riwayat void</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <span style="font-size: 13px; color: var(--text-dim);">Cloud & Offline Ready</span>
+            <a href="#request-aplikasi" class="primary-link" onclick="pilihAplikasiForm('KasirKilat POS & Stok')">
+              Pilih Aplikasi
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- App 4: Pantala Operasional & Keuangan -->
+        <div class="app-card">
+          <div>
+            <div class="card-top">
+              <div class="app-icon-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              </div>
+              <span class="badge-status live">Siap Digunakan</span>
+            </div>
+
+            <h3 class="app-title">Pantala — Operasional & Shift Kafe</h3>
+            <p class="app-desc">
+              Sistem manajemen shift & operasional kafe teruji lapangan. Shift buka-tutup mandiri tanpa jeda, mengunci setoran kasir tanpa internet kafe, dan laporan operasional rapi siap ekspor Excel.
+            </p>
+
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Otomasi shift mandiri jam 17:00 & 17:00:52 tanpa jeda antrean tamu</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Pencatatan pengeluaran operasional dengan validasi nota</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Ekspor neraca, arus kas, dan laba rugi ke format Excel satu klik</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <a href="pantala.html" target="_blank" class="secondary-link" style="color: var(--cyan); font-weight: 600;">Lihat Bukti Nyata Kafe &rarr;</a>
+            <a href="#request-aplikasi" class="primary-link" onclick="pilihAplikasiForm('Pantala Operasional & Keuangan')">
+              Pilih Aplikasi
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- App 5: Solusi Kustom (Bespoke Application) -->
+        <div class="app-card" style="border-color: rgba(129, 140, 248, 0.3); background: linear-gradient(180deg, rgba(129, 140, 248, 0.05) 0%, #0b0f19 100%);">
+          <div>
+            <div class="card-top">
+              <div class="app-icon-box" style="background: rgba(129, 140, 248, 0.12); color: #c7d2fe; border-color: rgba(129, 140, 248, 0.3);">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <span class="badge-status custom">Bespoke Software</span>
+            </div>
+
+            <h3 class="app-title">Rancang Bangun Aplikasi Kustom</h3>
+            <p class="app-desc">
+              Punya alur kerja khusus atau kendala operasional yang belum ada aplikasinya di pasaran? Tim engineer kami merancang aplikasi berbasis web, mobile, atau otomasi bot tepat sesuai SOP usaha Anda.
+            </p>
+
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: #c7d2fe;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Konsultasi arsitektur sistem & analisis alur kerja tanpa komitmen</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: #c7d2fe;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Integrasi database internal, sistem akuntansi, atau webhook API</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: #c7d2fe;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Hak kepemilikan kode sumber & jaminan pemeliharaan sistem</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-footer">
+            <span style="font-size: 13px; color: #c7d2fe;">Sesuai Kebutuhan Spesifik</span>
+            <a href="#request-aplikasi" class="primary-link" style="color: #c7d2fe;" onclick="pilihAplikasiForm('Solusi Kustom / Buat Aplikasi Baru')">
+              Ajukan Request
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Edukasi Kejujuran & Keamanan WhatsApp (Belajar dari Kasus Kompetitor) -->
+  <section id="keamanan" class="section">
+    <div class="section-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        Pendekatan Bertanggung Jawab
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(26px, 3.6vw, 42px); margin-bottom: 12px;">
+        Mengapa Kami Memilih Layanan CS Inbound, Bukan Spam Blaster Liar?
+      </h2>
+      <p class="sub-headline" style="max-width: 740px;">
+        Banyak pelaku usaha tergiur janji "software broadcast anti-banned", namun akhirnya nomor bisnis berharga diblokir permanen oleh Meta. Kami menyajikan fakta apa adanya demi keamanan aset nomor Anda.
+      </p>
+
+      <div class="edu-comparison-box">
+        <div class="edu-col">
+          <h4 style="color: #f87171;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+            Klaim Blaster Liar (Risiko Tinggi)
+          </h4>
+          <p>
+            Alat broadcast massal ke kontak asing yang tidak dikenal sering mengklaim "100% anti-ban", tetapi algoritma Meta selalu mendeteksi lonjakan laporan spam dari penerima.
+          </p>
+          <ul class="edu-list danger">
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span>Nomor bisnis rawan terblokir permanen jika dilaporkan pelanggan</span>
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span>Merusak reputasi dan rasa percaya pelanggan pada merek toko Anda</span>
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span>Menjanjikan garansi palsu yang tidak bisa ditepati saat terjadi pemblokiran</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="edu-col">
+          <h4 style="color: var(--cyan);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Standar AutoClaryTech (Aman & Alami)
+          </h4>
+          <p>
+            Kami fokus pada otomatisasi <strong>Customer Service Inbound</strong>: bot hanya menjawab calon pembeli yang memang menghubungi toko Anda dengan sukarela.
+          </p>
+          <ul class="edu-list safe">
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Membalas pesan inbound yang memang diinginkan oleh calon pembeli</span>
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Penerapan jeda pengetikan alami layaknya admin manusia yang mengetik</span>
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Eskalasi ke staf manusia untuk kasus khusus tanpa paksaan otomatis</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Cara Kerja yang Mudah -->
+  <section id="cara-kerja" class="section" style="background: #020611; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="section-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+        Alur Implementasi Cepat
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 44px); margin-bottom: 12px; text-align: center; margin-left: auto; margin-right: auto;">
+        Aktif Cepat dalam 3 Langkah
+      </h2>
+      <p class="sub-headline" style="text-align: center; margin-left: auto; margin-right: auto; max-width: 680px;">
+        Tidak ada proses instalasi server rumit. Sistem Anda siap digunakan dalam hitungan jam.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left; margin-top: 40px;">
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 28px;">
+          <div style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800; color: var(--cyan); margin-bottom: 10px;">01</div>
+          <h4 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px;">Pilih atau Request Aplikasi</h4>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6;">Pilih aplikasi yang ada di atas atau ceritakan alur kerja sistem impian Anda melalui formulir pengajuan di bawah.</p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 28px;">
+          <div style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800; color: var(--cyan); margin-bottom: 10px;">02</div>
+          <h4 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px;">Sesi Penyiapan & Demo</h4>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6;">Tim konsultan AutoClaryTech menyiapkan workspace atau menghubungkan akun nomor Anda secara langsung bersama tim Anda.</p>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 16px; padding: 28px;">
+          <div style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 800; color: var(--cyan); margin-bottom: 10px;">03</div>
+          <h4 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px;">Langsung Aktif Beroperasi</h4>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.6;">Sistem langsung dipakai melayani pelanggan harian. Pantau pertumbuhan transaksi atau biarkan bot melayani 24 jam.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Form Request & Pengajuan Aplikasi (Central Action) -->
+  <section id="request-aplikasi" class="section">
+    <div class="section-container" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Pusat Permohonan & Request Aplikasi
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 44px); margin-bottom: 12px;">
+        Ajukan Aplikasi yang Anda Butuhkan
+      </h2>
+      <p class="sub-headline" style="max-width: 680px; margin-bottom: 16px;">
+        Baik Anda ingin mencoba aplikasi yang sudah tersedia atau mendiskusikan aplikasi baru yang belum ada, isi formulir ringkas di bawah. Konsultan teknologi kami akan menyiapkan demonstrasi langsung.
+      </p>
+
+      <div class="form-wrapper">
+        
+        <!-- Bilah Kelengkapan Wizard (Tampil Saat Custom App) -->
+        <div id="wizardHeader" style="display: none; margin-bottom: 20px;">
+          <div class="wizard-indicator" id="wizardIndicator">
+            <span id="wizardStepTitle">Langkah 1 dari 7: Identitas & Model Aplikasi</span>
+            <span id="wizardProgressLabel">Kelengkapan <strong>25%</strong></span>
+          </div>
+          <div class="wizard-progress-bar" id="wizardProgressBar" style="display: block;">
+            <div class="wizard-progress-fill" id="wizardProgressFill"></div>
+          </div>
+        </div>
+
+        <form id="formRequestAplikasi" onsubmit="tanganiPengajuanAplikasi(event)">
+          
+          <!-- LAYAR 1: Identitas & Pilihan Aplikasi (Wajib & Selalu Tampil) -->
+          <div class="wizard-step active" id="step1">
+            <div class="form-grid">
+              
+              <div class="form-group">
+                <label class="form-label" for="reqNamaOwner">
+                  Nama Anda / Penanggung Jawab <span class="req">*</span>
+                </label>
+                <input type="text" id="reqNamaOwner" class="form-input" placeholder="Nama lengkap Anda" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reqWaOwner">
+                  Nomor WhatsApp Aktif <span class="req">*</span>
+                </label>
+                <input type="tel" id="reqWaOwner" class="form-input" placeholder="Contoh: 081234567890" required>
+                <span class="form-helper">Digunakan untuk akses akun, pengiriman draf, & koordinasi demo.</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reqNamaToko">
+                  Nama Usaha / Perusahaan <span class="req">*</span>
+                </label>
+                <input type="text" id="reqNamaToko" class="form-input" placeholder="Contoh: Berkah Rent Car / Kafe Senja" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reqKota">
+                  Kota Operasional Usaha
+                </label>
+                <input type="text" id="reqKota" class="form-input" placeholder="Contoh: Surakarta, Jakarta, Surabaya">
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label" for="reqJenisAplikasi">
+                  Pilih Kebutuhan Aplikasi <span class="req">*</span>
+                </label>
+                <select id="reqJenisAplikasi" class="form-select" required onchange="gantiKategoriAplikasi()">
+                  <option value="CS WhatsApp AI Commerce">AutoClary WA Commerce & CS AI 24 Jam (Gratis 1.000 Pesan/Bulan)</option>
+                  <option value="RentalKita - Rental Kendaraan">RentalKita — Sistem Operasional Rental Mobil & Motor</option>
+                  <option value="KasirKilat POS & Stok">KasirKilat POS — Kasir Cepat & Manajemen Stok Ritel</option>
+                  <option value="Pantala Operasional & Keuangan">Pantala — Operasional & Shift Kafe</option>
+                  <option value="Solusi Kustom / Buat Aplikasi Baru" selected>[Request Baru] Rancang Bangun Aplikasi Kustom Khusus (Spesifikasi Terpandu)</option>
+                </select>
+              </div>
+
+              <!-- Input ringkas hanya untuk aplikasi standar (bila bukan custom) -->
+              <div class="form-group full-width" id="boxKebutuhanStandar" style="display: none;">
+                <label class="form-label" for="reqPesanKebutuhanStandar">Catatan Tambahan untuk Tim</label>
+                <textarea id="reqPesanKebutuhanStandar" class="form-textarea" placeholder="Tuliskan catatan khusus atau pertanyaan Anda mengenai aplikasi yang dipilih..."></textarea>
+              </div>
+
+            </div>
+
+            <!-- Tombol Layar 1 -->
+            <div id="btnBoxLayar1Standar" style="display: none;">
+              <button type="submit" class="btn-submit">
+                <span>Kirim Permohonan & Jadwalkan Demo</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+
+            <div id="btnBoxLayar1Custom" class="wizard-nav-btns">
+              <button type="button" class="btn-submit" onclick="pindahLayar(2)">
+                <span>Lanjut ke Masalah & Target (Langkah 2)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LAYAR 2: Masalah & Kriteria Berhasil (Custom App) -->
+          <div class="wizard-step" id="step2">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 2: Masalah yang Ingin Diselesaikan & Target Sukses
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Ceritakan kendala nyata di lapangan agar tim arsitek kami paham titik kritis alur kerja Anda.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" for="reqMasalahUtama">
+                Apa kendala operasional yang paling melelahkan atau merugikan saat ini? <span class="req">*</span>
+              </label>
+              <textarea id="reqMasalahUtama" class="form-textarea" placeholder="Contoh: Jadwal sewa mobil sering bentrok saat ramai; atau uang setoran kasir kafe sering selisih ratusan ribu per minggu karena hitungan manual nota kertas."></textarea>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" for="reqKriteriaSukses">
+                Setelah aplikasi ini jadi dan dipakai, apa tanda yang membuat Anda puas bilang "berhasil"?
+              </label>
+              <input type="text" id="reqKriteriaSukses" class="form-input" placeholder="Contoh: Selisih kas Rp 0, booking tidak pernah tabrakan, atau nota langsung terkirim otomatis ke WA pelanggan.">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reqUrgensi">Seberapa mendesak kebutuhan aplikasi ini?</label>
+              <select id="reqUrgensi" class="form-select">
+                <option value="Secepatnya (< 2 minggu)">Secepatnya (Target mulai dalam 2 minggu)</option>
+                <option value="Bulan Depan (1-2 bulan)" selected>Bulan Depan (Persiapan 1–2 bulan ke depan)</option>
+                <option value="Hanya menjajaki opsi">Hanya menjajaki opsi & mengumpulkan perkiraan biaya</option>
+              </select>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(1)" style="flex: 1;">Kembali</button>
+              <button type="button" class="btn-submit" onclick="pindahLayar(3)" style="flex: 2;">
+                <span>Lanjut ke Alur Transaksi (Langkah 3)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LAYAR 3: Cerita Satu Alur Transaksi & Baseline -->
+          <div class="wizard-step" id="step3">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 3: Cerita Satu Transaksi dari Awal sampai Selesai
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Klien tidak perlu tahu istilah teknis database. Cukup ceritakan urutan kejadiannya secara wajar.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" for="reqAlurTransaksi">
+                Ceritakan SATU alur transaksi biasa: Siapa melakukan apa, mencatat di mana, sampai uang masuk? <span class="req">*</span>
+              </label>
+              <textarea id="reqAlurTransaksi" class="form-textarea" style="min-height: 120px;" placeholder="Contoh alur:
+1. Pelanggan chat WA tanya ketersediaan unit untuk tanggal 12-14.
+2. Admin cek jadwal, minta foto KTP & DP 30%.
+3. Saat serah terima kunci, staf lapangan cetak nota & terima sisa pelunasan tunai/transfer.
+4. Malam hari pemilik menerima rekap uang sewa hari itu."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Kondisi pencatatan usaha Anda saat ini:</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile">
+                  <input type="radio" name="baselineSistem" value="Manual buku tulis / nota kertas fisik" checked>
+                  <span>Manual buku tulis / nota kertas</span>
+                </label>
+                <label class="checkbox-tile">
+                  <input type="radio" name="baselineSistem" value="Spreadsheet Excel / Google Sheets">
+                  <span>Excel / Google Sheets</span>
+                </label>
+                <label class="checkbox-tile">
+                  <input type="radio" name="baselineSistem" value="Sudah ada aplikasi lama tapi kurang cocok">
+                  <span>Aplikasi lama (ingin diganti)</span>
+                </label>
+                <label class="checkbox-tile">
+                  <input type="radio" name="baselineSistem" value="Usaha baru sedang persiapan buka">
+                  <span>Usaha baru persiapan buka</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(2)" style="flex: 1;">Kembali</button>
+              <button type="button" class="btn-submit" onclick="pindahLayar(4)" style="flex: 2;">
+                <span>Lanjut ke Data & Aturan Hitung (Langkah 4)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LAYAR 4: Data yang Dicatat & Aturan Hitung Uang -->
+          <div class="wizard-step" id="step4">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 4: Apa yang Perlu Dicatat & Rumus Perhitungannya
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Pilih data yang wajib disimpan ke sistem dan bagaimana uang dihitung.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label">Data apa saja yang wajib dicatat di aplikasi? (Pilih yang relevan)</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Data Pelanggan & Kontak" checked><span>Data Pelanggan</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Daftar Produk / Menu / Armada" checked><span>Produk / Armada</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Inventori Stok Barang"><span>Stok Barang</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Jadwal Booking / Kalender Sewa" checked><span>Jadwal / Kalender</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Pembayaran & Bukti Transfer" checked><span>Pembayaran & Kas</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkData" value="Data Karyawan & Shift"><span>Karyawan & Shift</span></label>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="reqVolumeHarian">Perkiraan Transaksi per Hari</label>
+                <input type="text" id="reqVolumeHarian" class="form-input" placeholder="Contoh: 15–30 transaksi / hari">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="reqAturanHitung">Aturan Hitung Uang Khusus</label>
+                <input type="text" id="reqAturanHitung" class="form-input" placeholder="Contoh: Ada diskon sewa >3 hari, denda telat 50rb/jam, ada komisi supir 10%">
+              </div>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(3)" style="flex: 1;">Kembali</button>
+              <button type="button" class="btn-submit" onclick="pindahLayar(5)" style="flex: 2;">
+                <span>Lanjut ke Pengguna & Perangkat (Langkah 5)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LAYAR 5: Pengguna Sistem & Perangkat -->
+          <div class="wizard-step" id="step5">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 5: Siapa Saja yang Menggunakan Sistem
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Menentukan hak akses dan jenis gawai yang dipakai staf Anda di lokasi.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label">Peran Pengguna (Siapa saja yang akan login?)</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile"><input type="checkbox" name="chkUser" value="Pemilik / Owner (Lihat Semua)" checked><span>Pemilik Toko</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkUser" value="Manajer / Supervisor"><span>Manajer / Pengawas</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkUser" value="Kasir / Staf Operasional" checked><span>Kasir / Staf Lokasi</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkUser" value="Kurir / Driver Lapangan"><span>Kurir / Driver</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkUser" value="Pelanggan Luar (Portal Sewa Mandiri)"><span>Pelanggan (Portal Web)</span></label>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="reqPerangkat">Perangkat Utama yang Dipakai</label>
+                <select id="reqPerangkat" class="form-select">
+                  <option value="HP Android & iPhone (Mobile Web)" selected>HP Android / iPhone (Akses Mobile Ringan)</option>
+                  <option value="Laptop / Komputer Kasir Desktop">Laptop / PC Komputer Kasir</option>
+                  <option value="Tablet Layar Sentuh">Tablet Android / iPad</option>
+                  <option value="Kombinasi Semua Perangkat">Kombinasi Semua Gawai</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="reqCabang">Jumlah Cabang Operasional</label>
+                <select id="reqCabang" class="form-select">
+                  <option value="1 Lokasi / Toko Tunggal" selected>1 Lokasi / Toko Tunggal</option>
+                  <option value="2–5 Cabang Terpadu">2–5 Cabang (Multi-Outlet)</option>
+                  <option value="Lebih dari 5 Cabang">> 5 Cabang</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(4)" style="flex: 1;">Kembali</button>
+              <button type="button" class="btn-submit" onclick="pindahLayar(6)" style="flex: 2;">
+                <span>Lanjut ke Dokumen & Integrasi (Langkah 6)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LAYAR 6: Dokumen Keluaran & Integrasi Khusus -->
+          <div class="wizard-step" id="step6">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 6: Dokumen Keluaran & Integrasi Pihak Ketiga
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Beri tanda pada hasil cetak dan sambungan otomatis yang Anda butuhkan.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label">Dokumen yang Harus Bisa Dihasilkan Sistem:</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile"><input type="checkbox" name="chkDoc" value="Nota Struk Thermal 58/80mm" checked><span>Struk Nota Thermal</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkDoc" value="Surat Kontrak / Perjanjian Sewa Digital" checked><span>Kontrak Digital</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkDoc" value="Laporan Rekap Kas Harian" checked><span>Laporan Kas Harian</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkDoc" value="Laporan Laba Rugi"><span>Laba Rugi</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkDoc" value="Ekspor ke Excel / Spreadsheet" checked><span>Ekspor Excel (.xlsx)</span></label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Integrasi Otomatis yang Diinginkan:</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile"><input type="checkbox" name="chkInt" value="Notifikasi WhatsApp Otomatis ke Pembeli" checked><span>WhatsApp Otomatis</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkInt" value="Pembayaran QRIS Dinamis & VA Bank"><span>QRIS Otomatis</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkInt" value="Pelacakan Peta Lokasi / GPS Unit"><span>GPS Tracking Armada</span></label>
+                <label class="checkbox-tile"><input type="checkbox" name="chkInt" value="Impor Data Lama dari Excel"><span>Pindah Data Lama</span></label>
+              </div>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(5)" style="flex: 1;">Kembali</button>
+              <button type="button" class="btn-submit" onclick="pindahLayar(7)" style="flex: 2;">
+                <span>Lanjut ke Prioritas & Anggaran (Langkah 7 Terakhir)</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LAYAR 7: Prioritas, Rentang Anggaran, Termin Pembayaran & Jadwal -->
+          <div class="wizard-step" id="step7">
+            <h4 style="font-family: 'Outfit', sans-serif; font-size: 18px; color: #fff; margin-bottom: 6px;">
+              Langkah 7 Terakhir: Prioritas Fitur & Rencana Pelaksanaan
+            </h4>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 20px;">
+              Langkah penutup untuk menentukan prioritas rilis awal dan jadwal diskusi singkat.
+            </p>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" for="reqFiturPrioritas">
+                3 Fitur Paling Wajib Ada di Peluncuran Awal (Must-Have) <span class="req">*</span>
+              </label>
+              <input type="text" id="reqFiturPrioritas" class="form-input" placeholder="Contoh: 1. Kalender jadwal sewa, 2. Cetak nota, 3. Rekap kas masuk harian" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label">Perkiraan Alokasi Anggaran Investasi Sistem:</label>
+              <div class="checkbox-tile-grid">
+                <label class="checkbox-tile"><input type="radio" name="radAnggaran" value="Di bawah Rp 3 Juta"><span>Di bawah Rp 3 Juta</span></label>
+                <label class="checkbox-tile"><input type="radio" name="radAnggaran" value="Rp 3 Juta – Rp 10 Juta" checked><span>Rp 3 – 10 Juta</span></label>
+                <label class="checkbox-tile"><input type="radio" name="radAnggaran" value="Rp 10 Juta – Rp 25 Juta"><span>Rp 10 – 25 Juta</span></label>
+                <label class="checkbox-tile"><input type="radio" name="radAnggaran" value="Butuh Diskusi Estimasi Tim"><span>Butuh Estimasi Tim</span></label>
+              </div>
+            </div>
+
+            <!-- Ketetapan Kebijakan Termin Pembayaran Kanon Bapak -->
+            <div class="info-callout-box">
+              <strong style="color: var(--cyan); display: block; margin-bottom: 4px;">Skema Pembayaran Transparan & Terpercaya:</strong>
+              Ya, kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.
+            </div>
+
+            <div class="form-group" style="margin-bottom: 18px;">
+              <label class="form-label" for="reqJadwalKonsultasi">Waktu yang Nyaman untuk Diskusi Singkat 15-20 Menit:</label>
+              <select id="reqJadwalKonsultasi" class="form-select">
+                <option value="Hari ini / Besok Pagi (09.00 - 12.00 WIB)" selected>Pagi Hari (09.00 – 12.00 WIB)</option>
+                <option value="Siang Hari (13.00 - 17.00 WIB)">Siang Hari (13.00 – 17.00 WIB)</option>
+                <option value="Malam Hari (19.00 - 21.00 WIB)">Malam Hari (19.00 – 21.00 WIB)</option>
+                <option value="Fleksibel via Chat WhatsApp">Fleksibel via Chat WhatsApp Kapan Saja</option>
+              </select>
+            </div>
+
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn-outline" onclick="pindahLayar(6)" style="flex: 1;">Kembali</button>
+              <button type="submit" id="btnSubmitFinal" class="btn-submit" style="flex: 2;">
+                <span>Kirim Spesifikasi Kustom & Jadwalkan Konsultasi</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <div id="statusAlertBox" class="status-alert">
+          <div id="statusAlertTeks"></div>
+          <div id="statusAlertAksi" style="margin-top: 14px;"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Simulator CS WA (Interactive Showcase) -->
+  <section id="demo-wa" class="section" style="background: #020611; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="section-container">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        Pratinjau Interaktif
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 44px); margin-bottom: 12px;">
+        Coba Kecerdasan CS WhatsApp AI
+      </h2>
+      <p class="sub-headline">
+        Klik opsi di bawah untuk melihat bagaimana CS AI membalas otomatis dengan nada ramah layaknya staf profesional.
+      </p>
+
+      <div class="simulator-container">
+        <div class="sim-header">
+          <div class="sim-avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <div>
+            <div class="sim-header-name">AutoClary Assistant</div>
+            <div class="sim-header-status">Online 24 Jam (AI Otomatis)</div>
+          </div>
+        </div>
+
+        <div class="sim-body" id="simChatBody">
+          <div class="chat-bubble chat-bot">
+            Halo! Selamat datang di AutoClary Store. Ada yang bisa kami bantu seputar produk atau layanan hari ini?
+          </div>
+        </div>
+
+        <div class="sim-quick-replies">
+          <button class="sim-chip" onclick="kirimSimulasiPesan('Apakah produk Kopi Arabika 250gr masih ready stok kak?')">Tanya Stok</button>
+          <button class="sim-chip" onclick="kirimSimulasiPesan('Saya mau sewa mobil Innova untuk besok lusa 2 hari, ada?')">Tanya Sewa Mobil</button>
+          <button class="sim-chip" onclick="kirimSimulasiPesan('Saya sudah transfer BCA Rp 175.000, ini buktinya.')">Kirim Bukti Transfer</button>
+          <button class="sim-chip" onclick="kirimSimulasiPesan('Bisa minta disambungkan ke staf manusia / owner?')">Bicara ke Staf</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Artikel & Direktori UMKM -->
+  <section id="artikel" class="section" style="background: #020611; border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+    <div class="section-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        Edukasi & Direktori Publik
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 44px); margin-bottom: 12px;">
+        Artikel & Direktori UMKM Pilihan
+      </h2>
+      <p class="sub-headline" style="max-width: 650px; margin-bottom: 48px;">
+        Kurasi independen dan panduan operasional bisnis kagem menolong pengusaha lokal dan mempermudah calon pelanggan menemukan layanan terpercaya.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; width: 100%; text-align: left;">
+        
+        <!-- Card 1: Direktori Jogja -->
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s;">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+              <span style="background: rgba(0, 210, 180, 0.12); color: var(--cyan); padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;">Direktori Transportasi</span>
+              <span style="color: var(--text-dim); font-size: 12px;">10 Rental Terpilih</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4;">
+              10 Rental Mobil Jogja Lepas Kunci Murah & Terpercaya (Alamat & WhatsApp)
+            </h3>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+              Panduan lengkap sewa mobil 24 jam di Yogyakarta dekat Stasiun Tugu & Bandara YIA kagem wisatawan dan dinas. Dilengkapi kontak WhatsApp langsung.
+            </p>
+          </div>
+          <a href="/rental-mobil-jogja.html" style="color: var(--cyan); font-weight: 700; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            Buka Direktori Jogja &rarr;
+          </a>
+        </div>
+
+        <!-- Card 2: Direktori Solo -->
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s;">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+              <span style="background: rgba(56, 189, 248, 0.12); color: var(--blue); padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;">Direktori Transportasi</span>
+              <span style="color: var(--text-dim); font-size: 12px;">10 Rental Terpilih</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4;">
+              10 Rental Mobil Solo Murah Antar Stasiun Balapan (Alamat & WhatsApp)
+            </h3>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+              Daftar rental mobil Surakarta lepas kunci dan paket sopir ramah kagem perjalanan keluarga, wisata kuliner, hingga trip Tawangmangu.
+            </p>
+          </div>
+          <a href="/rental-mobil-solo.html" style="color: var(--blue); font-weight: 700; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            Buka Direktori Solo &rarr;
+          </a>
+        </div>
+
+        <!-- Card 3: Direktori Bali -->
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s;">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+              <span style="background: rgba(245, 158, 11, 0.12); color: var(--amber); padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;">Direktori Transportasi</span>
+              <span style="color: var(--text-dim); font-size: 12px;">10 Rental Terpilih</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4;">
+              10 Rental Mobil Bali Dekat Bandara Ngurah Rai (Kuta & Denpasar)
+            </h3>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+              Rekomendasi rental mobil matic irit & mobil keluarga berfasilitas antar-jemput bandara Ngurah Rai tanpa repot antre taksi.
+            </p>
+          </div>
+          <a href="/rental-mobil-bali.html" style="color: var(--amber); font-weight: 700; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            Buka Direktori Bali &rarr;
+          </a>
+        </div>
+
+        <!-- Card 4: Studi Kasus Pantala -->
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s;">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+              <span style="background: rgba(129, 140, 248, 0.12); color: var(--purple); padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;">Studi Kasus Lapangan</span>
+              <span style="color: var(--text-dim); font-size: 12px;">Studi Nyata</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4;">
+              Pantala: Sistem Operasional & Shift Kafe Mandiri Tanpa Operator
+            </h3>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+              Buku bukti lapangan implementasi nyata sistem parkir kafe di Pekalongan. Menghitung kendaraan via kamera, merangkul juru parkir lokal, dan mencegah kebocoran setoran malam.
+            </p>
+          </div>
+          <a href="/pantala.html" style="color: var(--purple); font-weight: 700; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            Baca Studi Kasus Pantala &rarr;
+          </a>
+        </div>
+
+        <!-- Card 5: RentalKita SaaS -->
+        <div style="background: var(--bg-card); border: 1px solid var(--card-border); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s;">
+          <div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+              <span style="background: rgba(16, 185, 129, 0.12); color: #10b981; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;">Solusi SaaS Armada</span>
+              <span style="color: var(--text-dim); font-size: 12px;">SaaS Teruji</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.4;">
+              RentalKita: Solusi Cerdas Mencegah Bentrok Jadwal & Sengketa Lecet Armada
+            </h3>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+              Bagaimana pemilik rental mobil & motor mengamankan bisnis mereka dengan sistem kalender terpadu, screening KTP online, dan nota digital resmi WhatsApp.
+            </p>
+          </div>
+          <a href="/rentalkita.html" style="color: #10b981; font-weight: 700; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            Pelajari Sistem RentalKita &rarr;
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: FAQ -->
+  <section id="faq" class="section">
+    <div class="section-container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <div class="badge-pill">
+        <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        Pertanyaan Umum
+      </div>
+
+      <h2 class="headline" style="font-size: clamp(28px, 3.8vw, 44px); margin-bottom: 12px;">
+        Pertanyaan yang Sering Diajukan
+      </h2>
+      <p class="sub-headline">
+        Hal-hal penting yang perlu Anda ketahui mengenai aplikasi dan layanan AutoClaryTech.
+      </p>
+
+      <div class="faq-grid">
+        <div class="faq-card">
+          <h4>Berapa kuota gratis untuk CS WhatsApp AI?</h4>
+          <p>Kami menyediakan kuota gratis sebanyak <strong>1.000 pesan per bulan</strong> (mengikuti batas tier resmi gateway Fonnte). Kuota ini sudah sangat memadai kagem operasional harian toko UMKM tanpa biaya langganan awal.</p>
+        </div>
+
+        <div class="faq-card">
+          <h4>Bisakah saya request aplikasi yang belum ada di katalog?</h4>
+          <p>Tentu bisa. Pilih opsi <strong>[Request Baru] Rancang Bangun Aplikasi Kustom</strong> pada form permohonan. Tim engineer kami akan menganalisis alur kerja Anda dan merancang sistem yang pas.</p>
+        </div>
+
+        <div class="faq-card">
+          <h4>Bagaimana skema pembayaran dan langganan untuk pembuatan aplikasi kustom?</h4>
+          <p>Ya, kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.</p>
+        </div>
+
+        <div class="faq-card">
+          <h4>Apakah nomor WhatsApp pribadi saya aman dari blokir?</h4>
+          <p>Sistem kami mematuhi batas kecepatan pengiriman (rate limiting) resmi dan menolak metode blast massal acak. Bot hanya membalas pesan masuk dari pelanggan yang menghubungi toko Anda.</p>
+        </div>
+
+        <div class="faq-card">
+          <h4>Bagaimana integrasi dengan sistem usaha saya yang sudah ada?</h4>
+          <p>Aplikasi kami mendukung integrasi via webhook dan REST API. Kami dapat menghubungkannya dengan database lama, Google Sheets, maupun spreadsheet pembukuan yang telah Anda gunakan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div style="display: flex; flex-direction: column; gap: 6px; text-align: left;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" style="height: 26px; width: 26px; object-fit: contain;">
+          <span style="font-family: 'Outfit', sans-serif; font-weight: 700; color: #fff; font-size: 16px;">AutoClaryTech</span>
+        </div>
+        <div style="color: var(--cyan); font-weight: 600;">Your Simple, Reliable Partner</div><div>Ekosistem Solusi Perangkat Lunak & Otomasi Operasional Bisnis</div>
+      </div>
+
+      <div class="footer-links" style="margin-bottom: 12px;">
+        <span style="color: #cbd5e1; font-weight: 700; margin-right: 8px;">Direktori Rental Kota:</span>
+        <a href="/rental-mobil-bandung.html" style="color: var(--cyan); font-weight: 600;">Rental Mobil Bandung</a> &bull;
+        <a href="/rental-mobil-jogja.html">Rental Mobil Yogyakarta</a> &bull;
+        <a href="/rental-mobil-solo.html">Rental Mobil Solo</a> &bull;
+        <a href="/rental-mobil-bali.html">Rental Mobil Bali</a>
+      </div>
+      <div class="footer-links">
+        <a href="#katalog-aplikasi">Katalog Aplikasi</a>
+        <a href="#artikel">Artikel & Direktori</a>
+        <a href="pantala.html">Pantala (Kafe)</a>
+        <a href="rentalkita.html">RentalKita</a>
+        <a href="rental-mobil-jogja.html">Direktori Jogja</a>
+        <a href="rental-mobil-solo.html">Direktori Solo</a>
+        <a href="rental-mobil-bali.html">Direktori Bali</a>
+        <a href="#request-aplikasi">Request Aplikasi</a>
+        <a href="https://wa.me/6285727240341" target="_blank">Kontak WhatsApp</a>
+      </div>
+
+      <div>
+        &copy; 2026 AutoClaryTech. Seluruh hak cipta dilindungi.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactivity Scripts -->
+  <script>
+    // Inisialisasi tampilan wizard saat halaman selesai dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+      gantiKategoriAplikasi();
+    });
+
+    // Beralih antara mode Aplikasi Standar dan Wizard 7 Layar Kustom
+    function gantiKategoriAplikasi() {
+      const selectEl = document.getElementById('reqJenisAplikasi');
+      const val = selectEl ? selectEl.value : '';
+      const isCustom = val.includes('Kustom') || val.includes('Request Baru');
+
+      const wizardHeader = document.getElementById('wizardHeader');
+      const boxStandar = document.getElementById('boxKebutuhanStandar');
+      const btnStandar = document.getElementById('btnBoxLayar1Standar');
+      const btnCustom = document.getElementById('btnBoxLayar1Custom');
+
+      if (isCustom) {
+        if (wizardHeader) wizardHeader.style.display = 'block';
+        if (boxStandar) boxStandar.style.display = 'none';
+        if (btnStandar) btnStandar.style.display = 'none';
+        if (btnCustom) btnCustom.style.display = 'flex';
+        pindahLayar(1);
+      } else {
+        if (wizardHeader) wizardHeader.style.display = 'none';
+        if (boxStandar) boxStandar.style.display = 'block';
+        if (btnStandar) btnStandar.style.display = 'block';
+        if (btnCustom) btnCustom.style.display = 'none';
+        // Pastikan hanya layar 1 yang aktif
+        for (let i = 2; i <= 7; i++) {
+          const stepEl = document.getElementById('step' + i);
+          if (stepEl) stepEl.classList.remove('active');
+        }
+        const step1 = document.getElementById('step1');
+        if (step1) step1.classList.add('active');
+        perbaruiPanduanKebutuhan();
+      }
+    }
+
+    // Navigasi Antar-Layar Wizard (1 sampai 7)
+    function pindahLayar(targetLayar) {
+      // Validasi wajib untuk Layar 1 sebelum maju ke Layar 2
+      if (targetLayar > 1) {
+        const nama = document.getElementById('reqNamaOwner').value.trim();
+        const wa = document.getElementById('reqWaOwner').value.trim();
+        const usaha = document.getElementById('reqNamaToko').value.trim();
+        if (!nama || !wa || !usaha) {
+          alert('Mohon lengkapi Nama Anda, Nomor WhatsApp, dan Nama Usaha terlebih dahulu.');
+          targetLayar = 1;
+        }
+      }
+
+      // Atur class active pada step
+      for (let i = 1; i <= 7; i++) {
+        const stepEl = document.getElementById('step' + i);
+        if (stepEl) {
+          if (i === targetLayar) {
+            stepEl.classList.add('active');
+          } else {
+            stepEl.classList.remove('active');
+          }
+        }
+      }
+
+      // Judul dan persentase progress bar
+      const judulLayar = [
+        "",
+        "Langkah 1 dari 7: Identitas & Pilihan Solusi",
+        "Langkah 2 dari 7: Masalah Nyata & Kriteria Berhasil",
+        "Langkah 3 dari 7: Alur Transaksi & Baseline Sistem",
+        "Langkah 4 dari 7: Entitas Data & Logika Hitung",
+        "Langkah 5 dari 7: Hak Akses Pengguna & Perangkat",
+        "Langkah 6 dari 7: Dokumen Cetak & Integrasi Pihak Ketiga",
+        "Langkah 7 Terakhir: Prioritas, Anggaran, & Skema Pembayaran"
+      ];
+
+      const persenLayar = [0, 15, 30, 45, 60, 75, 90, 100];
+
+      const stepTitleEl = document.getElementById('wizardStepTitle');
+      const progressLabelEl = document.getElementById('wizardProgressLabel');
+      const progressFillEl = document.getElementById('wizardProgressFill');
+
+      if (stepTitleEl) stepTitleEl.innerText = judulLayar[targetLayar] || `Langkah ${targetLayar} dari 7`;
+      if (progressLabelEl) progressLabelEl.innerHTML = `Kelengkapan <strong>${persenLayar[targetLayar]}%</strong>`;
+      if (progressFillEl) progressFillEl.style.width = persenLayar[targetLayar] + '%';
+
+      // Scroll halus ke kartu formulir
+      const formWrapper = document.querySelector('.form-wrapper');
+      if (formWrapper) {
+        formWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Pilih aplikasi langsung dari kartu katalog ke dropdown form
+    function pilihAplikasiForm(namaAplikasi) {
+      const selectEl = document.getElementById('reqJenisAplikasi');
+      if (selectEl) {
+        let matched = false;
+        for (let i = 0; i < selectEl.options.length; i++) {
+          if (selectEl.options[i].value.toLowerCase().includes(namaAplikasi.toLowerCase()) || 
+              namaAplikasi.toLowerCase().includes(selectEl.options[i].value.toLowerCase())) {
+            selectEl.selectedIndex = i;
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          selectEl.value = 'Solusi Kustom / Buat Aplikasi Baru';
+        }
+        gantiKategoriAplikasi();
+      }
+      
+      const formTarget = document.getElementById('request-aplikasi');
+      if (formTarget) {
+        formTarget.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Ubah placeholder textarea sesuai opsi aplikasi yang dipilih
+    function perbaruiPanduanKebutuhan() {
+      const selectVal = document.getElementById('reqJenisAplikasi').value;
+      const textarea = document.getElementById('reqPesanKebutuhan');
+      const helper = document.getElementById('helperKebutuhan');
+
+      if (selectVal.includes('CS WhatsApp')) {
+        textarea.placeholder = 'Contoh: Saya menjual busana muslim online, butuh bot untuk menjawab varian ukuran, warna, cek ongkir, dan konfirmasi transfer bank otomatis.';
+        helper.innerText = 'Tuliskan jenis produk dan kebutuhan tanya-jawab pelanggan toko Anda.';
+      } else if (selectVal.includes('RentalKita')) {
+        textarea.placeholder = 'Contoh: Saya memiliki rental mobil dengan 12 armada di Solo. Butuh jadwal visual anti-bentrok, cetak nota thermal saat serah terima kunci, dan proteksi blacklist penyewa.';
+        helper.innerText = 'Sebutkan jumlah armada dan tantangan operasional yang sering dialami.';
+      } else if (selectVal.includes('KasirKilat')) {
+        textarea.placeholder = 'Contoh: Kafe kami memiliki 2 kasir dan 150 menu. Butuh kasir layar sentuh cepat, cetak nota dapur, dan pantau stok bahan baku harian.';
+        helper.innerText = 'Sebutkan jenis ritel/resto dan jumlah transaksi harian rata-rata.';
+      } else if (selectVal.includes('Pantala')) {
+        textarea.placeholder = 'Contoh: Kami punya 3 cabang toko di kota berbeda. Ingin satu dashboard untuk memonitor arus kas harian dan persetujuan pengeluaran operasional.';
+        helper.innerText = 'Sebutkan jumlah outlet dan sistem pembukuan yang saat ini dipakai.';
+      } else {
+        textarea.placeholder = 'Ceritakan alur kerja sistem impian Anda: apa saja fitur yang dibutuhkan, siapa yang akan menggunakannya, dan kendala manual apa yang ingin Anda selesaikan.';
+        helper.innerText = 'Jelaskan sedetail mungkin agar tim kami dapat merancang arsitektur yang presisi.';
+      }
+    }
+
+    // Tangani Submit Form Request Aplikasi (Universal & Wizard Kustom)
+    async function tanganiPengajuanAplikasi(event) {
+      event.preventDefault();
+      
+      const btnStandar = document.querySelector('#btnBoxLayar1Standar button');
+      const btnFinal = document.getElementById('btnSubmitFinal');
+      const btnActive = btnFinal || btnStandar;
+      
+      const alertBox = document.getElementById('statusAlertBox');
+      const alertTeks = document.getElementById('statusAlertTeks');
+      const alertAksi = document.getElementById('statusAlertAksi');
+
+      // Ambil nilai Layar 1 (Wajib)
+      const namaOwner = (document.getElementById('reqNamaOwner') ? document.getElementById('reqNamaOwner').value : '').trim();
+      const waOwner = (document.getElementById('reqWaOwner') ? document.getElementById('reqWaOwner').value : '').trim();
+      const namaToko = (document.getElementById('reqNamaToko') ? document.getElementById('reqNamaToko').value : '').trim();
+      const kota = (document.getElementById('reqKota') ? document.getElementById('reqKota').value : '').trim();
+      const jenisAplikasi = document.getElementById('reqJenisAplikasi') ? document.getElementById('reqJenisAplikasi').value : '';
+      const isCustom = jenisAplikasi.includes('Kustom') || jenisAplikasi.includes('Request Baru');
+
+      if (!namaOwner || !waOwner || !namaToko) {
+        alert('Mohon lengkapi Nama Anda, Nomor WhatsApp, dan Nama Usaha.');
+        pindahLayar(1);
+        return;
+      }
+
+      // Ambil nilai Layar 2-7 jika Custom
+      let masalahUtama = '';
+      let alurTransaksi = '';
+      let kondisiSaatIni = '';
+      let dataDicatat = [];
+      let aturanHitung = '';
+      let penggunaSistem = [];
+      let perangkatPakai = '';
+      let dokumenKeluaran = [];
+      let integrasiWajib = [];
+      let fiturPrioritas = '';
+      let rentangAnggaran = '';
+      let jadwalKonsultasi = '';
+      let pesanKebutuhan = '';
+
+      if (isCustom) {
+        const elMasalah = document.getElementById('reqMasalahUtama');
+        const elKriteria = document.getElementById('reqKriteriaSukses');
+        const elUrgensi = document.getElementById('reqUrgensi');
+        masalahUtama = [
+          elMasalah ? elMasalah.value.trim() : '',
+          elKriteria ? 'Target Berhasil: ' + elKriteria.value.trim() : '',
+          elUrgensi ? 'Urgensi: ' + elUrgensi.value : ''
+        ].filter(Boolean).join(' | ');
+
+        const elAlur = document.getElementById('reqAlurTransaksi');
+        const elVolume = document.getElementById('reqVolumeHarian');
+        alurTransaksi = [
+          elAlur ? elAlur.value.trim() : '',
+          elVolume ? 'Volume Transaksi: ' + elVolume.value : ''
+        ].filter(Boolean).join(' | ');
+
+        const radBaseline = document.querySelector('input[name="baselineSistem"]:checked');
+        kondisiSaatIni = radBaseline ? radBaseline.value : '';
+
+        document.querySelectorAll('input[name="chkData"]:checked').forEach(cb => dataDicatat.push(cb.value));
+        const elAturan = document.getElementById('reqAturanHitung');
+        aturanHitung = elAturan ? elAturan.value.trim() : '';
+
+        document.querySelectorAll('input[name="chkUser"]:checked').forEach(cb => penggunaSistem.push(cb.value));
+        const elPerangkat = document.getElementById('reqPerangkat');
+        const elCabang = document.getElementById('reqCabang');
+        perangkatPakai = [
+          elPerangkat ? elPerangkat.value : '',
+          elCabang ? 'Jangkauan: ' + elCabang.value : ''
+        ].filter(Boolean).join(' | ');
+
+        document.querySelectorAll('input[name="chkDoc"]:checked').forEach(cb => dokumenKeluaran.push(cb.value));
+        document.querySelectorAll('input[name="chkInteg"]:checked').forEach(cb => integrasiWajib.push(cb.value));
+
+        const elPrioritas = document.getElementById('reqFiturPrioritas');
+        fiturPrioritas = elPrioritas ? elPrioritas.value.trim() : '';
+
+        const radBudget = document.querySelector('input[name="radAnggaran"]:checked');
+        rentangAnggaran = radBudget ? radBudget.value : 'Butuh Diskusi Estimasi Tim';
+
+        const elJadwal = document.getElementById('reqJadwalKonsultasi');
+        jadwalKonsultasi = elJadwal ? elJadwal.value : 'Fleksibel';
+
+        pesanKebutuhan = `[Aplikasi Kustom]
+Masalah: ${masalahUtama}
+Alur: ${alurTransaksi}
+Anggaran: ${rentangAnggaran}`;
+      } else {
+        const elStandar = document.getElementById('reqPesanKebutuhanStandar');
+        pesanKebutuhan = elStandar ? elStandar.value.trim() : '';
+      }
+
+      if (btnActive) {
+        btnActive.disabled = true;
+        btnActive.innerHTML = '<span>Sedang Memproses Permohonan...</span>';
+      }
+      alertBox.style.display = 'none';
+
+      // Ringkasan untuk teks WhatsApp cepat
+      let waTextRaw = `Halo AutoClaryTech, saya ${namaOwner} dari ${namaToko}${kota ? ' (' + kota + ')' : ''}.
+
+Saya mengajukan: *${jenisAplikasi}*`;
+      if (isCustom) {
+        waTextRaw += `
+- Masalah Utama: ${masalahUtama || '-'}
+- Estimasi Anggaran: ${rentangAnggaran}
+- Alur Singkat: ${alurTransaksi.slice(0, 160)}...`;
+      } else if (pesanKebutuhan) {
+        waTextRaw += `
+- Catatan Kebutuhan: ${pesanKebutuhan}`;
+      }
+      const waLink = 'https://wa.me/6285727240341?text=' + encodeURIComponent(waTextRaw);
+
+      try {
+        const resp = await fetch('/api/daftar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            namaOwner,
+            waOwner,
+            namaToko,
+            kota,
+            jenisAplikasi,
+            pesanKebutuhan,
+            kategori: isCustom ? 'Request-Kustom' : 'Request-Universal',
+            masalahUtama,
+            alurTransaksi,
+            kondisiSaatIni,
+            dataDicatat,
+            aturanHitung,
+            penggunaSistem,
+            perangkatPakai,
+            dokumenKeluaran,
+            integrasiWajib,
+            fiturPrioritas,
+            rentangAnggaran,
+            jadwalKonsultasi
+          })
+        });
+
+        if (!resp.ok) { throw new Error('penyimpanan gagal: ' + resp.status); }
+        alertBox.className = 'status-alert success';
+        alertTeks.innerHTML = `
+          <strong style="font-size: 16px; color: #4ade80; display: block; margin-bottom: 8px;">Permohonan Berhasil Dikirim!</strong>
+          Terima kasih, Bapak/Ibu <strong>${namaOwner}</strong>. Spesifikasi kebutuhan untuk <strong>${namaToko}</strong> telah tersimpan di sistem AutoClaryTech.<br><br>
+          <div style="background: rgba(0,229,255,0.08); border-left: 3px solid var(--cyan); padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 13.5px; color: #e2e8f0; line-height: 1.6;">
+            <strong style="color: var(--cyan); display: block; margin-bottom: 3px;">Ketetapan Pengerjaan & Termin:</strong>
+            Ya, kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.
+          </div>
+          Tim konsultan teknologi kami akan segera meninjau spesifikasi dan menghubungi WhatsApp <strong>${waOwner}</strong> untuk penjadwalan demonstrasi & penawaran resmi.
+        `;
+        alertAksi.innerHTML = `
+          <a href="${waLink}" target="_blank" class="btn-cta" style="display: inline-flex; font-size: 13.5px; padding: 10px 22px;">
+            Konfirmasi Cepat via WhatsApp Resmi (0857-2724-0341)
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        `;
+        alertBox.style.display = 'block';
+        alertBox.scrollIntoView({ behavior: 'smooth' });
+
+      } catch (err) {
+        alertBox.className = 'status-alert success';
+        alertTeks.innerHTML = `
+          <strong style="font-size: 16px; color: #4ade80; display: block; margin-bottom: 8px;">Permohonan Anda Telah Siap Diteruskan!</strong>
+          Spesifikasi kebutuhan aplikasi untuk <strong>${namaToko}</strong> telah siap di perangkat Anda.<br><br>
+          <div style="background: rgba(0,229,255,0.08); border-left: 3px solid var(--cyan); padding: 10px 14px; margin: 12px 0; border-radius: 4px; font-size: 13.5px; color: #e2e8f0; line-height: 1.6;">
+            <strong style="color: var(--cyan); display: block; margin-bottom: 3px;">Ketetapan Pengerjaan & Termin:</strong>
+            Ya, kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.
+          </div>
+          Silakan teruskan langsung ke konsultan resmi AutoClaryTech via tombol WhatsApp di bawah:
+        `;
+        alertAksi.innerHTML = `
+          <a href="${waLink}" target="_blank" class="btn-cta" style="display: inline-flex; font-size: 13.5px; padding: 10px 22px;">
+            Teruskan ke WhatsApp AutoClaryTech Sekarang
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        `;
+        alertBox.style.display = 'block';
+        alertBox.scrollIntoView({ behavior: 'smooth' });
+      } finally {
+        if (btnActive) {
+          btnActive.disabled = false;
+          btnActive.innerHTML = isCustom 
+            ? '<span>Kirim Spesifikasi Kustom & Jadwalkan Konsultasi</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>'
+            : '<span>Kirim Permohonan & Jadwalkan Demo</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+        }
+      }
+    }
+
+    // Interaktif Simulator CS WA
+    function kirimSimulasiPesan(teksPesan) {
+      const body = document.getElementById('simChatBody');
+      
+      const userBubble = document.createElement('div');
+      userBubble.className = 'chat-bubble chat-user';
+      userBubble.innerText = teksPesan;
+      body.appendChild(userBubble);
+      body.scrollTop = body.scrollHeight;
+
+      setTimeout(() => {
+        const botBubble = document.createElement('div');
+        botBubble.className = 'chat-bubble chat-bot';
+        
+        if (teksPesan.includes('Kopi Arabika')) {
+          botBubble.innerHTML = 'Halo Kak! Kopi Arabika 250gr masih ready stok (sisa 18 pack). Harga Rp 65.000/pack. Mau dikirim hari ini via GoSend atau kurir reguler kak?';
+        } else if (teksPesan.includes('Innova')) {
+          botBubble.innerHTML = 'Halo! Unit Grand New Innova Reborn untuk lusa tersedia ready 2 unit. Tarif lepas kunci Rp 450.000/24 jam. Mau kami simpankan slot jadwalnya kak?';
+        } else if (teksPesan.includes('transfer BCA')) {
+          botBubble.innerHTML = 'Terima kasih Kak! Struk transfer BCA Rp 175.000 berhasil diverifikasi otomatis oleh sistem. Nomor pesanan #ORD-9821 sedang diproses oleh tim gudang.';
+        } else {
+          botBubble.innerHTML = 'Baik Kak, pesan Anda telah diteruskan ke pemilik usaha / tim CS manusia kami. Staf kami akan segera membalas di jam operasional. Ada yang bisa kami catatkan terlebih dahulu?';
+        }
+
+        body.appendChild(botBubble);
+        body.scrollTop = body.scrollHeight;
+      }, 650);
+    }
+  </script>
+
+</body>
+</html>
