@@ -15,99 +15,121 @@
 <meta property="og:site_name" content="AutoClaryTech">
 <meta property="og:locale" content="id_ID">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
-<style>
-  :root{
-    --kertas:#f4efe6; --kertas2:#ebe4d6; --tinta:#1e1b16; --tinta2:#4a443a;
-    --hijau:#1f5a3b; --hijau-teks:#ffffff; --bata:#9a4420; --garis:#cfc5b2;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-tema="terang"]){
-      --kertas:#17140f; --kertas2:#211d16; --tinta:#f1ebdd; --tinta2:#c9bfab;
-      --hijau:#8fd1a8; --hijau-teks:#10231a; --bata:#f0a078; --garis:#3a3427;
-    }
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--kertas);color:var(--tinta);
-    font:17px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-  .bungkus{max-width:720px;margin:0 auto;padding:0 20px}
-  header{padding:18px 0;border-bottom:1px solid var(--garis)}
-  header .bungkus{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .merek{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
-  .merek img{width:34px;height:34px;display:block}
-  .merek small{display:block;font-weight:500;color:var(--tinta2);font-size:12.5px;letter-spacing:0}
-  .tombol{display:inline-block;background:var(--hijau);color:var(--hijau-teks);text-decoration:none;
-    font-weight:700;padding:12px 20px;border-radius:6px;min-height:44px}
-  .tombol:focus-visible,a:focus-visible{outline:3px solid var(--bata);outline-offset:3px}
-  .pembuka{padding:56px 0 40px}
-  .pembuka .cap{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--bata);font-weight:700}
-  h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:700;line-height:1.25;margin:0}
-  h1{font-size:clamp(30px,7vw,46px);margin:14px 0 18px}
-  .pembuka p{color:var(--tinta2);margin:0 0 22px;max-width:56ch}
-  section.bab{padding:52px 0;border-top:1px solid var(--garis)}
-  .nomor{font-family:Georgia,serif;font-size:64px;line-height:1;color:var(--bata);opacity:.9;margin-bottom:6px}
-  .label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta2);font-weight:700}
-  h2{font-size:clamp(24px,5.6vw,34px);margin:10px 0 18px}
-  .bab p{margin:0 0 14px;max-width:60ch}
-  .lampiran{margin:26px 0 8px;background:var(--kertas2);border:1px solid var(--garis);border-radius:8px;padding:12px}
-  .lampiran img{width:100%;height:auto;display:block;border-radius:4px}
-  .lampiran figcaption{font-size:14px;color:var(--tinta2);margin-top:10px}
-  .cap-bukti{display:inline-block;border:2px solid var(--hijau);color:var(--hijau);font-weight:800;
-    font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:3px;transform:rotate(-2deg);margin-bottom:10px}
-  .kasus{margin:0 0 6px;padding:0;list-style:none}
-  .kasus li{margin:0 0 22px;padding-left:16px;border-left:3px solid var(--hijau)}
-  .kasus b{display:block;margin-bottom:4px}
-  .maskot{margin:28px 0;border:2px dashed var(--garis);border-radius:10px;padding:26px 16px;text-align:center;color:var(--tinta2);font-size:14.5px}
-  blockquote.termin{margin:20px 0;padding:16px 18px;background:var(--kertas2);border-left:4px solid var(--bata);
-    font-family:Georgia,serif;font-size:18px;line-height:1.6}
-  .penutup{padding:56px 0 64px;border-top:1px solid var(--garis)}
-  footer{padding:22px 0 40px;border-top:1px solid var(--garis);color:var(--tinta2);font-size:14px}
-  .catatan-draf{background:var(--kertas2);border:1px dashed var(--bata);padding:12px 14px;font-size:14px;margin:22px 0;color:var(--tinta2)}
-  .langkah{margin:0;padding-left:22px}.langkah li{margin:0 0 10px;max-width:60ch}
-  .kaki a{color:inherit}
-  header .tombol{white-space:nowrap;padding:10px 16px}
-</style>
 <script src="/hitung.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/act-soft.css">
+<meta name="theme-color" content="#E4E9F2">
+<script src="/assets/act-soft.js" defer></script>
 </head>
 <body>
-<header><div class="bungkus">
-  <a href="/" class="merek" style="text-decoration:none;color:inherit">
-    <img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="34" height="34">
-    <span>AutoClaryTech<small>Your Simple, Reliable Partner</small></span>
-  </a>
-  <a class="tombol" href="#hitung">Hitung gratis</a>
-</div></header>
-
-<main class="bungkus">
-  <div class="pembuka">
-    <div class="cap">Desa wisata &amp; BUMDes &bull; Cek sendiri, gratis</div>
-    <h1>Pengunjung ramai, kas tetap tipis</h1>
-    <p>Akhir pekan, desa wisata Anda ramai. Mobil dan motor berjajar sampai jalan desa.</p><p>Karcis kertas disobek di loket. Uang masuk ke kotak.</p><p>Sore dihitung. Jumlah karcis tidak terasa sebanding dengan ramainya pengunjung tadi.</p><p>Tidak ada yang tahu pasti di mana bedanya: karcis tidak dirobek, rombongan masuk tanpa karcis, atau salah hitung.</p><p>Padahal dari kas itulah jalan desa diperbaiki, kebersihan dibayar, dan warga mendapat bagian.</p>
-    <a class="tombol" href="#hitung">Hitung sekarang</a>
+<nav class="nav" id="nav">
+  <div class="wadah">
+    <a href="/" class="merek" title="AutoClaryTech - Software Solusi UMKM">
+      <span class="merek-tanda"><img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="30" height="30"></span>
+      <span class="merek-kata">AUTOCLARY<em>TECH</em></span>
+    </a>
+    <div class="kapsul-menu" id="kapsulMenu"><a href="#hitung">Hitung gratis</a><a href="#cara">Tanpa alat</a><a href="#kenapa">Kenapa penting</a><a href="/#katalog-aplikasi">Katalog</a></div>
+    <div class="nav-aksi">
+      <a href="/#request-aplikasi" class="tombol tombol-utama tombol-kecil tombol-ajukan">Free Apps <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+      <button type="button" class="tombol tombol-menu" id="tombolMenu" aria-label="Buka menu" aria-expanded="false" aria-controls="kapsulMenu"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-menu"/></svg></button>
+    </div>
   </div>
+</nav>
 
-  <section class="bab" id="hitung">
-    <div data-hitung="desa"><noscript><p>Alat hitung ini memerlukan JavaScript. Anda tetap bisa menghitung dengan kertas memakai langkah di bawah.</p></noscript></div>
+<main>
+  <header class="hero ringkas">
+    <div class="wadah">
+      <div>
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-tiket"/></svg></span><span class="label-mono">Desa wisata & BUMDes • Cek sendiri, gratis</span></div>
+        <h1>Pengunjung ramai, kas tetap tipis</h1>
+        <div class="narasi"><p>Akhir pekan, desa wisata Anda ramai. Mobil dan motor berjajar sampai jalan desa.</p><p>Karcis kertas disobek di loket. Uang masuk ke kotak.</p><p>Sore dihitung. Jumlah karcis tidak terasa sebanding dengan ramainya pengunjung tadi.</p><p>Tidak ada yang tahu pasti di mana bedanya: karcis tidak dirobek, rombongan masuk tanpa karcis, atau salah hitung.</p><p>Padahal dari kas itulah jalan desa diperbaiki, kebersihan dibayar, dan warga mendapat bagian.</p></div>
+        <div class="hero-aksi">
+          <a class="tombol tombol-utama" href="#hitung">Hitung sekarang <svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-kalkulator"/></svg></a>
+          <a class="tombol" href="#cara">Cara tanpa alat</a>
+        </div>
+      </div>
+      <div class="panel" data-hidup="desa" aria-label="Contoh tampilan: Loket karcis wisata">
+        <div class="panel-kepala">
+          <span class="label-mono">Loket karcis wisata</span>
+          <span class="label-contoh"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-info"/></svg>Contoh tampilan</span>
+        </div>
+        <div class="hidup-isi"></div>
+        <p class="panel-catatan">Contoh tampilan, bukan data nyata. Setiap karcis tercatat beserta jumlah orangnya, sehingga ramainya pengunjung bisa dibandingkan dengan isi kotak.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="bagian rapat" id="hitung">
+    <div class="wadah sempit">
+      <div data-hitung="desa"><noscript><p>Alat hitung ini memerlukan JavaScript. Anda tetap bisa menghitung dengan kertas memakai langkah di bawah.</p></noscript></div>
+    </div>
   </section>
 
-  <section class="bab" id="cara">
-    <div class="label">Tanpa alat pun bisa</div>
-    <h2>Cek dalam satu akhir pekan</h2>
-    <ol class="langkah"><li>Akhir pekan ini, coba satu hal sederhana.</li><li>Tugaskan satu orang di jalan masuk. Hitung kendaraan dan rombongan yang masuk, pakai garis di kertas.</li><li>Perkirakan jumlah orang per kendaraan. Kalikan dengan harga karcis.</li><li>Sore hari, bandingkan dengan jumlah karcis terjual dan uang di kotak.</li><li>Itu angka desa Anda sendiri, bukan kata kami. Kalau ada selisih, yang kurang biasanya catatannya, bukan orangnya.</li><li>Hasil hitungan ini juga bisa dibawa ke musyawarah. Warga melihat angkanya sendiri.</li></ol>
+  <section class="bagian rapat" id="cara">
+    <div class="wadah">
+      <div class="dua-kolom">
+        <div class="kepala-bagian">
+          <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-catat"/></svg></span><span class="label-mono">Tanpa alat pun bisa</span></div>
+          <h2>Cek dalam satu akhir pekan</h2>
+        </div>
+        <div class="kolom-cekung"><ol class="urutan"><li><span>Akhir pekan ini, coba satu hal sederhana.</span></li><li><span>Tugaskan satu orang di jalan masuk. Hitung kendaraan dan rombongan yang masuk, pakai garis di kertas.</span></li><li><span>Perkirakan jumlah orang per kendaraan. Kalikan dengan harga karcis.</span></li><li><span>Sore hari, bandingkan dengan jumlah karcis terjual dan uang di kotak.</span></li><li><span>Itu angka desa Anda sendiri, bukan kata kami. Kalau ada selisih, yang kurang biasanya catatannya, bukan orangnya.</span></li><li><span>Hasil hitungan ini juga bisa dibawa ke musyawarah. Warga melihat angkanya sendiri.</span></li></ol></div>
+      </div>
+    </div>
   </section>
 
-  <section class="bab" id="kenapa">
-    <div class="label">Kenapa ini penting</div>
-    <h2>Warga bertanya di musyawarah desa</h2>
-    <p>Musyawarah desa. Laporan BUMDes dibacakan.</p><p>Seorang warga bertanya: &quot;Ramai begitu, kok hasilnya segini?&quot;</p><p>Pengurus menjawab sebisanya. Catatannya tidak cukup untuk menjelaskan.</p><p>Pulang dari balai, cerita berkembang di warung. Pengurus yang jujur ikut kena curiga.</p><p>Lama-lama warga enggan terlibat. Pengelolaan bisa jatuh ke pihak luar. Yang membangun desa wisata itu warga, yang menikmati bisa orang lain.</p><p>Usaha milik desa harus tetap dimiliki desa. Mulai dari catatan yang bisa dilihat bersama.</p>
+  <section class="bagian rapat" id="kenapa">
+    <div class="wadah">
+      <div class="kartu-besar">
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-tanya"/></svg></span><span class="label-mono">Kenapa ini penting</span></div>
+        <h2>Warga bertanya di musyawarah desa</h2>
+        <div class="prosa" style="margin-top:20px"><p>Musyawarah desa. Laporan BUMDes dibacakan.</p><p>Seorang warga bertanya: "Ramai begitu, kok hasilnya segini?"</p><p>Pengurus menjawab sebisanya. Catatannya tidak cukup untuk menjelaskan.</p><p>Pulang dari balai, cerita berkembang di warung. Pengurus yang jujur ikut kena curiga.</p><p>Lama-lama warga enggan terlibat. Pengelolaan bisa jatuh ke pihak luar. Yang membangun desa wisata itu warga, yang menikmati bisa orang lain.</p><p>Usaha milik desa harus tetap dimiliki desa. Mulai dari catatan yang bisa dilihat bersama.</p></div>
+      </div>
+    </div>
   </section>
 
-  <div class="penutup">
-    <h2>Yang kurang biasanya catatannya, bukan orangnya.</h2>
-    <p>Sudah menghitung? Tinggalkan nama Anda, tim AutoClaryTech membantu membaca angkanya. Tanpa biaya, tanpa paksaan.</p>
-    <a class="tombol" href="#daftar">Tinggalkan nama</a>
-  </div>
+  <section class="bagian rapat">
+    <div class="wadah">
+      <div class="penutup-kartu">
+        <h2>Yang kurang biasanya catatannya, bukan orangnya.</h2>
+        <p>Sudah menghitung? Tinggalkan nama Anda, tim AutoClaryTech membantu membaca angkanya. Tanpa biaya, tanpa paksaan.</p>
+        <div class="hero-aksi"><a class="tombol tombol-utama" href="#daftar">Tinggalkan nama <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a></div>
+      </div>
+    </div>
+  </section>
 </main>
-<footer><div class="bungkus kaki">&copy; 2026 AutoClaryTech &bull; <a href="/privasi.html">Kebijakan Privasi</a> &bull; <a href="/syarat.html">Syarat</a></div></footer>
+
+<footer>
+  <div class="wadah">
+    <div class="kaki">
+      <div class="kaki-atas">
+        <div>
+          <a href="/" class="merek"><span class="merek-tanda"><img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="30" height="30"></span><span class="merek-kata">AUTOCLARY<em>TECH</em></span></a>
+          <div class="semb">Your Simple, Reliable Partner</div>
+          <div class="ket">Ekosistem Solusi Perangkat Lunak &amp; Otomasi Operasional Bisnis</div>
+        </div>
+        <a href="/" class="tombol">Beranda <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+      </div>
+      
+      <div class="kaki-tautan">
+        <span class="judul-kecil">Aplikasi:</span>
+        <a href="/pantala.html">Pantala (Kafe)</a>
+        <a href="/rentalkita.html">RentalKita</a>
+        <a href="/les.html">Les &amp; bimbel</a>
+        <a href="/pondok.html">Pondok</a>
+        <a href="/koperasi.html">Koperasi</a>
+        <a href="/desa.html">Desa wisata</a>
+        <a href="/toko.html">Parkir toko</a>
+      </div>
+      <div class="kaki-tautan">
+        <a href="/#katalog-aplikasi">Katalog Aplikasi</a>
+        <a href="/privasi.html">Kebijakan Privasi</a>
+        <a href="/syarat.html">Syarat &amp; Ketentuan</a>
+      </div>
+      <div class="hak">© 2026 AutoClaryTech • <a href="/privasi.html">Kebijakan Privasi</a> • <a href="/syarat.html">Syarat</a></div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

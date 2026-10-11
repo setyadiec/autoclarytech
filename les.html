@@ -15,164 +15,158 @@
 <meta property="og:site_name" content="AutoClaryTech">
 <meta property="og:locale" content="id_ID">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
-<style>
-  :root{
-    --kertas:#f4efe6; --kertas2:#ebe4d6; --tinta:#1e1b16; --tinta2:#4a443a;
-    --hijau:#1f5a3b; --hijau-teks:#ffffff; --bata:#9a4420; --garis:#cfc5b2;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-tema="terang"]){
-      --kertas:#17140f; --kertas2:#211d16; --tinta:#f1ebdd; --tinta2:#c9bfab;
-      --hijau:#8fd1a8; --hijau-teks:#10231a; --bata:#f0a078; --garis:#3a3427;
-    }
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--kertas);color:var(--tinta);
-    font:17px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-  .bungkus{max-width:720px;margin:0 auto;padding:0 20px}
-  header{padding:18px 0;border-bottom:1px solid var(--garis)}
-  header .bungkus{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .merek{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
-  .merek img{width:34px;height:34px;display:block}
-  .merek small{display:block;font-weight:500;color:var(--tinta2);font-size:12.5px;letter-spacing:0}
-  .tombol{display:inline-block;background:var(--hijau);color:var(--hijau-teks);text-decoration:none;
-    font-weight:700;padding:12px 20px;border-radius:6px;min-height:44px}
-  .tombol:focus-visible,a:focus-visible{outline:3px solid var(--bata);outline-offset:3px}
-  .pembuka{padding:56px 0 40px}
-  .pembuka .cap{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--bata);font-weight:700}
-  h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:700;line-height:1.25;margin:0}
-  h1{font-size:clamp(30px,7vw,46px);margin:14px 0 18px}
-  .pembuka p{color:var(--tinta2);margin:0 0 22px;max-width:56ch}
-  section.bab{padding:52px 0;border-top:1px solid var(--garis)}
-  .nomor{font-family:Georgia,serif;font-size:64px;line-height:1;color:var(--bata);opacity:.9;margin-bottom:6px}
-  .label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta2);font-weight:700}
-  h2{font-size:clamp(24px,5.6vw,34px);margin:10px 0 18px}
-  .bab p{margin:0 0 14px;max-width:60ch}
-  .lampiran{margin:26px 0 8px;background:var(--kertas2);border:1px solid var(--garis);border-radius:8px;padding:12px}
-  .lampiran img{width:100%;height:auto;display:block;border-radius:4px}
-  .lampiran figcaption{font-size:14px;color:var(--tinta2);margin-top:10px}
-  .cap-bukti{display:inline-block;border:2px solid var(--hijau);color:var(--hijau);font-weight:800;
-    font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:3px;transform:rotate(-2deg);margin-bottom:10px}
-  .kasus{margin:0 0 6px;padding:0;list-style:none}
-  .kasus li{margin:0 0 22px;padding-left:16px;border-left:3px solid var(--hijau)}
-  .kasus b{display:block;margin-bottom:4px}
-  .maskot{margin:28px 0;border:2px dashed var(--garis);border-radius:10px;padding:26px 16px;text-align:center;color:var(--tinta2);font-size:14.5px}
-  blockquote.termin{margin:20px 0;padding:16px 18px;background:var(--kertas2);border-left:4px solid var(--bata);
-    font-family:Georgia,serif;font-size:18px;line-height:1.6}
-  .penutup{padding:56px 0 64px;border-top:1px solid var(--garis)}
-  footer{padding:22px 0 40px;border-top:1px solid var(--garis);color:var(--tinta2);font-size:14px}
-  .catatan-draf{background:var(--kertas2);border:1px dashed var(--bata);padding:12px 14px;font-size:14px;margin:22px 0;color:var(--tinta2)}
-  .langkah{margin:0;padding-left:22px}.langkah li{margin:0 0 10px;max-width:60ch}
-  .kaki a{color:inherit}
-  header .tombol{white-space:nowrap;padding:10px 16px}
-</style>
 <script src="/hitung.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/act-soft.css">
+<meta name="theme-color" content="#E4E9F2">
+<script src="/assets/act-soft.js" defer></script>
 </head>
 <body>
-<header><div class="bungkus">
-  <a href="/" class="merek" style="text-decoration:none;color:inherit">
-    <img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="34" height="34">
-    <span>AutoClaryTech<small>Your Simple, Reliable Partner</small></span>
-  </a>
-  <a class="tombol" href="#hitung">Hitung gratis</a>
-</div></header>
-
-<main class="bungkus">
-  <div class="pembuka">
-    <div class="cap">Les &amp; bimbel rumahan &bull; Cek sendiri, gratis</div>
-    <h1>Les Anda sudah jadi usaha. Sudah dicatat seperti usaha?</h1>
-    <p>Sepulang mengajar, Anda membuka les di rumah. Muridnya bertambah.</p><p>Iuran ada yang dibayar awal bulan, ada yang tengah bulan, ada yang &quot;nanti ya, Bu&quot;.</p><p>Ada yang lupa ditagih. Ada yang berhenti tanpa kabar, iurannya menggantung.</p><p>Jadwal bergeser, dua kelompok datang di jam yang sama.</p><p>Akhir bulan: setelah fotokopi, alat tulis, listrik, dan tenaga Anda, berapa sebenarnya yang bersih?</p>
-    <a class="tombol" href="#hitung">Hitung sekarang</a>
+<nav class="nav" id="nav">
+  <div class="wadah">
+    <a href="/" class="merek" title="AutoClaryTech - Software Solusi UMKM">
+      <span class="merek-tanda"><img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="30" height="30"></span>
+      <span class="merek-kata">AUTOCLARY<em>TECH</em></span>
+    </a>
+    <div class="kapsul-menu" id="kapsulMenu"><a href="#hitung">Hitung gratis</a><a href="#cara">Tanpa alat</a><a href="#kenapa">Kenapa penting</a><a href="#pilihan-paket">Paket</a><a href="/#katalog-aplikasi">Katalog</a></div>
+    <div class="nav-aksi">
+      <a href="/#request-aplikasi" class="tombol tombol-utama tombol-kecil tombol-ajukan">Free Apps <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+      <button type="button" class="tombol tombol-menu" id="tombolMenu" aria-label="Buka menu" aria-expanded="false" aria-controls="kapsulMenu"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-menu"/></svg></button>
+    </div>
   </div>
+</nav>
 
-  <section class="bab" id="hitung">
-    <div data-hitung="les"><noscript><p>Alat hitung ini memerlukan JavaScript. Anda tetap bisa menghitung dengan kertas memakai langkah di bawah.</p></noscript></div>
-  </section>
-
-  <section class="bab" id="cara">
-    <div class="label">Tanpa alat pun bisa</div>
-    <h2>Hitung les Anda dalam satu malam</h2>
-    <ol class="langkah"><li>Malam ini, ambil satu kertas.</li><li>Tulis semua murid les bulan ini dan iuran masing-masing. Jumlahkan: itu yang seharusnya masuk.</li><li>Centang yang benar-benar sudah bayar. Jumlahkan: itu yang sudah masuk. Selisihnya, iuran yang tertunda.</li><li>Kurangi biaya: fotokopi, alat tulis, listrik, kuota, transport bila datang ke rumah murid.</li><li>Bagi dengan jumlah jam mengajar les sebulan. Itu nilai satu jam tenaga Anda.</li><li>Itu angka Anda sendiri, bukan kata kami. Dengan angka yang jelas, menagih tidak lagi terasa sungkan.</li></ol>
-  </section>
-
-  <section class="bab" id="kenapa">
-    <div class="label">Kenapa ini penting</div>
-    <h2>Sungkan menagih tetangga sendiri</h2>
-    <p>Orang tua murid les Anda: tetangga, kenalan, kadang saudara.</p><p>Iurannya telat. Anda ingin mengingatkan, tapi sungkan.</p><p>Takut dianggap hitung-hitungan. Takut hubungan baik jadi renggang.</p><p>Di sisi lain, orang tua ingin tahu perkembangan anaknya. Ada yang bertanya lewat chat, lewat anak, lewat tetangga lain.</p><p>Kalau jawabannya cuma &quot;baik, Bu&quot;, lama-lama orang tua ragu. Anaknya pindah ke bimbel lain yang laporannya jelas.</p><p>Menagih dengan rapi bukan berarti komersial. Laporan yang jelas justru membuat orang tua makin percaya.</p>
-  </section>
-
-  <!-- SECTION TANGGA NILAI PAKET GRAVIDYA (FREEMIUM & BERJENJANG) -->
-  <section class="bab" id="pilihan-paket">
-    <img src="/assets/logo-gravidya-horizontal.svg" alt="Gravidya - aplikasi pengelolaan les &amp; bimbel" width="240" height="72" style="display:block; height:auto; max-width:240px; margin:0 0 14px;">
-    <div class="label">Pilihan Solusi Gravidya</div>
-    <h2>Mulai dari Rp 0, naik kelas saat murid bertambah</h2>
-    <p>Kami percaya guru les rumahan tidak boleh dibebani biaya di awal. Mulai catat dengan template mandiri gratis kami, atau gunakan sistem cloud berkecepatan tinggi dengan modul otomatisasi saat les Anda berkembang.</p>
-    
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:18px; margin: 26px 0;">
-      <!-- TIER 0: FREEMIUM APPS SCRIPT -->
-      <div style="background:var(--kertas2); border:1px solid var(--garis); border-radius:8px; padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
-        <div>
-          <span style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--bata); letter-spacing:.05em;">Tier 1 &bull; Freemium</span>
-          <h3 style="font-family:Georgia,serif; font-size:20px; margin:6px 0 10px;">Starter Apps Script</h3>
-          <div style="font-size:24px; font-weight:800; font-family:Georgia,serif; color:var(--hijau); margin-bottom:12px;">Rp 0 <small style="font-size:13px; font-weight:normal; color:var(--tinta2);">/ selamanya</small></div>
-          <p style="font-size:13.5px; color:var(--tinta2); margin-bottom:14px;">Template mandiri Google Apps Script + Google Sheets yang dipasang di Google Drive pribadi Anda.</p>
-          <ul style="font-size:13px; color:var(--tinta2); padding-left:18px; margin-bottom:16px;">
-            <li>Maks. 25 murid &amp; 2 pengajar</li>
-            <li>Presensi web via peramban HP</li>
-            <li>Hitung hadir &times; tarif fleksibel</li>
-            <li>Tautan pesan WhatsApp manual</li>
-            <li>100% Gratis di Google Drive Anda</li>
-          </ul>
+<main>
+  <header class="hero ringkas">
+    <div class="wadah">
+      <div>
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-topi"/></svg></span><span class="label-mono">Les & bimbel rumahan • Cek sendiri, gratis</span></div>
+        <h1>Les Anda sudah jadi usaha. Sudah dicatat seperti usaha?</h1>
+        <div class="narasi"><p>Sepulang mengajar, Anda membuka les di rumah. Muridnya bertambah.</p><p>Iuran ada yang dibayar awal bulan, ada yang tengah bulan, ada yang "nanti ya, Bu".</p><p>Ada yang lupa ditagih. Ada yang berhenti tanpa kabar, iurannya menggantung.</p><p>Jadwal bergeser, dua kelompok datang di jam yang sama.</p><p>Akhir bulan: setelah fotokopi, alat tulis, listrik, dan tenaga Anda, berapa sebenarnya yang bersih?</p></div>
+        <div class="hero-aksi">
+          <a class="tombol tombol-utama" href="#hitung">Hitung sekarang <svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-kalkulator"/></svg></a>
+          <a class="tombol" href="#cara">Cara tanpa alat</a>
         </div>
-        <a class="tombol" href="https://wa.me/6282329767223?text=Halo%20AutoClaryTech,%20saya%20ingin%20unduh%20template%20gratis%20Gravidya%20Apps%20Script" style="text-align:center; background:var(--tinta2); font-size:13px;">Dapatkan Template Gratis</a>
       </div>
-
-      <!-- TIER 1: STANDAR CLOUD -->
-      <div style="background:var(--kertas2); border:1px solid var(--garis); border-radius:8px; padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
-        <div>
-          <span style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--hijau); letter-spacing:.05em;">Tier 2 &bull; Mandiri</span>
-          <h3 style="font-family:Georgia,serif; font-size:20px; margin:6px 0 10px;">Gravidya Standar Cloud</h3>
-          <div style="font-size:24px; font-weight:800; font-family:Georgia,serif; color:var(--tinta); margin-bottom:12px;">Rp 49.000 <small style="font-size:13px; font-weight:normal; color:var(--tinta2);">/ bulan</small></div>
-          <p style="font-size:13.5px; color:var(--tinta2); margin-bottom:14px;">Antarmuka web app cepat dan rapi, multi-pengajar &amp; estafet sorogan tanpa rumus manual.</p>
-          <ul style="font-size:13px; color:var(--tinta2); padding-left:18px; margin-bottom:16px;">
-            <li>Hingga 75 murid &amp; 5 pengajar</li>
-            <li>Estafet capaian sorogan &amp; iqra</li>
-            <li>Buku kas &amp; rekap honor tentor</li>
-            <li>Kuitansi &amp; laporan tagihan rapi</li>
-            <li>Bantuan teknis via WhatsApp ACT</li>
-          </ul>
+      <div class="panel" data-hidup="les" aria-label="Contoh tampilan: Presensi sesi sore">
+        <div class="panel-kepala">
+          <span class="label-mono">Presensi sesi sore</span>
+          <span class="label-contoh"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-info"/></svg>Contoh tampilan</span>
         </div>
-        <a class="tombol" href="https://wa.me/6282329767223?text=Halo%20AutoClaryTech,%20saya%20tertarik%20mencoba%20Gravidya%20Standar%20Rp49rb" style="text-align:center; background:var(--hijau); font-size:13px;">Pilih Paket Standar</a>
+        <div class="hidup-isi"></div>
+        <p class="panel-catatan">Contoh tampilan, bukan data nyata. Kehadiran dan iuran tercatat per murid, sehingga yang tertunda terlihat tanpa perlu diingat-ingat.</p>
       </div>
+    </div>
+  </header>
 
-      <!-- TIER 2: PRO OTOMASI -->
-      <div style="background:var(--kertas2); border:2px solid var(--bata); border-radius:8px; padding:20px; display:flex; flex-direction:column; justify-content:space-between; position:relative;">
-        <div style="position:absolute; top:-11px; right:16px; background:var(--bata); color:white; font-size:10px; font-weight:800; padding:2px 8px; border-radius:3px; text-transform:uppercase;">Rekomendasi</div>
-        <div>
-          <span style="font-size:11px; font-weight:800; text-transform:uppercase; color:var(--bata); letter-spacing:.05em;">Tier 3 &bull; Otomasi Penuh</span>
-          <h3 style="font-family:Georgia,serif; font-size:20px; margin:6px 0 10px;">Gravidya Pro Otomasi</h3>
-          <div style="font-size:24px; font-weight:800; font-family:Georgia,serif; color:var(--bata); margin-bottom:12px;">Rp 149.000 <small style="font-size:13px; font-weight:normal; color:var(--tinta2);">/ bulan</small></div>
-          <p style="font-size:13.5px; color:var(--tinta2); margin-bottom:14px;">Semua fitur standar ditambah format pesan WhatsApp terstruktur dan pratinjau ringkasan capaian untuk orang tua.</p>
-          <ul style="font-size:13px; color:var(--tinta2); padding-left:18px; margin-bottom:16px;">
-            <li>Kapasitas murid &amp; pengajar lebih besar</li>
-            <li>Format pesan WhatsApp rapi siap kirim</li>
-            <li>Pratinjau ringkasan capaian untuk wali murid</li>
-            <li>Pencatatan rincian transfer bank &amp; kas</li>
-            <li>Dukungan konsultasi AutoClaryTech</li>
-          </ul>
+  <section class="bagian rapat" id="hitung">
+    <div class="wadah sempit">
+      <div data-hitung="les"><noscript><p>Alat hitung ini memerlukan JavaScript. Anda tetap bisa menghitung dengan kertas memakai langkah di bawah.</p></noscript></div>
+    </div>
+  </section>
+
+  <section class="bagian rapat" id="cara">
+    <div class="wadah">
+      <div class="dua-kolom">
+        <div class="kepala-bagian">
+          <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-catat"/></svg></span><span class="label-mono">Tanpa alat pun bisa</span></div>
+          <h2>Hitung les Anda dalam satu malam</h2>
         </div>
-        <a class="tombol" href="https://wa.me/6282329767223?text=Halo%20AutoClaryTech,%20saya%20tertarik%20dengan%20Gravidya%20Pro%20Otomasi%20Rp149rb" style="text-align:center; background:var(--bata); font-size:13px;">Pilih Paket Pro</a>
+        <div class="kolom-cekung"><ol class="urutan"><li><span>Malam ini, ambil satu kertas.</span></li><li><span>Tulis semua murid les bulan ini dan iuran masing-masing. Jumlahkan: itu yang seharusnya masuk.</span></li><li><span>Centang yang benar-benar sudah bayar. Jumlahkan: itu yang sudah masuk. Selisihnya, iuran yang tertunda.</span></li><li><span>Kurangi biaya: fotokopi, alat tulis, listrik, kuota, transport bila datang ke rumah murid.</span></li><li><span>Bagi dengan jumlah jam mengajar les sebulan. Itu nilai satu jam tenaga Anda.</span></li><li><span>Itu angka Anda sendiri, bukan kata kami. Dengan angka yang jelas, menagih tidak lagi terasa sungkan.</span></li></ol></div>
       </div>
     </div>
   </section>
 
-  <div class="penutup">
-    <h2>Yang kurang biasanya catatannya, bukan orangnya.</h2>
-    <p>Sudah menghitung? Tinggalkan nama Anda, tim AutoClaryTech membantu membaca angkanya. Tanpa biaya, tanpa paksaan.</p>
-    <a class="tombol" href="#daftar">Tinggalkan nama</a>
-  </div>
+  <section class="bagian rapat" id="kenapa">
+    <div class="wadah">
+      <div class="kartu-besar">
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-tanya"/></svg></span><span class="label-mono">Kenapa ini penting</span></div>
+        <h2>Sungkan menagih tetangga sendiri</h2>
+        <div class="prosa" style="margin-top:20px"><p>Orang tua murid les Anda: tetangga, kenalan, kadang saudara.</p><p>Iurannya telat. Anda ingin mengingatkan, tapi sungkan.</p><p>Takut dianggap hitung-hitungan. Takut hubungan baik jadi renggang.</p><p>Di sisi lain, orang tua ingin tahu perkembangan anaknya. Ada yang bertanya lewat chat, lewat anak, lewat tetangga lain.</p><p>Kalau jawabannya cuma "baik, Bu", lama-lama orang tua ragu. Anaknya pindah ke bimbel lain yang laporannya jelas.</p><p>Menagih dengan rapi bukan berarti komersial. Laporan yang jelas justru membuat orang tua makin percaya.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bagian rapat" id="pilihan-paket">
+    <div class="wadah">
+      <div class="kepala-bagian">
+        <img src="/assets/logo-gravidya-horizontal.svg" alt="Gravidya - aplikasi pengelolaan les &amp; bimbel" width="240" height="72" style="display:block;height:auto;max-width:240px;margin:0 0 18px">
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-topi"/></svg></span><span class="label-mono">Pilihan Solusi Gravidya</span></div>
+        <h2>Mulai dari Rp 0, naik kelas saat murid bertambah</h2>
+        <p>Kami percaya guru les rumahan tidak boleh dibebani biaya di awal. Mulai catat dengan template mandiri gratis kami, atau gunakan sistem cloud berkecepatan tinggi dengan modul otomatisasi saat les Anda berkembang.</p>
+      </div>
+      <div class="kisi-harga">
+        <div class="kartu-harga">
+          
+          <span class="label-mono">Tier 1 • Freemium</span>
+          <div class="nm">Starter Apps Script</div>
+          <div class="rp">Rp 0 <small>/ selamanya</small></div>
+          <p class="desk">Template mandiri Google Apps Script + Google Sheets yang dipasang di Google Drive pribadi Anda.</p>
+          <ul class="fitur"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Maks. 25 murid & 2 pengajar</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Presensi web via peramban HP</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Hitung hadir × tarif fleksibel</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Tautan pesan WhatsApp manual</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>100% Gratis di Google Drive Anda</span></li></ul>
+          <a class="tombol" href="https://wa.me/6282329767223?text=AutoClaryTech,%20saya%20ingin%20unduh%20template%20gratis%20Gravidya%20Apps%20Script">Dapatkan Template Gratis</a>
+        </div><div class="kartu-harga">
+          
+          <span class="label-mono">Tier 2 • Mandiri</span>
+          <div class="nm">Gravidya Standar Cloud</div>
+          <div class="rp">Rp 49.000 <small>/ bulan</small></div>
+          <p class="desk">Antarmuka web app cepat dan rapi, multi-pengajar & estafet sorogan tanpa rumus manual.</p>
+          <ul class="fitur"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Hingga 75 murid & 5 pengajar</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Estafet capaian sorogan & iqra</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Buku kas & rekap honor tentor</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Kuitansi & laporan tagihan rapi</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Bantuan teknis via WhatsApp ACT</span></li></ul>
+          <a class="tombol" href="https://wa.me/6282329767223?text=AutoClaryTech,%20saya%20tertarik%20mencoba%20Gravidya%20Standar%20Rp49rb">Pilih Paket Standar</a>
+        </div><div class="kartu-harga pilihan">
+          <span class="chip aksen"><i></i>Rekomendasi</span>
+          <span class="label-mono">Tier 3 • Otomasi Penuh</span>
+          <div class="nm">Gravidya Pro Otomasi</div>
+          <div class="rp">Rp 149.000 <small>/ bulan</small></div>
+          <p class="desk">Semua fitur standar ditambah format pesan WhatsApp terstruktur dan pratinjau ringkasan capaian untuk orang tua.</p>
+          <ul class="fitur"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Kapasitas murid & pengajar lebih besar</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Format pesan WhatsApp rapi siap kirim</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Pratinjau ringkasan capaian untuk wali murid</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Pencatatan rincian transfer bank & kas</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Dukungan konsultasi AutoClaryTech</span></li></ul>
+          <a class="tombol tombol-utama" href="https://wa.me/6282329767223?text=AutoClaryTech,%20saya%20tertarik%20dengan%20Gravidya%20Pro%20Otomasi%20Rp149rb">Pilih Paket Pro</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bagian rapat">
+    <div class="wadah">
+      <div class="penutup-kartu">
+        <h2>Yang kurang biasanya catatannya, bukan orangnya.</h2>
+        <p>Sudah menghitung? Tinggalkan nama Anda, tim AutoClaryTech membantu membaca angkanya. Tanpa biaya, tanpa paksaan.</p>
+        <div class="hero-aksi"><a class="tombol tombol-utama" href="#daftar">Tinggalkan nama <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a></div>
+      </div>
+    </div>
+  </section>
 </main>
-<footer><div class="bungkus kaki">&copy; 2026 AutoClaryTech &bull; <a href="/privasi.html">Kebijakan Privasi</a> &bull; <a href="/syarat.html">Syarat</a></div></footer>
+
+<footer>
+  <div class="wadah">
+    <div class="kaki">
+      <div class="kaki-atas">
+        <div>
+          <a href="/" class="merek"><span class="merek-tanda"><img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="30" height="30"></span><span class="merek-kata">AUTOCLARY<em>TECH</em></span></a>
+          <div class="semb">Your Simple, Reliable Partner</div>
+          <div class="ket">Ekosistem Solusi Perangkat Lunak &amp; Otomasi Operasional Bisnis</div>
+        </div>
+        <a href="/" class="tombol">Beranda <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+      </div>
+      
+      <div class="kaki-tautan">
+        <span class="judul-kecil">Aplikasi:</span>
+        <a href="/pantala.html">Pantala (Kafe)</a>
+        <a href="/rentalkita.html">RentalKita</a>
+        <a href="/les.html">Les &amp; bimbel</a>
+        <a href="/pondok.html">Pondok</a>
+        <a href="/koperasi.html">Koperasi</a>
+        <a href="/desa.html">Desa wisata</a>
+        <a href="/toko.html">Parkir toko</a>
+      </div>
+      <div class="kaki-tautan">
+        <a href="/#katalog-aplikasi">Katalog Aplikasi</a>
+        <a href="/privasi.html">Kebijakan Privasi</a>
+        <a href="/syarat.html">Syarat &amp; Ketentuan</a>
+      </div>
+      <div class="hak">© 2026 AutoClaryTech • <a href="/privasi.html">Kebijakan Privasi</a> • <a href="/syarat.html">Syarat</a></div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

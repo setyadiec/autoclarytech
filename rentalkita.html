@@ -32,252 +32,143 @@
   </script>
   <meta name="description" content="RentalKita: aplikasi web untuk usaha rental mobil dan motor. Pemesanan online, armada, keuangan, multi-cabang. Langganan per cabang per bulan.">
 <link rel="icon" type="image/png" href="aset/logo-rentalkita.png">
-<style>
-:root{--bg:#f7f8fa;--card:#fff;--ink:#14213d;--mut:#55627a;--line:#e1e5ec;--pri:#1d4ed8;--pri-d:#1e3a8a;--wa:#128c4a;--soft:#eaf0ff}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding-bottom:84px;-webkit-text-size-adjust:100%}
-a{color:var(--pri)}
-.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-header.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:12px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--ink);text-decoration:none}
-.brand img{width:34px;height:34px;border-radius:8px}
-nav.m{display:none;gap:22px;font-size:14px}
-nav.m a{color:var(--mut);text-decoration:none}
-nav.m a:hover{color:var(--pri)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;min-height:44px}
-.btn svg{width:20px;height:20px;flex:none}
-.btn-wa{background:var(--wa);color:#fff}
-.btn-wa:hover{background:#0e7a40}
-.btn-line{background:#fff;color:var(--pri-d);border-color:var(--line)}
-.btn-sm{padding:8px 14px;min-height:38px;font-size:14px}
-.hero{padding:40px 0 32px;background:linear-gradient(180deg,#fff,var(--soft))}
-.hero h1{font-size:30px;line-height:1.2;max-width:720px;letter-spacing:-.01em}
-.hero p.lead{margin-top:14px;color:var(--mut);font-size:17px;max-width:640px}
-.hero .cta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
-.note{margin-top:14px;font-size:13px;color:var(--mut)}
-section{padding:40px 0}
-h2{font-size:24px;line-height:1.25;margin-bottom:8px}
-.sub{color:var(--mut);margin-bottom:22px;max-width:700px}
-.grid{display:grid;gap:14px;grid-template-columns:1fr}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
-.card h3{font-size:16px;margin:10px 0 4px}
-.card p{font-size:14.5px;color:var(--mut)}
-.ic{width:38px;height:38px;border-radius:10px;background:var(--soft);color:var(--pri);display:grid;place-items:center}
-.ic svg{width:22px;height:22px}
-.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.roles{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-.roles span{background:var(--soft);color:var(--pri-d);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600}
-.price{display:flex;flex-direction:column}
-.price .nm{font-weight:700;font-size:17px}
-.price .rp{font-size:26px;font-weight:800;margin:6px 0 2px}
-.price .rp small{font-size:13px;font-weight:500;color:var(--mut)}
-.price ul{list-style:none;margin:12px 0 16px;font-size:14px;color:var(--ink);flex:1}
-.price li{display:flex;gap:8px;padding:4px 0}
-.price li svg{width:16px;height:16px;color:var(--wa);flex:none;margin-top:5px}
-.price .btn{width:100%}
-.legend{font-size:13.5px;color:var(--mut);margin-top:14px}
-details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
-summary{cursor:pointer;font-weight:600}
-details p{margin-top:8px;color:var(--mut);font-size:14.5px}
-.final{text-align:center;padding:44px 0}
-.final .btn{margin-top:14px}
-footer{padding:26px 0;color:var(--mut);font-size:13px;border-top:1px solid var(--line);background:#fff}
-.fab{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line)}
-.fab .btn{width:100%;max-width:520px;margin:0 auto;display:flex}
-@media(min-width:720px){
- nav.m{display:flex}
- .hero{padding:72px 0 56px}
- .hero h1{font-size:44px}
- .grid.c2{grid-template-columns:repeat(2,1fr)}
- .grid.c3{grid-template-columns:repeat(3,1fr)}
- .grid.c4{grid-template-columns:repeat(4,1fr)}
- body{padding-bottom:0}
- .fab{left:auto;right:20px;bottom:20px;width:auto;padding:0;background:none;border:0}
- .fab .btn{width:auto;box-shadow:0 6px 20px rgba(0,0,0,.2)}
-}
-</style>
 <script src="/hitung.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/act-soft.css">
+<meta name="theme-color" content="#E4E9F2">
+<script src="/assets/act-soft.js" defer></script>
 </head>
-<body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
- <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.4 11.4 0 0 0 2.2 17.3L1 23l5.8-1.5A11.4 11.4 0 0 0 12 23h0a11.4 11.4 0 0 0 8.5-19.5zM12 21a9.4 9.4 0 0 1-4.8-1.3l-.3-.2-3.4.9.9-3.3-.2-.3A9.4 9.4 0 1 1 12 21zm5.2-7c-.3-.1-1.7-.8-1.9-.9s-.5-.1-.7.1-.8.9-.9 1.1-.3.2-.6.1a7.7 7.7 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.5a.6.6 0 0 0 0-.6l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 4.9c2.1.9 2.9.9 3.9.8a3.3 3.3 0 0 0 2.2-1.6 2.7 2.7 0 0 0 .2-1.6c-.1-.1-.3-.2-.6-.4z"/></symbol>
- <symbol id="i-ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
- <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
- <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M3 12h18"/></symbol>
- <symbol id="i-usr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
- <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></symbol>
- <symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></symbol>
- <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></symbol>
- <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
- <symbol id="i-bld" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></symbol>
- <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
- <symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></symbol>
- <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
- <symbol id="i-glb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
-</svg>
-
-<header class="top">
- <div class="wrap">
-  <a class="brand" href="#atas"><img src="assets/logo-act.svg" alt="AutoClaryTech" style="height: 36px; width: auto;">RentalKita<img src="assets/logo-act.svg" alt="AutoClaryTech" style="height: 36px; width: auto;"></a>
-  <nav class="m" aria-label="Menu"><a href="#fitur">Fitur</a><a href="#peran">Peran pengguna</a><a href="#harga">Harga</a><a href="#tanya">Pertanyaan</a></nav>
-  <a class="btn btn-wa btn-sm" href="#hitung">Hitung gratis</a>
- </div>
-</header>
+<body class="ada-fab">
+<nav class="nav" id="nav">
+  <div class="wadah">
+    <a href="/" class="merek" title="AutoClaryTech - Software Solusi UMKM">
+      <span class="merek-tanda"><img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="30" height="30"></span>
+      <span class="merek-kata">AUTOCLARY<em>TECH</em></span>
+    </a>
+    <div class="kapsul-menu" id="kapsulMenu"><a href="#hitung">Hitung gratis</a><a href="#fitur">Fitur</a><a href="#peran">Peran pengguna</a><a href="#simulasi-armada">Simulasi</a><a href="#harga">Harga</a><a href="#tanya">Pertanyaan</a></div>
+    <div class="nav-aksi">
+      <a href="/#request-aplikasi" class="tombol tombol-utama tombol-kecil tombol-ajukan">Free Apps <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+      <button type="button" class="tombol tombol-menu" id="tombolMenu" aria-label="Buka menu" aria-expanded="false" aria-controls="kapsulMenu"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</nav>
 
 <main id="atas">
-<div class="hero"><div class="wrap">
- <h1>Aplikasi untuk mengelola usaha rental mobil dan motor Anda</h1>
- <p class="lead">RentalKita menyatukan pemesanan online, jadwal armada, kontrak, keuangan, dan beberapa cabang dalam satu aplikasi web. Dipakai oleh usaha rental di Bali.</p>
- <div class="cta">
-  <a class="btn btn-wa" href="#hitung">Hitung kerugian Anda, gratis</a>
-  <a class="btn btn-line" href="#harga">Lihat harga</a>
- </div>
- <p class="note">Tersedia versi gratis untuk 1 cabang. Peragaan aplikasi dapat diminta lewat formulir di halaman ini.</p>
-
-  <div style="background:#fff; border:1px solid #cbd5e1; border-radius:14px; padding:20px; margin-top:24px; text-align:left; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
-    <div style="font-weight:800; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:#1d4ed8; margin-bottom:10px;">MASALAH UTAMA PENGUSAHA RENTAL YANG KAMI SELESAIKAN:</div>
-    <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px; font-size:14.5px; color:#1e293b;">
-      <li style="display:flex; gap:8px; align-items:flex-start;">
-        <span style="color:#ef4444; font-weight:bold; flex:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true" style="vertical-align:-2px"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-        <span>Jadwal bentrok karena chat WhatsApp saling tumpuk, pelanggan komplain mobilnya terlanjur dibawa orang lain?</span>
-      </li>
-      <li style="display:flex; gap:8px; align-items:flex-start;">
-        <span style="color:#ef4444; font-weight:bold; flex:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true" style="vertical-align:-2px"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-        <span>Pusing melacak unit mana yang sedang jalan, identitas penyewa, dan kapan batas jam pengembalian armada?</span>
-      </li>
-      <li style="display:flex; gap:8px; align-items:flex-start;">
-        <span style="color:#ef4444; font-weight:bold; flex:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true" style="vertical-align:-2px"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-        <span>Uang deposit penyewa tercecer, nota sewa masih tulis tangan di buku kuitansi yang mudah basah/hilang?</span>
-      </li>
-      <li style="display:flex; gap:8px; align-items:flex-start;">
-        <span style="color:#ef4444; font-weight:bold; flex:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true" style="vertical-align:-2px"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-        <span>Rentan kena penyewa nakal karena tidak punya sistem pencatatan daftar hitam (blacklist) pelanggan?</span>
-      </li>
-    </ul>
-    <div style="margin-top:14px; padding-top:12px; border-top:1px dashed #cbd5e1; font-size:14.5px; color:#15803d; font-weight:700;">
-      SOLUSI RENTALKITA: Jadwal bentrok otomatis ditolak, kontrak dan nota siap cetak, deposit dan daftar hitam penyewa tercatat, dan semua bisa Anda pantau dari HP. Mudah dipakai, tanpa ribet.
-    </div>
-  </div>
-
-</div></div>
-
-<section id="hitung"><div class="wrap" style="max-width:760px;--hijau:#1d4ed8">
- <div data-hitung="rental"><noscript><p>Alat hitung ini memerlukan JavaScript. Cara manual: jumlahkan biaya kerusakan yang Anda tanggung sendiri, pesanan batal karena bentrok dikali harga sewa, dan uang sewa yang belum jelas selama tiga bulan terakhir.</p></noscript></div>
-</div></section>
-
-<section id="fitur"><div class="wrap">
- <h2>Yang bisa dikerjakan aplikasi ini</h2>
- <p class="sub">Fitur di bawah sudah ada di aplikasi yang berjalan. Ketersediaan per paket ada di bagian harga.</p>
- <div class="grid c3">
-  <div class="card"><div class="ic"><svg><use href="#i-cal"/></svg></div><h3>Pemesanan online dan jadwal</h3><p>Penyewa memesan sendiri lewat halaman web. Sistem menolak jadwal yang bentrok untuk unit yang sama.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-car"/></svg></div><h3>Armada mobil dan motor</h3><p>Data unit, status ketersediaan, katalog paket harga harian, mingguan, dan bulanan.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-usr"/></svg></div><h3>Portal penyewa</h3><p>Penyewa mendaftar sendiri, melihat riwayat sewa dan pesanannya. Tidak bercampur dengan akun staf.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-doc"/></svg></div><h3>Kontrak dan nota</h3><p>Kontrak sewa dan nota siap cetak dari data sewa yang sudah tercatat.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-shield"/></svg></div><h3>Pelanggan dan blacklist</h3><p>Data penyewa beserta daftar penyewa bermasalah, dan pencatatan deposit.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-cash"/></svg></div><h3>Keuangan</h3><p>Pemasukan dan pengeluaran, buku kas umum, laporan laba rugi, estimasi pajak, dan ekspor ke Excel.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-chart"/></svg></div><h3>Grafik pencapaian</h3><p>Dashboard grafik pencapaian dan keterisian armada per cabang.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-tool"/></svg></div><h3>Servis dan dokumen unit</h3><p>Riwayat servis armada dan pengingat jadwal servis serta dokumen kendaraan.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-bell"/></svg></div><h3>Notifikasi dalam aplikasi</h3><p>Pemberitahuan di dalam aplikasi untuk sewa terlambat, dokumen, servis, dan pesanan masuk.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-bld"/></svg></div><h3>Banyak cabang</h3><p>Beberapa cabang dikelola dalam satu aplikasi. Staf cabang hanya melihat data cabangnya.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-pin"/></svg></div><h3>Pelacakan GPS</h3><p>Menampilkan posisi unit dari perangkat GPS yang ditautkan oleh admin. Pada paket Custom.</p></div>
-  <div class="card"><div class="ic"><svg><use href="#i-glb"/></svg></div><h3>Halaman penyewa dwibahasa</h3><p>Halaman pemesanan dan portal penyewa dalam bahasa Indonesia dan Inggris.</p></div>
- </div>
-</div></section>
-
-<section id="peran" class="alt"><div class="wrap">
- <h2>Hak akses menurut peran</h2>
- <p class="sub">Setiap akun punya peran. Pembatasan akses dijaga di sisi basis data, bukan hanya disembunyikan di tampilan.</p>
- <div class="roles"><span>Owner</span><span>Manajer</span><span>Akunting</span><span>Admin</span><span>QC</span><span>Investor (hanya membaca)</span><span>Penyewa (portal sendiri)</span></div>
-</div></section>
-
-
-<section id="simulasi-armada" style="background:#0f172a; color:#f8fafc; padding:48px 0; border-top:1px solid #334155; border-bottom:1px solid #334155;">
-  <div class="wrap">
-    <div style="text-align:center; max-width:700px; margin:0 auto 28px;">
-      <span style="display:inline-block; background:rgba(29, 78, 216, 0.25); color:#60a5fa; border:1px solid #2563eb; padding:4px 12px; border-radius:999px; font-size:12.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:10px;">SIMULATOR SISTEM LANGSUNG</span>
-      <h2 style="color:#ffffff; font-size:26px;">Uji Coba Langsung: Deteksi Bentrok Jadwal Otomatis</h2>
-      <p style="color:#94a3b8; font-size:15px; margin-top:8px;">Pilih armada dan tanggal sewa untuk merasakan bagaimana RentalKita mencegah unit disewakan ganda secara otomatis.</p>
-    </div>
-
-    <div style="max-width:760px; margin:0 auto; background:#1e293b; border:1px solid #334155; border-radius:16px; padding:24px; box-shadow:0 10px 25px rgba(0,0,0,0.4);">
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-bottom:20px;">
-        <div>
-          <label style="display:block; font-size:13px; color:#cbd5e1; margin-bottom:6px; font-weight:600;">1. Pilih Unit Armada:</label>
-          <select id="sim-unit" style="width:100%; background:#0f172a; border:1px solid #475569; color:#f8fafc; padding:10px; border-radius:8px; font-size:14px; outline:none;">
-            <option value="innova">Toyota Kijang Innova (DK 1024 XX) - Sewa Aktif</option>
-            <option value="avanza">Toyota All New Avanza (DK 1842 YY) - Tersedia</option>
-            <option value="nmax">Yamaha NMax 155 (DK 5519 ZZ) - Tersedia</option>
-          </select>
+  <header class="hero ringkas">
+    <div class="wadah">
+      <div>
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-mobil"/></svg></span><span class="label-mono">RentalKita &bull; usaha rental mobil &amp; motor</span></div>
+        <h1>Aplikasi untuk mengelola usaha rental mobil dan motor Anda</h1>
+        <p class="hero-sub">RentalKita menyatukan pemesanan online, jadwal armada, kontrak, keuangan, dan beberapa cabang dalam satu aplikasi web. Dipakai oleh usaha rental di Bali.</p>
+        <div class="hero-aksi">
+          <a class="tombol tombol-utama" href="#hitung">Hitung kerugian Anda, gratis <svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-kalkulator"/></svg></a>
+          <a class="tombol" href="#harga">Lihat harga</a>
         </div>
-        <div>
-          <label style="display:block; font-size:13px; color:#cbd5e1; margin-bottom:6px; font-weight:600;">2. Tanggal Mulai Sewa:</label>
-          <input type="date" id="sim-tgl-mulai" value="2026-10-09" style="width:100%; background:#0f172a; border:1px solid #475569; color:#f8fafc; padding:10px; border-radius:8px; font-size:14px; outline:none;">
-        </div>
-        <div>
-          <label style="display:block; font-size:13px; color:#cbd5e1; margin-bottom:6px; font-weight:600;">3. Durasi Sewa:</label>
-          <select id="sim-durasi" style="width:100%; background:#0f172a; border:1px solid #475569; color:#f8fafc; padding:10px; border-radius:8px; font-size:14px; outline:none;">
-            <option value="1">1 Hari (Harian)</option>
-            <option value="3">3 Hari (Liburan)</option>
-            <option value="7">7 Hari (Mingguan)</option>
-          </select>
-        </div>
+        <p class="catatan">Tersedia versi gratis untuk 1 cabang. Peragaan aplikasi dapat diminta lewat formulir di halaman ini.</p>
       </div>
-
-      <div style="text-align:center; margin-bottom:20px;">
-        <button id="sim-btn-cek" type="button" style="background:#2563eb; hover:background:#1d4ed8; color:#fff; border:none; padding:12px 28px; border-radius:10px; font-weight:700; font-size:15px; cursor:pointer; transition:0.2s; box-shadow:0 4px 12px rgba(37,99,235,0.4);">
-          Cek Ketersediaan & Validasi Jadwal
-        </button>
-      </div>
-
-      <!-- Kotak Hasil Simulator -->
-      <div id="sim-hasil" style="background:#0f172a; border-radius:12px; border:1px dashed #3b82f6; padding:18px; font-family:monospace; font-size:13.5px; line-height:1.6; color:#93c5fd;">
-        <div style="color:#64748b;">[STATUS SIMULATOR: Klik tombol di atas untuk menjalankan validasi anti-bentrok]</div>
+      <div class="panel" data-hidup="rental" aria-label="Contoh tampilan: Jadwal armada pekan ini">
+        <div class="panel-kepala">
+          <span class="label-mono">Jadwal armada pekan ini</span>
+          <span class="label-contoh"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-info"/></svg>Contoh tampilan</span>
+        </div>
+        <div class="hidup-isi"></div>
+        <p class="panel-catatan">Contoh tampilan, bukan data nyata. Pesanan yang bentrok dengan sewa berjalan ditolak otomatis dan dialihkan ke unit sekelas yang kosong.</p>
       </div>
     </div>
-  </div>
-</section>
+  </header>
+
+  <section class="bagian rapat" id="masalah">
+    <div class="wadah">
+      <div class="banding">
+        <div class="banding-kolom risiko">
+          <h3><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-lingkar-x"/></svg>Masalah utama pengusaha rental yang kami selesaikan</h3>
+          <ul class="daftar-tanda ringkas"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-silang"/></svg><span>Jadwal bentrok karena chat WhatsApp saling tumpuk, pelanggan komplain mobilnya terlanjur dibawa orang lain?</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-silang"/></svg><span>Pusing melacak unit mana yang sedang jalan, identitas penyewa, dan kapan batas jam pengembalian armada?</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-silang"/></svg><span>Uang deposit penyewa tercecer, nota sewa masih tulis tangan di buku kuitansi yang mudah basah/hilang?</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-silang"/></svg><span>Rentan kena penyewa nakal karena tidak punya sistem pencatatan daftar hitam (blacklist) pelanggan?</span></li></ul>
+        </div>
+        <div class="banding-kolom aman">
+          <h3><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-lingkar-cek"/></svg>Solusi RentalKita</h3>
+          <p>Jadwal bentrok otomatis ditolak, kontrak dan nota siap cetak, deposit dan daftar hitam penyewa tercatat, dan semua bisa Anda pantau dari HP. Mudah dipakai, tanpa ribet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bagian rapat" id="hitung">
+    <div class="wadah sempit"><div data-hitung="rental"><noscript><p>Alat hitung ini memerlukan JavaScript. Cara manual: jumlahkan biaya kerusakan yang Anda tanggung sendiri, pesanan batal karena bentrok dikali harga sewa, dan uang sewa yang belum jelas selama tiga bulan terakhir.</p></noscript></div></div>
+  </section>
+
+  <section class="bagian rapat" id="fitur">
+    <div class="wadah">
+      <div class="kepala-bagian">
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-kisi"/></svg></span><span class="label-mono">Fitur yang sudah berjalan</span></div>
+        <h2>Yang bisa dikerjakan aplikasi ini</h2>
+        <p>Fitur di bawah sudah ada di aplikasi yang berjalan. Ketersediaan per paket ada di bagian harga.</p>
+      </div>
+      <div class="kisi-fitur"><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-kalender"/></svg></div><h3>Pemesanan online dan jadwal</h3><p>Penyewa memesan sendiri lewat halaman web. Sistem menolak jadwal yang bentrok untuk unit yang sama.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-mobil"/></svg></div><h3>Armada mobil dan motor</h3><p>Data unit, status ketersediaan, katalog paket harga harian, mingguan, dan bulanan.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-orang"/></svg></div><h3>Portal penyewa</h3><p>Penyewa mendaftar sendiri, melihat riwayat sewa dan pesanannya. Tidak bercampur dengan akun staf.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-berkas"/></svg></div><h3>Kontrak dan nota</h3><p>Kontrak sewa dan nota siap cetak dari data sewa yang sudah tercatat.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-perisai"/></svg></div><h3>Pelanggan dan blacklist</h3><p>Data penyewa beserta daftar penyewa bermasalah, dan pencatatan deposit.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-uang"/></svg></div><h3>Keuangan</h3><p>Pemasukan dan pengeluaran, buku kas umum, laporan laba rugi, estimasi pajak, dan ekspor ke Excel.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-rekap"/></svg></div><h3>Grafik pencapaian</h3><p>Dashboard grafik pencapaian dan keterisian armada per cabang.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-alat"/></svg></div><h3>Servis dan dokumen unit</h3><p>Riwayat servis armada dan pengingat jadwal servis serta dokumen kendaraan.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-lonceng"/></svg></div><h3>Notifikasi dalam aplikasi</h3><p>Pemberitahuan di dalam aplikasi untuk sewa terlambat, dokumen, servis, dan pesanan masuk.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-gedung"/></svg></div><h3>Banyak cabang</h3><p>Beberapa cabang dikelola dalam satu aplikasi. Staf cabang hanya melihat data cabangnya.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-pin"/></svg></div><h3>Pelacakan GPS</h3><p>Menampilkan posisi unit dari perangkat GPS yang ditautkan oleh admin. Pada paket Custom.</p></div><div class="kartu-fitur"><div class="kotak-ikon"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-globe"/></svg></div><h3>Halaman penyewa dwibahasa</h3><p>Halaman pemesanan dan portal penyewa dalam bahasa Indonesia dan Inggris.</p></div></div>
+    </div>
+  </section>
+
+  <section class="bagian rapat" id="peran">
+    <div class="wadah">
+      <div class="kolom-cekung">
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-gembok"/></svg></span><span class="label-mono">Hak akses</span></div>
+        <h2>Hak akses menurut peran</h2>
+        <p style="margin:14px 0 22px;font-size:16.5px;max-width:68ch">Setiap akun punya peran. Pembatasan akses dijaga di sisi basis data, bukan hanya disembunyikan di tampilan.</p>
+        <div class="peran"><span>Owner</span><span>Manajer</span><span>Akunting</span><span>Admin</span><span>QC</span><span>Investor (hanya membaca)</span><span>Penyewa (portal sendiri)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bagian rapat" id="simulasi-armada">
+    <div class="wadah sempit">
+      <div class="kepala-bagian">
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-gerak"/></svg></span><span class="label-mono">Simulator sistem langsung</span></div>
+        <h2>Uji Coba Langsung: Deteksi Bentrok Jadwal Otomatis</h2>
+        <p>Pilih armada dan tanggal sewa untuk merasakan bagaimana RentalKita mencegah unit disewakan ganda secara otomatis.</p>
+      </div>
+      <div class="sim">
+        <div class="sim-isian">
+          <div class="form-group"><label class="form-label" for="sim-unit">1. Pilih Unit Armada:</label><select id="sim-unit" class="form-select"><option value="innova">Toyota Kijang Innova (DK 1024 XX) - Sewa Aktif</option><option value="avanza">Toyota All New Avanza (DK 1842 YY) - Tersedia</option><option value="nmax">Yamaha NMax 155 (DK 5519 ZZ) - Tersedia</option></select></div>
+          <div class="form-group"><label class="form-label" for="sim-tgl-mulai">2. Tanggal Mulai Sewa:</label><input type="date" id="sim-tgl-mulai" class="form-input" value="2026-10-09"></div>
+          <div class="form-group"><label class="form-label" for="sim-durasi">3. Durasi Sewa:</label><select id="sim-durasi" class="form-select"><option value="1">1 Hari (Harian)</option><option value="3">3 Hari (Liburan)</option><option value="7">7 Hari (Mingguan)</option></select></div>
+        </div>
+        <button id="sim-btn-cek" type="button" class="tombol tombol-utama">Cek Ketersediaan &amp; Validasi Jadwal <svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-kalender"/></svg></button>
+        <div id="sim-hasil" class="sim-hasil" aria-live="polite">
+          <div style="color:var(--redup)">[STATUS SIMULATOR: Klik tombol di atas untuk menjalankan validasi anti-bentrok]</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const btn = document.getElementById("sim-btn-cek");
   const unitSelect = document.getElementById("sim-unit");
   const hasil = document.getElementById("sim-hasil");
+  const IK = function (n) { return '<svg class="ikon" aria-hidden="true"><use href="/assets/ikon.svg#' + n + '"/></svg>'; };
 
   btn.addEventListener("click", function() {
     const unit = unitSelect.value;
     const durasi = document.getElementById("sim-durasi").value;
     const tglMulai = document.getElementById("sim-tgl-mulai").value;
-    
-    hasil.innerHTML = "<div style='color:#38bdf8;'>[MEMERIKSA DATABASE ARMADA & JADWAL CABANG...]</div>";
-    
+
+    hasil.innerHTML = "<div style='color:var(--aksen-teks)'>[MEMERIKSA DATABASE ARMADA &amp; JADWAL CABANG...]</div>";
+
     setTimeout(function() {
       if (unit === "innova") {
         hasil.innerHTML = `
-          <div style="color:#f87171; font-weight:bold; font-size:15px; margin-bottom:6px;">
-            &#10060; [SISTEM MENOLAK RESERVASI - JADWAL BENTROK TERDETEKSI]
-          </div>
-          <div style="color:#fca5a5; margin-bottom:8px;">
-            Unit <strong>Innova (DK 1024 XX)</strong> sudah terikat Kontrak No #RK-202610-042 hingga 11 Oktober 2026 pk 14:00 WITA.
-          </div>
-          <div style="background:rgba(239, 68, 68, 0.15); border-left:3px solid #ef4444; padding:8px 12px; color:#fecaca; font-size:12.5px;">
-            <strong>Proteksi Otomatis:</strong> Staf cabang maupun pemesan online tidak dapat melakukan double-booking pada unit yang sama. Rekomendasi alternatif dialihkan ke unit sekelas yang ready.
-          </div>
+          <div class="judul tolak">${IK('i-lingkar-x')} [SISTEM MENOLAK RESERVASI - JADWAL BENTROK TERDETEKSI]</div>
+          <div>Unit <strong>Innova (DK 1024 XX)</strong> sudah terikat Kontrak No #RK-202610-042 hingga 11 Oktober 2026 pk 14:00 WITA.</div>
+          <div class="catat"><strong>Proteksi Otomatis:</strong> Staf cabang maupun pemesan online tidak dapat melakukan double-booking pada unit yang sama. Rekomendasi alternatif dialihkan ke unit sekelas yang ready.</div>
         `;
       } else {
         const total = unit === "avanza" ? (350000 * parseInt(durasi)).toLocaleString("id-ID") : (120000 * parseInt(durasi)).toLocaleString("id-ID");
         hasil.innerHTML = `
-          <div style="color:#4ade80; font-weight:bold; font-size:15px; margin-bottom:6px;">
-            &#9989; [UNIT TERSEDIA & SIAP DIKUNCI JADWAL]
-          </div>
-          <div style="color:#86efac; margin-bottom:8px;">
-            Unit <strong>${unitSelect.options[unitSelect.selectedIndex].text}</strong> status AMAN (QC Lolos & Servis Beres).<br>
-            Estimasi Biaya Sewa (${durasi} hari): <strong>Rp ${total}</strong>
-          </div>
-          <div style="background:rgba(34, 197, 94, 0.15); border-left:3px solid #22c55e; padding:8px 12px; color:#bbf7d0; font-size:12.5px;">
-            <strong>Langkah Selanjutnya:</strong> Kontrak digital, nota pembayaran, dan data SIM/KTP langsung terbit otomatis tanpa ketik ulang manual.
-          </div>
+          <div class="judul ok">${IK('i-lingkar-cek')} [UNIT TERSEDIA &amp; SIAP DIKUNCI JADWAL]</div>
+          <div>Unit <strong>${unitSelect.options[unitSelect.selectedIndex].text}</strong> status AMAN (QC Lolos &amp; Servis Beres).<br>
+            Estimasi Biaya Sewa (${durasi} hari): <strong>Rp ${total}</strong></div>
+          <div class="catat"><strong>Langkah Selanjutnya:</strong> Kontrak digital, nota pembayaran, dan data SIM/KTP langsung terbit otomatis tanpa ketik ulang manual.</div>
         `;
       }
     }, 400);
@@ -285,67 +176,104 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
-<section id="harga"><div class="wrap">
- <h2>Harga langganan</h2>
- <p class="sub">Harga per cabang per bulan. Untuk biaya pemasangan awal dan rincian lain, hubungi kami.</p>
- <div class="grid c4">
-  <div class="card price"><div class="nm">Gratis</div><div class="rp">Rp0</div><div class="legend" style="margin:0">1 cabang</div>
-   <ul><li><svg><use href="#i-ck"/></svg>Maksimal 15 transaksi per bulan</li><li><svg><use href="#i-ck"/></svg>Armada, sewa, pelanggan</li><li><svg><use href="#i-ck"/></svg>Nota dan kontrak sewa siap cetak</li><li><svg><use href="#i-ck"/></svg>Portal pemesanan publik</li><li><svg><use href="#i-ck"/></svg>Pelacakan posisi staf</li></ul>
-   <a class="btn btn-line" href="#daftar">Tanya paket ini</a></div>
-  <div class="card price"><div class="nm">Starter</div><div class="rp">Rp199rb <small>/ cabang / bulan</small></div>
-   <ul><li><svg><use href="#i-ck"/></svg>Semua fitur paket Gratis tanpa batas transaksi</li><li><svg><use href="#i-ck"/></svg>Blacklist pelanggan</li><li><svg><use href="#i-ck"/></svg>Kas masuk dan keluar dasar</li></ul>
-   <a class="btn btn-line" href="#daftar">Tanya paket ini</a></div>
-  <div class="card price"><div class="nm">Bisnis</div><div class="rp">Rp349rb <small>/ cabang / bulan</small></div>
-   <ul><li><svg><use href="#i-ck"/></svg>Semua fitur Starter</li><li><svg><use href="#i-ck"/></svg>Buku kas umum dan laba rugi</li><li><svg><use href="#i-ck"/></svg>Estimasi pajak PPh final 0,5%</li><li><svg><use href="#i-ck"/></svg>Grafik pencapaian</li><li><svg><use href="#i-ck"/></svg>Katalog paket harga</li><li><svg><use href="#i-ck"/></svg>Notifikasi dalam aplikasi</li><li><svg><use href="#i-ck"/></svg>Penyewa instansi (NPWP dan PIC)</li><li><svg><use href="#i-ck"/></svg>Deposit dan klaim kerusakan</li><li><svg><use href="#i-ck"/></svg>Servis armada</li></ul>
-   <a class="btn btn-line" href="#daftar">Tanya paket ini</a></div>
-  <div class="card price"><div class="nm">Profesional</div><div class="rp">Rp499rb <small>/ cabang / bulan</small></div>
-   <ul><li><svg><use href="#i-ck"/></svg>Semua fitur Bisnis</li><li><svg><use href="#i-ck"/></svg>Portal dwibahasa Indonesia dan Inggris</li><li><svg><use href="#i-ck"/></svg>Laporan modal dan estimasi ROI investor</li><li><svg><use href="#i-ck"/></svg>Nama dan logo usaha sendiri</li><li><svg><use href="#i-ck"/></svg>Formulir BAST cek fisik kendaraan</li></ul>
-   <a class="btn btn-line" href="#daftar">Tanya paket ini</a></div>
- </div>
- <div class="card price" style="margin-top:14px"><div class="nm">Custom</div><p style="margin:6px 0 10px">Untuk usaha dengan banyak cabang atau kontrak armada jangka panjang. Mencakup semua fitur Profesional, ditambah kontrak fleet-lease untuk instansi, pengelolaan multi-cabang terpadu, rekonsiliasi margin mitra OTA, dan integrasi pelacak GPS. Harga: hubungi kami.</p>
-  <a class="btn btn-wa" href="#daftar">Tinggalkan nama</a></div>
- <p class="legend">Harga dapat berubah. Perubahan harga diumumkan kepada pelanggan aktif 30 hari sebelumnya.</p>
-</div></section>
+  <section class="bagian rapat" id="harga">
+    <div class="wadah">
+      <div class="kepala-bagian">
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-uang"/></svg></span><span class="label-mono">Per cabang per bulan</span></div>
+        <h2>Harga langganan</h2>
+        <p>Harga per cabang per bulan. Untuk biaya pemasangan awal dan rincian lain, hubungi kami.</p>
+      </div>
+      <div class="kisi-harga"><div class="kartu-harga">
+          <div class="nm">Gratis</div>
+          <div class="rp">Rp0 <small>1 cabang</small></div>
+          <ul class="fitur"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Maksimal 15 transaksi per bulan</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Armada, sewa, pelanggan</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Nota dan kontrak sewa siap cetak</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Portal pemesanan publik</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Pelacakan posisi staf</span></li></ul>
+          <a class="tombol" href="#daftar">Tanya paket ini</a>
+        </div><div class="kartu-harga">
+          <div class="nm">Starter</div>
+          <div class="rp">Rp199rb <small>/ cabang / bulan</small></div>
+          <ul class="fitur"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Semua fitur paket Gratis tanpa batas transaksi</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Blacklist pelanggan</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Kas masuk dan keluar dasar</span></li></ul>
+          <a class="tombol" href="#daftar">Tanya paket ini</a>
+        </div><div class="kartu-harga">
+          <div class="nm">Bisnis</div>
+          <div class="rp">Rp349rb <small>/ cabang / bulan</small></div>
+          <ul class="fitur"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Semua fitur Starter</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Buku kas umum dan laba rugi</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Estimasi pajak PPh final 0,5%</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Grafik pencapaian</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Katalog paket harga</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Notifikasi dalam aplikasi</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Penyewa instansi (NPWP dan PIC)</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Deposit dan klaim kerusakan</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Servis armada</span></li></ul>
+          <a class="tombol" href="#daftar">Tanya paket ini</a>
+        </div><div class="kartu-harga">
+          <div class="nm">Profesional</div>
+          <div class="rp">Rp499rb <small>/ cabang / bulan</small></div>
+          <ul class="fitur"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Semua fitur Bisnis</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Portal dwibahasa Indonesia dan Inggris</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Laporan modal dan estimasi ROI investor</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Nama dan logo usaha sendiri</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Formulir BAST cek fisik kendaraan</span></li></ul>
+          <a class="tombol" href="#daftar">Tanya paket ini</a>
+        </div></div>
+      <div class="kartu-harga pilihan" style="margin-top:24px">
+        <div class="nm">Custom</div>
+        <p class="desk">Untuk usaha dengan banyak cabang atau kontrak armada jangka panjang. Mencakup semua fitur Profesional, ditambah kontrak fleet-lease untuk instansi, pengelolaan multi-cabang terpadu, rekonsiliasi margin mitra OTA, dan integrasi pelacak GPS. Harga: hubungi kami.</p>
+        <a class="tombol tombol-utama" style="width:auto;align-self:flex-start" href="#daftar">Tinggalkan nama <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+      </div>
+      <p class="catatan">Harga dapat berubah. Perubahan harga diumumkan kepada pelanggan aktif 30 hari sebelumnya.</p>
+    </div>
+  </section>
 
-<section id="tanya" class="alt"><div class="wrap">
- <h2>Pertanyaan umum</h2>
- <details><summary>Apakah ada versi gratis?</summary><p>Ada. Untuk 1 cabang, dengan batas 15 transaksi per bulan.</p></details>
- <details><summary>Harganya dihitung bagaimana?</summary><p>Per cabang per bulan. Usaha dengan beberapa cabang membayar sesuai jumlah cabang.</p></details>
- <details><summary>Berapa biaya pemasangan awal?</summary><p>Tinggalkan nama dan kontak lewat formulir di halaman ini. Biaya disampaikan sesuai kebutuhan usaha Anda.</p></details>
- <details><summary>Bagaimana kalau saya ingin melihat aplikasinya dulu?</summary><p>Minta peragaan lewat formulir di halaman ini. Kami tunjukkan aplikasinya dan menjawab pertanyaan Anda.</p></details>
-</div></section>
+  <section class="bagian rapat" id="tanya">
+    <div class="wadah sempit">
+      <div class="kepala-bagian"><div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-tanya"/></svg></span><span class="label-mono">Tanya jawab</span></div><h2>Pertanyaan umum</h2></div>
+      <div class="lipat"><details><summary>Apakah ada versi gratis?<svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-bawah"/></svg></summary><p>Ada. Untuk 1 cabang, dengan batas 15 transaksi per bulan.</p></details><details><summary>Harganya dihitung bagaimana?<svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-bawah"/></svg></summary><p>Per cabang per bulan. Usaha dengan beberapa cabang membayar sesuai jumlah cabang.</p></details><details><summary>Berapa biaya pemasangan awal?<svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-bawah"/></svg></summary><p>Tinggalkan nama dan kontak lewat formulir di halaman ini. Biaya disampaikan sesuai kebutuhan usaha Anda.</p></details><details><summary>Bagaimana kalau saya ingin melihat aplikasinya dulu?<svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-bawah"/></svg></summary><p>Minta peragaan lewat formulir di halaman ini. Kami tunjukkan aplikasinya dan menjawab pertanyaan Anda.</p></details></div>
+    </div>
+  </section>
 
-<section id="direktori" class="alt"><div class="wrap">
- <h2>Direktori Rekomendasi Rental Mobil Mitra ACT</h2>
- <p class="sub">Sebagai bentuk kepedulian kami pada kemajuan UMKM transportasi di Indonesia, AutoClaryTech membantu mempromosikan unit rental mobil terbaik di berbagai kota besar secara gratis:</p>
- <div class="grid c3">
-  <div class="card">
-   <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> Yogyakarta (Jogja)</h3>
-   <p>Daftar 10 rental mobil Jogja lepas kunci murah dekat Stasiun Tugu & Bandara YIA lengkap dengan kontak WA langsung.</p>
-   <a href="/rental-mobil-jogja.html" style="font-weight:600; margin-top:8px; display:inline-block;">Lihat Direktori Jogja &rarr;</a>
-  </div>
-  <div class="card">
-   <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> Solo (Surakarta)</h3>
-   <p>Daftar 10 rental mobil Solo terpercaya lepas kunci 24 jam & antar jemput Stasiun Balapan tanpa calo.</p>
-   <a href="/rental-mobil-solo.html" style="font-weight:600; margin-top:8px; display:inline-block;">Lihat Direktori Solo &rarr;</a>
-  </div>
-  <div class="card">
-   <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> Bali (Kuta & Bandara DPS)</h3>
-   <p>Daftar 10 rental mobil murah di Bali lepas kunci dekat Bandara Ngurah Rai untuk liburan keluarga.</p>
-   <a href="/rental-mobil-bali.html" style="font-weight:600; margin-top:8px; display:inline-block;">Lihat Direktori Bali &rarr;</a>
-  </div>
- </div>
-</div></section>
+  <section class="bagian rapat" id="direktori">
+    <div class="wadah">
+      <div class="kepala-bagian">
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-pin"/></svg></span><span class="label-mono">Direktori</span></div>
+        <h2>Direktori Rekomendasi Rental Mobil Mitra ACT</h2>
+        <p>Sebagai bentuk kepedulian kami pada kemajuan UMKM transportasi di Indonesia, AutoClaryTech membantu mempromosikan unit rental mobil terbaik di berbagai kota besar secara gratis:</p>
+      </div>
+      <div class="kisi-artikel"><a class="kartu-artikel" href="/rental-mobil-jogja.html"><div><div class="meta"><span class="tag"><svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-pin"/></svg> Direktori</span></div><h3>Yogyakarta (Jogja)</h3><p>Daftar 10 rental mobil Jogja lepas kunci murah dekat Stasiun Tugu & Bandara YIA lengkap dengan kontak WA langsung.</p></div><span class="tautan-kedua">Lihat Direktori Jogja <svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></span></a><a class="kartu-artikel" href="/rental-mobil-solo.html"><div><div class="meta"><span class="tag"><svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-pin"/></svg> Direktori</span></div><h3>Solo (Surakarta)</h3><p>Daftar 10 rental mobil Solo terpercaya lepas kunci 24 jam & antar jemput Stasiun Balapan tanpa calo.</p></div><span class="tautan-kedua">Lihat Direktori Solo <svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></span></a><a class="kartu-artikel" href="/rental-mobil-bali.html"><div><div class="meta"><span class="tag"><svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-pin"/></svg> Direktori</span></div><h3>Bali (Kuta & Bandara DPS)</h3><p>Daftar 10 rental mobil murah di Bali lepas kunci dekat Bandara Ngurah Rai untuk liburan keluarga.</p></div><span class="tautan-kedua">Lihat Direktori Bali <svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></span></a></div>
+    </div>
+  </section>
 
-<section class="final"><div class="wrap">
- <h2>Ingin mencoba untuk usaha rental Anda?</h2>
- <p class="sub" style="margin:0 auto">Ceritakan jumlah cabang dan jenis armada Anda. Kami jelaskan paket yang sesuai.</p>
- <a class="btn btn-wa" href="#daftar">Tinggalkan nama Anda</a>
-</div></section>
+  <section class="bagian rapat">
+    <div class="wadah">
+      <div class="penutup-kartu">
+        <h2>Ingin mencoba untuk usaha rental Anda?</h2>
+        <p>Ceritakan jumlah cabang dan jenis armada Anda. Kami jelaskan paket yang sesuai.</p>
+        <div class="hero-aksi"><a class="tombol tombol-utama" href="#daftar">Tinggalkan nama Anda <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a></div>
+      </div>
+    </div>
+  </section>
 </main>
 
-<footer><div class="wrap">RentalKita ditawarkan oleh AutoClaryTech. <a href="/privasi.html">Kebijakan Privasi</a>.</div></footer>
+<footer>
+  <div class="wadah">
+    <div class="kaki">
+      <div class="kaki-atas">
+        <div>
+          <a href="/" class="merek"><span class="merek-tanda"><img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="30" height="30"></span><span class="merek-kata">AUTOCLARY<em>TECH</em></span></a>
+          <div class="semb">Your Simple, Reliable Partner</div>
+          <div class="ket">Ekosistem Solusi Perangkat Lunak &amp; Otomasi Operasional Bisnis</div>
+        </div>
+        <a href="/" class="tombol">Beranda <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+      </div>
+      
+      <div class="kaki-tautan">
+        <span class="judul-kecil">Aplikasi:</span>
+        <a href="/pantala.html">Pantala (Kafe)</a>
+        <a href="/rentalkita.html">RentalKita</a>
+        <a href="/les.html">Les &amp; bimbel</a>
+        <a href="/pondok.html">Pondok</a>
+        <a href="/koperasi.html">Koperasi</a>
+        <a href="/desa.html">Desa wisata</a>
+        <a href="/toko.html">Parkir toko</a>
+      </div>
+      <div class="kaki-tautan">
+        <a href="/#katalog-aplikasi">Katalog Aplikasi</a>
+        <a href="/privasi.html">Kebijakan Privasi</a>
+        <a href="/syarat.html">Syarat &amp; Ketentuan</a>
+      </div>
+      <div class="hak">RentalKita ditawarkan oleh AutoClaryTech. <a href="/privasi.html">Kebijakan Privasi</a>.</div>
+    </div>
+  </div>
+</footer>
 
-<div class="fab"><a class="btn btn-wa" href="#hitung">Hitung gratis</a></div>
+<div class="fab"><a class="tombol tombol-utama" href="#hitung">Hitung gratis <svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-kalkulator"/></svg></a></div>
 </body>
 </html>

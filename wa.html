@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
   <meta charset="utf-8">
@@ -8,31 +8,30 @@
   <script>
     (function() {
       var urlParams = new URLSearchParams(window.location.search);
-      var text = urlParams.get('text') || 'Halo AutoClaryTech, saya ingin konsultasi sistem.';
+      var text = urlParams.get('text') || 'AutoClaryTech, saya ingin konsultasi sistem.';
       var waNumber = (window.SITUS && window.SITUS.waNomor) ? window.SITUS.waNomor : '6285727240341';
       var targetUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(text);
       window.location.replace(targetUrl);
     })();
   </script>
-  <style>
-    body { font-family: system-ui, -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #0b0f19; color: #e2e8f0; text-align: center; }
-    .box { padding: 32px; border-radius: 16px; background: #111827; border: 1px solid #1f2937; max-width: 420px; }
-    .btn { display: inline-block; margin-top: 16px; padding: 12px 24px; background: #128c4a; color: #fff; font-weight: 700; text-decoration: none; border-radius: 8px; }
-    .btn:hover { background: #0e7a40; }
-  </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/act-soft.css">
+<meta name="theme-color" content="#E4E9F2">
 </head>
 <body>
-  <div class="box">
-    <div style="font-size: 32px; margin-bottom: 12px;">💬</div>
-    <h3 style="margin: 0; font-size: 18px;">Menghubungkan ke WhatsApp AutoClaryTech...</h3>
-    <p style="color: #94a3b8; font-size: 14px; margin-top: 10px; line-height: 1.5;">
-      Sistem sedang mengalihkan Anda ke saluran WhatsApp resmi kami. Jika tidak berpindah otomatis dalam 3 detik, silakan klik tombol di bawah:
-    </p>
-    <a id="btnWa" class="btn" href="#">Buka WhatsApp Sekarang &rarr;</a>
+<main class="alih">
+  <div class="lembar">
+    <div class="bulat-besar"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-chat"/></svg></div>
+    <h1>Menghubungkan ke WhatsApp AutoClaryTech...</h1>
+    <p>Sistem sedang mengalihkan Anda ke saluran WhatsApp resmi kami. Jika tidak berpindah otomatis dalam 3 detik, silakan klik tombol di bawah:</p>
+    <a id="btnWa" class="tombol tombol-utama" href="#">Buka WhatsApp Sekarang <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
   </div>
-  <script>
+</main>
+<script>
     var urlParams = new URLSearchParams(window.location.search);
-    var text = urlParams.get('text') || 'Halo AutoClaryTech, saya ingin konsultasi sistem.';
+    var text = urlParams.get('text') || 'AutoClaryTech, saya ingin konsultasi sistem.';
     var waNumber = (window.SITUS && window.SITUS.waNomor) ? window.SITUS.waNomor : '6285727240341';
     var targetUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(text);
     document.getElementById('btnWa').href = targetUrl;

@@ -43,313 +43,249 @@
   }
   </script>
 <meta name="description" content="Studi kasus nyata sistem operasional parkir & shift otomatis Pantala di sebuah Kafe & Social Hub di Pekalongan. Terbukti mandiri di lapangan.">
-<style>
-  :root{
-    --kertas:#f4efe6; --kertas2:#ebe4d6; --tinta:#1e1b16; --tinta2:#4a443a;
-    --hijau:#1f5a3b; --hijau-teks:#ffffff; --bata:#9a4420; --garis:#cfc5b2;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-tema="terang"]){
-      --kertas:#17140f; --kertas2:#211d16; --tinta:#f1ebdd; --tinta2:#c9bfab;
-      --hijau:#8fd1a8; --hijau-teks:#10231a; --bata:#f0a078; --garis:#3a3427;
-    }
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--kertas);color:var(--tinta);
-    font:17px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-  .bungkus{max-width:720px;margin:0 auto;padding:0 20px}
-  header{padding:18px 0;border-bottom:1px solid var(--garis)}
-  header .bungkus{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .merek{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
-  .merek img{width:34px;height:34px;display:block}
-  .merek small{display:block;font-weight:500;color:var(--tinta2);font-size:12.5px;letter-spacing:0}
-  .tombol{display:inline-block;background:var(--hijau);color:var(--hijau-teks);text-decoration:none;
-    font-weight:700;padding:12px 20px;border-radius:6px;min-height:44px}
-  .tombol:focus-visible,a:focus-visible{outline:3px solid var(--bata);outline-offset:3px}
-  .pembuka{padding:56px 0 40px}
-  .pembuka .cap{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--bata);font-weight:700}
-  h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:700;line-height:1.25;margin:0}
-  h1{font-size:clamp(30px,7vw,46px);margin:14px 0 18px}
-  .pembuka p{color:var(--tinta2);margin:0 0 22px;max-width:56ch}
-  section.bab{padding:52px 0;border-top:1px solid var(--garis)}
-  .nomor{font-family:Georgia,serif;font-size:64px;line-height:1;color:var(--bata);opacity:.9;margin-bottom:6px}
-  .label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta2);font-weight:700}
-  h2{font-size:clamp(24px,5.6vw,34px);margin:10px 0 18px}
-  .bab p{margin:0 0 14px;max-width:60ch}
-  .lampiran{margin:26px 0 8px;background:var(--kertas2);border:1px solid var(--garis);border-radius:8px;padding:12px}
-  .lampiran img{width:100%;height:auto;display:block;border-radius:4px}
-  .lampiran figcaption{font-size:14px;color:var(--tinta2);margin-top:10px}
-  .cap-bukti{display:inline-block;border:2px solid var(--hijau);color:var(--hijau);font-weight:800;
-    font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:3px;transform:rotate(-2deg);margin-bottom:10px}
-  .kasus{margin:0 0 6px;padding:0;list-style:none}
-  .kasus li{margin:0 0 22px;padding-left:16px;border-left:3px solid var(--hijau)}
-  .kasus b{display:block;margin-bottom:4px}
-  .maskot{margin:28px 0;border:2px dashed var(--garis);border-radius:10px;padding:26px 16px;text-align:center;color:var(--tinta2);font-size:14.5px}
-  blockquote.termin{margin:20px 0;padding:16px 18px;background:var(--kertas2);border-left:4px solid var(--bata);
-    font-family:Georgia,serif;font-size:18px;line-height:1.6}
-  .penutup{padding:56px 0 64px;border-top:1px solid var(--garis)}
-  footer{padding:22px 0 40px;border-top:1px solid var(--garis);color:var(--tinta2);font-size:14px}
-  .catatan-draf{background:var(--kertas2);border:1px dashed var(--bata);padding:12px 14px;font-size:14px;margin:22px 0;color:var(--tinta2)}
-</style>
 <script src="/hitung.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/act-soft.css">
+<meta name="theme-color" content="#E4E9F2">
+<script src="/assets/act-soft.js" defer></script>
 </head>
 <body>
-<header><div class="bungkus">
-  <a href="index.html" class="merek" style="text-decoration: none; color: inherit;">
-    <img src="assets/logo-act.svg" alt="AutoClaryTech" style="height: 36px; width: auto;">
-    <span>AutoClaryTech<small>Your Simple, Reliable Partner</small></span>
-  </a>
-  <div style="display: flex; align-items: center; gap: 14px;">
-    <a href="index.html" style="font-size: 14px; color: var(--tinta2); text-decoration: none; font-weight: 600;">&larr; Beranda Utama</a>
-    <a class="tombol" href="#hitung">Hitung gratis</a>
+<nav class="nav" id="nav">
+  <div class="wadah">
+    <a href="/" class="merek" title="AutoClaryTech - Software Solusi UMKM">
+      <span class="merek-tanda"><img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="30" height="30"></span>
+      <span class="merek-kata">AUTOCLARY<em>TECH</em></span>
+    </a>
+    <div class="kapsul-menu" id="kapsulMenu"><a href="#hitung">Hitung gratis</a><a href="#cerita">Cerita</a><a href="#bab4">Bukti nyata</a><a href="#simulasi-interaktif">Simulasi</a><a href="#bab5">Harga</a></div>
+    <div class="nav-aksi">
+      <a href="/#request-aplikasi" class="tombol tombol-utama tombol-kecil tombol-ajukan">Free Apps <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+      <button type="button" class="tombol tombol-menu" id="tombolMenu" aria-label="Buka menu" aria-expanded="false" aria-controls="kapsulMenu"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-menu"/></svg></button>
+    </div>
   </div>
-</div></header>
+</nav>
 
-<main class="bungkus">
-  
-
-  <div class="pembuka">
-    <div class="cap">Buku bukti lapangan &bull; Studi Kasus Nyata</div>
-<div style="display: inline-block; background: var(--kertas2); border: 1px solid var(--garis); padding: 5px 14px; border-radius: 999px; font-size: 13px; color: var(--tinta2); margin-bottom: 12px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px"><path d="M20 6 9 17l-5-5"/></svg> Implementasi Nyata di Lapangan &bull; Berjalan Mandiri Tanpa Operator</div>
-    <h1>Kami tidak menjanjikan angka. Kami menjamin setiap rupiah tercatat.</h1>
-    <p>Pantala berjalan setiap hari di lahan parkir sebuah kafe di Pekalongan. Halaman ini memuat bukti dari lokasi itu, apa adanya.</p>
-        <div style="background: rgba(0, 210, 180, 0.04); border: 1px solid rgba(0, 210, 180, 0.2); border-radius: 16px; padding: 22px 24px; margin: 24px 0 28px; text-align: left;">
-      <div style="font-weight: 800; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #008775; margin-bottom: 12px;">APAKAH PARKIR KAFE ANDA MENGALAMI HAL INI SETIAP HARI?</div>
-      <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: 15px; color: var(--tinta);">
-        <li style="display: flex; gap: 10px; align-items: flex-start;">
-          <span style="color: #e11d48; font-weight: bold; flex: none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true" style="vertical-align:-2px"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <span>Kafe ramai, halaman parkir penuh, tapi setoran parkir yang sampai ke tangan Anda kok segitu-segitu saja?</span>
-        </li>
-        <li style="display: flex; gap: 10px; align-items: flex-start;">
-          <span style="color: #e11d48; font-weight: bold; flex: none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true" style="vertical-align:-2px"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <span>Pemilik usaha lelah mencurigai kru sendiri setiap kali uang setoran berkurang tanpa jejak siapa yang bertanggung jawab?</span>
-        </li>
-        <li style="display: flex; gap: 10px; align-items: flex-start;">
-          <span style="color: #e11d48; font-weight: bold; flex: none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true" style="vertical-align:-2px"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <span>Mau pasang palang parkir otomatis, tapi sistem palang + aplikasi bisa puluhan juta, dan tukang parkir lokal jadi tersingkir?</span>
-        </li>
-        <li style="display: flex; gap: 10px; align-items: flex-start;">
-          <span style="color: #e11d48; font-weight: bold; flex: none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true" style="vertical-align:-2px"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-          <span>Anda tidak bisa menjaga parkir sepanjang hari, jadi yang Anda terima hanya apa yang diserahkan.</span>
-        </li>
-      </ul>
-      <div style="margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--garis); font-size: 15.5px; color: #00695c; font-weight: 700;">
-        SOLUSI KAMI: Tanpa palang, tanpa menyingkirkan tukang parkir lokal. Pantala menghitung kendaraan masuk dengan kamera, mencocokkannya dengan setoran tiap shift, dan Anda cukup melihatnya dari HP. Tukang parkir tetap bekerja seperti biasa, setorannya tercatat rapi.
+<main>
+  <header class="hero ringkas">
+    <div class="wadah">
+      <div>
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-buku"/></svg></span><span class="label-mono">Buku bukti lapangan • Studi Kasus Nyata</span></div>
+        <h1>Kami tidak menjanjikan angka. Kami menjamin setiap rupiah tercatat.</h1>
+        <p class="hero-sub">Pantala berjalan setiap hari di lahan parkir sebuah kafe di Pekalongan. Halaman ini memuat bukti dari lokasi itu, apa adanya.</p>
+        <ul class="jaminan"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg>Implementasi Nyata di Lapangan &bull; Berjalan Mandiri Tanpa Operator</li></ul>
+        <div class="hero-aksi">
+          <a class="tombol tombol-utama" href="#hitung">Hitung parkir kafe Anda <svg class="ikon ikon-s" aria-hidden="true"><use href="/assets/ikon.svg#i-kalkulator"/></svg></a>
+          <a class="tombol" href="#bab4">Lihat buktinya</a>
+        </div>
+      </div>
+      <div class="panel" data-hidup="pantala" aria-label="Contoh tampilan: Pos parkir kafe">
+        <div class="panel-kepala">
+          <span class="label-mono">Pos parkir kafe</span>
+          <span class="label-contoh"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-info"/></svg>Contoh tampilan</span>
+        </div>
+        <div class="hidup-isi"></div>
+        <p class="panel-catatan">Contoh tampilan, bukan data nyata. Shift dibuka dan ditutup sendiri oleh sistem; setoran dicocokkan dengan hitungan kamera dan tercatat atas nama petugas.</p>
       </div>
     </div>
+  </header>
 
-    <a class="tombol" href="#hitung">Hitung parkir kafe Anda</a>
-    <a href="#bab4" style="margin-left:14px;color:var(--tinta2);font-weight:600">Lihat buktinya</a>
-  </div>
-
-  <section class="bab" id="hitung">
-    <div data-hitung="pantala"><noscript><p>Alat hitung ini memerlukan JavaScript. Cara manual: hitung motor dan mobil tamu dari buka sampai tutup, kalikan tarif parkir, kalikan jumlah hari buka sebulan.</p></noscript></div>
-  </section>
-
-  <section class="bab" id="bab1">
-    <div class="nomor">1</div><div class="label">Ketegangan</div>
-    <h2>Uang parkir berpindah tangan setiap jam, tetapi ke mana selisihnya pergi baru terasa saat setoran dihitung malam hari.</h2>
-    <p>Di lapangan, uang berpindah tangan langsung dari pelanggan ke petugas tanpa jejak kertas atau angka yang tercatat. Saat rekap dihitung di penghujung hari, pemilik usaha hanya menerima apa yang diserahkan.</p>
-    <p>Masalahnya bukan staf berniat curang, melainkan ketiadaan catatan seketika yang membuat selisih tidak pernah bisa dilacak sumbernya.</p>
-  </section>
-
-  <section class="bab" id="bab2">
-    <div class="nomor">2</div><div class="label">Tidak ada yang berhenti</div>
-    <h2>Sistem baru tidak boleh menghentikan transaksi yang sedang berjalan walau hanya satu jam.</h2>
-    <p>Kami tidak meminta usaha Anda tutup untuk pemasangan yang rumit. Pelanggan tetap dilayani seperti biasa, sementara pencatatan masuk ke sistem secara bertahap tanpa mengganggu ritme usaha.</p>
-  </section>
-
-  <section class="bab" id="bab3">
-    <div class="nomor">3</div><div class="label">Orang lapangan tidak digantikan</div>
-    <h2>Aplikasi kami hadir bukan untuk menggantikan orang lapangan, melainkan menjaga mereka agar tidak lagi disalahkan saat kas berselisih.</h2>
-    <p>Petugas parkir adalah penggerak utama di lapangan. Tampilannya dibuat sederhana agar mudah dipakai dari ponsel. Setiap penerimaan tercatat atas nama mereka, sehingga mereka pulang dengan tenang dan terlindungi dari kecurigaan saat setoran diperiksa.</p>
-    
-  </section>
-
-  <section class="bab" id="bab4">
-    <div class="nomor">4</div><div class="label">Diuji di hari kacau</div>
-    <h2>Sistem yang baik tidak dinilai dari tenangnya hari biasa, melainkan bagaimana ia bertahan saat usaha sedang kacau.</h2>
-    <p>Tiga kejadian nyata di aplikasi parkir Pantala, dan apa yang kami lakukan:</p>
-    <ul class="kasus">
-      <li><b>Petugas tidak sempat membuka komputer.</b>
-        Shift ditutup sendiri oleh sistem pada jam selesainya dan ditandai &ldquo;menunggu setoran&rdquo;, lalu shift berikutnya dibuka sendiri. Tidak ada angka yang ditebak.</li>
-      <li><b>Langganan sudah dibayar, peringatan masih tampil.</b>
-        Status tagihan kini otomatis disamakan dengan catatan pembayaran agar peringatan keliru tidak muncul lagi.</li>
-      <li><b>Grafik harian tidak muncul tiap hari.</b>
-        Kini dipetakan per tanggal kalender, sehingga hari sepi pun tetap tampak.</li>
-    </ul>
-    <figure class="lampiran">
-      <span class="cap-bukti">Tampilan nyata</span>
-      <img src="aset-pantala/pantala-shift-menunggu-setoran.webp" width="1760" height="374" loading="lazy" alt="Tangkapan layar nyata kartu Menunggu Setoran pada aplikasi Pantala, nominal disamarkan">
-      <figcaption>Shift Sore 3 Oktober ditutup sendiri oleh sistem dan menunggu setoran. Nominal disamarkan.</figcaption>
-    </figure>
-    <figure class="lampiran">
-      <img src="aset-pantala/pantala-shift-berjalan-otomatis.webp" width="1760" height="398" loading="lazy" alt="Tangkapan layar nyata shift Pagi yang terbuka otomatis pukul 10.00 pada aplikasi Pantala">
-      <figcaption>Shift Pagi terbuka sendiri pukul 10.00, tanpa ada yang menyentuh komputer.</figcaption>
-    </figure>
-    <figure class="lampiran">
-      <img src="aset-pantala/pantala-grafik-tanggal.webp" width="1760" height="510" loading="lazy" alt="Tangkapan layar nyata grafik kendaraan masuk 14 hari terakhir, tiap tanggal terisi">
-      <figcaption>Kendaraan masuk 14 hari terakhir, tiap tanggal terisi.</figcaption>
-    </figure>
-  </section>
-
-  <!-- Interactive Shift Simulator Widget -->
-  <section class="bab" id="simulasi-interaktif" style="background: var(--kertas2); border-radius: 12px; padding: 32px 24px; margin: 32px 0; border: 1px solid var(--garis);">
-    <div class="label" style="color: var(--hijau); font-weight: 800;">Simulasi Interaktif</div>
-    <h2 style="font-size: clamp(22px, 5vw, 30px); margin: 8px 0 14px;">Coba Sendiri Bagaimana Komputer Kafe Menutup & Membuka Shift Mandiri</h2>
-    <p style="font-size: 15px; color: var(--tinta2); margin-bottom: 22px; max-width: 62ch;">Klik tombol simulasi di bawah untuk menguji bagaimana sistem Pantala menangani pergantian shift secara mandiri tanpa operator utak-atik angka:</p>
-
-    <!-- Simulator Screen -->
-    <div style="background: #101522; border: 1px solid #1f293d; border-radius: 10px; padding: 20px; color: #e2e8f0; font-family: monospace; font-size: 13.5px; box-shadow: 0 10px 25px rgba(0,0,0,0.25);">
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f293d; padding-bottom: 12px; margin-bottom: 16px;">
-        <span style="color: #00d2b4; font-weight: bold;"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg> PANTALA WORKSTATION SIMULATOR</span>
-        <span id="sim-clock" style="color: #94a3b8;">16:59:50 WIB</span>
-      </div>
-
-      <div id="sim-status-box" style="background: #162032; border-left: 4px solid #38bdf8; padding: 14px; border-radius: 4px; margin-bottom: 14px;">
-        <div style="color: #94a3b8; font-size: 12px; text-transform: uppercase;">Status Shift Berjalan</div>
-        <div id="sim-status-title" style="color: #fff; font-size: 15px; font-weight: bold; margin-top: 2px;">Shift Sore Aktif (Shift ID #8)</div>
-        <div id="sim-status-desc" style="color: #cbd5e1; font-size: 13px; margin-top: 4px;">Kamera menghitung kendaraan masuk. Uang tunai dipegang kru shift sore.</div>
-      </div>
-
-      <div style="background: #0b0f19; border: 1px solid #1a2333; border-radius: 6px; padding: 12px; height: 110px; overflow-y: auto; font-size: 12px; color: #a0aec0; line-height: 1.6;" id="sim-log-box">
-        <div>[16:58:12] Kendaraan masuk ke-142 terhitung kamera.</div>
-        <div>[16:59:05] Sistem bersiap pergantian shift otomatis pada jam operasional 17:00:00...</div>
-      </div>
-
-      <!-- Controls -->
-      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px;">
-        <button id="btn-sim-tutup" onclick="jalankanSimulasiTutup()" style="background: #e11d48; color: #fff; border: none; padding: 10px 16px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; transition: all 0.2s;">
-          1. Simulasikan Jam 17:00:00 (Tutup Shift Otomatis)
-        </button>
-        <button id="btn-sim-buka" onclick="jalankanSimulasiBuka()" style="background: #059669; color: #fff; border: none; padding: 10px 16px; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; opacity: 0.5; transition: all 0.2s;" disabled>
-          2. Simulasikan Jam 17:00:52 (Buka Shift Baru)
-        </button>
-        <button onclick="resetSimulasi()" style="background: #374151; color: #d1d5db; border: none; padding: 10px 14px; border-radius: 6px; font-size: 13px; cursor: pointer;">
-          Reset
-        </button>
+  <section class="bagian rapat" id="masalah">
+    <div class="wadah">
+      <div class="banding">
+        <div class="banding-kolom risiko">
+          <h3><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-lingkar-x"/></svg>Apakah parkir kafe Anda mengalami hal ini setiap hari?</h3>
+          <ul class="daftar-tanda ringkas"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-silang"/></svg><span>Kafe ramai, halaman parkir penuh, tapi setoran parkir yang sampai ke tangan Anda kok segitu-segitu saja?</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-silang"/></svg><span>Pemilik usaha lelah mencurigai kru sendiri setiap kali uang setoran berkurang tanpa jejak siapa yang bertanggung jawab?</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-silang"/></svg><span>Mau pasang palang parkir otomatis, tapi sistem palang + aplikasi bisa puluhan juta, dan tukang parkir lokal jadi tersingkir?</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-silang"/></svg><span>Anda tidak bisa menjaga parkir sepanjang hari, jadi yang Anda terima hanya apa yang diserahkan.</span></li></ul>
+        </div>
+        <div class="banding-kolom aman">
+          <h3><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-lingkar-cek"/></svg>Solusi kami</h3>
+          <p>Tanpa palang, tanpa menyingkirkan tukang parkir lokal. Pantala menghitung kendaraan masuk dengan kamera, mencocokkannya dengan setoran tiap shift, dan Anda cukup melihatnya dari HP. Tukang parkir tetap bekerja seperti biasa, setorannya tercatat rapi.</p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div style="margin-top: 24px; text-align: center;">
-      <p style="font-size: 14.5px; color: var(--tinta2); margin-bottom: 12px;">Ingin sistem anti-selisih ini beroperasi di komputer kafe Anda?</p>
-      <a class="tombol" href="#daftar">Tinggalkan nama untuk konsultasi &rarr;</a>
+  <section class="bagian rapat" id="hitung">
+    <div class="wadah sempit"><div data-hitung="pantala"><noscript><p>Alat hitung ini memerlukan JavaScript. Cara manual: hitung motor dan mobil tamu dari buka sampai tutup, kalikan tarif parkir, kalikan jumlah hari buka sebulan.</p></noscript></div></div>
+  </section>
+
+  <section class="bagian rapat" id="cerita">
+    <div class="wadah sempit">
+      <article class="bab-kartu" id="bab1"><div class="bab-label"><span class="no">01</span><span class="label-mono">Ketegangan</span></div>
+          <h2>Uang parkir berpindah tangan setiap jam, tetapi ke mana selisihnya pergi baru terasa saat setoran dihitung malam hari.</h2><p>Di lapangan, uang berpindah tangan langsung dari pelanggan ke petugas tanpa jejak kertas atau angka yang tercatat. Saat rekap dihitung di penghujung hari, pemilik usaha hanya menerima apa yang diserahkan.</p><p>Masalahnya bukan staf berniat curang, melainkan ketiadaan catatan seketika yang membuat selisih tidak pernah bisa dilacak sumbernya.</p></article>
+      <article class="bab-kartu" id="bab2"><div class="bab-label"><span class="no">02</span><span class="label-mono">Tidak ada yang berhenti</span></div>
+          <h2>Sistem baru tidak boleh menghentikan transaksi yang sedang berjalan walau hanya satu jam.</h2><p>Kami tidak meminta usaha Anda tutup untuk pemasangan yang rumit. Pelanggan tetap dilayani seperti biasa, sementara pencatatan masuk ke sistem secara bertahap tanpa mengganggu ritme usaha.</p></article>
+      <article class="bab-kartu" id="bab3"><div class="bab-label"><span class="no">03</span><span class="label-mono">Orang lapangan tidak digantikan</span></div>
+          <h2>Aplikasi kami hadir bukan untuk menggantikan orang lapangan, melainkan menjaga mereka agar tidak lagi disalahkan saat kas berselisih.</h2><p>Petugas parkir adalah penggerak utama di lapangan. Tampilannya dibuat sederhana agar mudah dipakai dari ponsel. Setiap penerimaan tercatat atas nama mereka, sehingga mereka pulang dengan tenang dan terlindungi dari kecurigaan saat setoran diperiksa.</p></article>
+      <article class="bab-kartu" id="bab4"><div class="bab-label"><span class="no">04</span><span class="label-mono">Diuji di hari kacau</span></div>
+          <h2>Sistem yang baik tidak dinilai dari tenangnya hari biasa, melainkan bagaimana ia bertahan saat usaha sedang kacau.</h2><p>Tiga kejadian nyata di aplikasi parkir Pantala, dan apa yang kami lakukan:</p>
+        <ul class="kasus"><li><b>Petugas tidak sempat membuka komputer.</b>
+        Shift ditutup sendiri oleh sistem pada jam selesainya dan ditandai “menunggu setoran”, lalu shift berikutnya dibuka sendiri. Tidak ada angka yang ditebak.</li><li><b>Langganan sudah dibayar, peringatan masih tampil.</b>
+        Status tagihan kini otomatis disamakan dengan catatan pembayaran agar peringatan keliru tidak muncul lagi.</li><li><b>Grafik harian tidak muncul tiap hari.</b>
+        Kini dipetakan per tanggal kalender, sehingga hari sepi pun tetap tampak.</li></ul>
+        <figure class="lampiran">
+          <img src="/aset-pantala/pantala-shift-menunggu-setoran.webp" width="1760" height="374" loading="lazy" alt="Tangkapan layar nyata kartu Menunggu Setoran pada aplikasi Pantala, nominal disamarkan">
+          <figcaption><span class="chip hidup"><i></i>Tampilan nyata</span><span>Shift Sore 3 Oktober ditutup sendiri oleh sistem dan menunggu setoran. Nominal disamarkan.</span></figcaption>
+        </figure>
+        <figure class="lampiran">
+          <img src="/aset-pantala/pantala-shift-berjalan-otomatis.webp" width="1760" height="398" loading="lazy" alt="Tangkapan layar nyata shift Pagi yang terbuka otomatis pukul 10.00 pada aplikasi Pantala">
+          <figcaption><span>Shift Pagi terbuka sendiri pukul 10.00, tanpa ada yang menyentuh komputer.</span></figcaption>
+        </figure>
+        <figure class="lampiran">
+          <img src="/aset-pantala/pantala-grafik-tanggal.webp" width="1760" height="510" loading="lazy" alt="Tangkapan layar nyata grafik kendaraan masuk 14 hari terakhir, tiap tanggal terisi">
+          <figcaption><span>Kendaraan masuk 14 hari terakhir, tiap tanggal terisi.</span></figcaption>
+        </figure>
+      </article>
+    </div>
+  </section>
+
+  <section class="bagian rapat" id="simulasi-interaktif">
+    <div class="wadah sempit">
+      <div class="kepala-bagian">
+        <div class="alis"><span class="bulat"><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-gerak"/></svg></span><span class="label-mono">Simulasi interaktif</span></div>
+        <h2>Coba Sendiri Bagaimana Komputer Kafe Menutup & Membuka Shift Mandiri</h2>
+        <p>Klik tombol simulasi di bawah untuk menguji bagaimana sistem Pantala menangani pergantian shift secara mandiri tanpa operator utak-atik angka:</p>
+      </div>
+      <div class="sim">
+        <div class="sim-atas">
+          <span class="label-mono">Pantala workstation, simulasi</span>
+          <span class="sim-jam" id="sim-clock">16:59:50 WIB</span>
+        </div>
+        <div class="sim-kotak" id="sim-status-box">
+          <span class="label-mono">Status shift berjalan</span>
+          <div class="judul" id="sim-status-title">Shift Sore Aktif (Shift ID #8)</div>
+          <div class="ket" id="sim-status-desc">Kamera menghitung kendaraan masuk. Uang tunai dipegang kru shift sore.</div>
+        </div>
+        <div class="sim-log" id="sim-log-box">
+          <div>[16:58:12] Kendaraan masuk ke-142 terhitung kamera.</div>
+          <div>[16:59:05] Sistem bersiap pergantian shift otomatis pada jam operasional 17:00:00...</div>
+        </div>
+        <div class="sim-kendali">
+          <button id="btn-sim-tutup" type="button" class="tombol tombol-utama tombol-kecil" onclick="jalankanSimulasiTutup()">1. Simulasikan Jam 17:00:00 (Tutup Shift Otomatis)</button>
+          <button id="btn-sim-buka" type="button" class="tombol tombol-kecil" onclick="jalankanSimulasiBuka()" disabled>2. Simulasikan Jam 17:00:52 (Buka Shift Baru)</button>
+          <button type="button" class="tombol tombol-kecil" onclick="resetSimulasi()">Reset</button>
+        </div>
+      </div>
+      <div class="penutup-kartu" style="margin-top:36px;padding:32px 24px">
+        <p style="margin-top:0">Ingin sistem anti-selisih ini beroperasi di komputer kafe Anda?</p>
+        <div class="hero-aksi" style="margin-top:18px"><a class="tombol tombol-utama" href="#daftar">Tinggalkan nama untuk konsultasi <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a></div>
+      </div>
     </div>
   </section>
 
   <script>
-    function addSimLog(msg) {
+    function addSimLog(msg, kelas) {
       const box = document.getElementById('sim-log-box');
       const d = document.createElement('div');
-      d.innerHTML = msg;
+      d.textContent = msg; if (kelas) d.className = kelas;
       box.appendChild(d);
       box.scrollTop = box.scrollHeight;
     }
-
     function jalankanSimulasiTutup() {
       document.getElementById('sim-clock').innerText = '17:00:00 WIB';
-      const sBox = document.getElementById('sim-status-box');
-      sBox.style.borderLeftColor = '#f59e0b';
-      sBox.style.background = '#271d0e';
-      
+      document.getElementById('sim-status-box').className = 'sim-kotak tunggu';
       document.getElementById('sim-status-title').innerText = 'Status: MENUNGGU SETORAN (Shift #8 Ditutup Otomatis)';
-      document.getElementById('sim-status-title').style.color = '#fbbf24';
       document.getElementById('sim-status-desc').innerText = 'Shift #8 selesai tepat waktu. Sistem menutup shift lama dan menampilkannya di Beranda sebagai Menunggu Setoran (contoh angka).';
-      
-      addSimLog('<span style="color:#fbbf24">[17:00:00] ALARM: Jam operasional shift sore berakhir.</span>');
-      addSimLog('<span style="color:#fbbf24">[17:00:01] Shift #8 otomatis DITUTUP oleh sistem. Kartu Menunggu Setoran diterbitkan.</span>');
-      addSimLog('<span style="color:#a7f3d0">[17:00:02] Tidak ada angka yang dimanipulasi atau ditebak. Kru pulang dengan tenang.</span>');
-      
-      document.getElementById('btn-sim-tutup').disabled = true;
-      document.getElementById('btn-sim-tutup').style.opacity = '0.5';
-      
-      const bBtn = document.getElementById('btn-sim-buka');
-      bBtn.disabled = false;
-      bBtn.style.opacity = '1';
+      addSimLog('[17:00:00] ALARM: Jam operasional shift sore berakhir.', 'tunggu');
+      addSimLog('[17:00:01] Shift #8 otomatis DITUTUP oleh sistem. Kartu Menunggu Setoran diterbitkan.', 'tunggu');
+      addSimLog('[17:00:02] Tidak ada angka yang dimanipulasi atau ditebak. Kru pulang dengan tenang.', 'jalan');
+      const t = document.getElementById('btn-sim-tutup'); t.disabled = true; t.classList.remove('tombol-utama');
+      const b = document.getElementById('btn-sim-buka'); b.disabled = false; b.classList.add('tombol-utama');
     }
-
     function jalankanSimulasiBuka() {
       document.getElementById('sim-clock').innerText = '17:00:52 WIB';
-      const sBox = document.getElementById('sim-status-box');
-      sBox.style.borderLeftColor = '#10b981';
-      sBox.style.background = '#0e261a';
-      
+      document.getElementById('sim-status-box').className = 'sim-kotak jalan';
       document.getElementById('sim-status-title').innerText = 'Status: SHIFT MALAM TERBUKA MANDIRI (Shift #9)';
-      document.getElementById('sim-status-title').style.color = '#34d399';
       document.getElementById('sim-status-desc').innerText = 'Shift baru terbuka sendiri tanpa staf menyentuh pengaturan komputer. Kru malam langsung siap melayani pengunjung.';
-      
-      addSimLog('<span style="color:#34d399">[17:00:52] Shift #9 (Malam) dibuka mandiri oleh background workstation.</span>');
-      addSimLog('<span style="color:#34d399">[17:00:53] Timer shift aktif. Komputer kafe siap mencatat transaksi berikutnya.</span>');
-      
-      document.getElementById('btn-sim-buka').disabled = true;
-      document.getElementById('btn-sim-buka').style.opacity = '0.5';
+      addSimLog('[17:00:52] Shift #9 (Malam) dibuka mandiri oleh background workstation.', 'jalan');
+      addSimLog('[17:00:53] Timer shift aktif. Komputer kafe siap mencatat transaksi berikutnya.', 'jalan');
+      const b = document.getElementById('btn-sim-buka'); b.disabled = true; b.classList.remove('tombol-utama');
     }
-
     function resetSimulasi() {
       document.getElementById('sim-clock').innerText = '16:59:50 WIB';
-      const sBox = document.getElementById('sim-status-box');
-      sBox.style.borderLeftColor = '#38bdf8';
-      sBox.style.background = '#162032';
-      
+      document.getElementById('sim-status-box').className = 'sim-kotak';
       document.getElementById('sim-status-title').innerText = 'Shift Sore Aktif (Shift ID #8)';
-      document.getElementById('sim-status-title').style.color = '#fff';
       document.getElementById('sim-status-desc').innerText = 'Kamera menghitung kendaraan masuk. Uang tunai dipegang kru shift sore.';
-      
       document.getElementById('sim-log-box').innerHTML = '<div>[16:58:12] Kendaraan masuk ke-142 terhitung kamera.</div><div>[16:59:05] Sistem bersiap pergantian shift otomatis pada jam operasional 17:00:00...</div>';
-      
-      const tBtn = document.getElementById('btn-sim-tutup');
-      tBtn.disabled = false;
-      tBtn.style.opacity = '1';
-      
-      const bBtn = document.getElementById('btn-sim-buka');
-      bBtn.disabled = true;
-      bBtn.style.opacity = '0.5';
+      const t = document.getElementById('btn-sim-tutup'); t.disabled = false; t.classList.add('tombol-utama');
+      const b = document.getElementById('btn-sim-buka'); b.disabled = true; b.classList.remove('tombol-utama');
     }
   </script>
 
-
-  <section class="bab" id="bab5">
-    <div class="nomor">5</div><div class="label">Skema terbuka sejak awal</div>
-    <h2>Kami membuka seluruh ketentuan sejak awal, karena rasa percaya dibangun dari kejelasan hak dan kewajiban.</h2>
-    <p><b>Untuk aplikasi kustom:</b> ruang lingkup kebutuhan, estimasi pengerjaan, dan skema biaya disepakati bersama secara lugas sebelum pekerjaan teknis dimulai.</p>
-    <p><b>Tanpa biaya siluman:</b> tidak ada biaya di luar yang telah Anda setujui.</p>
-    <div class="lampiran" style="background: var(--kertas2); padding: 24px; border-radius: 10px; margin: 24px 0; border: 2px solid var(--hijau);">
-  <div style="display: inline-block; background: var(--hijau); color: var(--hijau-teks); font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Program Uji Coba Tanpa Risiko</div>
-  <div style="font-family: Georgia, serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">Coba Gratis 7 Hari di Lokasi Kafe Anda</div>
-  <p style="color: var(--tinta2); font-size: 14.5px; margin-bottom: 14px; line-height: 1.7;">Kami pasang langsung di komputer dan kamera kafe Anda selama 7 hari penuh. Anda dan staf membuktikan sendiri akurasi pencatatan setoran per shift tanpa keluar biaya apa pun di awal. Jika tidak cocok, sistem kami lepas tanpa ikatan apa pun.</p>
-  
-  <div style="font-family: Georgia, serif; font-size: 18px; font-weight: 700; margin: 20px 0 8px;">Investasi Setelah 7 Hari Terbukti Cocok:</div>
-  <div style="font-size: 26px; font-weight: 800; color: var(--bata); margin-bottom: 8px;">Rp 3.500.000 <span style="font-size: 13px; font-weight: 500; color: var(--tinta2);">biaya pasang & lisensi sistem mandiri</span></div>
-  <ul style="margin: 0 0 16px 18px; color: var(--tinta2); font-size: 14.5px; line-height: 1.8;">
-    <li>Otomasi buka-tutup shift mandiri mengikuti jam operasional kafe Anda</li>
-    <li>Pencatatan kendaraan dari kamera, dicocokkan otomatis dengan setoran kasir/juru parkir</li>
-    <li>Kartu rekapitulasi setoran transparan (mencegah saling curiga antarkru)</li>
-    <li>Pelatihan staf jaga sampai mandiri</li>
-    <li>Biaya pemeliharaan software & update: <strong>Rp 300.000 / bulan</strong> (mulai bulan kedua)</li>
-  </ul>
-  <div style="background: rgba(0,0,0,0.04); border-left: 3px solid var(--hijau); padding: 12px 14px; font-size: 13.5px; color: var(--tinta2); margin-bottom: 18px; border-radius: 0 6px 6px 0;">
-    <strong>Bebas Beban Pengadaan Alat:</strong> Kamera, komputer, dan perlengkapan fisik adalah milik kafe Anda sendiri. Kami memberikan panduan spesifikasi teknis presisi agar Anda bebas memanfaatkan perangkat yang sudah ada atau membeli di mana pun tanpa markup harga hardware.
-  </div>
-  <a class="tombol" style="display: inline-block; background: var(--hijau); color: var(--hijau-teks); font-weight: 700;" href="#daftar">Klaim Coba Gratis 7 Hari &rarr;</a>
-</div>
+  <section class="bagian rapat" id="bab5">
+    <div class="wadah sempit">
+      <article class="bab-kartu"><div class="bab-label"><span class="no">05</span><span class="label-mono">Skema terbuka sejak awal</span></div>
+          <h2>Kami membuka seluruh ketentuan sejak awal, karena rasa percaya dibangun dari kejelasan hak dan kewajiban.</h2><p><b>Untuk aplikasi kustom:</b> ruang lingkup kebutuhan, estimasi pengerjaan, dan skema biaya disepakati bersama secara lugas sebelum pekerjaan teknis dimulai.</p><p><b>Tanpa biaya siluman:</b> tidak ada biaya di luar yang telah Anda setujui.</p></article>
+      <div class="kisi-harga" style="margin-top:28px">
+        <div class="kartu-harga">
+          <span class="chip hidup"><i></i>Program Uji Coba Tanpa Risiko</span>
+          <div class="nm">Coba Gratis 7 Hari di Lokasi Kafe Anda</div>
+          <p class="desk">Kami pasang langsung di komputer dan kamera kafe Anda selama 7 hari penuh. Anda dan staf membuktikan sendiri akurasi pencatatan setoran per shift tanpa keluar biaya apa pun di awal. Jika tidak cocok, sistem kami lepas tanpa ikatan apa pun.</p>
+          <a class="tombol tombol-utama" href="#daftar">Klaim Coba Gratis 7 Hari <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+        </div>
+        <div class="kartu-harga pilihan">
+          <span class="label-mono">Investasi Setelah 7 Hari Terbukti Cocok:</span>
+          <div class="rp">Rp 3.500.000 <small>biaya pasang & lisensi sistem mandiri</small></div>
+          <ul class="fitur"><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Otomasi buka-tutup shift mandiri mengikuti jam operasional kafe Anda</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Pencatatan kendaraan dari kamera, dicocokkan otomatis dengan setoran kasir/juru parkir</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Kartu rekapitulasi setoran transparan (mencegah saling curiga antarkru)</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Pelatihan staf jaga sampai mandiri</span></li><li><svg class="ikon " aria-hidden="true"><use href="/assets/ikon.svg#i-cek"/></svg><span>Biaya pemeliharaan software & update: <strong>Rp 300.000 / bulan</strong> (mulai bulan kedua)</span></li></ul>
+        </div>
+      </div>
+      <div class="info-callout-box" style="margin-top:28px"><strong>Bebas Beban Pengadaan Alat:</strong> Kamera, komputer, dan perlengkapan fisik adalah milik kafe Anda sendiri. Kami memberikan panduan spesifikasi teknis presisi agar Anda bebas memanfaatkan perangkat yang sudah ada atau membeli di mana pun tanpa markup harga hardware.</div>
+    </div>
   </section>
 
-  <section class="bab" id="bab6">
-    <div class="nomor">6</div><div class="label">Jaminan jujur</div>
-    <h2>Yang kami jamin bukan omzet Anda pasti melipat ganda, melainkan bahwa setiap rupiah dan transaksi usaha Anda tercatat dengan benar.</h2>
-    <blockquote class="termin">Ya kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.</blockquote>
+  <section class="bagian rapat" id="bab6">
+    <div class="wadah sempit">
+      <article class="bab-kartu"><div class="bab-label"><span class="no">06</span><span class="label-mono">Jaminan jujur</span></div>
+          <h2>Yang kami jamin bukan omzet Anda pasti melipat ganda, melainkan bahwa setiap rupiah dan transaksi usaha Anda tercatat dengan benar.</h2>
+        <blockquote class="termin">Ya kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya.</blockquote>
+      </article>
+    </div>
   </section>
 
-  <div class="penutup">
-    <h2>Ceritakan alur usaha Anda.</h2>
-    <p>Diskusikan kebutuhan Anda langsung dengan tim AutoClaryTech, tanpa paksaan.</p>
-    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-  <a class="tombol" href="#daftar">Tinggalkan nama Anda</a>
-  <a class="tombol" style="background: transparent; color: var(--tinta); border: 1px solid var(--garis);" href="index.html#wizard">Rancang Aplikasi Kustom &rarr;</a>
-</div>
-  </div>
+  <section class="bagian rapat">
+    <div class="wadah">
+      <div class="penutup-kartu">
+        <h2>Ceritakan alur usaha Anda.</h2>
+        <p>Diskusikan kebutuhan Anda langsung dengan tim AutoClaryTech, tanpa paksaan.</p>
+        <div class="hero-aksi">
+          <a class="tombol tombol-utama" href="#daftar">Tinggalkan nama Anda <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+          <a class="tombol" href="index.html#wizard">Rancang Aplikasi Kustom <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
-<footer><div class="bungkus">&copy; 2026 AutoClaryTech. Your Simple, Reliable Partner.</div></footer>
+
+<footer>
+  <div class="wadah">
+    <div class="kaki">
+      <div class="kaki-atas">
+        <div>
+          <a href="/" class="merek"><span class="merek-tanda"><img src="/assets/logo_icon_mark_bapak.png" alt="AutoClaryTech" width="30" height="30"></span><span class="merek-kata">AUTOCLARY<em>TECH</em></span></a>
+          <div class="semb">Your Simple, Reliable Partner</div>
+          <div class="ket">Ekosistem Solusi Perangkat Lunak &amp; Otomasi Operasional Bisnis</div>
+        </div>
+        <a href="/" class="tombol">Beranda <svg class="ikon ikon-s ikon-geser" aria-hidden="true"><use href="/assets/ikon.svg#i-panah"/></svg></a>
+      </div>
+      
+      <div class="kaki-tautan">
+        <span class="judul-kecil">Aplikasi:</span>
+        <a href="/pantala.html">Pantala (Kafe)</a>
+        <a href="/rentalkita.html">RentalKita</a>
+        <a href="/les.html">Les &amp; bimbel</a>
+        <a href="/pondok.html">Pondok</a>
+        <a href="/koperasi.html">Koperasi</a>
+        <a href="/desa.html">Desa wisata</a>
+        <a href="/toko.html">Parkir toko</a>
+      </div>
+      <div class="kaki-tautan">
+        <a href="/#katalog-aplikasi">Katalog Aplikasi</a>
+        <a href="/privasi.html">Kebijakan Privasi</a>
+        <a href="/syarat.html">Syarat &amp; Ketentuan</a>
+      </div>
+      <div class="hak">© 2026 AutoClaryTech. Your Simple, Reliable Partner.</div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
