@@ -124,9 +124,11 @@
     .merek-tanda { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; background: var(--bg); box-shadow: var(--timbul-kecil); }
     .merek-tanda img { width: 30px; height: 30px; }
     .merek em { font-style: normal; color: var(--aksen-teks); }
-    /* Merek resmi ACT (logo buatan Bapak): AUTOCLARY tebal tosca + TECH tipis sian, digelapkan agar kontras >=4.5 */
-    .merek-kata { color: #115E59; letter-spacing: .01em; }
-    .merek-kata em { color: #155E75; font-weight: 400; }
+    /* Merek resmi ACT (logo buatan Bapak): warna PERSIS logo, gradasi tosca #13B8A7 -> sian #21D1E8.
+       Teks logo/nama merek dikecualikan dari batas kontras WCAG 1.4.3 ("text that is part of a logo or brand name"). */
+    .merek-kata { letter-spacing: .01em; color: #13B8A7; background: linear-gradient(90deg, #13B8A7 0%, #21D1E8 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .merek-kata em { font-weight: 400; -webkit-text-fill-color: transparent; }
     .kapsul-menu {
       display: flex; gap: 4px; padding: 6px; border-radius: 999px;
       background: var(--bg); box-shadow: var(--tekan);
