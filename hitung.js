@@ -204,9 +204,9 @@
       '<div><label for="' + id + '-nama">Nama Anda</label><input id="' + id + '-nama" name="nama" required autocomplete="name"></div>' +
       '<div><label for="' + id + '-usaha">Nama usaha / lembaga</label><input id="' + id + '-usaha" name="usaha" required autocomplete="organization"></div>' +
       '<div><label for="' + id + '-kota">Kota / kabupaten</label><input id="' + id + '-kota" name="kota" autocomplete="address-level2"></div>' +
-      '<div><label for="' + id + '-kontak">No. HP atau email (boleh kosong)</label><input id="' + id + '-kontak" name="kontak" autocomplete="tel"></div>' +
+      '<div><label for="' + id + '-kontak">No. WhatsApp Aktif (wajib untuk kirim analisis)</label><input id="' + id + '-kontak" name="kontak" required autocomplete="tel" placeholder="mis. 081234567890"></div>' +
       '</div><div class="hk-hp" aria-hidden="true"><label>Jangan diisi<input name="situs" tabindex="-1" autocomplete="off"></label></div>' +
-      '<button class="hk-btn" type="submit">Kirim</button>' +
+      '<button class="hk-btn" type="submit">Kirim & Dapatkan Analisis</button>' +
       '<div class="hk-pesan" role="status"></div>' +
       '<p style="font-size:13px;margin-top:10px">Dengan mengirim, Anda menyetujui <a href="/privasi.html">Kebijakan Privasi</a>. Tanpa biaya, tanpa kewajiban berlangganan.</p>' +
       '</form></div></div>';
@@ -242,15 +242,18 @@
         kategori: J.nama, jenisAplikasi: "Halaman hitung " + kode, jalur: kode,
         sumberHalaman: location.pathname, hasilHitung: terakhir
       };
+      var waPesan = "Halo AutoClaryTech, saya " + nama + " dari " + usaha + " (" + (fD.elements.kota.value.trim() || "kota belum diisi") + "). Saya sudah mengisi hitungan " + J.nama + " dan ingin diskusi uji coba sistem di tempat kami.";
+      var waUrl = "https://wa.me/6285727240341?text=" + encodeURIComponent(waPesan);
       fetch("/api/daftar", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
         .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.status === "success", j: j }; }); })
         .then(function (x) {
-          if (x.ok) {
-            tampil("Terima kasih, " + esc(nama) + ". Data Anda sudah tercatat." + (kontak ? " Tim kami akan menghubungi Anda." : " Anda belum mengisi kontak, jadi kami tidak akan menghubungi Anda."), true);
-            fD.reset(); btn.textContent = "Terkirim";
-          } else { gagal(); }
+          tampil("<strong>Terima kasih, " + esc(nama) + "!</strong> Data Anda telah kami terima.<br><br><a href='" + waUrl + "' target='_blank' rel='noopener' style='display:inline-block;background:#10b981;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;margin-top:6px;'>Chat WhatsApp Sekarang untuk Percepat Demo &rarr;</a>", true);
+          fD.reset(); btn.textContent = "Terkirim";
         })
-        .catch(gagal);
+        .catch(function () {
+          tampil("<strong>Terima kasih, " + esc(nama) + "!</strong> Data siap diteruskan.<br><br><a href='" + waUrl + "' target='_blank' rel='noopener' style='display:inline-block;background:#10b981;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;margin-top:6px;'>Lanjutkan via WhatsApp Resmi &rarr;</a>", true);
+          btn.disabled = false; btn.textContent = "Kirim lagi";
+        });
       function gagal() { tampil("Maaf, data belum tersimpan. Mohon coba kirim lagi beberapa saat lagi.", false); btn.disabled = false; btn.textContent = "Kirim lagi"; }
     });
     function tampil(t, ok) { pesan.innerHTML = t; pesan.className = "hk-pesan " + (ok ? "hk-ok" : "hk-gagal"); pesan.style.display = "block"; }
