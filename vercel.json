@@ -1,7 +1,21 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/rental", "destination": "/rentalkita" },
-    { "source": "/parkir", "destination": "/pantala" }
+    {
+      "source": "/rental",
+      "destination": "/rentalkita"
+    },
+    {
+      "source": "/parkir",
+      "destination": "/pantala"
+    },
+    {
+      "source": "/contact",
+      "destination": "/cont-act"
+    },
+    {
+      "source": "/studio",
+      "destination": "/cont-act"
+    }
   ]
 }
