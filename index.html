@@ -1144,7 +1144,7 @@
           <div class="sim-quick-replies">
           <button class="sim-chip" onclick="kirimSimulasiPesan('Apakah produk Kopi Arabika 250gr masih ready stok kak?')">Tanya Stok</button>
           <button class="sim-chip" onclick="kirimSimulasiPesan('Saya mau sewa mobil Innova untuk besok lusa 2 hari, ada?')">Tanya Sewa Mobil</button>
-          <button class="sim-chip" onclick="kirimSimulasiPesan('Saya sudah transfer BCA Rp 175.000, ini buktinya.')">Kirim Bukti Transfer</button>
+          <button class="sim-chip" onclick="kirimSimulasiPesan('Saya sudah transfer BCA Rp 175.000, ini buktinya.')">Kirim Bukti Transfer (Simulasi)</button>
           <button class="sim-chip" onclick="kirimSimulasiPesan('Bisa minta disambungkan ke staf manusia / owner?')">Bicara ke Staf</button>
           </div>
           <div class="ponsel-beranda" aria-hidden="true"></div>
@@ -1502,7 +1502,7 @@
         b.className = 'chat-bubble chat-bot';
         if (teksPesan.includes('Kopi Arabika')) b.textContent = 'Terima kasih sudah menghubungi kami, Kak. Kopi Arabika 250gr masih ready stok (sisa 18 pack). Harga Rp 65.000/pack. Mau dikirim hari ini via GoSend atau kurir reguler kak?';
         else if (teksPesan.includes('Innova')) b.textContent = 'Terima kasih atas pertanyaannya. Unit Grand New Innova Reborn untuk lusa tersedia ready 2 unit. Tarif lepas kunci Rp 450.000/24 jam. Mau kami simpankan slot jadwalnya kak?';
-        else if (teksPesan.includes('transfer BCA')) b.textContent = 'Terima kasih Kak! Struk transfer BCA Rp 175.000 berhasil diverifikasi otomatis oleh sistem. Nomor pesanan #ORD-9821 sedang diproses oleh tim gudang.';
+        else if (teksPesan.includes('transfer BCA')) b.textContent = 'Terima kasih Kak! Konfirmasi bukti transfer Rp 175.000 telah dicatat sistem (simulasi alur konfirmasi). Admin toko akan memverifikasi mutasi fisik dan memproses pesanan #ORD-9821.';
         else b.textContent = 'Baik Kak, pesan Anda telah diteruskan ke pemilik usaha / tim CS manusia kami. Staf kami akan segera membalas di jam operasional. Ada yang bisa kami catatkan terlebih dahulu?';
         body.appendChild(b); body.scrollTop = body.scrollHeight;
       }, 650);
