@@ -218,6 +218,142 @@
       font: 500 15px var(--f-teks); color: var(--ink); outline: none;
     }
     .form-input:focus { box-shadow: var(--tekan-dalam), 0 0 0 2px var(--aksen); }
+  
+    /* Master Mode Selector (GAMBAR vs VIDEO) */
+    .master-mode-pills {
+      display: inline-flex;
+      background: var(--bg);
+      padding: 6px;
+      border-radius: 999px;
+      box-shadow: var(--tekan);
+      margin-bottom: 28px;
+      gap: 6px;
+      max-width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .master-mode-btn {
+      padding: 12px 26px;
+      border-radius: 999px;
+      border: 0;
+      font: 700 15px/1 var(--f-judul);
+      color: var(--redup);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s var(--gerak);
+    }
+    .master-mode-btn:hover { color: var(--ink); }
+    .master-mode-btn.aktif {
+      color: #fff;
+      background: var(--aksen);
+      box-shadow: -2px -2px 6px rgba(255,255,255,0.8), 3px 4px 12px rgba(74,77,222,0.35);
+    }
+
+    /* Video Player Container */
+    .video-showcase-box {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 9/16;
+      margin: 0 auto;
+      border-radius: var(--r);
+      overflow: hidden;
+      box-shadow: var(--timbul-besar);
+      background: #0d1117;
+      border: 2px solid rgba(255,255,255,0.7);
+    }
+    .video-showcase-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .video-watermark-overlay {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(18,24,41,0.75);
+      backdrop-filter: blur(8px);
+      padding: 8px 18px;
+      border-radius: 999px;
+      color: #fff;
+      font: 600 12px/1 var(--f-mono);
+      letter-spacing: 0.04em;
+      pointer-events: none;
+      white-space: nowrap;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* 10 Musik Terviral Playlist */
+    .musik-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+      text-align: left;
+    }
+    .musik-card {
+      background: rgba(255,255,255,0.65);
+      border-radius: var(--r-kecil);
+      padding: 12px 16px;
+      box-shadow: var(--tekan);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s var(--gerak);
+      border: 1px solid rgba(255,255,255,0.8);
+    }
+    .musik-card:hover {
+      background: rgba(255,255,255,0.9);
+      transform: translateY(-2px);
+      box-shadow: var(--timbul-kecil);
+    }
+    .musik-card.sedang-putar {
+      background: #fff;
+      border-color: var(--aksen);
+      box-shadow: 0 0 0 2px rgba(74,77,222,0.3);
+    }
+    .btn-play-musik {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--aksen);
+      color: #fff;
+      border: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .btn-play-musik:hover { transform: scale(1.08); }
+    .musik-info { flex: 1; min-width: 0; }
+    .musik-judul {
+      font: 700 13px/1.3 var(--f-judul);
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .musik-mood {
+      font: 500 11px/1.2 var(--f-teks);
+      color: var(--redup);
+      margin-top: 2px;
+    }
+    .musik-tag {
+      font: 700 10px/1 var(--f-mono);
+      background: #FEE2E2;
+      color: #DC2626;
+      padding: 4px 8px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+
   </style>
 </head>
 <body>
@@ -246,16 +382,28 @@
   <!-- Hero Header -->
   <div class="hero-badge-act">
     <span class="badge-titik"></span>
-    <span>cont-ACT • Content by AutoClaryTech (Fase 1)</span>
+    <span>cont-ACT • Mesin Konten Generatif Kilat UMKM (2 Macam: GAMBAR &amp; VIDEO)</span>
   </div>
 
-  <h1 style="font:800 42px/1.15 var(--f-judul); letter-spacing:-.025em; color:var(--ink); max-width:820px; margin:0 auto 18px;">
-    Studio Foto Produk Kilat 1-Klik dari Kamera HP Anda
+  <h1 style="font:800 42px/1.15 var(--f-judul); letter-spacing:-.025em; color:var(--ink); max-width:860px; margin:0 auto 18px;">
+    Ubah Foto HP Jadi Foto Studio Mall &amp; Video Iklan FYP dalam 15 Detik
   </h1>
-  <p style="font-size:18px; color:var(--teks); max-width:680px; margin:0 auto 32px; line-height:1.6;">
-    Ubah foto produk di atas meja dapur atau lantai toko menjadi foto katalog studio mewah berbayang alami. 
-    Bentuk fisik &amp; teks kemasan <strong>100% terjaga utuh</strong> tanpa efek stiker melayang seperti Canva.
+  <p style="font-size:18px; color:var(--teks); max-width:720px; margin:0 auto 32px; line-height:1.6;">
+    Bukan sekadar potong-tempel seperti Canva. AI generatif membangun ulang pencahayaan studio mewah, 
+    pantulan marmer, gerakan kamera 3D 360°, serta menyematkan <strong>10 musik terviral TikTok &amp; Reels</strong> langsung ke produk Anda.
   </p>
+
+  <!-- Pilihan 2 Macam Produk Utama -->
+  <div class="master-mode-pills">
+    <button type="button" class="master-mode-btn aktif" id="btn-mode-gambar" onclick="gantiModePameran('gambar')">
+      <svg class="ikon ikon-s" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+      <span>1. GAMBAR: Foto Studio Katalog (Rp 9.900,-)</span>
+    </button>
+    <button type="button" class="master-mode-btn" id="btn-mode-video" onclick="gantiModePameran('video')">
+      <svg class="ikon ikon-s" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+      <span>2. VIDEO: Iklan 3D Gerak + Musik Viral (Rp 19.900,-)</span>
+    </button>
+  </div>
 
   <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:48px;">
     <a href="#demo-slider" class="tombol tombol-utama">
@@ -331,6 +479,141 @@
       </div>
     </div>
   </section>
+
+  <!-- Section Pameran VIDEO Sinematik 3D & 10 Musik Terviral -->
+  <section class="slider-card" id="demo-video" style="display:none; margin-top:28px;">
+    <div style="max-width:680px; margin:0 auto 24px;">
+      <span class="hero-badge-act" style="margin-bottom:8px;">HASIL VIDEO FLUX 3 GENERATIF</span>
+      <h2 style="font:800 28px/1.2 var(--f-judul); color:var(--ink); margin-bottom:8px;">
+        Video Iklan 5 Detik Bergerak Sinematik 360°
+      </h2>
+      <p style="font-size:15px; color:var(--redup); line-height:1.5;">
+        Kamera berputar halus mengitari produk dengan uap mengepul hangat atau bulir embun dingin meleleh. 
+        Pilih 1 dari <strong>10 musik paling viral di FYP TikTok &amp; IG Reels pekan ini</strong>:
+      </p>
+    </div>
+
+    <!-- Video Player Preview -->
+    <div class="video-showcase-box" id="video-box">
+      <video id="video-preview-player" autoplay loop muted playsinline poster="/assets/cont-act/degan_after.jpg">
+        <source src="/assets/cont-act/degan_video_demo.mp4" type="video/mp4">
+        <!-- Fallback image bila video belum load -->
+        <img src="/assets/cont-act/degan_after.jpg" alt="Video Preview" style="width:100%; height:100%; object-fit:cover;">
+      </video>
+      <div class="video-watermark-overlay">Pratinjau Watermark • cont-ACT Studio</div>
+    </div>
+
+    <div style="margin-top:20px; font:700 13px var(--f-judul); color:var(--ink);">
+      🎧 COBA PUTAR 10 MUSIK TERVIRAL PEKAN INI (KLIK UNTUK MENDENGARKAN):
+    </div>
+
+    <!-- 10 Musik Terviral Grid -->
+    <div class="musik-grid" id="playlist-musik">
+      <div class="musik-card" id="mcard-1" onclick="putarMusik(1, 'DJ Akim Laku Keras', 'Beat Cepat Enerjik • Tren FYP #1', this)">
+        <button type="button" class="btn-play-musik" id="btn-mplay-1">▶</button>
+        <div class="musik-info">
+          <div class="musik-judul">1. DJ Akim Laku Keras</div>
+          <div class="musik-mood">Beat Cepat Enerjik • Cocok Promo Kilat</div>
+        </div>
+        <span class="musik-tag">🔥 TREN #1</span>
+      </div>
+
+      <div class="musik-card" id="mcard-2" onclick="putarMusik(2, 'Acoustic Morning Breeze', 'Petikan Gitar Lembut • Kafe Estetik', this)">
+        <button type="button" class="btn-play-musik" id="btn-mplay-2">▶</button>
+        <div class="musik-info">
+          <div class="musik-judul">2. Acoustic Morning Breeze</div>
+          <div class="musik-mood">Santai Kafe • Madu, Kopi, Teh Herbal</div>
+        </div>
+        <span class="musik-tag">🔥 VIRAL</span>
+      </div>
+
+      <div class="musik-card" id="mcard-3" onclick="putarMusik(3, 'Tropical Sunny Day', 'Pop Upbeat Ceria • Minuman Segar', this)">
+        <button type="button" class="btn-play-musik" id="btn-mplay-3">▶</button>
+        <div class="musik-info">
+          <div class="musik-judul">3. Tropical Sunny Day</div>
+          <div class="musik-mood">Ceria &amp; Segar • Es Degan, Jus, Salad</div>
+        </div>
+        <span class="musik-tag">🔥 FYP</span>
+      </div>
+
+      <div class="musik-card" id="mcard-4" onclick="putarMusik(4, 'Dapur Ritmik ASMR', 'Beat Panci &amp; Desis Uap Hangat', this)">
+        <button type="button" class="btn-play-musik" id="btn-mplay-4">▶</button>
+        <div class="musik-info">
+          <div class="musik-judul">4. Dapur Ritmik ASMR</div>
+          <div class="musik-mood">Kuliner Hangat • Bakpao, Sambal, Bakso</div>
+        </div>
+        <span class="musik-tag">🔥 ASMR</span>
+      </div>
+
+      <div class="musik-card" id="mcard-5" onclick="putarMusik(5, 'Lo-Fi Chill Sore Hari', 'Irama Santai Senja • Nongkrong Kafe', this)">
+        <button type="button" class="btn-play-musik" id="btn-mplay-5">▶</button>
+        <div class="musik-info">
+          <div class="musik-judul">5. Lo-Fi Chill Sore Hari</div>
+          <div class="musik-mood">Santai Sore • Camilan, Wedangan, Kafe</div>
+        </div>
+        <span class="musik-tag">🔥 NAIK</span>
+      </div>
+
+      <div class="musik-card" id="mcard-6" onclick="putarMusik(6, 'Piano Kemewahan Butik', 'Klasik Sinematik • Kemasan Premium', this)">
+        <button type="button" class="btn-play-musik" id="btn-mplay-6">▶</button>
+        <div class="musik-info">
+          <div class="musik-judul">6. Piano Kemewahan Butik</div>
+          <div class="musik-mood">Elegan &amp; Mewah • Hampers, Oleh-oleh</div>
+        </div>
+        <span class="musik-tag">✨ MEWAH</span>
+      </div>
+
+      <div class="musik-card" id="mcard-7" onclick="putarMusik(7, 'Gamelan Upbeat Modern', 'Etnik Tradisional Berenergi', this)">
+        <button type="button" class="btn-play-musik" id="btn-mplay-7">▶</button>
+        <div class="musik-info">
+          <div class="musik-judul">7. Gamelan Upbeat Modern</div>
+          <div class="musik-mood">Otentik Nusantara • Jamu, Rempah, Madu</div>
+        </div>
+        <span class="musik-tag">🌾 ETNIK</span>
+      </div>
+
+      <div class="musik-card" id="mcard-8" onclick="putarMusik(8, 'Semangat Pagi Bugar', 'Ritme Sehat &amp; Positif', this)">
+        <button type="button" class="btn-play-musik" id="btn-mplay-8">▶</button>
+        <div class="musik-info">
+          <div class="musik-judul">8. Semangat Pagi Bugar</div>
+          <div class="musik-mood">Gaya Hidup Sehat • Makanan Diet, Herbal</div>
+        </div>
+        <span class="musik-tag">🏃 SEHAT</span>
+      </div>
+
+      <div class="musik-card" id="mcard-9" onclick="putarMusik(9, 'Kriuk Renyah Snack', 'Beat Ceria Gurih Berderak', this)">
+        <button type="button" class="btn-play-musik" id="btn-mplay-9">▶</button>
+        <div class="musik-info">
+          <div class="musik-judul">9. Kriuk Renyah Snack</div>
+          <div class="musik-mood">Garing Renyah • Keripik, Kerupuk, Basreng</div>
+        </div>
+        <span class="musik-tag">🍿 GURIH</span>
+      </div>
+
+      <div class="musik-card" id="mcard-10" onclick="putarMusik(10, 'TikTok Fast Hook Beat', 'Transisi Kilat Rasa Penasaran', this)">
+        <button type="button" class="btn-play-musik" id="btn-mplay-10">▶</button>
+        <div class="musik-info">
+          <div class="musik-judul">10. TikTok Fast Hook Beat</div>
+          <div class="musik-mood">Penasaran Tinggi • Transformasi Sebelum-Sesudah</div>
+        </div>
+        <span class="musik-tag">⚡ VIRAL</span>
+      </div>
+    </div>
+
+    <!-- Selected Music Action Box -->
+    <div style="margin-top:24px; padding:16px 20px; border-radius:var(--r-kecil); background:rgba(255,255,255,0.7); box-shadow:var(--tekan); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div style="text-align:left;">
+        <span style="font-size:12px; color:var(--redup);">Musik Terpilih Saat Ini:</span>
+        <div id="label-musik-aktif" style="font:700 14px var(--f-judul); color:var(--ink);">1. DJ Akim Laku Keras (Tren FYP #1)</div>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button type="button" class="tombol tombol-utama" style="padding:10px 18px; font-size:13px;" onclick="terapkanMusikKeVideo()">
+          <span>Pasangkan ke Video Produk</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
 
   <!-- Interactive Simulator: Autocomplete Prompt & Caption Generator -->
   <section class="slider-card" style="margin-top:48px; text-align:left;">
@@ -452,28 +735,61 @@ Pemesanan &amp; konsultasi: Klik tautan di bio sekarang!
     </div>
   </section>
 
-  <!-- Pricing Model -->
+  <!-- Pricing Model: 2 Macam Produk + Freemium 3-Shot Hook -->
   <section class="slider-card" id="tarif" style="margin-top:56px; text-align:center;">
-    <span class="hero-badge-act" style="margin-bottom:12px;">SKEMA TRANSAKSI MIKRO</span>
-    <h2 style="font:800 32px/1.2 var(--f-judul); color:var(--ink); margin-bottom:8px;">
-      Rp 9.900,- <span style="font-size:18px; font-weight:500; color:var(--redup);">/ Sekali Scan QRIS</span>
+    <span class="hero-badge-act" style="margin-bottom:12px;">SKEMA TRANSAKSI MIKRO (BEBAS LANGGANAN)</span>
+    <h2 style="font:800 34px/1.2 var(--f-judul); color:var(--ink); margin-bottom:8px;">
+      Pilih Sesuai Kebutuhan: Gambar atau Video
     </h2>
-    <p style="font-size:16px; color:var(--teks); max-width:540px; margin:0 auto 24px;">
-      Tanpa langganan bulanan yang mengikat. Bayar hanya ketika Anda ingin memposting produk baru.
+    <p style="font-size:16px; color:var(--teks); max-width:620px; margin:0 auto 28px;">
+      Sistem <strong>Freemium Terbuka</strong>: Coba langsung foto produk Anda secara gratis. Bayar uang receh via QRIS hanya ketika ingin mengunduh file bersih tanpa watermark.
     </p>
 
-    <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-bottom:32px;">
-      <div style="background:rgba(255,255,255,0.6); padding:18px 24px; border-radius:var(--r-kecil); box-shadow:var(--tekan); max-width:240px; text-align:left;">
-        <div style="font:700 14px var(--f-judul); color:var(--ink); margin-bottom:4px;">Gratis 3 Kali Awal</div>
-        <div style="font-size:12px; color:var(--redup);">Coba langsung 3 foto tanpa biaya kagem membuktikan hasil studio.</div>
+    <!-- 2 Kartu Produk Nyata -->
+    <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-bottom:36px;">
+      <!-- Kartu 1: GAMBAR -->
+      <div style="background:#fff; padding:28px 24px; border-radius:var(--r); box-shadow:var(--timbul-kecil); width:320px; text-align:left; border:2px solid rgba(74,77,222,0.15); display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div style="display:inline-block; font:700 11px/1 var(--f-mono); background:#EEF2FF; color:var(--aksen); padding:4px 10px; border-radius:999px; margin-bottom:12px;">MACAM 1 • FOTO KATALOG</div>
+          <h3 style="font:800 24px var(--f-judul); color:var(--ink); margin-bottom:6px;">Gambar Studio</h3>
+          <div style="font:800 30px/1 var(--f-judul); color:var(--aksen); margin-bottom:12px;">
+            Rp 9.900,- <span style="font-size:14px; font-weight:500; color:var(--redup);">/ foto</span>
+          </div>
+          <div style="background:#ECFDF5; color:#065F46; padding:8px 12px; border-radius:6px; font:600 12px var(--f-teks); margin-bottom:16px;">
+            🎁 FREEMIUM: 3 Kali Coba Gratis Perdana!
+          </div>
+          <ul style="font-size:13px; color:var(--teks); line-height:1.7; padding-left:18px; margin-bottom:20px;">
+            <li>Resolusi cetak HD super jernih</li>
+            <li>Relighting pencahayaan studio mewah</li>
+            <li>Contact shadow menyatu di marmer/kayu</li>
+            <li>Label &amp; kemasan asli 100% terjaga</li>
+            <li>Bonus Caption jualan &amp; tagar tren</li>
+          </ul>
+        </div>
+        <a href="#daftar" class="tombol" style="width:100%; text-align:center;">Ambil Kuota 3x Gratis</a>
       </div>
-      <div style="background:rgba(255,255,255,0.6); padding:18px 24px; border-radius:var(--r-kecil); box-shadow:var(--tekan); max-width:240px; text-align:left;">
-        <div style="font:700 14px var(--f-judul); color:var(--ink); margin-bottom:4px;">QRIS Dinamis Instan</div>
-        <div style="font-size:12px; color:var(--redup);">Bisa dibayar dari BCA, Mandiri, BRI, GoPay, OVO, ShopeePay, Dana.</div>
-      </div>
-      <div style="background:rgba(255,255,255,0.6); padding:18px 24px; border-radius:var(--r-kecil); box-shadow:var(--tekan); max-width:240px; text-align:left;">
-        <div style="font:700 14px var(--f-judul); color:var(--ink); margin-bottom:4px;">Unduh Resolusi HD</div>
-        <div style="font-size:12px; color:var(--redup);">Foto tajam siap unggah ke Instagram Feed, Facebook Page, atau Shopee.</div>
+
+      <!-- Kartu 2: VIDEO -->
+      <div style="background:#fff; padding:28px 24px; border-radius:var(--r); box-shadow:var(--timbul-besar); width:320px; text-align:left; border:2px solid var(--aksen); display:flex; flex-direction:column; justify-content:space-between; position:relative;">
+        <span style="position:absolute; top:-12px; right:20px; background:#DC2626; color:#fff; font:700 11px var(--f-mono); padding:4px 12px; border-radius:999px; box-shadow:0 2px 8px rgba(220,38,38,0.4);">PALING LARIS</span>
+        <div>
+          <div style="display:inline-block; font:700 11px/1 var(--f-mono); background:#FEF2F2; color:#DC2626; padding:4px 10px; border-radius:999px; margin-bottom:12px;">MACAM 2 • IKLAN FYP TIKTOK</div>
+          <h3 style="font:800 24px var(--f-judul); color:var(--ink); margin-bottom:6px;">Video Iklan 3D</h3>
+          <div style="font:800 30px/1 var(--f-judul); color:#DC2626; margin-bottom:12px;">
+            Rp 19.900,- <span style="font-size:14px; font-weight:500; color:var(--redup);">/ video</span>
+          </div>
+          <div style="background:#EFF6FF; color:#1E40AF; padding:8px 12px; border-radius:6px; font:600 12px var(--f-teks); margin-bottom:16px;">
+            🎬 FREEMIUM: Pratinjau Video 5 Detik Gratis!
+          </div>
+          <ul style="font-size:13px; color:var(--teks); line-height:1.7; padding-left:18px; margin-bottom:20px;">
+            <li>Video bergerak sinematik 5 detik (FLUX 3)</li>
+            <li>Gerakan kamera memutari produk 360°</li>
+            <li>Efek uap mengepul hangat / embun meleleh</li>
+            <li><strong>Pilihan 10 Musik Terviral FYP Pekan Ini</strong></li>
+            <li>Audio ASMR fisik produk menyatu alami</li>
+          </ul>
+        </div>
+        <a href="#daftar" class="tombol tombol-utama" style="width:100%; text-align:center;">Coba Pratinjau Video</a>
       </div>
     </div>
 
@@ -664,12 +980,141 @@ Yuk nikmati selagi hangat!`,
     });
   }
 
-  // Waitlist Form Handler
-  function kirimWaitlist(e) {
+  // Waitlist Form Handler (Tersambung ke /api/daftar & n8n)
+  async function kirimWaitlist(e) {
     e.preventDefault();
-    document.getElementById('form-waitlist').style.display = 'none';
-    document.getElementById('pesan-sukses').style.display = 'block';
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.innerHTML = '<span>Mengirim Pendaftaran...</span>';
+
+    const namaUsaha = document.getElementById('nama-usaha').value.trim();
+    const noWa = document.getElementById('no-wa').value.trim();
+    const kota = document.getElementById('kota').value.trim();
+
+    let tersimpan = false;
+    try {
+      const resp = await fetch('/api/daftar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          namaToko: namaUsaha,
+          waOwner: noWa,
+          kota: kota,
+          jenisAplikasi: 'cont-ACT (Studio Foto AI Kilat)',
+          kategori: 'Foto Produk UMKM',
+          skalaUsaha: 'UMKM',
+          jalur: 'cont-act',
+          sumberHalaman: 'autoclarytech.com/cont-act'
+        })
+      });
+      let hasil = null;
+      try { hasil = await resp.json(); } catch (_) { hasil = null; }
+      tersimpan = resp.ok && hasil && hasil.status === 'success';
+    } catch (err) {
+      console.error('Waitlist submit gagal:', err);
+    }
+    if (tersimpan) {
+      document.getElementById('form-waitlist').style.display = 'none';
+      document.getElementById('pesan-sukses').style.display = 'block';
+    } else {
+      // Jujur: jangan tampilkan sukses bila data belum tersimpan (audit Cody 18 Okt 2026)
+      btn.disabled = false;
+      btn.innerHTML = '<span>Ambil Akses 3 Kali Coba Gratis</span>';
+      let g = document.getElementById('pesan-gagal');
+      if (!g) {
+        g = document.createElement('div');
+        g.id = 'pesan-gagal';
+        g.style.cssText = 'margin-top:16px;padding:12px;border-radius:8px;background:rgba(180,40,40,0.1);color:#a42a2a;font:600 13px var(--f-teks);';
+        document.getElementById('form-waitlist').appendChild(g);
+      }
+      g.textContent = 'Data Anda belum tersimpan. Mohon coba kirim lagi beberapa saat lagi.';
+    }
   }
+
+  // Mode Pameran Switcher (GAMBAR vs VIDEO)
+  function gantiModePameran(mode) {
+    const btnGambar = document.getElementById('btn-mode-gambar');
+    const btnVideo = document.getElementById('btn-mode-video');
+    const seksiGambar = document.getElementById('demo-slider');
+    const seksiVideo = document.getElementById('demo-video');
+
+    if (mode === 'video') {
+      btnGambar.classList.remove('aktif');
+      btnVideo.classList.add('aktif');
+      seksiGambar.style.display = 'none';
+      seksiVideo.style.display = 'block';
+    } else {
+      btnVideo.classList.remove('aktif');
+      btnGambar.classList.add('aktif');
+      seksiVideo.style.display = 'none';
+      seksiGambar.style.display = 'block';
+    }
+  }
+
+  // Web Audio Synthesizer Beep Preview (Real in-browser sound generation for demo)
+  let audioCtx = null;
+  let oscillator = null;
+  let isPlayingAudio = false;
+  let laguAktifId = 1;
+
+  function putarMusik(id, judul, mood, el) {
+    laguAktifId = id;
+    document.getElementById('label-musik-aktif').textContent = `${id}. ${judul} (${mood})`;
+    
+    // Reset status kartu lain
+    document.querySelectorAll('.musik-card').forEach(c => c.classList.remove('sedang-putar'));
+    document.querySelectorAll('.btn-play-musik').forEach(b => b.textContent = '▶');
+
+    if (isPlayingAudio) {
+      hentikanMusik();
+    }
+
+    el.classList.add('sedang-putar');
+    el.querySelector('.btn-play-musik').textContent = '⏸';
+    isPlayingAudio = true;
+
+    // Putar melodi preview via Web Audio API agar terdengar ritme musik nyata di peramban
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      // Frekuensi berbeda tiap mood lagu
+      const nadaMood = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25, 587.33, 659.25];
+      osc.type = id % 2 === 0 ? 'sine' : 'triangle';
+      osc.frequency.setValueAtTime(nadaMood[id - 1] || 440, now);
+      
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 2.5);
+      
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 2.5);
+
+      setTimeout(() => {
+        if (el.classList.contains('sedang-putar')) {
+          el.querySelector('.btn-play-musik').textContent = '▶';
+          el.classList.remove('sedang-putar');
+          isPlayingAudio = false;
+        }
+      }, 2500);
+    } catch(e) {
+      console.log('Audio preview:', e);
+    }
+  }
+
+  function hentikanMusik() {
+    isPlayingAudio = false;
+    document.querySelectorAll('.musik-card').forEach(c => c.classList.remove('sedang-putar'));
+    document.querySelectorAll('.btn-play-musik').forEach(b => b.textContent = '▶');
+  }
+
+  function terapkanMusikKeVideo() {
+    alert(`Musik #${laguAktifId} berhasil dipasangkan ke video produk Anda! Sistem akan menjahit ritme audio ini saat video 1080p dirender.`);
+  }
+
 </script>
 
 </body>

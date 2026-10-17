@@ -43,7 +43,7 @@ export default async function handler(req, res) {
   } = req.body || {};
 
   // Halaman jalur: kontak boleh kosong (nomor WA CS diblokir 10 Okt; pengunjung tidak wajib memberi WA)
-  const JALUR_SAH = ['pantala', 'toko', 'rental', 'pondok', 'koperasi', 'desa', 'les'];
+  const JALUR_SAH = ['pantala', 'toko', 'rental', 'pondok', 'koperasi', 'desa', 'les', 'cont-act'];
   const jalurLp = JALUR_SAH.includes(String(jalur || '')) ? String(jalur) : '';
   const pesanGagal = jalurLp
     ? 'Data belum tersimpan di sistem kami. Mohon coba kirim lagi beberapa saat lagi.'
