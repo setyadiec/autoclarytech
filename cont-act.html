@@ -514,14 +514,14 @@
 
           <!-- Pratinjau Visual Studio Canvas/Image -->
           <div style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:16px; background:linear-gradient(180deg, #1E293B 0%, #0F172A 100%); text-align:center; box-shadow:var(--tekan);">
-            <canvas id="gen-canvas" width="600" height="600" style="width:100%; max-height:280px; object-fit:contain; display:block; margin:0 auto;"></canvas>
+            <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:280px; object-fit:contain; display:block; margin:0 auto;"></canvas>
             <div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; font-size:10px; padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
-              Studio Iklan cont-ACT
+              Mockup Studio cont-ACT
             </div>
           </div>
           <div style="margin-bottom:16px;">
             <a id="btn-download-foto" href="#" download="konten-studio-contact.png" class="tombol tombol-kecil" style="width:100%; justify-content:center; background:#F8FAFC; border:1px solid #CBD5E1; color:var(--ink); font-weight:700;">
-              <span>📥 Download Foto Studio HD</span>
+              <span>📥 Download Foto Mockup Studio (1080x1080)</span>
             </a>
           </div>
 
@@ -1518,20 +1518,20 @@ Yuk nikmati selagi hangat!`,
     ctx.fillRect(0, 0, w, h);
 
     // 2. Radial Soft Studio Spot Light behind product
-    const spotGrad = ctx.createRadialGradient(w/2, h/2 - 20, 20, w/2, h/2 - 20, 260);
-    spotGrad.addColorStop(0, 'rgba(0, 168, 150, 0.4)');
-    spotGrad.addColorStop(0.4, 'rgba(255, 255, 255, 0.12)');
+    const spotGrad = ctx.createRadialGradient(w/2, h/2 - 40, 40, w/2, h/2 - 40, 450);
+    spotGrad.addColorStop(0, 'rgba(0, 168, 150, 0.35)');
+    spotGrad.addColorStop(0.45, 'rgba(255, 255, 255, 0.08)');
     spotGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
     ctx.fillStyle = spotGrad;
     ctx.fillRect(0, 0, w, h);
 
     // 3. Elegant Marble / Studio Podium Pedestal
-    const podiumY = h * 0.72;
-    const podiumW = w * 0.68;
+    const podiumY = h * 0.74;
+    const podiumW = w * 0.72;
 
     // Podium shadow
     ctx.beginPath();
-    ctx.ellipse(w/2, podiumY + 18, podiumW/2 + 20, 20, 0, 0, Math.PI * 2);
+    ctx.ellipse(w/2, podiumY + 26, podiumW/2 + 30, 30, 0, 0, Math.PI * 2);
     ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
     ctx.fill();
 
@@ -1543,42 +1543,66 @@ Yuk nikmati selagi hangat!`,
     podGrad.addColorStop(1, '#94A3B8');
     ctx.fillStyle = podGrad;
     ctx.beginPath();
-    ctx.ellipse(w/2, podiumY, podiumW/2, 24, 0, 0, Math.PI * 2);
+    ctx.ellipse(w/2, podiumY, podiumW/2, 36, 0, 0, Math.PI * 2);
     ctx.fill();
 
     // Podium rim highlight
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 3;
     ctx.stroke();
 
     // 4. Contact shadow directly below the product
     ctx.beginPath();
-    ctx.ellipse(w/2, podiumY - 4, podiumW * 0.32, 10, 0, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
+    ctx.ellipse(w/2, podiumY - 6, podiumW * 0.34, 14, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
     ctx.fill();
 
-    // 5. Draw Product Image
+    // 5. Draw Product Image with rounded card framing
     if (img) {
-      const maxDim = h * 0.54;
+      const maxDim = h * 0.52;
       let pw = img.width;
       let ph = img.height;
       const scale = Math.min(maxDim / pw, maxDim / ph);
       pw *= scale;
       ph *= scale;
       const px = (w - pw) / 2;
-      const py = podiumY - ph;
+      const py = podiumY - ph - 6;
+
+      ctx.save();
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      ctx.shadowBlur = 20;
+      ctx.shadowOffsetY = 10;
+
+      // Rounded clipping path
+      const r = 20;
+      ctx.beginPath();
+      ctx.moveTo(px + r, py);
+      ctx.lineTo(px + pw - r, py);
+      ctx.quadraticCurveTo(px + pw, py, px + pw, py + r);
+      ctx.lineTo(px + pw, py + ph - r);
+      ctx.quadraticCurveTo(px + pw, py + ph, px + pw - r, py + ph);
+      ctx.lineTo(px + r, py + ph);
+      ctx.quadraticCurveTo(px, py + ph, px, py + ph - r);
+      ctx.lineTo(px, py + r);
+      ctx.quadraticCurveTo(px, py, px + r, py);
+      ctx.closePath();
+      ctx.clip();
       ctx.drawImage(img, px, py, pw, ph);
+      ctx.restore();
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
     } else {
-      // Placeholder bottle silhouette if no image yet
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-      ctx.fillRect(w/2 - 40, podiumY - 140, 80, 140);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+      ctx.fillRect(w/2 - 60, podiumY - 220, 120, 220);
     }
 
     // 6. Watermark Studio cont-ACT
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-    ctx.font = 'bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+    ctx.font = 'bold 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('cont-ACT • Studio Iklan AI (100% FREE)', w/2, h - 20);
+    ctx.fillText('cont-ACT • Mockup Studio Iklan 1080p', w/2, h - 32);
 
     // Update download button
     const btnDownload = document.getElementById('btn-download-foto');
@@ -1605,10 +1629,10 @@ Yuk nikmati selagi hangat!`,
     loadingState.style.display = 'block';
 
     const steps = [
-      { main: 'Memindai anatomi produk & mengunci keaslian label...', sub: 'Teknologi Preserved Mask menjaga merek Anda 100% utuh' },
-      { main: 'Memasang pencahayaan studio iklan profesional...', sub: 'Relighting 3D, contact shadow marmer, dan bokeh studio' },
+      { main: 'Menyiapkan frame mockup produk studio...', sub: 'Menyesuaikan proporsi foto kagem tampilan katalog komersial' },
+      { main: 'Memasang tata pencahayaan studio & bayangan...', sub: 'Efek pencahayaan fokus dan podium marmer estetik' },
       { main: 'Meracik naskah copywriting jualan formula Hook 3 Detik...', sub: 'Mengonversi penonton menjadi pembeli via psikologi pesan' },
-      { main: 'Menginjeksi 10 hashtag trending live TikTok & Reels...', sub: 'Menyesuaikan tagar dengan algoritma FYP pekan ini' }
+      { main: 'Menyiapkan 10 hashtag trending live TikTok & Reels...', sub: 'Menyesuaikan tagar dengan algoritma FYP pekan ini' }
     ];
 
     let stepIdx = 0;
