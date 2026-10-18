@@ -11,11 +11,12 @@ export const config = {
   }
 };
 
-// Konfigurasi Supabase untuk penyimpanan kuota persisten
-const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://hdxyzwjdbqhanimfspcm.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// Konfigurasi Supabase untuk penyimpanan kuota persisten khusus ACT
+// Hanya aktif bila Bapak telah menyiapkan project Supabase terpisah khusus ACT (profil BeyVault act-supabase)
+const SUPABASE_URL = process.env.ACT_SUPABASE_URL || process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.ACT_SUPABASE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY;
 
-// In-memory cache & fallback jika Supabase lambat/offline
+// In-memory per-instance fallback (aman, terisolasi, tidak menyentuh database klien lain)
 const kuotaClientMap = new Map();
 let hitunganHarianGlobal = 0;
 let tanggalHariIni = new Date().toISOString().slice(0, 10);
@@ -26,7 +27,7 @@ function hitungHashKunci(clientIp, userAgentSnippet) {
 
 async function ambilKuotaPersisten(kunci) {
   const dariMemori = kuotaClientMap.get(kunci) || 0;
-  if (!SUPABASE_KEY) return dariMemori;
+  if (!SUPABASE_URL || !SUPABASE_KEY) return dariMemori;
 
   try {
     const controller = new AbortController();
@@ -57,7 +58,7 @@ async function ambilKuotaPersisten(kunci) {
 
 async function simpanKuotaPersisten(kunci, hitungBaru, tanggal) {
   kuotaClientMap.set(kunci, hitungBaru);
-  if (!SUPABASE_KEY) return;
+  if (!SUPABASE_URL || !SUPABASE_KEY) return;
 
   try {
     const controller = new AbortController();
