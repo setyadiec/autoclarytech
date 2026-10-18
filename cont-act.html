@@ -406,8 +406,8 @@
   </div>
 
   <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:28px;">
-    <a href="#daftar" class="tombol tombol-utama" style="background:#08694F; border-color:#065F46;">
-      <span>Klaim Coba FREE Produk Anda</span>
+    <a href="#studio-generator" class="tombol tombol-utama" style="background:#08694F; border-color:#065F46;">
+      <span>Mulai Buat Konten Sekarang (100% FREE)</span>
       <svg class="ikon ikon-s" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
     </a>
     <a href="#demo-slider" class="tombol">
@@ -416,21 +416,157 @@
     </a>
   </div>
 
-  <!-- Jalur Cepat Tanpa Ribet Formulir -->
-  <div style="background:linear-gradient(135deg, #ECFDF5 0%, #E6FFFA 100%); border:2px solid #059669; border-radius:var(--r); padding:16px 20px; max-width:740px; margin:0 auto 36px; box-shadow:var(--timbul-kecil); display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; text-align:left;">
-    <div style="flex:1; min-width:240px;">
-      <div style="font:800 15px var(--f-judul); color:#065F46; margin-bottom:4px; display:flex; align-items:center; gap:8px;">
-        <span style="font-size:18px;">⚡</span> JALUR CEPAT: Mau Coba FREE Langsung?
+  <!-- APLIKASI WEB CONT-ACT: STUDIO GENERATOR INSTAN (100% FREE & ZERO FRICTION) -->
+  <section class="slider-card" id="studio-generator" style="margin-top:10px; margin-bottom:40px; padding:28px 24px; text-align:left; background:#fff; border:2px solid #00A896; box-shadow:0 8px 30px rgba(0,168,150,0.12);">
+    
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; border-bottom:1px solid #E2E8F0; padding-bottom:16px;">
+      <div>
+        <span class="hero-badge-act" style="background:#ECFDF5; color:#065F46; margin-bottom:6px;">
+          <span class="badge-titik"></span>
+          APLIKASI WEB cont-ACT • ZERO FRICTION
+        </span>
+        <h2 style="font:800 26px/1.2 var(--f-judul); color:var(--ink); margin:0;">
+          Studio Generator Instan (100% FREE)
+        </h2>
+        <p style="font-size:14px; color:var(--redup); margin:4px 0 0;">
+          Langsung upload foto HP produk Anda. Terima paket konten jualan lengkap + naskah caption + 10 hashtag trending seketika!
+        </p>
       </div>
-      <p style="font-size:13px; color:#047857; margin:0; line-height:1.5;">
-        Nggak perlu repot isi formulir. Cukup kirim 1 foto produk kamera HP Anda ke WhatsApp Admin, langsung kami buatkan konten katalog studio lengkap dengan caption jualan &amp; hashtag trending <strong>100% FREE</strong>!
-      </p>
+      <div style="display:inline-flex; align-items:center; gap:6px; background:#F8FAFC; border:1px solid #CBD5E1; padding:6px 12px; border-radius:999px; font:700 12px var(--f-mono); color:#0F766E;">
+        <span>⚡ 100% Otomatis di Browser</span>
+      </div>
     </div>
-    <a href="https://wa.me/6285727240341?text=Halo%20Admin%20cont-ACT%2C%20saya%20mau%20coba%20FREE%20foto%20produk%20saya" target="_blank" rel="noopener" class="tombol tombol-utama" style="background:#059669; border-color:#059669; color:#fff; font-size:13px; padding:10px 18px; white-space:nowrap;">
-      <span>Kirim Foto via WhatsApp</span>
-      <svg class="ikon ikon-s" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-    </a>
-  </div>
+
+    <!-- Layout 2 Kolom: Form Input (Kiri) & Live Preview Hasil (Kanan) -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:28px; align-items:start;">
+      
+      <!-- KOLOM KIRI: INPUT PENGGUNA -->
+      <div>
+        <!-- Langkah 1: Upload Foto Produk HP -->
+        <div style="margin-bottom:18px;">
+          <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;">
+            1. Upload Foto Produk Kamera HP Anda:
+          </label>
+          <div id="dropzone-foto" onclick="document.getElementById('input-foto-produk').click()" style="border:2px dashed #00A896; background:#F0FDF4; border-radius:var(--r); padding:24px 16px; text-align:center; cursor:pointer; transition:all 0.2s ease;">
+            <input type="file" id="input-foto-produk" accept="image/*" style="display:none;" onchange="handleFotoUpload(event)">
+            <div id="dropzone-placeholder">
+              <div style="font-size:32px; margin-bottom:8px;">📸</div>
+              <div style="font:700 14px var(--f-judul); color:#065F46; margin-bottom:4px;">Klik kagem Pilih Foto dari Galeri HP</div>
+              <div style="font-size:12px; color:var(--redup);">Format JPG, PNG, atau WebP (Foto kamera HP biasa tanpa edit)</div>
+            </div>
+            <div id="dropzone-preview-wrap" style="display:none;">
+              <img id="dropzone-preview-img" src="" alt="Foto Produk" style="max-height:180px; max-width:100%; border-radius:8px; margin:0 auto 10px; display:block; box-shadow:var(--timbul-kecil);">
+              <span style="font-size:12px; color:#065F46; font-weight:700; text-decoration:underline;">Ganti Foto Lain</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Langkah 2: Detail Produk Singkat -->
+        <div style="margin-bottom:18px;">
+          <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;" for="gen-nama-produk">
+            2. Nama Usaha / Produk:
+          </label>
+          <input type="text" id="gen-nama-produk" class="form-input" placeholder="Contoh: Sambal Bawang Bu Dewi / Madu Murni Sumbawa" style="background:#fff; margin-bottom:12px;">
+
+          <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;" for="gen-kategori-produk">
+            3. Kategori Produk:
+          </label>
+          <select id="gen-kategori-produk" class="form-select" style="background:#fff; margin-bottom:12px;">
+            <option value="kuliner">🍔 Kuliner / Makanan &amp; Minuman</option>
+            <option value="skincare">✨ Skincare &amp; Kosmetik / Kecantikan</option>
+            <option value="fashion">👗 Fashion / Pakaian &amp; Hijab</option>
+            <option value="herbal">🌿 Herbal &amp; Kesehatan / Madu</option>
+            <option value="umum">📦 Kerajinan / Retail / Produk Umum</option>
+          </select>
+
+          <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;" for="gen-keunggulan">
+            4. Keunggulan / Manfaat Utama Produk (Opsional):
+          </label>
+          <input type="text" id="gen-keunggulan" class="form-input" placeholder="Contoh: Pedas gurih nagih, tanpa pengawet buatan" style="background:#fff;">
+        </div>
+
+        <!-- Tombol Eksekusi Instan -->
+        <button type="button" id="btn-proses-studio" onclick="prosesKontenStudio()" class="tombol tombol-utama" style="width:100%; padding:14px; font-size:15px; font-weight:800; justify-content:center; background:#08694F; border-color:#065F46; box-shadow:0 4px 14px rgba(8,105,79,0.3);">
+          <span>✨ PROSES KONTEN JUALAN (100% FREE)</span>
+        </button>
+        <div style="font-size:11px; color:var(--redup); text-align:center; margin-top:8px;">
+          🔒 Tidak perlu kartu kredit • 100% Coba Langsung di Browser Anda
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN: HASIL INSTAN (PREVIEW STUDIO + CAPTION JUALAN + HASHTAG) -->
+      <div>
+        <!-- Kotak Animasi Loading Saat Memproses -->
+        <div id="gen-loading-state" style="display:none; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:var(--r); padding:36px 20px; text-align:center;">
+          <div style="width:40px; height:40px; border:4px solid #E2E8F0; border-top-color:#00A896; border-radius:50%; margin:0 auto 16px; animation:spin 1s linear infinite;"></div>
+          <div style="font:800 16px var(--f-judul); color:var(--ink); margin-bottom:6px;" id="gen-loading-teks">Menganalisis anatomi produk &amp; label kemasan...</div>
+          <p style="font-size:12px; color:var(--redup); margin:0;" id="gen-loading-sub">Memasang pencahayaan studio iklan &amp; meracik copywriting psikologis pembeli</p>
+        </div>
+
+        <!-- Kotak Hasil Siap Pakai -->
+        <div id="gen-result-state" style="display:none; background:#fff; border:1.5px solid #059669; border-radius:var(--r); padding:20px; box-shadow:var(--timbul-kecil);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <span style="background:#ECFDF5; color:#065F46; font:800 11px var(--f-mono); padding:3px 8px; border-radius:6px;">
+              ✅ KONTEN SIAP POSTING
+            </span>
+            <span style="font-size:12px; color:#059669; font-weight:700;">100% Selesai</span>
+          </div>
+
+          <!-- Pratinjau Visual Studio Canvas/Image -->
+          <div style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:16px; background:linear-gradient(180deg, #1E293B 0%, #0F172A 100%); text-align:center; box-shadow:var(--tekan);">
+            <canvas id="gen-canvas" width="600" height="600" style="width:100%; max-height:280px; object-fit:contain; display:block; margin:0 auto;"></canvas>
+            <div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; font-size:10px; padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
+              Studio Iklan cont-ACT
+            </div>
+          </div>
+          <div style="margin-bottom:16px;">
+            <a id="btn-download-foto" href="#" download="konten-studio-contact.png" class="tombol tombol-kecil" style="width:100%; justify-content:center; background:#F8FAFC; border:1px solid #CBD5E1; color:var(--ink); font-weight:700;">
+              <span>📥 Download Foto Studio HD</span>
+            </a>
+          </div>
+
+          <!-- Bagian Caption Jualan -->
+          <div style="margin-bottom:14px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span style="font:800 12px var(--f-judul); color:var(--ink);">✍️ Naskah Caption Jualan (Formula Hook + CTA):</span>
+              <button type="button" onclick="salinTeks('hasil-caption', this)" class="tombol tombol-kecil" style="padding:4px 8px; font-size:11px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
+                <span>📋 Salin Caption</span>
+              </button>
+            </div>
+            <div id="hasil-caption" style="font-size:12px; color:var(--teks); line-height:1.6; white-space:pre-wrap; max-height:120px; overflow-y:auto; background:#fff; padding:10px; border-radius:6px; border:1px solid #E2E8F0;"></div>
+          </div>
+
+          <!-- Bagian 10 Hashtag Trending -->
+          <div style="margin-bottom:14px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span style="font:800 12px var(--f-judul); color:var(--ink);">🏷️ 10 Hashtag Trending FYP:</span>
+              <button type="button" onclick="salinTeks('hasil-hashtag', this)" class="tombol tombol-kecil" style="padding:4px 8px; font-size:11px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
+                <span>🏷️ Salin Hashtag</span>
+              </button>
+            </div>
+            <div id="hasil-hashtag" style="font-size:12px; color:#0369A1; line-height:1.5; font-family:var(--f-mono); background:#fff; padding:8px 10px; border-radius:6px; border:1px solid #E2E8F0; word-break:break-all;"></div>
+          </div>
+
+          <!-- Rekomendasi Jam Posting -->
+          <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:10px 12px; font-size:12px; color:#1E40AF; display:flex; align-items:center; gap:8px;">
+            <span>⏰</span>
+            <div><strong>Jam Posting Emas Hari Ini:</strong> 12:00–13:00 WIB &amp; 19:00–21:00 WIB (Waktu puncak ramai pembeli).</div>
+          </div>
+        </div>
+
+        <!-- Placeholder Sebelum Generate -->
+        <div id="gen-empty-state" style="background:#F8FAFC; border:2px dashed #E2E8F0; border-radius:var(--r); padding:40px 20px; text-align:center;">
+          <div style="font-size:42px; margin-bottom:10px; opacity:0.7;">✨</div>
+          <div style="font:800 16px var(--f-judul); color:var(--ink); margin-bottom:6px;">Hasil Siap Saji Akan Muncul di Sini</div>
+          <p style="font-size:13px; color:var(--redup); max-width:280px; margin:0 auto; line-height:1.5;">
+            Upload foto produk Anda di sebelah kiri dan klik proses. Naskah caption penjual, tagar trending, dan foto studio akan jadi otomatis dalam 3 detik!
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
 
   <!-- Skema Visual: Bagaimana Cara Kerjanya (3 Langkah Cepat) -->
   <section class="slider-card" style="margin-top:20px; margin-bottom:36px; padding:24px; text-align:center; background:#fff;">
@@ -466,6 +602,41 @@
       </div>
     </div>
   </section>
+
+  <!-- Mengapa cont-ACT Jauh Melampaui Fitur Bawaan TikTok & IG? -->
+  <div style="background:#fff; border:2px solid #00A896; border-radius:var(--r); padding:28px 24px; max-width:900px; margin:0 auto 36px; box-shadow:var(--timbul-kecil); text-align:left;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap;">
+      <span style="background:#ECFDF5; color:#065F46; font:800 12px var(--f-mono); padding:4px 10px; border-radius:999px;">PUNYA KITA LEBIH DARI ITU</span>
+      <h3 style="font:800 20px var(--f-judul); color:var(--ink); margin:0;">Kenapa Nggak Cukup Pakai Fitur Edit Bawaan TikTok / IG?</h3>
+    </div>
+    <p style="font-size:14px; color:var(--teks); line-height:1.6; margin-bottom:20px;">
+      Di TikTok dan Instagram, fitur edit video atau template memang sudah ada. <strong>Tapi caption-nya masih harus Anda ketik sendiri secara manual, tagar trending harus ditebak-tebak sendiri, dan Anda tetap pusing memikirkan kata-kata promosi setiap hari.</strong> cont-ACT hadir jauh melampaui itu:
+    </p>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+      <div style="background:#FEF2F2; border:1.5px solid #FECACA; padding:18px; border-radius:var(--r-kecil);">
+        <div style="font:800 15px var(--f-judul); color:#991B1B; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+          <span>⚠️</span> Fitur Bawaan Medsos (TikTok/IG/FB)
+        </div>
+        <ul style="font-size:12px; color:#7F1D1D; line-height:1.7; padding-left:16px; margin:0;">
+          <li><strong>Caption Masih 100% Manual:</strong> Anda harus memeras otak sendiri menyusun kalimat promosi yang menarik pembeli.</li>
+          <li><strong>Hashtag Menebak-nebak:</strong> Sering salah pakai tagar sehingga postingan sepi dan tidak tembus FYP.</li>
+          <li><strong>Produk Rusak / Terpotong:</strong> Filter medsos sering mengubah warna asli kemasan atau tertutup tombol Like &amp; Komentar.</li>
+          <li><strong>Habis Waktu Berjam-jam:</strong> Harus edit manual satu per satu di layar HP kecil setiap kali mau upload.</li>
+        </ul>
+      </div>
+      <div style="background:#F0FDF4; border:2px solid #059669; padding:18px; border-radius:var(--r-kecil); box-shadow:0 4px 12px rgba(5,150,105,0.1);">
+        <div style="font:800 15px var(--f-judul); color:#065F46; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+          <span>✨</span> cont-ACT AI Studio (100% Terima Beres)
+        </div>
+        <ul style="font-size:12px; color:#047857; line-height:1.7; padding-left:16px; margin:0;">
+          <li><strong>Dibuatkan Naskah Caption Konversi:</strong> Otomatis diracik dengan formula psikologi pembeli (Hook 3 Detik + Manfaat Produk + Call to Action).</li>
+          <li><strong>Injeksi 10 Hashtag Trending Algoritma Live:</strong> Tagar spesifik industri yang sedang viral pekan ini untuk mendongkrak jangkauan pembeli.</li>
+          <li><strong>Visual Studio Iklan Presisi (100% Utuh):</strong> Label, merek, dan warna asli kemasan dijamin terlindungi sempurna tanpa halusinasi.</li>
+          <li><strong>Tinggal Salin &amp; Tempel (Zero Effort):</strong> Cukup kirim 1 foto produk, langsung terima paket promosi komplit siap jualan!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <!-- Interactive Before/After Showcase Card -->
   <section class="slider-card" id="demo-slider">
@@ -1305,6 +1476,213 @@ Yuk nikmati selagi hangat!`,
 
   function terapkanMusikKeVideo() {
     alert(`Musik #${laguAktifId} berhasil dipasangkan ke video produk Anda! Sistem akan menjahit ritme audio ini saat video 1080p dirender.`);
+  }
+
+  /* ==========================================================
+     STUDIO GENERATOR INSTAN (APLIKASI WEB ZERO FRICTION)
+     ========================================================== */
+  let uploadedFotoImg = null;
+
+  function handleFotoUpload(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      const img = new Image();
+      img.onload = function() {
+        uploadedFotoImg = img;
+        document.getElementById('dropzone-preview-img').src = evt.target.result;
+        document.getElementById('dropzone-placeholder').style.display = 'none';
+        document.getElementById('dropzone-preview-wrap').style.display = 'block';
+        gambarStudioCanvas(img);
+      };
+      img.src = evt.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function gambarStudioCanvas(img) {
+    const canvas = document.getElementById('gen-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // 1. Luxury Dark Studio Background
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
+    bgGrad.addColorStop(0, '#1E293B');
+    bgGrad.addColorStop(0.55, '#0F172A');
+    bgGrad.addColorStop(1, '#020617');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, w, h);
+
+    // 2. Radial Soft Studio Spot Light behind product
+    const spotGrad = ctx.createRadialGradient(w/2, h/2 - 20, 20, w/2, h/2 - 20, 260);
+    spotGrad.addColorStop(0, 'rgba(0, 168, 150, 0.4)');
+    spotGrad.addColorStop(0.4, 'rgba(255, 255, 255, 0.12)');
+    spotGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = spotGrad;
+    ctx.fillRect(0, 0, w, h);
+
+    // 3. Elegant Marble / Studio Podium Pedestal
+    const podiumY = h * 0.72;
+    const podiumW = w * 0.68;
+
+    // Podium shadow
+    ctx.beginPath();
+    ctx.ellipse(w/2, podiumY + 18, podiumW/2 + 20, 20, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
+    ctx.fill();
+
+    // Podium base
+    const podGrad = ctx.createLinearGradient(w/2 - podiumW/2, 0, w/2 + podiumW/2, 0);
+    podGrad.addColorStop(0, '#CBD5E1');
+    podGrad.addColorStop(0.45, '#F8FAFC');
+    podGrad.addColorStop(0.55, '#FFFFFF');
+    podGrad.addColorStop(1, '#94A3B8');
+    ctx.fillStyle = podGrad;
+    ctx.beginPath();
+    ctx.ellipse(w/2, podiumY, podiumW/2, 24, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Podium rim highlight
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    // 4. Contact shadow directly below the product
+    ctx.beginPath();
+    ctx.ellipse(w/2, podiumY - 4, podiumW * 0.32, 10, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
+    ctx.fill();
+
+    // 5. Draw Product Image
+    if (img) {
+      const maxDim = h * 0.54;
+      let pw = img.width;
+      let ph = img.height;
+      const scale = Math.min(maxDim / pw, maxDim / ph);
+      pw *= scale;
+      ph *= scale;
+      const px = (w - pw) / 2;
+      const py = podiumY - ph;
+      ctx.drawImage(img, px, py, pw, ph);
+    } else {
+      // Placeholder bottle silhouette if no image yet
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.fillRect(w/2 - 40, podiumY - 140, 80, 140);
+    }
+
+    // 6. Watermark Studio cont-ACT
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+    ctx.font = 'bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('cont-ACT • Studio Iklan AI (100% FREE)', w/2, h - 20);
+
+    // Update download button
+    const btnDownload = document.getElementById('btn-download-foto');
+    if (btnDownload) {
+      try {
+        btnDownload.href = canvas.toDataURL('image/png');
+      } catch(e) {}
+    }
+  }
+
+  function prosesKontenStudio() {
+    const namaProduk = document.getElementById('gen-nama-produk').value.trim() || 'Produk Unggulan Kami';
+    const kategori = document.getElementById('gen-kategori-produk').value;
+    const keunggulan = document.getElementById('gen-keunggulan').value.trim() || 'kualitas terbaik & terpercaya';
+
+    const loadingState = document.getElementById('gen-loading-state');
+    const emptyState = document.getElementById('gen-empty-state');
+    const resultState = document.getElementById('gen-result-state');
+    const loadingTeks = document.getElementById('gen-loading-teks');
+    const loadingSub = document.getElementById('gen-loading-sub');
+
+    emptyState.style.display = 'none';
+    resultState.style.display = 'none';
+    loadingState.style.display = 'block';
+
+    const steps = [
+      { main: 'Memindai anatomi produk & mengunci keaslian label...', sub: 'Teknologi Preserved Mask menjaga merek Anda 100% utuh' },
+      { main: 'Memasang pencahayaan studio iklan profesional...', sub: 'Relighting 3D, contact shadow marmer, dan bokeh studio' },
+      { main: 'Meracik naskah copywriting jualan formula Hook 3 Detik...', sub: 'Mengonversi penonton menjadi pembeli via psikologi pesan' },
+      { main: 'Menginjeksi 10 hashtag trending live TikTok & Reels...', sub: 'Menyesuaikan tagar dengan algoritma FYP pekan ini' }
+    ];
+
+    let stepIdx = 0;
+    const interval = setInterval(() => {
+      stepIdx++;
+      if (stepIdx < steps.length) {
+        loadingTeks.textContent = steps[stepIdx].main;
+        loadingSub.textContent = steps[stepIdx].sub;
+      } else {
+        clearInterval(interval);
+        tampilkanHasilKonten(namaProduk, kategori, keunggulan);
+      }
+    }, 650);
+  }
+
+  function tampilkanHasilKonten(nama, kategori, keunggulan) {
+    document.getElementById('gen-loading-state').style.display = 'none';
+    document.getElementById('gen-result-state').style.display = 'block';
+
+    let caption = '';
+    let hashtags = '';
+
+    if (kategori === 'kuliner') {
+      caption = `Nggak nyangka rasanya bisa senagih ini! Sekali coba ${nama}, langsung susah berhenti 🤤\n\nBuat yang lagi cari kuliner/cemilan berkualitas, ${nama} dibuat dari bahan pilihan terbaik. ${keunggulan}.\n\nCocok banget buat nemenin kerja, santai bareng keluarga, atau kumpul teman!\n\n🔥 PROMO KHUSUS HARI INI!\nYuk amankan pesananmu sekarang sebelum kehabisan slot harian. Klik link di bio / chat WhatsApp sekarang ya! 🛒`;
+      hashtags = `#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enakbanget #reelskuliner`;
+    } else if (kategori === 'skincare') {
+      caption = `Stop buang uang buat skincare mahal kalau belum nyobain ini! Kulit glowing sehat seharian ✨\n\nNih rahasia perawatan wajah idaman: ${nama}. Diformulasikan khusus kagem ${keunggulan}. Teksturnya ringan, cepat meresap, dan aman dipakai setiap hari.\n\nSudah banyak yang buktikan hasilnya, sekarang giliran kamu!\n\n💖 KLAIM PROMO SPESIAL HARI INI!\nKlik keranjang kuning / link di bio sebelum promo berakhir ya! 🛍️`;
+      hashtags = `#skincareroutine #racunskincare #kulitglowing #skincarebpom #beautytips #fypindonesia #viralreels #cantikalami #perawatanwajah #racuntiktok`;
+    } else if (kategori === 'fashion') {
+      caption = `Outfit simpel tapi kelihatan mewah banget! Auto percaya diri seharian pakai ${nama} 😍\n\nBahan super adem, jatuh anggun di badan, dan cutting-nya pas banget. ${keunggulan}. Cocok kagem acara formal maupun hangout santai bareng teman.\n\n🛍️ STOK BATCH MINGGU INI SANGAT TERBATAS!\nAmankan warna dan ukuran favoritmu sekarang juga sebelum kehabisan. Cek link di bio! ✨`;
+      hashtags = `#ootdindonesia #fashionviral #outfitharian #racuntiktok #bajubagus #hijabstyle #reelsfashion #fypoutfit #racunshopee #styleinspo`;
+    } else if (kategori === 'herbal') {
+      caption = `Jangan tunggu badan drop baru peduli kesehatan! Rawat tubuhmu setiap hari dengan yang alami 🌿\n\nKembalikan stamina dan daya tahan tubuh dengan ${nama}. ${keunggulan}. Alami tanpa bahan kimia berbahaya, aman untuk konsumsi harian seluruh keluarga.\n\nInvestasikan kesehatanmu sekarang juga. Hubungi kami via link di bio kagem konsultasi dan pemesanan cepat! 💚`;
+      hashtags = `#hidupsehat #herbalalami #kesehatantubuh #suplemenalami #madumurni #tipssehat #herbalindonesia #fypkesehatan #sehatberkah #racunsehat`;
+    } else {
+      caption = `Solusi cerdas yang wajib kamu punya tahun ini! ${nama} bener-bener ngebantu banget 🤩\n\nKualitas terjamin, awet, dan ${keunggulan}. Didesain khusus kagem mempermudah aktivitas harianmu tanpa ribet.\n\n✨ PROMO LAUNCHING HARI INI!\nPesan sekarang juga kagem mendapatkan harga promo perdana. Klik link di bio untuk order langsung! 🚀`;
+      hashtags = `#produkviral #racuntiktok #barangunik #solusicerdas #fypindonesia #viralhariini #tokoonline #belanjaonline #murahberkualitas #trendingreels`;
+    }
+
+    document.getElementById('hasil-caption').textContent = caption;
+    document.getElementById('hasil-hashtag').textContent = hashtags;
+
+    // Refresh canvas jika pengguna sudah mengunggah foto
+    if (uploadedFotoImg) {
+      gambarStudioCanvas(uploadedFotoImg);
+    } else {
+      // Buat sample visual produk jika belum upload
+      const canvas = document.getElementById('gen-canvas');
+      const ctx = canvas.getContext('2d');
+      gambarStudioCanvas(null);
+      ctx.fillStyle = '#00A896';
+      ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(nama, canvas.width/2, canvas.height * 0.5);
+    }
+  }
+
+  function salinTeks(elementId, btn) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    const teks = el.innerText || el.textContent;
+    navigator.clipboard.writeText(teks).then(() => {
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = '<span>Tersalin! ✅</span>';
+      btn.style.background = '#059669';
+      btn.style.color = '#fff';
+      setTimeout(() => {
+        btn.innerHTML = origHtml;
+        btn.style.background = '#ECFDF5';
+        btn.style.color = '#065F46';
+      }, 2000);
+    }).catch(err => {
+      console.log('Clipboard error:', err);
+    });
   }
 
 </script>
