@@ -1003,6 +1003,10 @@ Yuk nikmati selagi hangat!`,
 
     let tersimpan = false;
     let hasil = null;
+    let paramS = "";
+    try {
+      paramS = new URLSearchParams(window.location.search).get("s") || sessionStorage.getItem("act_kampanye") || "";
+    } catch (_) {}
     try {
       const resp = await fetch('/api/daftar', {
         method: 'POST',
@@ -1012,6 +1016,7 @@ Yuk nikmati selagi hangat!`,
           waOwner: noWa,
           kota: kota,
           email: email,
+          kampanye: paramS ? paramS.trim() : null,
           jenisAplikasi: 'cont-ACT (Studio Foto AI Kilat)',
           kategori: 'Foto Produk UMKM',
           skalaUsaha: 'UMKM',

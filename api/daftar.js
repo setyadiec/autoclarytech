@@ -40,7 +40,8 @@ export default async function handler(req, res) {
     jalur,
     kontak,
     hasilHitung,
-    sumberHalaman
+    sumberHalaman,
+    kampanye
   } = req.body || {};
 
   // Halaman jalur: kontak boleh kosong (nomor WA CS diblokir 10 Okt; pengunjung tidak wajib memberi WA)
@@ -73,6 +74,7 @@ export default async function handler(req, res) {
     kuota_gratis: 1000,
     persetujuan_privasi: true,
     skema_termin: 'Ya kami segera memproses permintaan Anda setelah masuk pembayaran uang muka, dan pelunasan setelah aplikasi jadi. Sedangkan biaya langganan akan kami kenakan mulai bulan berikutnya',
+    kampanye: kampanye ? String(kampanye).trim().slice(0, 50) : null,
     // Rincian Spesifikasi bila Custom App
     spesifikasi_kustom: isCustomApp ? {
       masalah_utama: String(masalahUtama || ''),

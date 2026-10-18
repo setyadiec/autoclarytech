@@ -8,6 +8,14 @@
 (function () {
   "use strict";
 
+  try {
+    var urlParams = new URLSearchParams(window.location.search);
+    var sVal = urlParams.get("s");
+    if (sVal) {
+      sessionStorage.setItem("act_kampanye", sVal.trim());
+    }
+  } catch (e) {}
+
   function angka(s) {                       // padanan _angka(): 150rb, 1,2jt, 2.000, 2000
     if (s == null) return null;
     var t = String(s).toLowerCase().replace(/\s+/g, "").replace(/^rp\.?/, "");
@@ -238,10 +246,15 @@
       var btn = fD.querySelector("button"); btn.disabled = true; btn.textContent = "Mengirim...";
       var kontak = fD.elements.kontak.value.trim();
       var email = fD.elements.email ? fD.elements.email.value.trim() : "";
+      var paramS = "";
+      try {
+        paramS = new URLSearchParams(window.location.search).get("s") || sessionStorage.getItem("act_kampanye") || "";
+      } catch (e) {}
       var body = {
         namaToko: usaha, namaOwner: nama, kota: fD.elements.kota.value.trim(),
         waOwner: /^[+\d][\d\s().-]{7,}$/.test(kontak) ? kontak : "", kontak: kontak,
         email: email,
+        kampanye: paramS ? paramS.trim() : null,
         kategori: J.nama, jenisAplikasi: "Halaman hitung " + kode, jalur: kode,
         sumberHalaman: location.pathname, hasilHitung: terakhir
       };

@@ -97,13 +97,18 @@
       var wa = document.getElementById('waOwner').value.trim();
       var email = document.getElementById('emailOwner') ? document.getElementById('emailOwner').value.trim() : '';
       var kat = document.getElementById('kategori').value;
+      var paramS = "";
+      try {
+        paramS = new URLSearchParams(window.location.search).get("s") || sessionStorage.getItem("act_kampanye") || "";
+      } catch (_) {}
 
       var payload = {
         namaToko: toko,
         namaOwner: owner,
         waOwner: wa,
         email: email,
-        kategori: kat
+        kategori: kat,
+        kampanye: paramS ? paramS.trim() : null
       };
 
       var isSuccess = false;
