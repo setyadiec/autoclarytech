@@ -160,7 +160,7 @@ export default async function handler(req, res) {
   }
 }
 
-// Integrasi LLM Awan fal.ai (fal-ai/any-llm) untuk copywriting presisi & 10 tagar trending
+// Integrasi LLM Awan fal.ai (fal-ai/any-llm) untuk copywriting presisi & 10 tagar relevan
 async function racikNaskahLlm(falKey, nama, kategori, keunggulan, suasana) {
   const promptLlm = `Kamu adalah copywriter profesional Indonesia untuk promosi produk UMKM di Instagram, TikTok, dan WhatsApp.
 Tugas: Buat naskah caption jualan medsos yang memikat, persuasif, membangkitkan minat pembeli, dan bikin laku jualan.
@@ -174,7 +174,7 @@ Instruksi Formula:
 1. Hook emosional yang mengena dan relevan dengan produk.
 2. Jelaskan manfaat nyata dan keunggulan spesifik produk tersebut (jangan generik).
 3. Call to Action (CTA) pemesanan yang jelas.
-4. Tepat 10 tagar (hashtag) yang relevan, viral, dan trending.
+4. Tepat 10 tagar (hashtag) yang relevan, tertarget, dan populer.
 
 Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
 CAPTION:
@@ -238,7 +238,7 @@ function racikNaskahFallback(nama, kategori, keunggulan) {
     hashtags = `#hidupsehat #herbalalami #kesehatantubuh #suplemenalami #madumurni #tipssehat #herbalindonesia #fypkesehatan #sehatberkah #racunsehat`;
   } else {
     caption = `Solusi fungsional untuk menunjang aktivitas harian Anda: ${nama}.\n\nKualitas teruji, andal, dan ${keunggulan}. Dibuat secara presisi untuk memberikan kemudahan serta efisiensi maksimal.\n\nPromo Perdana:\nDapatkan penawaran harga terbaik khusus hari ini dengan mengunjungi tautan di profil.`;
-    hashtags = `#produkviral #racuntiktok #barangunik #solusicerdas #fypindonesia #viralhariini #tokoonline #belanjaonline #murahberkualitas #trendingreels`;
+    hashtags = `#produkviral #racuntiktok #barangunik #solusicerdas #fypindonesia #viralhariini #tokoonline #belanjaonline #murahberkualitas #reelsindonesia`;
   }
 
   return { caption, hashtags };
