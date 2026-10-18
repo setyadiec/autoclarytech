@@ -63,15 +63,20 @@ export default async function handler(req, res) {
     });
   }
 
-  // Cek Kuota Klien (3x Gratis)
-  const clientKey = String(clientId || req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'guest').slice(0, 80);
-  const pemakaianSaatIni = kuotaClientMap.get(clientKey) || 0;
+  // Cek Kuota Klien Sisi Server (3x Gratis per IP + Perangkat)
+  // Menutup celah penghapusan localStorage di peramban klien
+  const forwarded = req.headers['x-forwarded-for'];
+  const clientIp = forwarded ? forwarded.split(',')[0].trim() : (req.headers['x-real-ip'] || req.socket.remoteAddress || '127.0.0.1');
+  const userAgentSnippet = (req.headers['user-agent'] || 'generic').slice(0, 40);
+  const serverClientKey = `ip:${clientIp}::ua:${userAgentSnippet}`;
+
+  const pemakaianSaatIni = kuotaClientMap.get(serverClientKey) || 0;
   const MAKS_KUOTA_GRATIS = 3;
 
   if (pemakaianSaatIni >= MAKS_KUOTA_GRATIS) {
     return res.status(403).json({
       status: 'quota_exceeded',
-      message: 'Jatah 3x coba gratis Anda telah selesai digunakan. Selesaikan misi sosial media atau daftarkan antrean produksi kustom kagem membuka akses berikutnya.',
+      message: 'Jatah 3x coba gratis untuk perangkat/jaringan ini telah selesai digunakan. Selesaikan misi media sosial atau daftarkan antrean produksi kustom kagem membuka akses berikutnya.',
       sisaKuota: 0
     });
   }
@@ -129,7 +134,7 @@ export default async function handler(req, res) {
     const falData = await falResp.json();
 
     // Catat pemakaian kuota setelah request queue sukses
-    kuotaClientMap.set(clientKey, pemakaianSaatIni + 1);
+    kuotaClientMap.set(serverClientKey, pemakaianSaatIni + 1);
     hitunganHarianGlobal += 1;
     const sisaKuota = Math.max(0, MAKS_KUOTA_GRATIS - (pemakaianSaatIni + 1));
 
