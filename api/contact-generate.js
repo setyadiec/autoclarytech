@@ -1,5 +1,7 @@
+import crypto from 'node:crypto';
+
 // Vercel Serverless Function: /api/contact-generate
-// Arsitektur cont-ACT AI Awan (fal.ai) — arahan Bapak & Bey 18 Okt 2026
+// Arsitektur cont-ACT AI Awan (fal.ai) — arahan Bapak & Bey 18-19 Okt 2026
 
 export const config = {
   api: {
@@ -9,11 +11,78 @@ export const config = {
   }
 };
 
-// Penyimpanan kuota memori in-memory sederhana per instance serverless
-// Ditambah validasi di sisi client untuk akurasi kuota 3x gratis
+// Konfigurasi Supabase untuk penyimpanan kuota persisten
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://hdxyzwjdbqhanimfspcm.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+// In-memory cache & fallback jika Supabase lambat/offline
 const kuotaClientMap = new Map();
 let hitunganHarianGlobal = 0;
 let tanggalHariIni = new Date().toISOString().slice(0, 10);
+
+function hitungHashKunci(clientIp, userAgentSnippet) {
+  return crypto.createHash('sha256').update(`${clientIp}::${userAgentSnippet}`).digest('hex').slice(0, 32);
+}
+
+async function ambilKuotaPersisten(kunci) {
+  const dariMemori = kuotaClientMap.get(kunci) || 0;
+  if (!SUPABASE_KEY) return dariMemori;
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 3000);
+    const resp = await fetch(`${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/contact_kuota?kunci=eq.${encodeURIComponent(kunci)}&select=hitung,tanggal`, {
+      method: 'GET',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    if (!resp.ok) return dariMemori;
+    const rows = await resp.json();
+    if (rows && rows.length > 0) {
+      const dbHitung = Number(rows[0].hitung) || 0;
+      const nilaiFinal = Math.max(dariMemori, dbHitung);
+      kuotaClientMap.set(kunci, nilaiFinal);
+      return nilaiFinal;
+    }
+    return dariMemori;
+  } catch (err) {
+    return dariMemori;
+  }
+}
+
+async function simpanKuotaPersisten(kunci, hitungBaru, tanggal) {
+  kuotaClientMap.set(kunci, hitungBaru);
+  if (!SUPABASE_KEY) return;
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 3000);
+    await fetch(`${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/contact_kuota`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify({
+        kunci: kunci,
+        hitung: hitungBaru,
+        tanggal: tanggal,
+        terakhir_akses: new Date().toISOString()
+      }),
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+  } catch (err) {
+    // Non-blocking fallback
+  }
+}
 
 export default async function handler(req, res) {
   // CORS Headers
@@ -38,8 +107,10 @@ export default async function handler(req, res) {
   }
 
   // Batas Pengaman Global: Maksimal 100 generate/hari agar saldo API Bapak aman
+  const kunciGlobal = `global:${skrgTanggal}`;
+  const totalHarian = await ambilKuotaPersisten(kunciGlobal);
   const BATAS_GLOBAL_HARIAN = 100;
-  if (hitunganHarianGlobal >= BATAS_GLOBAL_HARIAN) {
+  if (totalHarian >= BATAS_GLOBAL_HARIAN) {
     return res.status(429).json({
       status: 'error',
       message: 'Batas pemakaian harian studio AI publik telah tercapai (100 foto/hari). Silakan coba lagi besok atau daftarkan antrean kustom.'
@@ -63,14 +134,13 @@ export default async function handler(req, res) {
     });
   }
 
-  // Cek Kuota Klien Sisi Server (3x Gratis per IP + Perangkat)
-  // Menutup celah penghapusan localStorage di peramban klien
+  // Cek Kuota Klien Sisi Server (3x Gratis per IP + Perangkat secara Persisten di Supabase)
   const forwarded = req.headers['x-forwarded-for'];
   const clientIp = forwarded ? forwarded.split(',')[0].trim() : (req.headers['x-real-ip'] || req.socket.remoteAddress || '127.0.0.1');
   const userAgentSnippet = (req.headers['user-agent'] || 'generic').slice(0, 40);
-  const serverClientKey = `ip:${clientIp}::ua:${userAgentSnippet}`;
+  const serverClientKey = hitungHashKunci(clientIp, userAgentSnippet);
 
-  const pemakaianSaatIni = kuotaClientMap.get(serverClientKey) || 0;
+  const pemakaianSaatIni = await ambilKuotaPersisten(serverClientKey);
   const MAKS_KUOTA_GRATIS = 3;
 
   if (pemakaianSaatIni >= MAKS_KUOTA_GRATIS) {
@@ -133,9 +203,9 @@ export default async function handler(req, res) {
 
     const falData = await falResp.json();
 
-    // Catat pemakaian kuota setelah request queue sukses
-    kuotaClientMap.set(serverClientKey, pemakaianSaatIni + 1);
-    hitunganHarianGlobal += 1;
+    // Catat pemakaian kuota persisten ke Supabase & memori
+    await simpanKuotaPersisten(serverClientKey, pemakaianSaatIni + 1, skrgTanggal);
+    await simpanKuotaPersisten(kunciGlobal, totalHarian + 1, skrgTanggal);
     const sisaKuota = Math.max(0, MAKS_KUOTA_GRATIS - (pemakaianSaatIni + 1));
 
     // Racik Naskah Copywriting Jualan & 10 Tagar Relevan via LLM Awan fal.ai
