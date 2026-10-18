@@ -795,11 +795,15 @@ Pemesanan &amp; konsultasi: Klik tautan di bio sekarang!
 
     <!-- Early Access Waitlist Form (Fase 1 Uji Permintaan) -->
     <div class="form-card" id="daftar">
-      <h3 style="font:700 20px var(--f-judul); color:var(--ink); margin-bottom:8px;">
-        Dapatkan Kuota Gratis &amp; Akses Perdana
+      <span class="hero-badge-act" style="margin-bottom:10px; background:#ECFDF5; color:#065F46;">
+        <span class="badge-titik"></span>
+        EARLY BIRD • FREEMIUM BORDERLESS
+      </span>
+      <h3 style="font:800 24px var(--f-judul); color:var(--ink); margin-bottom:8px;">
+        Khusus 10 Pendaftar Pertama: 100% Coba Gratis Langsung!
       </h3>
       <p style="font-size:13px; color:var(--redup); margin-bottom:20px;">
-        Isi data singkat berikut untuk menjadi 50 UMKM pertama yang mencoba sistem cont-ACT secara cuma-cuma:
+        Isi data singkat berikut kagem klaim jatah coba gratis perdana produk usaha Anda. Bila jatah habis, Anda bisa membuka kuota tambahan gratis lewat misi kilat di bawah:
       </p>
 
       <form id="form-waitlist" onsubmit="kirimWaitlist(event)">
@@ -820,7 +824,7 @@ Pemesanan &amp; konsultasi: Klik tautan di bio sekarang!
           <input type="email" id="email" class="form-input" placeholder="nama@email.com">
         </div>
         <button type="submit" class="tombol tombol-utama" style="width:100%; margin-top:8px;">
-          <span>Ambil Akses 3 Kali Coba Gratis</span>
+          <span>Klaim Jatah Coba Gratis Perdana</span>
           <svg class="ikon ikon-s" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
       </form>
@@ -829,6 +833,116 @@ Pemesanan &amp; konsultasi: Klik tautan di bio sekarang!
         <p style="margin-bottom:14px; font-size:13px; color:var(--teks);">ID Pendaftaran: <code id="sukses-reg-id" style="font-weight:700;"></code>. Silakan klik tombol di bawah untuk langsung terhubung dengan tim AutoClaryTech:</p>
         <a id="btn-wa-sukses" href="https://wa.me/6285727240341" target="_blank" rel="noopener" class="tombol tombol-utama" style="display:inline-flex; align-items:center; gap:8px; padding:12px 24px; text-decoration:none;">
           <span>Chat WhatsApp Sekarang untuk Percepat Akses</span>
+          <svg class="ikon ikon-s" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Gamifikasi Misi Buka Kuota Gratis (Viral Loop cont-ACT) -->
+    <div class="slider-card" id="misi-kuota" style="margin-top:40px; text-align:left; background:linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(243,246,255,0.98) 100%); border:2px solid var(--aksen);">
+      <div style="text-align:center; max-width:680px; margin:0 auto 28px;">
+        <span class="hero-badge-act" style="background:#EEF2FF; color:var(--aksen); margin-bottom:10px;">
+          <span class="badge-titik"></span>
+          MISI VIRAL LOOP • 100% GRATIS TANPA BAYAR
+        </span>
+        <h3 style="font:800 28px/1.2 var(--f-judul); color:var(--ink); margin-bottom:10px;">
+          Jatah Kuota Habis? Dapatkan Tambahan Gratis Lewat Misi Kilat!
+        </h3>
+        <p style="font-size:14px; color:var(--teks); line-height:1.6;">
+          Khusus layanan <strong>auto bikin konten (cont-ACT)</strong>: 10 pendaftar pertama gratis penuh. Bila batas jatah habis, Anda <strong>TIDAK PERLU BAYAR</strong>. Cukup selesaikan misi sosial media sederhana di bawah kagem membuka kuota berikutnya secara otomatis:
+        </p>
+      </div>
+
+      <!-- Grid 5 Misi -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:18px; margin-bottom:28px;">
+        
+        <!-- Misi 1: Follow -->
+        <div style="background:#fff; border-radius:var(--r); padding:20px; box-shadow:var(--timbul-kecil); border:1px solid rgba(74,77,222,0.15); display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span style="font:700 11px var(--f-mono); color:var(--redup); text-transform:uppercase;">Level 1</span>
+              <span style="background:#ECFDF5; color:#065F46; font:700 11px var(--f-mono); padding:3px 8px; border-radius:999px;">+2 Kuota Gratis</span>
+            </div>
+            <h4 style="font:700 16px var(--f-judul); color:var(--ink); margin-bottom:6px;">Follow TikTok &amp; Instagram</h4>
+            <p style="font-size:12px; color:var(--teks); line-height:1.5; margin-bottom:14px;">
+              Follow akun resmi AutoClaryTech di TikTok &amp; Instagram kagem melihat perkembangan tren konten UMKM.
+            </p>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <a href="https://www.tiktok.com/@autoclarytech7" target="_blank" rel="noopener" class="tombol tombol-kecil" style="flex:1; text-align:center; font-size:11px; padding:8px 10px;">Follow TikTok</a>
+            <a href="https://www.instagram.com/autoclarytech" target="_blank" rel="noopener" class="tombol tombol-kecil" style="flex:1; text-align:center; font-size:11px; padding:8px 10px;">Follow IG</a>
+          </div>
+        </div>
+
+        <!-- Misi 2: Like 3 Video -->
+        <div style="background:#fff; border-radius:var(--r); padding:20px; box-shadow:var(--timbul-kecil); border:1px solid rgba(74,77,222,0.15); display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span style="font:700 11px var(--f-mono); color:var(--redup); text-transform:uppercase;">Level 2</span>
+              <span style="background:#ECFDF5; color:#065F46; font:700 11px var(--f-mono); padding:3px 8px; border-radius:999px;">+2 Kuota Gratis</span>
+            </div>
+            <h4 style="font:700 16px var(--f-judul); color:var(--ink); margin-bottom:6px;">Like 3 Video / Reels</h4>
+            <p style="font-size:12px; color:var(--teks); line-height:1.5; margin-bottom:14px;">
+              Kena batas lagi? Beri Like pada 3 video edukasi bisnis &amp; katalog kami di TikTok atau Instagram Reels.
+            </p>
+          </div>
+          <a href="https://www.tiktok.com/@autoclarytech7" target="_blank" rel="noopener" class="tombol tombol-kecil" style="width:100%; text-align:center; font-size:11px; padding:8px 10px;">Buka Video TikTok ACT</a>
+        </div>
+
+        <!-- Misi 3: Komentar -->
+        <div style="background:#fff; border-radius:var(--r); padding:20px; box-shadow:var(--timbul-kecil); border:1px solid rgba(74,77,222,0.15); display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span style="font:700 11px var(--f-mono); color:var(--redup); text-transform:uppercase;">Level 3</span>
+              <span style="background:#ECFDF5; color:#065F46; font:700 11px var(--f-mono); padding:3px 8px; border-radius:999px;">+3 Kuota Gratis</span>
+            </div>
+            <h4 style="font:700 16px var(--f-judul); color:var(--ink); margin-bottom:6px;">Komentar Positif</h4>
+            <p style="font-size:12px; color:var(--teks); line-height:1.5; margin-bottom:14px;">
+              Tuliskan komentar atau pertanyaan tentang produk Anda di salah satu video edukasi kami.
+            </p>
+          </div>
+          <a href="https://www.instagram.com/autoclarytech" target="_blank" rel="noopener" class="tombol tombol-kecil" style="width:100%; text-align:center; font-size:11px; padding:8px 10px;">Komentar di Reels</a>
+        </div>
+
+        <!-- Misi 4: Share -->
+        <div style="background:#fff; border-radius:var(--r); padding:20px; box-shadow:var(--timbul-kecil); border:1px solid rgba(74,77,222,0.15); display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span style="font:700 11px var(--f-mono); color:var(--redup); text-transform:uppercase;">Level 4</span>
+              <span style="background:#ECFDF5; color:#065F46; font:700 11px var(--f-mono); padding:3px 8px; border-radius:999px;">+3 Kuota Gratis</span>
+            </div>
+            <h4 style="font:700 16px var(--f-judul); color:var(--ink); margin-bottom:6px;">Share ke Story / Teman</h4>
+            <p style="font-size:12px; color:var(--teks); line-height:1.5; margin-bottom:14px;">
+              Bagikan tautan autoclarytech.com/cont-act ke WhatsApp Story atau grup wirausaha Anda.
+            </p>
+          </div>
+          <a href="https://api.whatsapp.com/send?text=Kawan-kawan%20pelaku%20usaha,%20cobain%20bikin%20foto%20katalog%20produk%20dan%20video%20iklan%203D%20otomatis%20gratis%20di%20https://www.autoclarytech.com/cont-act" target="_blank" rel="noopener" class="tombol tombol-kecil" style="width:100%; text-align:center; font-size:11px; padding:8px 10px;">Share ke WhatsApp</a>
+        </div>
+
+        <!-- Misi 5: Testimoni -->
+        <div style="background:#fff; border-radius:var(--r); padding:20px; box-shadow:var(--timbul-kecil); border:2px solid #08694F; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span style="font:700 11px var(--f-mono); color:#08694F; text-transform:uppercase;">Level 5 • VIP</span>
+              <span style="background:#08694F; color:#fff; font:700 11px var(--f-mono); padding:3px 8px; border-radius:999px;">+5 Kuota VIP</span>
+            </div>
+            <h4 style="font:700 16px var(--f-judul); color:var(--ink); margin-bottom:6px;">Kirim Testimoni Hasil</h4>
+            <p style="font-size:12px; color:var(--teks); line-height:1.5; margin-bottom:14px;">
+              Kirimkan tangkapan layar hasil foto produk Anda beserta ulasan jujur. Kuota VIP langsung dibuka!
+            </p>
+          </div>
+          <a href="https://wa.me/6285727240341?text=Halo%20Admin%20cont-ACT,%20saya%20sudah%20mencoba%20studio%20foto%20dan%20ingin%20mengirimkan%20testimoni%20kagem%20klaim%20kuota%20VIP" target="_blank" rel="noopener" class="tombol tombol-utama tombol-kecil" style="width:100%; text-align:center; font-size:11px; padding:8px 10px;">Kirim Testimoni via WA</a>
+        </div>
+
+      </div>
+
+      <!-- Action Footer -->
+      <div style="text-align:center; padding:18px; background:#fff; border-radius:var(--r); border:1px dashed var(--aksen);">
+        <p style="font-size:13px; color:var(--ink); margin-bottom:12px; font-weight:600;">
+          Sudah menyelesaikan salah satu misi di atas? Konfirmasi instan ke admin kagem aktivasi kuota:
+        </p>
+        <a href="https://wa.me/6285727240341?text=Halo%20Admin%20cont-ACT,%20saya%20sudah%20menyelesaikan%20Misi%20(Follow/Like/Komentar/Share/Testimoni).%20Mohon%20aktivasi%20tambahan%20kuota%20gratis%20saya." target="_blank" rel="noopener" class="tombol tombol-utama" style="display:inline-flex; align-items:center; gap:8px;">
+          <span>Klaim Bonus Kuota Misi via WhatsApp (0857-2724-0341)</span>
           <svg class="ikon ikon-s" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
       </div>
