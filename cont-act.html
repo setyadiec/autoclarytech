@@ -284,8 +284,11 @@
           Langsung upload foto HP produk Anda. Terima paket konten jualan lengkap + naskah caption + 10 hashtag trending seketika!
         </p>
       </div>
-      <div style="display:inline-flex; align-items:center; gap:6px; background:#F8FAFC; border:1px solid #CBD5E1; padding:6px 12px; border-radius:999px; font:700 12px var(--f-mono); color:#0F766E;">
-        <svg class="ikon ikon-s" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg><span>Proses Langsung di Browser</span>
+      <div id="badge-kuota-wrap" style="display:inline-flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        <div style="display:inline-flex; align-items:center; gap:6px; background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 14px; border-radius:999px; font:700 12px var(--f-mono); color:#065F46;">
+          <svg class="ikon ikon-s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span id="label-sisa-kuota">Sisa Kuota Gratis: 3 dari 3 Kali</span>
+        </div>
       </div>
     </div>
 
@@ -367,8 +370,9 @@
           <!-- Pratinjau Visual Studio Canvas/Image -->
           <div style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:16px; background:linear-gradient(180deg, #1E293B 0%, #0F172A 100%); text-align:center; box-shadow:var(--tekan);">
             <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:280px; object-fit:contain; display:block; margin:0 auto;"></canvas>
-            <div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; font-size:10px; padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
-              Mockup Studio cont-ACT
+            <img id="gen-result-img" src="" alt="Hasil Studio AI Awan" style="width:100%; max-height:280px; object-fit:contain; display:none; margin:0 auto;">
+            <div id="gen-badge-overlay" style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; font-size:10px; padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
+              Studio cont-ACT
             </div>
           </div>
           <div style="margin-bottom:16px;">
@@ -1223,10 +1227,85 @@ Yuk nikmati selagi hangat!`,
     }
   }
 
-  function prosesKontenStudio() {
+  /* ==========================================================
+     MANAJEMEN KUOTA 3X GRATIS & INTEGRASI AI AWAN (FAL.AI)
+     ========================================================== */
+  function getSisaKuota() {
+    const s = localStorage.getItem('contact_kuota_gratis');
+    if (s === null) return 3;
+    const n = parseInt(s, 10);
+    return isNaN(n) ? 3 : Math.max(0, n);
+  }
+
+  function setSisaKuota(n) {
+    localStorage.setItem('contact_kuota_gratis', Math.max(0, n).toString());
+    updateBadgeKuota();
+  }
+
+  function updateBadgeKuota() {
+    const sisa = getSisaKuota();
+    const el = document.getElementById('label-sisa-kuota');
+    if (el) {
+      el.textContent = `Sisa Kuota Gratis: ${sisa} dari 3 Kali`;
+    }
+  }
+
+  function getClientId() {
+    let id = localStorage.getItem('contact_client_id');
+    if (!id) {
+      id = 'cli_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+      localStorage.setItem('contact_client_id', id);
+    }
+    return id;
+  }
+
+  // Panggil update badge saat halaman dimuat
+  window.addEventListener('DOMContentLoaded', () => {
+    updateBadgeKuota();
+  });
+
+  // Fungsi kompresi foto kamera HP ke max 1280px JPEG kagem payload aman di serverless
+  function kompresFotoBase64(img) {
+    const maxDim = 1280;
+    let w = img.width;
+    let h = img.height;
+    if (w > maxDim || h > maxDim) {
+      if (w > h) {
+        h = Math.round((h * maxDim) / w);
+        w = maxDim;
+      } else {
+        w = Math.round((w * maxDim) / h);
+        h = maxDim;
+      }
+    }
+    const c = document.createElement('canvas');
+    c.width = w;
+    c.height = h;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(img, 0, 0, w, h);
+    return c.toDataURL('image/jpeg', 0.85);
+  }
+
+  async function prosesKontenStudio() {
+    // 1. Cek Kuota Klien (3x Gratis)
+    if (getSisaKuota() <= 0) {
+      alert('Jatah 3x coba gratis Anda telah selesai digunakan.\n\nSilakan selesaikan salah satu misi kilat sosial media di bawah kagem membuka kuota berikutnya secara otomatis!');
+      const elMisi = document.getElementById('misi-kuota');
+      if (elMisi) elMisi.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    // 2. Cek Upload Foto
+    if (!uploadedFotoImg) {
+      alert('Mohon pilih dan upload 1 foto produk kamera HP Anda terlebih dahulu.');
+      document.getElementById('input-foto-produk').click();
+      return;
+    }
+
     const namaProduk = document.getElementById('gen-nama-produk').value.trim() || 'Produk Unggulan Kami';
     const kategori = document.getElementById('gen-kategori-produk').value;
     const keunggulan = document.getElementById('gen-keunggulan').value.trim() || 'kualitas terbaik & terpercaya';
+    const suasanaDipilih = (document.getElementById('prompt-input') && document.getElementById('prompt-input').value.trim()) || 'Meja marmer hitam elegan dengan pencahayaan warm spotlight dramatis';
 
     const loadingState = document.getElementById('gen-loading-state');
     const emptyState = document.getElementById('gen-empty-state');
@@ -1238,35 +1317,130 @@ Yuk nikmati selagi hangat!`,
     resultState.style.display = 'none';
     loadingState.style.display = 'block';
 
-    const steps = [
-      { main: 'Menyiapkan frame mockup produk studio...', sub: 'Menyesuaikan proporsi foto kagem tampilan katalog komersial' },
-      { main: 'Memasang tata pencahayaan studio & bayangan...', sub: 'Efek pencahayaan fokus dan podium marmer estetik' },
-      { main: 'Meracik naskah copywriting jualan formula Hook Menarik...', sub: 'Mengonversi penonton menjadi pembeli via psikologi pesan' },
-      { main: 'Menyiapkan 10 hashtag trending live TikTok & Reels...', sub: 'Menyesuaikan tagar dengan algoritma FYP pekan ini' }
-    ];
+    loadingTeks.textContent = 'Menghubungkan ke Studio AI Awan (fal.ai)...';
+    loadingSub.textContent = 'Mengompres dan menyiapkan foto produk kamera HP Anda...';
 
-    let stepIdx = 0;
-    const interval = setInterval(() => {
-      stepIdx++;
-      if (stepIdx < steps.length) {
-        loadingTeks.textContent = steps[stepIdx].main;
-        loadingSub.textContent = steps[stepIdx].sub;
-      } else {
-        clearInterval(interval);
-        tampilkanHasilKonten(namaProduk, kategori, keunggulan);
+    const fotoDataUrl = kompresFotoBase64(uploadedFotoImg);
+
+    try {
+      // Panggil Serverless API contact-generate
+      const resp = await fetch('/api/contact-generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          foto: fotoDataUrl,
+          namaProduk: namaProduk,
+          kategori: kategori,
+          keunggulan: keunggulan,
+          suasana: suasanaDipilih,
+          clientId: getClientId()
+        })
+      });
+
+      let resData = null;
+      try { resData = await resp.json(); } catch(_) {}
+
+      if (resp.status === 403 && resData && resData.status === 'quota_exceeded') {
+        setSisaKuota(0);
+        loadingState.style.display = 'none';
+        alert('Jatah 3x coba gratis Anda telah habis. Selesaikan misi sosial media kagem membuka kuota berikutnya!');
+        document.getElementById('misi-kuota').scrollIntoView({ behavior: 'smooth' });
+        return;
       }
-    }, 650);
+
+      if (resp.ok && resData && resData.status === 'queued') {
+        // Polling ke antrean fal.ai
+        loadingTeks.textContent = 'AI Studio Awan sedang merender pencahayaan & bayangan...';
+        loadingSub.textContent = 'Model Flux-Pro Kontext berjalan di cloud GPU (estimasi ~30–40 detik)...';
+
+        const statusUrl = resData.statusUrl;
+        const responseUrl = resData.responseUrl;
+        const requestId = resData.requestId;
+
+        let selesai = false;
+        let imageUrlHasil = null;
+        let attempts = 0;
+        const maxAttempts = 30; // Maksimal 90 detik
+
+        while (!selesai && attempts < maxAttempts) {
+          await new Promise(r => setTimeout(r, 3000));
+          attempts++;
+
+          try {
+            const pollResp = await fetch(`/api/contact-status?requestId=${encodeURIComponent(requestId)}&statusUrl=${encodeURIComponent(statusUrl)}&responseUrl=${encodeURIComponent(responseUrl)}`);
+            const pollData = await pollResp.json();
+
+            if (pollData.status === 'completed' && pollData.imageUrl) {
+              imageUrlHasil = pollData.imageUrl;
+              selesai = true;
+              break;
+            } else if (pollData.status === 'in_progress') {
+              loadingSub.textContent = `Proses render AI awan sedang berjalan... (${attempts * 3} detik)`;
+            }
+          } catch(pollErr) {
+            console.warn('Polling error:', pollErr);
+          }
+        }
+
+        if (selesai && imageUrlHasil) {
+          // Sukses render AI Awan!
+          setSisaKuota(getSisaKuota() - 1);
+          tampilkanHasilAiAwan(imageUrlHasil, resData.caption, resData.hashtags);
+          return;
+        }
+      }
+
+      // Jika fal.ai pending kredensial atau timeout, fallback anggun ke generator lokal
+      console.warn('AI Cloud tidak merespons atau sedang sinkronisasi key; beralih ke generator instan.');
+      setSisaKuota(getSisaKuota() - 1);
+      tampilkanHasilKonten(namaProduk, kategori, keunggulan);
+
+    } catch (err) {
+      console.error('Proses generator error:', err);
+      // Fallback lokal jika jaringan offline
+      setSisaKuota(getSisaKuota() - 1);
+      tampilkanHasilKonten(namaProduk, kategori, keunggulan);
+    }
+  }
+
+  function tampilkanHasilAiAwan(imageUrl, caption, hashtags) {
+    document.getElementById('gen-loading-state').style.display = 'none';
+    document.getElementById('gen-result-state').style.display = 'block';
+
+    const canvas = document.getElementById('gen-canvas');
+    const resultImg = document.getElementById('gen-result-img');
+    const btnDownload = document.getElementById('btn-download-foto');
+
+    canvas.style.display = 'none';
+    resultImg.src = imageUrl;
+    resultImg.style.display = 'block';
+
+    btnDownload.href = imageUrl;
+    btnDownload.target = '_blank';
+    btnDownload.download = 'foto-studio-contact-ai.jpg';
+    btnDownload.querySelector('span').textContent = 'Download Foto Studio AI Asli (Resolusi Penuh)';
+
+    document.getElementById('hasil-caption').textContent = caption;
+    document.getElementById('hasil-hashtag').textContent = hashtags;
   }
 
   function tampilkanHasilKonten(nama, kategori, keunggulan) {
     document.getElementById('gen-loading-state').style.display = 'none';
     document.getElementById('gen-result-state').style.display = 'block';
 
+    const canvas = document.getElementById('gen-canvas');
+    const resultImg = document.getElementById('gen-result-img');
+    const btnDownload = document.getElementById('btn-download-foto');
+
+    resultImg.style.display = 'none';
+    canvas.style.display = 'block';
+    btnDownload.querySelector('span').textContent = 'Download Foto Mockup Studio (1080x1080)';
+
     let caption = '';
     let hashtags = '';
 
     if (kategori === 'kuliner') {
-      caption = `Pilihan tepat untuk penikmat kuliner berkualitas. ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi, ${keunggulan}. Sangat pas untuk menemani waktu kerja, santai bersama keluarga, maupun suguhan istimewa.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang. Silakan klik tautan di profil untuk informasi dan pemesanan.`;
+      caption = `Pilihan tepat untuk penikmat kuliner berkualitas. ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi, ${keunggulan}. Sangat pas untuk menemani waktu kerja, santai bersama keluarga, maupun suguhan istimewa.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang. Silakan klik tautan di bio untuk informasi dan pemesanan.`;
       hashtags = `#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enakbanget #reelskuliner`;
     } else if (kategori === 'skincare') {
       caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nPromo Khusus Hari Ini:\nDapatkan penawaran istimewa untuk pembelian pekan ini. Silakan kunjungi tautan di profil sebelum masa promo berakhir.`;
@@ -1290,13 +1464,13 @@ Yuk nikmati selagi hangat!`,
       gambarStudioCanvas(uploadedFotoImg);
     } else {
       // Buat sample visual produk jika belum upload
-      const canvas = document.getElementById('gen-canvas');
-      const ctx = canvas.getContext('2d');
+      const canvasEl = document.getElementById('gen-canvas');
+      const ctx = canvasEl.getContext('2d');
       gambarStudioCanvas(null);
       ctx.fillStyle = '#00A896';
       ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(nama, canvas.width/2, canvas.height * 0.5);
+      ctx.fillText(nama, canvasEl.width/2, canvasEl.height * 0.5);
     }
   }
 
