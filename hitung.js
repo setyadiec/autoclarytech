@@ -204,6 +204,7 @@
       '<div><label for="' + id + '-nama">Nama Anda</label><input id="' + id + '-nama" name="nama" required autocomplete="name"></div>' +
       '<div><label for="' + id + '-usaha">Nama usaha / lembaga</label><input id="' + id + '-usaha" name="usaha" required autocomplete="organization"></div>' +
       '<div><label for="' + id + '-kota">Kota / kabupaten</label><input id="' + id + '-kota" name="kota" autocomplete="address-level2"></div>' +
+      '<div><label for="' + id + '-email">Email Anda (opsional, untuk salinan hasil)</label><input id="' + id + '-email" name="email" type="email" autocomplete="email" placeholder="nama@email.com"></div>' +
       '<div><label for="' + id + '-kontak">No. WhatsApp Aktif (wajib untuk kirim analisis)</label><input id="' + id + '-kontak" name="kontak" required autocomplete="tel" placeholder="mis. 081234567890"></div>' +
       '</div><div class="hk-hp" aria-hidden="true"><label>Jangan diisi<input name="situs" tabindex="-1" autocomplete="off"></label></div>' +
       '<button class="hk-btn" type="submit">Kirim & Dapatkan Analisis</button>' +
@@ -236,9 +237,11 @@
       if (!nama || !usaha) { tampil("Mohon isi nama Anda dan nama usaha.", false); return; }
       var btn = fD.querySelector("button"); btn.disabled = true; btn.textContent = "Mengirim...";
       var kontak = fD.elements.kontak.value.trim();
+      var email = fD.elements.email ? fD.elements.email.value.trim() : "";
       var body = {
         namaToko: usaha, namaOwner: nama, kota: fD.elements.kota.value.trim(),
         waOwner: /^[+\d][\d\s().-]{7,}$/.test(kontak) ? kontak : "", kontak: kontak,
+        email: email,
         kategori: J.nama, jenisAplikasi: "Halaman hitung " + kode, jalur: kode,
         sumberHalaman: location.pathname, hasilHitung: terakhir
       };
@@ -247,11 +250,14 @@
       fetch("/api/daftar", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
         .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.status === "success", j: j }; }); })
         .then(function (x) {
-          tampil("<strong>Terima kasih, " + esc(nama) + "!</strong> Data Anda telah kami terima.<br><br><a href='" + waUrl + "' target='_blank' rel='noopener' style='display:inline-block;background:#10b981;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;margin-top:6px;'>Chat WhatsApp Sekarang untuk Percepat Demo &rarr;</a>", true);
+          var regId = (x.j && x.j.data && x.j.data.id_pendaftaran) ? x.j.data.id_pendaftaran : "";
+          var waText = "Halo AutoClaryTech, saya " + nama + " dari " + usaha + (regId ? " (ID: " + regId + ")" : "") + ". Saya sudah mengisi hitungan " + J.nama + " dan ingin diskusi uji coba sistem di tempat kami.";
+          var waLink = "https://wa.me/6285727240341?text=" + encodeURIComponent(waText);
+          tampil("<strong>Terima kasih, " + esc(nama) + "!</strong> Data Anda telah kami terima" + (regId ? " (ID: <code>" + esc(regId) + "</code>)" : "") + ".<br><br><a href='" + waLink + "' target='_blank' rel='noopener' style='display:inline-block;background:#10b981;color:#fff;font-weight:700;padding:12px 20px;border-radius:8px;text-decoration:none;margin-top:6px;box-shadow:0 4px 12px rgba(16,185,129,0.3);'>Chat WhatsApp Sekarang untuk Percepat Demo &rarr;</a>" + (email ? "<br><small style='display:inline-block;margin-top:8px;opacity:0.85;'>Salinan ringkasan juga dikirim ke " + esc(email) + ".</small>" : ""), true);
           fD.reset(); btn.textContent = "Terkirim";
         })
         .catch(function () {
-          tampil("<strong>Terima kasih, " + esc(nama) + "!</strong> Data siap diteruskan.<br><br><a href='" + waUrl + "' target='_blank' rel='noopener' style='display:inline-block;background:#10b981;color:#fff;font-weight:700;padding:10px 18px;border-radius:8px;text-decoration:none;margin-top:6px;'>Lanjutkan via WhatsApp Resmi &rarr;</a>", true);
+          tampil("<strong>Terima kasih, " + esc(nama) + "!</strong> Data siap diteruskan.<br><br><a href='" + waUrl + "' target='_blank' rel='noopener' style='display:inline-block;background:#10b981;color:#fff;font-weight:700;padding:12px 20px;border-radius:8px;text-decoration:none;margin-top:6px;'>Lanjutkan via WhatsApp Resmi &rarr;</a>", true);
           btn.disabled = false; btn.textContent = "Kirim lagi";
         });
       function gagal() { tampil("Maaf, data belum tersimpan. Mohon coba kirim lagi beberapa saat lagi.", false); btn.disabled = false; btn.textContent = "Kirim lagi"; }

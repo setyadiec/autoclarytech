@@ -38,7 +38,7 @@
       <div class="kotak-ingat"><strong>Panduan Keamanan Nomor:</strong> Untuk kebaikan operasional jangka panjang, kami menyarankan menggunakan nomor WhatsApp khusus usaha (bukan nomor pribadi utama) demi menghindari risiko pemblokiran sepihak dari pihak WhatsApp/Meta akibat frekuensi pesan tinggi.</div>
       <div id="alertSuccess" class="pesan-status" role="status">Pendaftaran Anda telah tercatat di sistem kami! Mengalihkan ke WhatsApp resmi untuk aktivasi kuota 100 chat gratis...</div>
       <form id="formDaftar" class="form-tumpuk" onsubmit="handleDaftar(event)">
-        <div class="form-group"><label class="form-label" for="namaToko">Nama Usaha / Toko</label><input class="form-input" id="namaToko" placeholder="Contoh: Kopi Nusantara / Berkah Rental" required="" type="text"/></div><div class="form-group"><label class="form-label" for="namaOwner">Nama Pemilik / Pengelola</label><input class="form-input" id="namaOwner" placeholder="Contoh: Budi Santoso" required="" type="text"/></div><div class="form-group"><label class="form-label" for="waOwner">Nomor WhatsApp Aktif</label><input class="form-input" id="waOwner" placeholder="Contoh: 081234567890" required="" type="tel"/></div><div class="form-group"><label class="form-label" for="kategori">Kategori Bisnis</label><select class="form-select" id="kategori">
+        <div class="form-group"><label class="form-label" for="namaToko">Nama Usaha / Toko</label><input class="form-input" id="namaToko" placeholder="Contoh: Kopi Nusantara / Berkah Rental" required="" type="text"/></div><div class="form-group"><label class="form-label" for="namaOwner">Nama Pemilik / Pengelola</label><input class="form-input" id="namaOwner" placeholder="Contoh: Budi Santoso" required="" type="text"/></div><div class="form-group"><label class="form-label" for="waOwner">Nomor WhatsApp Aktif</label><input class="form-input" id="waOwner" placeholder="Contoh: 081234567890" required="" type="tel"/></div><div class="form-group"><label class="form-label" for="emailOwner">Email Anda (Opsional, untuk salinan pendaftaran)</label><input class="form-input" id="emailOwner" placeholder="nama@email.com" type="email"/></div><div class="form-group"><label class="form-label" for="kategori">Kategori Bisnis</label><select class="form-select" id="kategori">
 <option value="Kuliner &amp; Kafe">Kuliner, Kafe &amp; Restoran</option>
 <option value="Rental Kendaraan">Rental Mobil / Motor</option>
 <option value="Toko Online &amp; Reseller">Toko Online &amp; Reseller</option>
@@ -95,12 +95,14 @@
       var toko = document.getElementById('namaToko').value.trim();
       var owner = document.getElementById('namaOwner').value.trim();
       var wa = document.getElementById('waOwner').value.trim();
+      var email = document.getElementById('emailOwner') ? document.getElementById('emailOwner').value.trim() : '';
       var kat = document.getElementById('kategori').value;
 
       var payload = {
         namaToko: toko,
         namaOwner: owner,
         waOwner: wa,
+        email: email,
         kategori: kat
       };
 
