@@ -306,7 +306,7 @@
             <input type="file" id="input-foto-produk" accept="image/*" style="display:none;" onchange="handleFotoUpload(event)">
             <div id="dropzone-placeholder">
               <div style="margin-bottom:8px;"><svg class="ikon" style="width:36px; height:36px; stroke:var(--aksen); margin:0 auto;" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
-              <div style="font:700 14px var(--f-judul); color:#065F46; margin-bottom:4px;">Klik kagem Pilih Foto dari Galeri HP</div>
+              <div style="font:700 14px var(--f-judul); color:#065F46; margin-bottom:4px;">Klik untuk Pilih Foto dari Galeri HP</div>
               <div style="font-size:12px; color:var(--redup);">Format JPG, PNG, atau WebP (Foto kamera HP biasa tanpa edit)</div>
             </div>
             <div id="dropzone-preview-wrap" style="display:none;">
@@ -345,7 +345,7 @@
           <svg class="ikon ikon-s" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg><span>Proses Mockup &amp; Naskah Jualan (Gratis)</span>
         </button>
         <div style="font-size:11px; color:var(--redup); text-align:center; margin-top:8px;">
-          Tanpa perlu daftar &bull; Langsung diproses di peramban Anda
+          Tanpa perlu daftar &bull; Diproses langsung oleh AI Studio Awan (fal.ai)
         </div>
       </div>
 
@@ -367,18 +367,18 @@
             <span style="font-size:12px; color:#059669; font-weight:700;">100% Selesai</span>
           </div>
 
-          <!-- Pratinjau Visual Studio Canvas/Image -->
-          <div style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:16px; background:linear-gradient(180deg, #1E293B 0%, #0F172A 100%); text-align:center; box-shadow:var(--tekan);">
-            <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:280px; object-fit:contain; display:block; margin:0 auto;"></canvas>
-            <img id="gen-result-img" src="" alt="Hasil Studio AI Awan" style="width:100%; max-height:280px; object-fit:contain; display:none; margin:0 auto;">
-            <div id="gen-badge-overlay" style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.6); color:#fff; font-size:10px; padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
+          <!-- Pratinjau Visual Studio Canvas/Image (Bersih Tanpa Bingkai Gelap) -->
+          <div id="gen-preview-box" style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:16px; background:#F8FAFC; border:1px solid #E2E8F0; text-align:center;">
+            <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:360px; object-fit:contain; display:block; margin:0 auto;"></canvas>
+            <img id="gen-result-img" src="" alt="Hasil Studio AI Awan" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:none; margin:0 auto; border-radius:8px;">
+            <div id="gen-badge-overlay" style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.5); color:#fff; font-size:10px; padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
               Studio cont-ACT
             </div>
           </div>
           <div style="margin-bottom:16px;">
-            <a id="btn-download-foto" href="#" download="konten-studio-contact.png" class="tombol tombol-kecil" style="width:100%; justify-content:center; background:#F8FAFC; border:1px solid #CBD5E1; color:var(--ink); font-weight:700;">
+            <a id="btn-download-foto" href="#" download="foto-studio-contact-ai.jpg" class="tombol tombol-kecil" style="width:100%; justify-content:center; background:#F8FAFC; border:1px solid #CBD5E1; color:var(--ink); font-weight:700;">
               <svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              <span>Download Foto Mockup Studio (1080x1080)</span>
+              <span>Download Foto Studio AI Asli (Resolusi Penuh)</span>
             </a>
           </div>
 
@@ -416,7 +416,7 @@
           <div style="margin-bottom:10px;"><svg class="ikon" style="width:36px; height:36px; stroke:var(--redup); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
           <div style="font:800 16px var(--f-judul); color:var(--ink); margin-bottom:6px;">Hasil Siap Saji Akan Muncul di Sini</div>
           <p style="font-size:13px; color:var(--redup); max-width:280px; margin:0 auto; line-height:1.5;">
-            Upload foto produk Anda di sebelah kiri dan klik proses. Naskah caption penjual, tagar trending, dan foto studio akan jadi otomatis di peramban Anda!
+            Upload foto produk Anda di sebelah kiri dan klik proses. Naskah caption penjual, tagar trending, dan foto studio resolusi tinggi akan diproses otomatis oleh AI Studio Awan!
           </p>
         </div>
 
@@ -774,7 +774,7 @@ Pemesanan &amp; konsultasi: Klik tautan di bio sekarang!
           Jatah Kuota Habis? Dapatkan Tambahan Gratis Lewat Misi Kilat!
         </h3>
         <p style="font-size:14px; color:var(--teks); line-height:1.6;">
-          Khusus layanan <strong>auto bikin konten (cont-ACT)</strong>: 10 pendaftar pertama gratis penuh. Bila batas jatah habis, Anda <strong>TIDAK PERLU BAYAR</strong>. Cukup selesaikan misi sosial media sederhana di bawah kagem membuka kuota berikutnya secara otomatis:
+          Khusus layanan <strong>auto bikin konten (cont-ACT)</strong>: 10 pendaftar pertama gratis penuh. Bila batas jatah habis, Anda <strong>TIDAK PERLU BAYAR</strong>. Cukup selesaikan misi sosial media sederhana di bawah untuk membuka kuota berikutnya secara otomatis:
         </p>
       </div>
 
@@ -790,7 +790,7 @@ Pemesanan &amp; konsultasi: Klik tautan di bio sekarang!
             </div>
             <h4 style="font:700 16px var(--f-judul); color:var(--ink); margin-bottom:6px;">Follow TikTok &amp; Instagram</h4>
             <p style="font-size:12px; color:var(--teks); line-height:1.5; margin-bottom:14px;">
-              Follow akun resmi AutoClaryTech di TikTok &amp; Instagram kagem melihat perkembangan tren konten UMKM.
+              Follow akun resmi AutoClaryTech di TikTok &amp; Instagram untuk melihat perkembangan tren konten UMKM.
             </p>
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
@@ -856,7 +856,7 @@ Pemesanan &amp; konsultasi: Klik tautan di bio sekarang!
               Kirimkan tangkapan layar hasil foto produk Anda beserta ulasan jujur. Kuota VIP langsung dibuka!
             </p>
           </div>
-          <a href="https://wa.me/6285727240341?text=Halo%20Admin%20cont-ACT,%20saya%20sudah%20mencoba%20studio%20foto%20dan%20ingin%20mengirimkan%20testimoni%20kagem%20klaim%20kuota%20VIP" target="_blank" rel="noopener" class="tombol tombol-utama tombol-kecil" style="width:100%; text-align:center; font-size:11px; padding:8px 10px;">Kirim Testimoni via WA</a>
+          <a href="https://wa.me/6285727240341?text=Halo%20Admin%20cont-ACT,%20saya%20sudah%20mencoba%20studio%20foto%20dan%20ingin%20mengirimkan%20testimoni%20untuk%20klaim%20kuota%20VIP" target="_blank" rel="noopener" class="tombol tombol-utama tombol-kecil" style="width:100%; text-align:center; font-size:11px; padding:8px 10px;">Kirim Testimoni via WA</a>
         </div>
 
       </div>
@@ -864,7 +864,7 @@ Pemesanan &amp; konsultasi: Klik tautan di bio sekarang!
       <!-- Action Footer -->
       <div style="text-align:center; padding:18px; background:#fff; border-radius:var(--r); border:1px dashed var(--aksen);">
         <p style="font-size:13px; color:var(--ink); margin-bottom:12px; font-weight:600;">
-          Sudah menyelesaikan salah satu misi di atas? Konfirmasi instan ke admin kagem aktivasi kuota:
+          Sudah menyelesaikan salah satu misi di atas? Konfirmasi instan ke admin untuk aktivasi kuota:
         </p>
         <a href="https://wa.me/6285727240341?text=Halo%20Admin%20cont-ACT,%20saya%20sudah%20menyelesaikan%20Misi%20(Follow/Like/Komentar/Share/Testimoni).%20Mohon%20aktivasi%20tambahan%20kuota%20gratis%20saya." target="_blank" rel="noopener" class="tombol tombol-utama" style="display:inline-flex; align-items:center; gap:8px;">
           <span>Klaim Bonus Kuota Misi via WhatsApp (0857-2724-0341)</span>
@@ -1264,7 +1264,7 @@ Yuk nikmati selagi hangat!`,
     updateBadgeKuota();
   });
 
-  // Fungsi kompresi foto kamera HP ke max 1280px JPEG kagem payload aman di serverless
+  // Fungsi kompresi foto kamera HP ke max 1280px JPEG untuk payload aman di serverless
   function kompresFotoBase64(img) {
     const maxDim = 1280;
     let w = img.width;
@@ -1289,7 +1289,7 @@ Yuk nikmati selagi hangat!`,
   async function prosesKontenStudio() {
     // 1. Cek Kuota Klien (3x Gratis)
     if (getSisaKuota() <= 0) {
-      alert('Jatah 3x coba gratis Anda telah selesai digunakan.\n\nSilakan selesaikan salah satu misi kilat sosial media di bawah kagem membuka kuota berikutnya secara otomatis!');
+      alert('Jatah 3x coba gratis Anda telah selesai digunakan.\n\nSilakan selesaikan salah satu misi kilat sosial media di bawah untuk membuka kuota berikutnya secara otomatis!');
       const elMisi = document.getElementById('misi-kuota');
       if (elMisi) elMisi.scrollIntoView({ behavior: 'smooth' });
       return;
@@ -1343,7 +1343,7 @@ Yuk nikmati selagi hangat!`,
       if (resp.status === 403 && resData && resData.status === 'quota_exceeded') {
         setSisaKuota(0);
         loadingState.style.display = 'none';
-        alert('Jatah 3x coba gratis Anda telah habis. Selesaikan misi sosial media kagem membuka kuota berikutnya!');
+        alert('Jatah 3x coba gratis Anda telah habis. Selesaikan misi sosial media untuk membuka kuota berikutnya!');
         document.getElementById('misi-kuota').scrollIntoView({ behavior: 'smooth' });
         return;
       }
@@ -1410,6 +1410,12 @@ Yuk nikmati selagi hangat!`,
     const canvas = document.getElementById('gen-canvas');
     const resultImg = document.getElementById('gen-result-img');
     const btnDownload = document.getElementById('btn-download-foto');
+    const previewBox = document.getElementById('gen-preview-box');
+
+    if (previewBox) {
+      previewBox.style.background = '#FFFFFF';
+      previewBox.style.border = '1px solid #E2E8F0';
+    }
 
     canvas.style.display = 'none';
     resultImg.src = imageUrl;

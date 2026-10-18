@@ -1,5 +1,5 @@
 // Vercel Serverless Function: /api/contact-generate
-// Arsitektur cont-ACT AI Awan (fal.ai) — Dhawuh Bapak & Bey 18 Okt 2026
+// Arsitektur cont-ACT AI Awan (fal.ai) — arahan Bapak & Bey 18 Okt 2026
 
 export const config = {
   api: {
@@ -76,7 +76,7 @@ export default async function handler(req, res) {
   if (pemakaianSaatIni >= MAKS_KUOTA_GRATIS) {
     return res.status(403).json({
       status: 'quota_exceeded',
-      message: 'Jatah 3x coba gratis untuk perangkat/jaringan ini telah selesai digunakan. Selesaikan misi media sosial atau daftarkan antrean produksi kustom kagem membuka akses berikutnya.',
+      message: 'Jatah 3x coba gratis untuk perangkat/jaringan ini telah selesai digunakan. Selesaikan misi media sosial atau daftarkan antrean produksi kustom untuk membuka akses berikutnya.',
       sisaKuota: 0
     });
   }
@@ -138,8 +138,8 @@ export default async function handler(req, res) {
     hitunganHarianGlobal += 1;
     const sisaKuota = Math.max(0, MAKS_KUOTA_GRATIS - (pemakaianSaatIni + 1));
 
-    // Racik Naskah Copywriting Jualan Terstruktur & 10 Tagar Relevan
-    const { caption, hashtags } = racikNaskah(namaBersih, kategoriBersih, keunggulanBersih);
+    // Racik Naskah Copywriting Jualan & 10 Tagar Relevan via LLM Awan fal.ai
+    const { caption, hashtags } = await racikNaskahLlm(FAL_KEY, namaBersih, kategoriBersih, keunggulanBersih, suasanaBersih);
 
     return res.status(200).json({
       status: 'queued',
@@ -160,22 +160,81 @@ export default async function handler(req, res) {
   }
 }
 
-// Helper peracik copywriting jualan profesional formula Hook Menarik + Manfaat + CTA
-function racikNaskah(nama, kategori, keunggulan) {
+// Integrasi LLM Awan fal.ai (fal-ai/any-llm) untuk copywriting presisi & 10 tagar trending
+async function racikNaskahLlm(falKey, nama, kategori, keunggulan, suasana) {
+  const promptLlm = `Kamu adalah copywriter profesional Indonesia untuk promosi produk UMKM di Instagram, TikTok, dan WhatsApp.
+Tugas: Buat naskah caption jualan medsos yang memikat, persuasif, membangkitkan minat pembeli, dan bikin laku jualan.
+Data Produk Klien:
+- Nama Produk: ${nama}
+- Kategori Usaha: ${kategori}
+- Keunggulan Utama: ${keunggulan}
+- Suasana Foto Studio: ${suasana}
+
+Instruksi Formula:
+1. Hook emosional yang mengena dan relevan dengan produk.
+2. Jelaskan manfaat nyata dan keunggulan spesifik produk tersebut (jangan generik).
+3. Call to Action (CTA) pemesanan yang jelas.
+4. Tepat 10 tagar (hashtag) yang relevan, viral, dan trending.
+
+Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
+CAPTION:
+[Isi caption lengkap di sini, gunakan emoji yang memikat pembeli]
+
+HASHTAGS:
+#tagar1 #tagar2 #tagar3 #tagar4 #tagar5 #tagar6 #tagar7 #tagar8 #tagar9 #tagar10`;
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000); // 10 detik batas waktu LLM
+    const resp = await fetch('https://fal.run/fal-ai/any-llm', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Key ${falKey.trim()}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ prompt: promptLlm }),
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+
+    if (resp.ok) {
+      const data = await resp.json();
+      const outputText = String(data.output || '');
+
+      const capMatch = outputText.match(/CAPTION:\s*([\s\S]*?)(?=HASHTAGS:|$)/i);
+      const hashMatch = outputText.match(/HASHTAGS:\s*([\s\S]*?)$/i);
+
+      let caption = capMatch ? capMatch[1].trim() : '';
+      let hashtags = hashMatch ? hashMatch[1].trim() : '';
+
+      if (caption && hashtags) {
+        return { caption, hashtags };
+      }
+    }
+  } catch (err) {
+    console.warn('Fallback LLM awan:', err.message);
+  }
+
+  // Fallback cerdas jika LLM awan timeout
+  return racikNaskahFallback(nama, kategori, keunggulan);
+}
+
+// Helper peracik copywriting jualan formula Hook Menarik + Manfaat + CTA
+function racikNaskahFallback(nama, kategori, keunggulan) {
   let caption = '';
   let hashtags = '';
 
   if (kategori === 'kuliner') {
-    caption = `Pilihan tepat untuk penikmat kuliner berkualitas. ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi, ${keunggulan}. Sangat pas untuk menemani waktu kerja, santai bersama keluarga, maupun suguhan istimewa.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang. Silakan klik tautan di bio untuk informasi dan pemesanan.`;
+    caption = `Pilihan tepat untuk penikmat kuliner berkualitas! ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi: ${keunggulan}. Sangat pas untuk menemani waktu kerja, kumpul keluarga, maupun hidangan spesial.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang. Silakan klik tautan di bio untuk informasi dan pemesanan!`;
     hashtags = `#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enakbanget #reelskuliner`;
   } else if (kategori === 'skincare') {
     caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nPromo Khusus Hari Ini:\nDapatkan penawaran istimewa untuk pembelian pekan ini. Silakan kunjungi tautan di profil sebelum masa promo berakhir.`;
     hashtags = `#skincareroutine #racunskincare #kulitglowing #skincarebpom #beautytips #fypindonesia #viralreels #cantikalami #perawatanwajah #racuntiktok`;
   } else if (kategori === 'fashion') {
-    caption = `Tampil percaya diri dengan busana yang nyaman dan elegan: ${nama}.\n\nDirancang menggunakan material berkualitas yang jatuh rapi di badan. ${keunggulan}. Pilihan serasi baik untuk agenda formal maupun kegiatan santai harian.\n\nPersediaan Terbatas:\nAmankan ukuran dan varian pilihan Anda sekarang juga melalui tautan di profil.`;
+    caption = `Tampil percaya diri dengan busana yang nyaman dan elegan: ${nama}.\n\nDirancang menggunakan material berkualitas yang jatuh rapi di badan: ${keunggulan}. Pilihan serasi baik untuk agenda formal maupun kegiatan santai harian.\n\nPersediaan Terbatas:\nAmankan ukuran dan varian pilihan Anda sekarang juga melalui tautan di profil.`;
     hashtags = `#ootdindonesia #fashionviral #outfitharian #racuntiktok #bajubagus #hijabstyle #reelsfashion #fypoutfit #racunshopee #styleinspo`;
   } else if (kategori === 'herbal') {
-    caption = `Kesehatan adalah investasi terbaik untuk masa depan keluarga. Jaga stamina harian dengan ${nama}.\n\nKhasiat alami murni untuk mendukung daya tahan tubuh secara optimal. ${keunggulan}. Tanpa bahan tambahan yang merugikan, aman untuk konsumsi harian.\n\nPemesanan & Konsultasi:\nHubungi kami melalui tautan di profil untuk mendapatkan produk asli bergaransi.`;
+    caption = `Kesehatan adalah investasi terbaik untuk masa depan keluarga. Jaga stamina harian dengan ${nama}.\n\nKhasiat alami murni untuk mendukung daya tahan tubuh secara optimal: ${keunggulan}. Tanpa bahan tambahan yang merugikan, aman untuk konsumsi harian.\n\nPemesanan & Konsultasi:\nHubungi kami melalui tautan di profil untuk mendapatkan produk asli bergaransi.`;
     hashtags = `#hidupsehat #herbalalami #kesehatantubuh #suplemenalami #madumurni #tipssehat #herbalindonesia #fypkesehatan #sehatberkah #racunsehat`;
   } else {
     caption = `Solusi fungsional untuk menunjang aktivitas harian Anda: ${nama}.\n\nKualitas teruji, andal, dan ${keunggulan}. Dibuat secara presisi untuk memberikan kemudahan serta efisiensi maksimal.\n\nPromo Perdana:\nDapatkan penawaran harga terbaik khusus hari ini dengan mengunjungi tautan di profil.`;

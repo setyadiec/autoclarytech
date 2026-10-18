@@ -1,5 +1,5 @@
 // Vercel Serverless Function: /api/contact-status
-// Polling status antrean & hasil render fal.ai — Dhawuh Bapak & Bey 18 Okt 2026
+// Polling status antrean & hasil render fal.ai — arahan Bapak & Bey 18 Okt 2026
 
 export default async function handler(req, res) {
   // CORS Headers
