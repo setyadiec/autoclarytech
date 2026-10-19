@@ -357,7 +357,8 @@ Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
       // Sanitasi ketat keluaran AI Copywriter
       caption = bersihkanTeksPlaceholder(caption);
       videoScript = bersihkanTeksPlaceholder(videoScript);
-      const waStatusBersih = bersihkanWaStatus(waStatus, nama, keunggulan, nomorWa);
+      const waStatusBersih = bersihkanWaStatus(bersihkanTeksPlaceholder(waStatus), nama, keunggulan, nomorWa);
+      const ideKontenBersih = bersihkanTeksPlaceholder(ideKonten7Hari);
       const hashtagsBersih = bersihkanHashtags(hashtags, kategori, nama, keunggulan);
 
       if (caption && hashtagsBersih) {
@@ -365,7 +366,7 @@ Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
           caption,
           videoScript: videoScript || racikVideoScriptFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa),
           waStatus: waStatusBersih,
-          ideKonten7Hari: ideKonten7Hari || racikIde7HariFallback(nama, kategori),
+          ideKonten7Hari: ideKontenBersih || racikIde7HariFallback(nama, kategori),
           hashtags: hashtagsBersih
         };
       }
@@ -378,7 +379,7 @@ Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
   return racikPaketKontenFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa);
 }
 
-// Fungsi Pembersih Placeholder Teks Bocor seperti [Emoji bakpao], [Masukkan ...]
+// Fungsi Pembersih Placeholder Teks Bocor seperti [Emoji bakpao], [Masukkan ...] dan Markdown Mentah (**)
 function bersihkanTeksPlaceholder(teks) {
   if (!teks || typeof teks !== 'string') return '';
   return teks
@@ -388,6 +389,10 @@ function bersihkanTeksPlaceholder(teks) {
     .replace(/\[\s*ganti[^\]]*\]/gi, '')
     .replace(/\[\s*link[^\]]*\]/gi, '')
     .replace(/\[\s*nomor[^\]]*\]/gi, '')
+    .replace(/\*\*/g, '') // Bersihkan markdown bold mentah
+    .replace(/^\s*\*\s{2,}/gm, '• ') // Ubah markdown bullet mentah menjadi bullet bersih
+    .replace(/^\s*\*\s+/gm, '• ')
+    .replace(/terbatas/gi, 'tersedia')
     .trim();
 }
 

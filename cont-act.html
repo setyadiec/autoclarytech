@@ -2023,18 +2023,19 @@ Yuk nikmati selagi hangat!`,
     }
     updateTeksPenguatPreview();
 
-    // Isi 5 Tab Konten Kreator
-    document.getElementById('hasil-caption').textContent = resData.caption || '';
+    // Isi 5 Tab Konten Kreator (Bebas Markdown Mentah)
+    const stripMd = (t) => (t || '').replace(/\*\*/g, '').replace(/^\s*\*\s+/gm, '• ');
+    document.getElementById('hasil-caption').textContent = stripMd(resData.caption);
     document.getElementById('hasil-hashtag').textContent = resData.hashtags || '';
     
     if (document.getElementById('hasil-video-script')) {
-      document.getElementById('hasil-video-script').textContent = resData.videoScript || '';
+      document.getElementById('hasil-video-script').textContent = stripMd(resData.videoScript);
     }
     if (document.getElementById('hasil-wa-status')) {
-      document.getElementById('hasil-wa-status').textContent = resData.waStatus || '';
+      document.getElementById('hasil-wa-status').textContent = stripMd(resData.waStatus);
     }
     if (document.getElementById('hasil-jadwal-7hari')) {
-      document.getElementById('hasil-jadwal-7hari').textContent = resData.ideKonten7Hari || '';
+      document.getElementById('hasil-jadwal-7hari').textContent = stripMd(resData.ideKonten7Hari);
     }
 
     const boxTombolWa = document.getElementById('box-tombol-wa-order');
