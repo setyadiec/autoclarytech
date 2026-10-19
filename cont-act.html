@@ -459,49 +459,187 @@
             <span style="font-size:12px; color:#059669; font-weight:700;">100% Selesai</span>
           </div>
 
-          <!-- TAB NAVIGASI ASET KONTEN -->
-          <div style="display:flex; gap:6px; margin-bottom:14px; overflow-x:auto; padding-bottom:6px;" id="tabs-konten-bar">
-            <button type="button" id="tab-btn-foto" onclick="gantiTabKonten('foto')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#08694F; color:#fff; border:1px solid #065F46; white-space:nowrap;">Foto Studio</button>
-            <button type="button" id="tab-btn-video" onclick="gantiTabKonten('video')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">Skrip Reels/TikTok</button>
-            <button type="button" id="tab-btn-caption" onclick="gantiTabKonten('caption')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">Caption Feed</button>
-            <button type="button" id="tab-btn-wa" onclick="gantiTabKonten('wa')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">Status WhatsApp</button>
-            <button type="button" id="tab-btn-jadwal" onclick="gantiTabKonten('jadwal')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">Rencana 7 Hari</button>
+          <!-- RINGKASAN BUKTI KELENGKAPAN 360° -->
+          <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:10px 12px; margin-bottom:14px; display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:8px; font-size:11px; text-align:center;">
+            <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:6px; padding:6px 4px;">
+              <span style="color:#059669; font-weight:800;">✓ Foto Studio Polos</span>
+            </div>
+            <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:6px; padding:6px 4px;">
+              <span style="color:#059669; font-weight:800;">✓ Banner Berteks</span>
+            </div>
+            <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:6px; padding:6px 4px;">
+              <span style="color:#059669; font-weight:800;">✓ 360° Parallax</span>
+            </div>
+            <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:6px; padding:6px 4px;">
+              <span style="color:#059669; font-weight:800;">✓ Video Reels 9:16</span>
+            </div>
+            <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:6px; padding:6px 4px;">
+              <span style="color:#059669; font-weight:800;">✓ Copywriting &amp; CTA</span>
+            </div>
           </div>
 
-          <!-- PANEL 1: FOTO STUDIO -->
+          <!-- TAB NAVIGASI ASET KONTEN -->
+          <div style="display:flex; gap:6px; margin-bottom:14px; overflow-x:auto; padding-bottom:6px;" id="tabs-konten-bar">
+            <button type="button" id="tab-btn-foto" onclick="gantiTabKonten('foto')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#08694F; color:#fff; border:1px solid #065F46; white-space:nowrap;">📸 Foto &amp; Banner</button>
+            <button type="button" id="tab-btn-video" onclick="gantiTabKonten('video')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">🎬 Video Reels 9:16</button>
+            <button type="button" id="tab-btn-caption" onclick="gantiTabKonten('caption')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">✍️ Caption Feed</button>
+            <button type="button" id="tab-btn-wa" onclick="gantiTabKonten('wa')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">💬 Status WhatsApp</button>
+            <button type="button" id="tab-btn-jadwal" onclick="gantiTabKonten('jadwal')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">📅 Rencana 7 Hari</button>
+          </div>
+
+          <!-- PANEL 1: FOTO STUDIO & BANNER PROMOSI (DENGAN TEKS PENGUAT PRODUK & 360° VIEW) -->
           <div id="tab-pane-foto" style="display:block;">
-            <div id="gen-preview-box" style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:14px; background:#F8FAFC; border:1px solid #E2E8F0; text-align:center;">
-              <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:360px; object-fit:contain; display:block; margin:0 auto;"></canvas>
+            
+            <!-- Kontrol Mode Tampilan: Banner Promosi / Rotasi 360° -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span style="font:800 12px var(--f-judul); color:var(--ink);">Format Tampilan Gambar:</span>
+              <div style="display:inline-flex; background:#E2E8F0; border-radius:6px; padding:2px;">
+                <button type="button" id="btn-mode-banner" onclick="setModeTampilanFoto('banner')" style="padding:4px 9px; font-size:11px; font-weight:700; border-radius:4px; border:none; cursor:pointer; background:#08694F; color:#fff;">Banner Promosi</button>
+                <button type="button" id="btn-mode-360" onclick="setModeTampilanFoto('360')" style="padding:4px 9px; font-size:11px; font-weight:700; border-radius:4px; border:none; cursor:pointer; background:transparent; color:#475569;">🔄 Parallax 360°</button>
+              </div>
+            </div>
+
+            <!-- Wadah Gambar Preview Box -->
+            <div id="gen-preview-box" style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:14px; background:#F8FAFC; border:1px solid #E2E8F0; text-align:center; transition:transform 0.1s ease-out;">
+              <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:380px; object-fit:contain; display:block; margin:0 auto;"></canvas>
               <img id="gen-result-img" src="" alt="Hasil Studio Foto AI" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:none; margin:0 auto; border-radius:8px;">
+              
+              <!-- OVERLAY TEKS PENGUAT PRODUK (BANNER PROMOSI FEED) -->
+              <div id="gen-teks-penguat-overlay" style="position:absolute; top:12px; left:12px; right:12px; pointer-events:none; display:flex; flex-direction:column; gap:6px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <div id="overlay-badge-tag" style="display:inline-flex; align-items:center; gap:5px; background:linear-gradient(135deg, #059669, #047857); color:#FFFFFF; font:800 11px 'Plus Jakarta Sans', sans-serif; padding:4px 10px; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.25); text-transform:uppercase; letter-spacing:0.04em;">
+                    ⭐ PRODUK UNGGULAN
+                  </div>
+                  <div id="overlay-label-banner" style="background:rgba(15,23,42,0.75); color:#F8FAFC; font:700 10px var(--f-mono); padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
+                    FEED PROMOSI
+                  </div>
+                </div>
+                <div id="overlay-headline-box" style="background:rgba(15, 23, 42, 0.85); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.22); border-radius:8px; padding:10px 12px; color:#FFFFFF; text-align:left; box-shadow:0 4px 14px rgba(0,0,0,0.35);">
+                  <div id="overlay-teks-headline" style="font:800 15px 'Plus Jakarta Sans', sans-serif; line-height:1.3; color:#FFFFFF; letter-spacing:-0.01em;">
+                    100% Produk Berkualitas • Pilihan Terpercaya
+                  </div>
+                  <div id="overlay-teks-sub" style="font-size:11px; color:#94A3B8; margin-top:3px; line-height:1.4;">
+                    Dibuat dengan standar mutu tinggi &amp; siap kirim hari ini.
+                  </div>
+                </div>
+              </div>
+
+              <!-- WATERMARK BADGE RESMI ACT -->
               <div id="gen-badge-overlay" style="position:absolute; bottom:10px; right:10px; display:inline-flex; align-items:center; gap:6px; background:rgba(11,19,41,0.8); color:#FFFFFF; font:700 11px 'Plus Jakarta Sans', sans-serif; padding:5px 10px; border-radius:6px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); box-shadow:0 2px 8px rgba(0,0,0,0.35); pointer-events:none;">
                 <img src="/assets/logo_icon_mark_bapak.png" alt="Logo ACT" style="width:15px; height:15px; display:block; object-fit:contain;">
                 <span style="letter-spacing:0.02em;">AutoClary<span style="color:#00d2b4;">Tech</span></span>
               </div>
+
+              <!-- Hint interaktif Parallax 360 -->
+              <div id="hint-360" style="display:none; position:absolute; bottom:10px; left:10px; background:rgba(15,23,42,0.85); color:#F8FAFC; font:700 10px var(--f-mono); padding:4px 8px; border-radius:4px; backdrop-filter:blur(4px); pointer-events:none;">
+                🔄 Gerakkan mouse / usap layar untuk putar 3D
+              </div>
             </div>
-            <div>
-              <a id="btn-download-foto" href="#" download="foto-studio-contact-ai.jpg" class="tombol tombol-kecil" style="width:100%; justify-content:center; background:#F8FAFC; border:1px solid #CBD5E1; color:var(--ink); font-weight:700;">
+
+            <!-- KOTAK EDITOR TEKS PENGUAT PRODUK -->
+            <div style="background:#F8FAFC; border:1px solid #CBD5E1; border-radius:8px; padding:12px; margin-bottom:12px; text-align:left;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+                <label style="font:800 12px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:6px; cursor:pointer;" for="chk-toggle-teks-penguat">
+                  <input type="checkbox" id="chk-toggle-teks-penguat" checked onchange="toggleTeksPenguat(this.checked)" style="width:15px; height:15px; accent-color:#059669; cursor:pointer;">
+                  <span>✍️ Pasang Teks Penguat Produk di Gambar</span>
+                </label>
+                <span style="font-size:10px; color:#059669; font-weight:700; background:#ECFDF5; padding:2px 6px; border-radius:4px;">Rekomendasi Feed Jualan</span>
+              </div>
+
+              <div id="box-editor-teks-penguat">
+                <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px;">
+                  <span style="font-size:11px; color:var(--redup); align-self:center; margin-right:2px;">Preset Badge:</span>
+                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('⭐ KUALITAS PREMIUM')" style="padding:2px 7px; font-size:10px; font-weight:700; border-radius:4px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0; cursor:pointer;">Kualitas Premium</button>
+                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('🔥 PALING LARIS')" style="padding:2px 7px; font-size:10px; font-weight:700; border-radius:4px; background:#FFFBEB; color:#92400E; border:1px solid #FDE68A; cursor:pointer;">Paling Laris</button>
+                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('🛡️ 100% ORIGINAL')" style="padding:2px 7px; font-size:10px; font-weight:700; border-radius:4px; background:#EFF6FF; color:#1E40AF; border:1px solid #BFDBFE; cursor:pointer;">100% Original</button>
+                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('📦 SIAP KIRIM HARI INI')" style="padding:2px 7px; font-size:10px; font-weight:700; border-radius:4px; background:#F1F5F9; color:#334155; border:1px solid #CBD5E1; cursor:pointer;">Siap Kirim</button>
+                </div>
+
+                <input type="text" id="input-teks-headline" class="form-input" placeholder="Teks Headline Utama (contoh: 100% Kulit Sintetis Premium • Muat Laptop 14 Inch)" style="background:#fff; margin-bottom:6px; font-size:12px; padding:8px 10px;" oninput="updateTeksPenguatPreview()">
+                
+                <input type="text" id="input-teks-sub" class="form-input" placeholder="Sub-teks Keunggulan (contoh: Tahan Percikan Air • Desain Ramping Profesional)" style="background:#fff; font-size:11px; padding:7px 10px;" oninput="updateTeksPenguatPreview()">
+              </div>
+            </div>
+
+            <!-- DUA TOMBOL UNDUHAN LENGKAP -->
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px;">
+              <button type="button" onclick="unduhPosterPromosiBerteks()" class="tombol tombol-utama" style="width:100%; justify-content:center; background:#08694F; border-color:#065F46; font-size:12px; font-weight:800; padding:10px 8px;">
                 <svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                <span>Download Foto Studio AI Asli (Resolusi Penuh)</span>
+                <span>Unduh Banner Berteks</span>
+              </button>
+              <a id="btn-download-foto" href="#" download="foto-studio-polos.jpg" class="tombol tombol-kecil" style="width:100%; justify-content:center; background:#F8FAFC; border:1px solid #CBD5E1; color:var(--ink); font-weight:700; font-size:12px; padding:10px 8px;">
+                <svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Unduh Foto Polos</span>
               </a>
             </div>
+
+            <!-- TOMBOL UTAMA LANJUT KE PROSES VIDEO / REELS -->
+            <button type="button" onclick="lanjutKeProsesVideo()" class="tombol tombol-utama" style="width:100%; justify-content:center; background:linear-gradient(135deg, #1E1B4B, #0F172A); border:1px solid #312E81; font-size:13px; font-weight:800; padding:12px; box-shadow:0 4px 14px rgba(30,27,75,0.35);">
+              <svg class="ikon ikon-s" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+              <span>🎬 Lanjut ke Proses Video / Reels (Animasi Otomatis) →</span>
+            </button>
           </div>
 
-          <!-- PANEL 2: SKRIP VIDEO REELS & TIKTOK -->
+          <!-- PANEL 2: STUDIO VIDEO REELS & TIKTOK 9:16 (BUKTI NYATA PEMBUATAN VIDEO) -->
           <div id="tab-pane-video" style="display:none;">
+            
+            <!-- HEADER STUDIO VIDEO REELS -->
+            <div style="background:#0F172A; color:#FFFFFF; border-radius:10px; padding:16px; margin-bottom:14px; text-align:center;">
+              <div style="font:800 15px var(--f-judul); margin-bottom:4px; display:inline-flex; align-items:center; gap:6px;">
+                <svg class="ikon ikon-s" style="stroke:#00D2B4;" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                Studio Animasi Reels &amp; TikTok (Vertikal 9:16)
+              </div>
+              <p style="font-size:12px; color:#94A3B8; margin:0 auto 12px; max-width:400px; line-height:1.4;">
+                Ubah foto studio menjadi video animasi vertikal 9:16 dengan teks hook bergerak yang siap diunggah ke Instagram Reels, TikTok, atau WhatsApp Status!
+              </p>
+
+              <!-- PLAYER CANVAS VIDEO REELS 9:16 -->
+              <div style="position:relative; width:220px; height:390px; margin:0 auto 12px; border-radius:12px; overflow:hidden; border:2px solid #334155; box-shadow:0 8px 24px rgba(0,0,0,0.5); background:#000;">
+                <canvas id="reels-video-canvas" width="540" height="960" style="width:100%; height:100%; display:block; object-fit:contain;"></canvas>
+                <div id="reels-play-overlay" onclick="togglePlayReels()" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.35); cursor:pointer;">
+                  <div style="width:48px; height:48px; border-radius:50%; background:rgba(0,210,180,0.9); display:flex; align-items:center; justify-content:center; color:#0F172A; font-size:20px; font-weight:800; box-shadow:0 4px 14px rgba(0,0,0,0.4);">
+                    ▶
+                  </div>
+                </div>
+                <div id="reels-timer-badge" style="position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.7); color:#00D2B4; font:700 10px var(--f-mono); padding:2px 6px; border-radius:4px;">
+                  00:00 / 00:09
+                </div>
+              </div>
+
+              <!-- KONTROL PEMUTARAN & DOWNLOAD VIDEO -->
+              <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
+                <button type="button" id="btn-play-reels" onclick="togglePlayReels()" class="tombol tombol-kecil" style="background:#1E293B; border:1px solid #475569; color:#FFFFFF; font-weight:700; font-size:12px;">
+                  ▶ Putar Preview
+                </button>
+                <button type="button" id="btn-unduh-video" onclick="unduhVideoReels()" class="tombol tombol-kecil" style="background:#059669; border:1px solid #047857; color:#FFFFFF; font-weight:800; font-size:12px;">
+                  📹 Unduh Video Reels (.webm)
+                </button>
+              </div>
+            </div>
+
+            <!-- NASKAH SKRIP DETAIL PER DETIK -->
             <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:14px; margin-bottom:12px;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                 <span style="font:800 12px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:6px;">
                   <svg class="ikon ikon-s" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
-                  Skrip Video Reels/TikTok (15–30 Detik):
+                  Naskah Skrip Suara &amp; Panduan Rekaman HP:
                 </span>
                 <button type="button" onclick="salinTeks('hasil-video-script', this)" class="tombol tombol-kecil" style="padding:4px 8px; font-size:11px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
                   <svg class="ikon ikon-s" style="width:12px; height:12px; margin-right:4px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Salin Skrip</span>
                 </button>
               </div>
-              <div id="hasil-video-script" style="font-size:12px; color:var(--teks); line-height:1.6; white-space:pre-wrap; max-height:220px; overflow-y:auto; background:#fff; padding:12px; border-radius:6px; border:1px solid #E2E8F0;"></div>
+              <div id="hasil-video-script" style="font-size:12px; color:var(--teks); line-height:1.6; white-space:pre-wrap; max-height:180px; overflow-y:auto; background:#fff; padding:12px; border-radius:6px; border:1px solid #E2E8F0;"></div>
             </div>
-            <div style="background:#FEF3C7; border:1px solid #FDE68A; border-radius:8px; padding:10px 12px; font-size:11px; color:#92400E;">
-              <strong>Tips Konten Kreator:</strong> Rekam video menggunakan kamera HP dekat jendela (cahaya alami). Tampilkan produk di 3 detik pertama agar penonton tidak melewati video Anda!
+
+            <!-- JALUR LANJUTAN: RENDER 3D AI STUDIO WORKSTATION -->
+            <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+              <div>
+                <strong style="font-size:12px; color:#1E40AF;">Butuh Video 3D Motion AI Render Studio?</strong>
+                <div style="font-size:11px; color:#3B82F6; margin-top:2px;">Render video motion 3D tingkat lanjut bertenaga workstation GPU AutoClaryTech.</div>
+              </div>
+              <a id="btn-request-video-studio" href="#" target="_blank" class="tombol tombol-kecil" style="background:#1E40AF; border-color:#1E3A8A; color:#fff; font-size:11px; font-weight:700;">
+                Hubungi Studio via WA
+              </a>
             </div>
           </div>
 
@@ -1716,6 +1854,16 @@ Yuk nikmati selagi hangat!`,
         elPane.style.display = (t === namaTab) ? 'block' : 'none';
       }
     });
+
+    if (namaTab === 'video') {
+      if (!reelsCanvas) {
+        reelsCanvas = document.getElementById('reels-video-canvas');
+        if (reelsCanvas) reelsCtx = reelsCanvas.getContext('2d');
+      }
+      if (reelsCanvas && reelsCtx && !reelsIsPlaying) {
+        gambarFrameReels(0);
+      }
+    }
   }
 
   function tampilkanHasilStudioAi(imageUrl, resData) {
@@ -1740,6 +1888,23 @@ Yuk nikmati selagi hangat!`,
     btnDownload.target = '_blank';
     btnDownload.download = 'foto-studio-contact-ai.jpg';
     btnDownload.querySelector('span').textContent = 'Download Foto Studio AI Asli (Resolusi Penuh)';
+
+    // Simpan state produk untuk Banner Promosi & Video Reels
+    const namaInput = document.getElementById('gen-nama-produk')?.value?.trim();
+    const keunggulanInput = document.getElementById('gen-keunggulan')?.value?.trim();
+    const waInput = document.getElementById('gen-nomor-wa')?.value?.trim();
+
+    currentStudioImgUrl = imageUrl;
+    currentProdukNama = namaInput || 'Produk Unggulan Kami';
+    currentProdukKeunggulan = keunggulanInput || 'Kualitas Terbaik & Terpercaya';
+    currentNomorWa = waInput || '';
+
+    // Isi teks penguat produk otomatis
+    const elHeadInput = document.getElementById('input-teks-headline');
+    const elSubInput = document.getElementById('input-teks-sub');
+    if (elHeadInput) elHeadInput.value = currentProdukNama + ' • ' + currentProdukKeunggulan;
+    if (elSubInput) elSubInput.value = 'Pilihan tepat penunjang gaya hidup & bisnis • Siap kirim hari ini.';
+    updateTeksPenguatPreview();
 
     // Isi 5 Tab Konten Kreator
     document.getElementById('hasil-caption').textContent = resData.caption || '';
@@ -1766,7 +1931,539 @@ Yuk nikmati selagi hangat!`,
       }
     }
 
+    // Update link WhatsApp Studio ACT untuk video 3D
+    const btnReqStudio = document.getElementById('btn-request-video-studio');
+    if (btnReqStudio) {
+      const waMsg = `Halo Studio AutoClaryTech, saya baru saja membuat foto studio untuk produk ${currentProdukNama}. Bisakah saya memesan render video 3D motion AI profesional untuk produk ini?`;
+      btnReqStudio.href = `https://wa.me/6285728888068?text=${encodeURIComponent(waMsg)}`;
+    }
+
     gantiTabKonten('foto');
+  }
+
+  /* ==========================================================
+     MANAJEMEN TEKS PENGUAT PRODUK DI GAMBAR (BANNER PROMOSI)
+     & PEMBUATAN VIDEO REELS / TIKTOK 9:16 (BUKTI NYATA 360°)
+     ========================================================== */
+
+  let currentStudioImgUrl = null;
+  let currentProdukNama = 'Produk Unggulan Kami';
+  let currentProdukKeunggulan = 'Kualitas Terbaik & Terpercaya';
+  let currentNomorWa = '';
+  let modeTampilanFoto = 'banner'; // 'banner' atau '360'
+
+  function updateTeksPenguatPreview() {
+    const elHeadInput = document.getElementById('input-teks-headline');
+    const elSubInput = document.getElementById('input-teks-sub');
+    const elOverlayHead = document.getElementById('overlay-teks-headline');
+    const elOverlaySub = document.getElementById('overlay-teks-sub');
+
+    const teksHead = (elHeadInput && elHeadInput.value.trim()) || (currentProdukNama + ' • ' + currentProdukKeunggulan);
+    const teksSub = (elSubInput && elSubInput.value.trim()) || 'Pilihan tepat penunjang kebutuhan Anda • Siap kirim hari ini.';
+
+    if (elOverlayHead) elOverlayHead.textContent = teksHead;
+    if (elOverlaySub) elOverlaySub.textContent = teksSub;
+  }
+
+  function toggleTeksPenguat(aktif) {
+    const elOverlay = document.getElementById('gen-teks-penguat-overlay');
+    const elBoxEditor = document.getElementById('box-editor-teks-penguat');
+    if (elOverlay) elOverlay.style.display = aktif ? 'flex' : 'none';
+    if (elBoxEditor) elBoxEditor.style.opacity = aktif ? '1' : '0.4';
+  }
+
+  function pilihBadgePenguat(badgeText) {
+    const elBadge = document.getElementById('overlay-badge-tag');
+    if (elBadge) elBadge.textContent = badgeText;
+  }
+
+  let parallaxAutoAnimId = null;
+  let isUserInteracting360 = false;
+
+  function stopParallaxAuto() {
+    if (parallaxAutoAnimId) {
+      cancelAnimationFrame(parallaxAutoAnimId);
+      parallaxAutoAnimId = null;
+    }
+  }
+
+  function startParallaxAuto() {
+    stopParallaxAuto();
+    const box = document.getElementById('gen-preview-box');
+    if (!box) return;
+    const t0 = performance.now();
+    function loop(now) {
+      if (modeTampilanFoto !== '360') return;
+      if (!isUserInteracting360) {
+        const sec = (now - t0) / 1000;
+        const rotY = Math.sin(sec * 1.6) * 12;
+        const rotX = Math.cos(sec * 1.6) * 5;
+        box.style.transform = `perspective(800px) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) scale(1.02)`;
+      }
+      parallaxAutoAnimId = requestAnimationFrame(loop);
+    }
+    parallaxAutoAnimId = requestAnimationFrame(loop);
+  }
+
+  function setModeTampilanFoto(mode) {
+    modeTampilanFoto = mode;
+    const btnBanner = document.getElementById('btn-mode-banner');
+    const btn360 = document.getElementById('btn-mode-360');
+    const overlay = document.getElementById('gen-teks-penguat-overlay');
+    const hint360 = document.getElementById('hint-360');
+    const previewBox = document.getElementById('gen-preview-box');
+
+    if (mode === '360') {
+      if (btn360) { btn360.style.background = '#08694F'; btn360.style.color = '#FFFFFF'; }
+      if (btnBanner) { btnBanner.style.background = 'transparent'; btnBanner.style.color = '#475569'; }
+      if (overlay) overlay.style.display = 'none';
+      if (hint360) hint360.style.display = 'block';
+      if (previewBox) {
+        previewBox.style.cursor = 'grab';
+        previewBox.style.boxShadow = '0 12px 30px rgba(0, 168, 150, 0.25)';
+      }
+      startParallaxAuto();
+    } else {
+      stopParallaxAuto();
+      if (btnBanner) { btnBanner.style.background = '#08694F'; btnBanner.style.color = '#FFFFFF'; }
+      if (btn360) { btn360.style.background = 'transparent'; btn360.style.color = '#475569'; }
+      const chk = document.getElementById('chk-toggle-teks-penguat');
+      if (overlay) overlay.style.display = (chk && chk.checked) ? 'flex' : 'none';
+      if (hint360) hint360.style.display = 'none';
+      if (previewBox) {
+        previewBox.style.cursor = 'default';
+        previewBox.style.transform = 'none';
+        previewBox.style.boxShadow = 'var(--timbul-kecil)';
+      }
+    }
+  }
+
+  // Listener Parallax 360 Mouse & Touch
+  (function initParallax360() {
+    window.addEventListener('DOMContentLoaded', () => {
+      const box = document.getElementById('gen-preview-box');
+      if (!box) return;
+
+      function handleMove(clientX, clientY) {
+        if (modeTampilanFoto !== '360') return;
+        isUserInteracting360 = true;
+        const rect = box.getBoundingClientRect();
+        const x = clientX - rect.left - rect.width / 2;
+        const y = clientY - rect.top - rect.height / 2;
+        const rotY = (x / (rect.width / 2)) * 18;
+        const rotX = -(y / (rect.height / 2)) * 14;
+        box.style.transform = `perspective(800px) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) scale(1.02)`;
+      }
+
+      box.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+      box.addEventListener('mouseleave', () => {
+        isUserInteracting360 = false;
+      });
+      box.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) {
+          handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+      box.addEventListener('touchend', () => {
+        isUserInteracting360 = false;
+      });
+    });
+  })();
+
+  // Render & Unduh Komposit Poster Banner dengan Teks Penguat (Resolusi 1080x1080)
+  function unduhPosterPromosiBerteks() {
+    const c = document.createElement('canvas');
+    c.width = 1080;
+    c.height = 1080;
+    const ctx = c.getContext('2d');
+
+    const resultImg = document.getElementById('gen-result-img');
+    const canvasAsli = document.getElementById('gen-canvas');
+    let sumberGambar = null;
+
+    if (resultImg && resultImg.style.display !== 'none' && resultImg.complete && resultImg.naturalWidth > 0) {
+      sumberGambar = resultImg;
+    } else if (canvasAsli) {
+      sumberGambar = canvasAsli;
+    }
+
+    if (!sumberGambar) {
+      alert('Mohon proses gambar studio terlebih dahulu sebelum mengunduh banner promosi.');
+      return;
+    }
+
+    // 1. Gambar latar foto studio
+    ctx.drawImage(sumberGambar, 0, 0, 1080, 1080);
+
+    const chk = document.getElementById('chk-toggle-teks-penguat');
+    if (chk && chk.checked) {
+      // 2. Vignette bayangan atas semi-transparan
+      const gradTop = ctx.createLinearGradient(0, 0, 0, 360);
+      gradTop.addColorStop(0, 'rgba(15, 23, 42, 0.88)');
+      gradTop.addColorStop(0.65, 'rgba(15, 23, 42, 0.45)');
+      gradTop.addColorStop(1, 'rgba(15, 23, 42, 0)');
+      ctx.fillStyle = gradTop;
+      ctx.fillRect(0, 0, 1080, 360);
+
+      // 3. Gambar Badge Penguat Nilai Jual
+      const badgeText = document.getElementById('overlay-badge-tag')?.textContent?.trim() || '⭐ PRODUK UNGGULAN';
+      ctx.font = '800 22px "Plus Jakarta Sans", sans-serif';
+      const badgeW = ctx.measureText(badgeText).width + 36;
+      const badgeH = 46;
+      const bx = 40;
+      const by = 40;
+
+      ctx.fillStyle = '#059669';
+      ctx.beginPath();
+      ctx.roundRect(bx, by, badgeW, badgeH, 10);
+      ctx.fill();
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'left';
+      ctx.fillText(badgeText, bx + 18, by + 31);
+
+      // Label FEED PROMOSI di kanan atas
+      const labelKanan = 'FEED PROMOSI';
+      ctx.font = '700 20px monospace';
+      const labelW = ctx.measureText(labelKanan).width + 28;
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
+      ctx.beginPath();
+      ctx.roundRect(1080 - 40 - labelW, by, labelW, badgeH, 8);
+      ctx.fill();
+      ctx.fillStyle = '#F8FAFC';
+      ctx.fillText(labelKanan, 1080 - 40 - labelW + 14, by + 30);
+
+      // 4. Container Headline Glassmorphism Box
+      const elHead = document.getElementById('overlay-teks-headline');
+      const elSub = document.getElementById('overlay-teks-sub');
+      const headText = elHead ? elHead.textContent.trim() : (currentProdukNama + ' • ' + currentProdukKeunggulan);
+      const subText = elSub ? elSub.textContent.trim() : 'Pilihan tepat penunjang kebutuhan Anda.';
+
+      const boxX = 40;
+      const boxY = 104;
+      const boxW = 1000;
+      const boxH = 130;
+
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.beginPath();
+      ctx.roundRect(boxX, boxY, boxW, boxH, 16);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Headline Text
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '800 34px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(headText.slice(0, 55), boxX + 24, boxY + 52);
+
+      // Sub-headline Text
+      ctx.fillStyle = '#94A3B8';
+      ctx.font = '600 22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(subText.slice(0, 75), boxX + 24, boxY + 98);
+    }
+
+    // 5. Watermark Badge Resmi ACT di pojok kanan bawah
+    const logoMark = actLogoWatermarkImg;
+    if (logoMark && logoMark.complete && logoMark.naturalWidth > 0) {
+      const bW = 200;
+      const bH = 46;
+      const bX = 1080 - 40 - bW;
+      const bY = 1080 - 40 - bH;
+      ctx.fillStyle = 'rgba(11, 19, 41, 0.85)';
+      ctx.beginPath();
+      ctx.roundRect(bX, bY, bW, bH, 10);
+      ctx.fill();
+      ctx.drawImage(logoMark, bX + 12, bY + 9, 28, 28);
+      ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'left';
+      ctx.fillText('AutoClary', bX + 48, bY + 31);
+      ctx.fillStyle = '#00D2B4';
+      ctx.fillText('Tech', bX + 142, bY + 31);
+    }
+
+    // Unduh File
+    const link = document.createElement('a');
+    link.download = `banner-promosi-${(currentProdukNama || 'produk').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.jpg`;
+    link.href = c.toDataURL('image/jpeg', 0.92);
+    link.click();
+  }
+
+  // Lanjut ke Proses Video / Reels
+  function lanjutKeProsesVideo() {
+    gantiTabKonten('video');
+    mulaiStudioReels();
+    const target = document.getElementById('tab-pane-video');
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // STUDIO ANIMASI REELS & TIKTOK 9:16
+  let reelsCanvas = null;
+  let reelsCtx = null;
+  let reelsIsPlaying = false;
+  let reelsStartTime = 0;
+  let reelsAnimId = null;
+  const REELS_DURASI = 9000;
+
+  function mulaiStudioReels() {
+    reelsCanvas = document.getElementById('reels-video-canvas');
+    if (!reelsCanvas) return;
+    reelsCtx = reelsCanvas.getContext('2d');
+    reelsIsPlaying = true;
+    reelsStartTime = performance.now();
+    const btnPlay = document.getElementById('btn-play-reels');
+    const overlay = document.getElementById('reels-play-overlay');
+    if (btnPlay) btnPlay.textContent = '⏸️ Jeda Preview';
+    if (overlay) overlay.style.display = 'none';
+
+    renderLoopReels();
+  }
+
+  function togglePlayReels() {
+    if (!reelsIsPlaying) {
+      mulaiStudioReels();
+    } else {
+      reelsIsPlaying = false;
+      if (reelsAnimId) cancelAnimationFrame(reelsAnimId);
+      const btnPlay = document.getElementById('btn-play-reels');
+      const overlay = document.getElementById('reels-play-overlay');
+      if (btnPlay) btnPlay.textContent = '▶ Putar Preview';
+      if (overlay) overlay.style.display = 'flex';
+    }
+  }
+
+  function renderLoopReels() {
+    if (!reelsIsPlaying) return;
+    const now = performance.now();
+    let elapsed = (now - reelsStartTime) % REELS_DURASI;
+    gambarFrameReels(elapsed);
+    reelsAnimId = requestAnimationFrame(renderLoopReels);
+  }
+
+  function gambarFrameReels(elapsedMs) {
+    if (!reelsCanvas || !reelsCtx) return;
+    const w = reelsCanvas.width;   // 540
+    const h = reelsCanvas.height;  // 960
+    const ctx = reelsCtx;
+    const sec = elapsedMs / 1000;
+
+    const badgeTimer = document.getElementById('reels-timer-badge');
+    if (badgeTimer) {
+      badgeTimer.textContent = `00:0${Math.floor(sec)} / 00:09`;
+    }
+
+    // 1. Background studio gelap
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
+    bgGrad.addColorStop(0, '#0F172A');
+    bgGrad.addColorStop(0.5, '#1E293B');
+    bgGrad.addColorStop(1, '#020617');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, w, h);
+
+    // 2. Gambar produk dengan efek Ken Burns (Slow Pan & Zoom-in)
+    const resultImg = document.getElementById('gen-result-img');
+    const canvasAsli = document.getElementById('gen-canvas');
+    let sumber = null;
+    if (resultImg && resultImg.style.display !== 'none' && resultImg.complete && resultImg.naturalWidth > 0) {
+      sumber = resultImg;
+    } else if (canvasAsli) {
+      sumber = canvasAsli;
+    }
+
+    if (sumber) {
+      ctx.save();
+      const scale = 1.0 + (sec / 9) * 0.12;
+      const transY = Math.sin(sec * 0.7) * 8;
+      ctx.translate(w / 2, h / 2 + transY);
+      ctx.scale(scale, scale);
+
+      const pDim = w * 0.88;
+      ctx.drawImage(sumber, -pDim/2, -pDim/2, pDim, pDim);
+      ctx.restore();
+    }
+
+    // Vignette hitam transparan atas & bawah untuk teks
+    const topV = ctx.createLinearGradient(0, 0, 0, 240);
+    topV.addColorStop(0, 'rgba(0,0,0,0.85)');
+    topV.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = topV;
+    ctx.fillRect(0, 0, w, 240);
+
+    const botV = ctx.createLinearGradient(0, h - 260, 0, h);
+    botV.addColorStop(0, 'rgba(0,0,0,0)');
+    botV.addColorStop(1, 'rgba(0,0,0,0.92)');
+    ctx.fillStyle = botV;
+    ctx.fillRect(0, h - 260, w, 260);
+
+    // 3. Lapisan Animasi Teks Hook Berganti Waktu
+    if (sec < 3.0) {
+      // FASE 1 (0-3s): HOOK 3 DETIK MEMIKAT
+      const t = sec / 3.0;
+      const alpha = Math.min(1, t * 4);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+
+      ctx.fillStyle = '#EF4444';
+      ctx.beginPath();
+      ctx.roundRect(40, 50, 160, 34, 6);
+      ctx.fill();
+      ctx.font = '800 14px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'center';
+      ctx.fillText('🔥 VIRAL HARI INI', 120, 73);
+
+      ctx.font = '800 26px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'left';
+      ctx.fillText('Pecinta ' + (currentProdukNama || 'produk ini').slice(0, 25), 40, 125);
+      ctx.fillStyle = '#00D2B4';
+      ctx.fillText('WAJIB TAHU INI! 😱', 40, 160);
+
+      ctx.font = '600 15px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#E2E8F0';
+      ctx.fillText('Tonton sampai habis untuk penawaran terbaik!', 40, h - 90);
+      ctx.restore();
+
+    } else if (sec < 6.0) {
+      // FASE 2 (3-6s): KEUNGGULAN UTAMA PRODUK
+      const t = (sec - 3.0) / 3.0;
+      const alpha = Math.min(1, t * 4);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+
+      ctx.fillStyle = '#059669';
+      ctx.beginPath();
+      ctx.roundRect(40, 50, 190, 34, 6);
+      ctx.fill();
+      ctx.font = '800 14px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'center';
+      ctx.fillText('⭐ KUALITAS TERBAIK', 135, 73);
+
+      ctx.font = '800 24px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'left';
+      ctx.fillText(currentProdukNama.slice(0, 30), 40, 125);
+      ctx.fillStyle = '#FDE047';
+      ctx.font = '700 19px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(currentProdukKeunggulan.slice(0, 40), 40, 160);
+
+      ctx.font = '600 15px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#E2E8F0';
+      ctx.fillText('Bahan bermutu tinggi & jaminan kepuasan.', 40, h - 90);
+      ctx.restore();
+
+    } else {
+      // FASE 3 (6-9s): CALL TO ACTION & WHATSAPP
+      const t = (sec - 6.0) / 3.0;
+      const alpha = Math.min(1, t * 4);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+
+      ctx.fillStyle = '#25D366';
+      ctx.beginPath();
+      ctx.roundRect(40, 50, 170, 34, 6);
+      ctx.fill();
+      ctx.font = '800 14px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#0F172A';
+      ctx.textAlign = 'center';
+      ctx.fillText('💬 PESAN SEKARANG', 125, 73);
+
+      ctx.font = '800 24px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'left';
+      ctx.fillText('Dapatkan Produk Asli Hari Ini!', 40, 125);
+      ctx.fillStyle = '#00D2B4';
+      ctx.font = '700 18px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Klik Link di Bio / Hubungi WhatsApp', 40, 160);
+
+      ctx.fillStyle = '#25D366';
+      ctx.beginPath();
+      ctx.roundRect(40, h - 120, w - 80, 52, 10);
+      ctx.fill();
+      ctx.font = '800 18px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#0F172A';
+      ctx.textAlign = 'center';
+      const noTeks = currentNomorWa ? 'WhatsApp: ' + currentNomorWa : 'Ketik "MAU" di Komentar';
+      ctx.fillText(noTeks, w / 2, h - 87);
+      ctx.restore();
+    }
+
+    // 4. Logo Watermark ACT di pojok kanan atas
+    if (actLogoWatermarkImg && actLogoWatermarkImg.complete && actLogoWatermarkImg.naturalWidth > 0) {
+      ctx.drawImage(actLogoWatermarkImg, w - 46, 20, 26, 26);
+    }
+  }
+
+  // Rekam & Unduh Video Reels WebM
+  async function unduhVideoReels() {
+    if (!reelsCanvas) {
+      reelsCanvas = document.getElementById('reels-video-canvas');
+      if (reelsCanvas) reelsCtx = reelsCanvas.getContext('2d');
+    }
+    if (!reelsCanvas) return;
+
+    const btnUnduh = document.getElementById('btn-unduh-video');
+    if (btnUnduh) {
+      btnUnduh.disabled = true;
+      btnUnduh.textContent = '⏳ Merekam Video 9 Detik...';
+    }
+
+    reelsIsPlaying = true;
+    reelsStartTime = performance.now();
+    renderLoopReels();
+
+    let stream = null;
+    try {
+      stream = reelsCanvas.captureStream(30);
+    } catch(e) {
+      alert('Fitur perekaman video tidak didukung di browser ini.');
+      if (btnUnduh) { btnUnduh.disabled = false; btnUnduh.textContent = '📹 Unduh Video Reels (.webm)'; }
+      return;
+    }
+
+    const recordedChunks = [];
+    let mediaRecorder = null;
+    try {
+      mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp9' });
+    } catch(_) {
+      try {
+        mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+      } catch(err2) {
+        mediaRecorder = new MediaRecorder(stream);
+      }
+    }
+
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(recordedChunks, { type: 'video/webm' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `video-reels-${(currentProdukNama || 'produk').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.webm`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+
+      if (btnUnduh) {
+        btnUnduh.disabled = false;
+        btnUnduh.textContent = '✅ Video Berhasil Diunduh!';
+        setTimeout(() => {
+          btnUnduh.textContent = '📹 Unduh Video Reels (.webm)';
+        }, 3000);
+      }
+    };
+
+    mediaRecorder.start();
+    setTimeout(() => {
+      if (mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+      }
+    }, REELS_DURASI);
   }
 
   function tampilkanHasilKonten(nama, kategori, keunggulan, tujuanKonten, suasana, nomorWa) {
@@ -1779,7 +2476,20 @@ Yuk nikmati selagi hangat!`,
 
     resultImg.style.display = 'none';
     canvas.style.display = 'block';
-    btnDownload.querySelector('span').textContent = 'Download Foto Studio Siap Pakai';
+    if (btnDownload && btnDownload.querySelector('span')) {
+      btnDownload.querySelector('span').textContent = 'Unduh Foto Polos';
+    }
+
+    currentProdukNama = nama || 'Produk Unggulan Kami';
+    currentProdukKeunggulan = keunggulan || 'Kualitas Terbaik & Terpercaya';
+    currentNomorWa = nomorWa || '';
+
+    // Isi teks penguat produk otomatis
+    const elHeadInput = document.getElementById('input-teks-headline');
+    const elSubInput = document.getElementById('input-teks-sub');
+    if (elHeadInput) elHeadInput.value = currentProdukNama + ' • ' + currentProdukKeunggulan;
+    if (elSubInput) elSubInput.value = 'Pilihan tepat penunjang kebutuhan Anda • Siap kirim hari ini.';
+    updateTeksPenguatPreview();
 
     let caption = '';
     let hashtags = '';
@@ -1819,7 +2529,6 @@ Yuk nikmati selagi hangat!`,
     const waKontak = nomorWa ? `\n\nBisa langsung chat kami via WhatsApp wa.me/${nomorWa} ya!` : `\n\nBisa langsung balas status ini untuk info pemesanan ya!`;
     const waStatus = `Halo semuanya! Buat yang mencari ${nama} berkualitas...\n\nProduk kami hadir dengan keunggulan: ${keunggulan}.\n\nSiap dipesan untuk melengkapi kebutuhan harian Anda.${waKontak}`;
 
-
     // Rencana Konten 7 Hari
     const ide7Hari = `📅 RENCANA KONTEN 7 HARI UNTUK MENINGKATKAN OMZET:
 • HARI 1 (Reels/TikTok): Video Hook Penasaran — "3 Alasan Kenapa ${nama} Selalu Dicari Pelanggan".
@@ -1845,6 +2554,13 @@ Yuk nikmati selagi hangat!`,
       } else {
         boxTombolWa.style.display = 'none';
       }
+    }
+
+    // Update link WhatsApp Studio ACT untuk video 3D
+    const btnReqStudio = document.getElementById('btn-request-video-studio');
+    if (btnReqStudio) {
+      const waMsg = `Halo Studio AutoClaryTech, saya baru saja membuat foto studio untuk produk ${currentProdukNama}. Bisakah saya memesan render video 3D motion AI profesional untuk produk ini?`;
+      btnReqStudio.href = `https://wa.me/6285728888068?text=${encodeURIComponent(waMsg)}`;
     }
 
     // Refresh canvas jika pengguna sudah mengunggah foto
