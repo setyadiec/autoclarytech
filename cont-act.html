@@ -2562,29 +2562,15 @@ Yuk nikmati selagi hangat!`,
     atasNama: 'ARTAREKSA TEKNOLOGI EKONOMI'
   };
 
-  function cekStatusAksesVideo() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('terbayar') === '1' || localStorage.getItem('act_video_terbayar') === '1') {
-      return true;
-    }
-    return false;
-  }
 
   function perbaruiStatusTombolVideo() {
     const btnUnduh = document.getElementById('btn-unduh-video');
     const labelBtn = document.getElementById('label-btn-unduh-video');
     if (!btnUnduh) return;
-    if (cekStatusAksesVideo()) {
-      btnUnduh.style.background = '#059669';
-      btnUnduh.style.borderColor = '#047857';
-      if (labelBtn) labelBtn.textContent = 'Unduh Video Reels (.mp4)';
-      else btnUnduh.textContent = 'Unduh Video Reels (.mp4)';
-    } else {
-      btnUnduh.style.background = '#D97706';
-      btnUnduh.style.borderColor = '#B45309';
-      if (labelBtn) labelBtn.textContent = `Beli video ${TEKS_HARGA_VIDEO_REELS}`;
-      else btnUnduh.textContent = `Beli video ${TEKS_HARGA_VIDEO_REELS}`;
-    }
+    btnUnduh.style.background = '#D97706';
+    btnUnduh.style.borderColor = '#B45309';
+    if (labelBtn) labelBtn.textContent = `Beli video ${TEKS_HARGA_VIDEO_REELS}`;
+    else btnUnduh.textContent = `Beli video ${TEKS_HARGA_VIDEO_REELS}`;
   }
 
   function bukaModalBeliVideo() {
@@ -2594,7 +2580,7 @@ Yuk nikmati selagi hangat!`,
     if (elHarga) elHarga.textContent = TEKS_HARGA_VIDEO_REELS;
     if (btnWa) {
       const namaProd = currentProdukNama || 'Produk';
-      btnWa.href = `https://wa.me/${NOMOR_WA_ADMIN_BAYAR}?text=${encodeURIComponent(`Halo Admin AutoClaryTech, saya sudah transfer pembayaran Video Reels cont-ACT (${TEKS_HARGA_VIDEO_REELS}) untuk produk ${namaProd} ke rekening BRI Artareksa. Mohon verifikasi dan aktivasi unduhan video.`)}`;
+      btnWa.href = `https://wa.me/${NOMOR_WA_ADMIN_BAYAR}?text=${encodeURIComponent(`Halo Admin AutoClaryTech, saya sudah transfer pembayaran Video Reels cont-ACT (${TEKS_HARGA_VIDEO_REELS}) untuk produk ${namaProd} ke rekening BRI Artareksa. Mohon verifikasi dan kirimkan master berkas video MP4 Reels siap posting ke nomor ini.`)}`;
     }
     if (modal) modal.style.display = 'flex';
   }
@@ -2605,11 +2591,7 @@ Yuk nikmati selagi hangat!`,
   }
 
   function aksiUnduhAtauBeliVideo() {
-    if (cekStatusAksesVideo()) {
-      unduhVideoReels();
-    } else {
-      bukaModalBeliVideo();
-    }
+    bukaModalBeliVideo();
   }
 
   // STUDIO ANIMASI REELS & TIKTOK 9:16
@@ -2819,86 +2801,9 @@ Yuk nikmati selagi hangat!`,
     }
   }
 
-  // Rekam & Unduh Video Reels WebM (Hanya jika terbayar)
-  async function unduhVideoReels() {
-    if (!cekStatusAksesVideo()) {
-      bukaModalBeliVideo();
-      return;
-    }
-
-    if (!reelsCanvas) {
-      reelsCanvas = document.getElementById('reels-video-canvas');
-      if (reelsCanvas) reelsCtx = reelsCanvas.getContext('2d');
-    }
-    if (!reelsCanvas) return;
-
-    const btnUnduh = document.getElementById('btn-unduh-video');
-    if (btnUnduh) {
-      btnUnduh.disabled = true;
-      btnUnduh.textContent = '⏳ Merekam Video 9 Detik...';
-    }
-
-    reelsIsPlaying = true;
-    reelsStartTime = performance.now();
-    renderLoopReels();
-
-    let stream = null;
-    try {
-      stream = reelsCanvas.captureStream(30);
-    } catch(e) {
-      alert('Fitur perekaman video tidak didukung di browser ini.');
-      if (btnUnduh) { btnUnduh.disabled = false; perbaruiStatusTombolVideo(); }
-      return;
-    }
-
-    let selectedMime = 'video/mp4';
-    if (MediaRecorder.isTypeSupported('video/mp4; codecs=avc1')) {
-      selectedMime = 'video/mp4; codecs=avc1';
-    } else if (MediaRecorder.isTypeSupported('video/mp4')) {
-      selectedMime = 'video/mp4';
-    } else if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9')) {
-      selectedMime = 'video/webm; codecs=vp9';
-    } else {
-      selectedMime = 'video/webm';
-    }
-
-    const recordedChunks = [];
-    let mediaRecorder = null;
-    try {
-      mediaRecorder = new MediaRecorder(stream, { mimeType: selectedMime });
-    } catch(_) {
-      mediaRecorder = new MediaRecorder(stream);
-    }
-
-    mediaRecorder.ondataavailable = (e) => {
-      if (e.data && e.data.size > 0) recordedChunks.push(e.data);
-    };
-
-    mediaRecorder.onstop = () => {
-      const blob = new Blob(recordedChunks, { type: selectedMime });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `video-reels-${(currentProdukNama || 'produk').toLowerCase().replace(/[^a-z0-9]+/g, '-')}.mp4`;
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 10000);
-
-      if (btnUnduh) {
-        btnUnduh.disabled = false;
-        btnUnduh.textContent = 'Video Berhasil Diunduh (.mp4)';
-        setTimeout(() => {
-          perbaruiStatusTombolVideo();
-        }, 3000);
-      }
-    };
-
-    mediaRecorder.start();
-    setTimeout(() => {
-      if (mediaRecorder.state !== 'inactive') {
-        mediaRecorder.stop();
-      }
-    }, REELS_DURASI);
+  // Unduh Video: Terkunci pada alur resmi (Admin mengirimkan master MP4 via WhatsApp)
+  function unduhVideoReels() {
+    bukaModalBeliVideo();
   }
 
   function tampilkanHasilKonten(nama, kategori, keunggulan, tujuanKonten, suasana, nomorWa) {
@@ -3052,7 +2957,7 @@ Yuk nikmati selagi hangat!`,
         <div style="font-size:11px; color:#94A3B8; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Rekening Resmi Transfer Bank BRI:</div>
         <div style="background:#1E293B; padding:8px 12px; border-radius:6px; font-family:var(--f-mono); font-size:14px; font-weight:800; color:#38BDF8; display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
           <span>0102-01-032414-53-6</span>
-          <button type="button" onclick="navigator.clipboard.writeText('010201032414536'); alert('Nomor rekening BRI disalin!');" style="background:#0284C7; color:#fff; border:none; padding:3px 8px; border-radius:4px; font-size:10px; cursor:pointer;">Salin</button>
+          <button type="button" onclick="navigator.clipboard.writeText('010201032414536'); this.textContent='Tersalin!'; setTimeout(()=>this.textContent='Salin', 1500);" style="background:#0284C7; color:#fff; border:none; padding:3px 8px; border-radius:4px; font-size:10px; cursor:pointer;">Salin</button>
         </div>
         <div style="font-size:11px; color:#CBD5E1; margin-bottom:10px;">Atas Nama: <strong>ARTAREKSA TEKNOLOGI EKONOMI</strong></div>
 
