@@ -348,15 +348,19 @@
             <option value="edukasi">Edukasi Solusi Masalah Konsumen (Problem - Solution)</option>
           </select>
 
-          <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;" for="gen-suasana-foto">
+          <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:4px;" for="gen-suasana-foto">
             6. Suasana / Latar Foto Studio Produk:
           </label>
-          <select id="gen-suasana-foto" class="form-select" style="background:#fff; margin-bottom:12px;">
-            <option value="kafe_kayu">Meja Kayu Kafe Estetik &amp; Hangat (Makanan, Minuman &amp; Santai)</option>
-            <option value="marmer_mewah">Studio Marmer Mewah &amp; Spotlight Elegan (Skincare &amp; Kemasan Mewah)</option>
-            <option value="alami_botanical">Nuansa Alami Segar &amp; Daun Tropis (Herbal, Madu &amp; Produk Alami)</option>
-            <option value="pastel_modern">Podium Minimalis Modern Pastel (Fashion, Hijab &amp; Aksesoris)</option>
-          </select>
+          <div style="font-size:11px; color:var(--redup); margin-bottom:8px;">
+            Pilih rekomendasi cepat atau ketik bebas suasana studio impian Anda:
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;" id="preset-suasana-container">
+            <button type="button" class="btn-preset-suasana active" onclick="pilihPresetSuasana(this, 'Meja Kayu Kafe Estetik &amp; Hangat')" style="padding:5px 9px; font-size:11px; font-weight:700; border-radius:6px; cursor:pointer; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">Meja Kayu Kafe</button>
+            <button type="button" class="btn-preset-suasana" onclick="pilihPresetSuasana(this, 'Studio Marmer Mewah &amp; Spotlight Elegan')" style="padding:5px 9px; font-size:11px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1;">Marmer Mewah</button>
+            <button type="button" class="btn-preset-suasana" onclick="pilihPresetSuasana(this, 'Nuansa Alami Segar &amp; Daun Tropis')" style="padding:5px 9px; font-size:11px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1;">Alami &amp; Tropis</button>
+            <button type="button" class="btn-preset-suasana" onclick="pilihPresetSuasana(this, 'Podium Minimalis Modern Pastel')" style="padding:5px 9px; font-size:11px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1;">Podium Pastel</button>
+          </div>
+          <input type="text" id="gen-suasana-foto" class="form-input" placeholder="Ketik bebas suasana studio di sini (contoh: Meja piknik kayu di taman bunga)" value="Meja Kayu Kafe Estetik &amp; Hangat" style="background:#fff; margin-bottom:12px;">
 
           <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;" for="gen-nomor-wa">
             7. Nomor WhatsApp Pemesanan Anda (Opsional):
@@ -369,7 +373,7 @@
           <svg class="ikon ikon-s" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg><span>Proses Paket Konten Lengkap (Gratis)</span>
         </button>
         <div style="font-size:11px; color:var(--redup); text-align:center; margin-top:8px;">
-          Tanpa perlu daftar &bull; Diproses langsung oleh AI Studio Awan (fal.ai)
+          Tanpa perlu daftar &bull; Diproses langsung oleh Studio Foto AI AutoClaryTech
         </div>
       </div>
 
@@ -409,7 +413,7 @@
               <div id="step-2-icon" style="width:26px; height:26px; border-radius:50%; background:#E2E8F0; color:#64748B; display:flex; align-items:center; justify-content:center; font:700 12px var(--f-mono); flex-shrink:0;">2</div>
               <div style="flex:1;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <strong style="font-size:13px; color:var(--ink);">Fase 2: AI Studio Awan Render Tata Cahaya</strong>
+                  <strong style="font-size:13px; color:var(--ink);">Fase 2: Studio Foto AI Render Tata Cahaya</strong>
                   <span id="step-2-badge" style="font-size:11px; font-weight:800; color:#64748B;">Menunggu</span>
                 </div>
                 <div style="font-size:11px; color:var(--redup); margin-top:2px;">Memasang pencahayaan studio komersial, bayangan kontak alami &amp; latar suasana pilihan.</div>
@@ -442,7 +446,7 @@
           </div>
 
           <div style="font-size:11px; color:var(--redup); text-align:center; margin-top:16px;" id="gen-loading-timer">
-            Estimasi waktu total: ~30–40 detik di GPU serverless AI awan
+            Estimasi waktu total: ~30–40 detik di Studio AI AutoClaryTech
           </div>
         </div>
 
@@ -468,7 +472,7 @@
           <div id="tab-pane-foto" style="display:block;">
             <div id="gen-preview-box" style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:14px; background:#F8FAFC; border:1px solid #E2E8F0; text-align:center;">
               <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:360px; object-fit:contain; display:block; margin:0 auto;"></canvas>
-              <img id="gen-result-img" src="" alt="Hasil Studio AI Awan" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:none; margin:0 auto; border-radius:8px;">
+              <img id="gen-result-img" src="" alt="Hasil Studio Foto AI" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:none; margin:0 auto; border-radius:8px;">
               <div id="gen-badge-overlay" style="position:absolute; bottom:10px; right:10px; display:inline-flex; align-items:center; gap:6px; background:rgba(11,19,41,0.8); color:#FFFFFF; font:700 11px 'Plus Jakarta Sans', sans-serif; padding:5px 10px; border-radius:6px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); box-shadow:0 2px 8px rgba(0,0,0,0.35); pointer-events:none;">
                 <img src="/assets/logo_icon_mark_bapak.png" alt="Logo ACT" style="width:15px; height:15px; display:block; object-fit:contain;">
                 <span style="letter-spacing:0.02em;">AutoClary<span style="color:#00d2b4;">Tech</span></span>
@@ -580,7 +584,7 @@
           <div style="margin-bottom:10px;"><svg class="ikon" style="width:36px; height:36px; stroke:var(--redup); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
           <div style="font:800 16px var(--f-judul); color:var(--ink); margin-bottom:6px;">Hasil Siap Saji Akan Muncul di Sini</div>
           <p style="font-size:13px; color:var(--redup); max-width:280px; margin:0 auto; line-height:1.5;">
-            Upload foto produk Anda di sebelah kiri dan klik proses. Naskah caption promosi, skrip video Reels/TikTok, status WhatsApp, dan foto studio resolusi tinggi akan diproses otomatis oleh AI Studio Awan!
+            Upload foto produk Anda di sebelah kiri dan klik proses. Naskah caption promosi, skrip video Reels/TikTok, status WhatsApp, dan foto studio resolusi tinggi akan diproses otomatis oleh Studio Foto AI!
           </p>
         </div>
 
@@ -626,13 +630,13 @@
             <div style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:#ECFDF5; color:#065F46; margin-bottom:12px;">
               <svg class="ikon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
             </div>
-            <div style="font:800 15px var(--f-judul); color:#065F46; margin-bottom:6px;">2. AI Studio Awan (fal.ai)</div>
+            <div style="font:800 15px var(--f-judul); color:#065F46; margin-bottom:6px;">2. Studio Foto AI Komersial</div>
             <p style="font-size:13px; color:var(--teks); line-height:1.5; margin:0;">
-              Sistem memproses foto produk dengan pencahayaan komersial alami, menjaga label kemasan asli, serta meracik naskah &amp; 10 tagar relevan via LLM awan (~40 detik).
+              Sistem memproses foto produk dengan pencahayaan komersial alami, menjaga label kemasan asli, serta meracik naskah &amp; 10 tagar relevan via AI Copywriter (~40 detik).
             </p>
           </div>
           <div style="margin-top:12px; font:700 11px var(--f-mono); color:#065F46; background:#ECFDF5; padding:4px 8px; border-radius:4px; display:inline-block;">
-            Mesin: AI Studio Cloud
+            Mesin: Studio Foto AI
           </div>
         </div>
 
@@ -854,14 +858,14 @@ Pemesanan &amp; konsultasi: Klik tautan di bio sekarang!
             <td>Alami (Kamera fisik)</td>
             <td>Efek stiker melayang</td>
             <td>Sering tabrakan arah cahaya</td>
-            <td class="col-highlight"><strong>Foto Studio AI Awan</strong></td>
+            <td class="col-highlight"><strong>Studio Foto AI AutoClaryTech</strong></td>
           </tr>
           <tr>
             <td><strong>Waktu Jadi</strong></td>
             <td>3 s.d. 7 hari</td>
             <td>15–30 menit atur layer</td>
             <td>30 detik</td>
-            <td class="col-highlight"><strong>AI Studio Awan (~40 detik)</strong></td>
+            <td class="col-highlight"><strong>Studio Foto AI (~40 detik)</strong></td>
           </tr>
           <tr>
             <td><strong>Caption &amp; Tagar Tren</strong></td>
@@ -1438,7 +1442,7 @@ Yuk nikmati selagi hangat!`,
   }
 
   /* ==========================================================
-     MANAJEMEN KUOTA 3X GRATIS & INTEGRASI AI AWAN (FAL.AI)
+     MANAJEMEN KUOTA 3X GRATIS & INTEGRASI STUDIO FOTO AI
      ========================================================== */
   function getSisaKuota() {
     const s = localStorage.getItem('contact_kuota_gratis');
@@ -1473,6 +1477,22 @@ Yuk nikmati selagi hangat!`,
   window.addEventListener('DOMContentLoaded', () => {
     updateBadgeKuota();
   });
+
+  // Pemilih Preset Suasana Studio Cepat (Tetap Bebas Diketik Pengguna)
+  function pilihPresetSuasana(btn, teks) {
+    const input = document.getElementById('gen-suasana-foto');
+    if (input) input.value = teks;
+    document.querySelectorAll('.btn-preset-suasana').forEach(b => {
+      b.style.background = '#F8FAFC';
+      b.style.color = '#475569';
+      b.style.borderColor = '#CBD5E1';
+    });
+    if (btn) {
+      btn.style.background = '#ECFDF5';
+      btn.style.color = '#065F46';
+      btn.style.borderColor = '#A7F3D0';
+    }
+  }
 
   // Fungsi kompresi foto kamera HP ke max 1280px JPEG untuk payload aman di serverless
   function kompresFotoBase64(img) {
@@ -1516,7 +1536,7 @@ Yuk nikmati selagi hangat!`,
     const kategori = document.getElementById('gen-kategori-produk').value;
     const keunggulan = document.getElementById('gen-keunggulan').value.trim() || 'kualitas terbaik & terpercaya';
     const tujuanKonten = (document.getElementById('gen-tujuan-konten') && document.getElementById('gen-tujuan-konten').value) || 'hard_sell';
-    const suasanaDipilih = (document.getElementById('gen-suasana-foto') && document.getElementById('gen-suasana-foto').value) || 'kafe_kayu';
+    const suasanaDipilih = (document.getElementById('gen-suasana-foto') && document.getElementById('gen-suasana-foto').value.trim()) || 'Meja Kayu Kafe Estetik & Hangat';
     const nomorWa = (document.getElementById('gen-nomor-wa') && document.getElementById('gen-nomor-wa').value.trim()) || '';
 
     const loadingState = document.getElementById('gen-loading-state');
@@ -1533,8 +1553,8 @@ Yuk nikmati selagi hangat!`,
     const fotoDataUrl = kompresFotoBase64(uploadedFotoImg);
 
     try {
-      // Masuk Fase 2: Menghubungi Serverless AI Studio fal.ai
-      setTahapProses(2, 25, 'Fase 2: Menghubungkan antrean GPU AI Studio Awan (fal.ai)...');
+      // Masuk Fase 2: Menghubungi Serverless AI Studio
+      setTahapProses(2, 25, 'Fase 2: Menghubungkan antrean GPU Studio Foto AI...');
 
       // Panggil Serverless API contact-generate
       const resp = await fetch('/api/contact-generate', {
@@ -1564,7 +1584,7 @@ Yuk nikmati selagi hangat!`,
       }
 
       if (resp.ok && resData && resData.status === 'queued') {
-        // Polling ke antrean GPU fal.ai
+        // Polling ke antrean GPU Studio AI
         const statusUrl = resData.statusUrl;
         const responseUrl = resData.responseUrl;
         const requestId = resData.requestId;
@@ -1605,15 +1625,15 @@ Yuk nikmati selagi hangat!`,
           setTahapProses(4, 100, 'Fase 4: Finalisasi selesai 100%! Menyajikan seluruh aset siap pakai...');
           await new Promise(r => setTimeout(r, 400));
 
-          // Sukses render AI Awan!
+          // Sukses render Studio Foto AI!
           setSisaKuota(getSisaKuota() - 1);
-          tampilkanHasilAiAwan(imageUrlHasil, resData);
+          tampilkanHasilStudioAi(imageUrlHasil, resData);
           return;
         }
       }
 
-      // Jika fal.ai pending kredensial atau timeout, fallback anggun ke generator lokal
-      console.warn('AI Cloud tidak merespons atau sedang sinkronisasi key; beralih ke generator lokal.');
+      // Jika pending kredensial atau timeout, fallback anggun ke generator lokal
+      console.warn('Studio AI tidak merespons atau sedang sinkronisasi key; beralih ke generator lokal.');
       setTahapProses(3, 85, 'Fase 3: Meracik copywriting jualan & naskah promosi...');
       await new Promise(r => setTimeout(r, 400));
       setTahapProses(4, 100, 'Fase 4: Menyajikan hasil studio siap pakai...');
@@ -1698,7 +1718,7 @@ Yuk nikmati selagi hangat!`,
     });
   }
 
-  function tampilkanHasilAiAwan(imageUrl, resData) {
+  function tampilkanHasilStudioAi(imageUrl, resData) {
     document.getElementById('gen-loading-state').style.display = 'none';
     document.getElementById('gen-result-state').style.display = 'block';
 

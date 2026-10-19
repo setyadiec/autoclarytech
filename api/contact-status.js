@@ -1,5 +1,5 @@
 // Vercel Serverless Function: /api/contact-status
-// Polling status antrean & hasil render fal.ai — arahan Bapak & Bey 18 Okt 2026
+// Polling status antrean & hasil render Studio AI — arahan Bapak & Bey 18 Okt 2026
 
 export default async function handler(req, res) {
   // CORS Headers
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
       const errText = await checkResp.text();
       return res.status(checkResp.status).json({
         status: 'error',
-        message: 'Gagal memeriksa status fal.ai: ' + checkResp.status,
+        message: 'Gagal memeriksa status antrean Studio AI: ' + checkResp.status,
         detail: errText
       });
     }
@@ -97,7 +97,7 @@ export default async function handler(req, res) {
       } else {
         return res.status(502).json({
           status: 'error',
-          message: 'Status selesai namun URL gambar hasil tidak ditemukan dalam respons fal.ai.'
+          message: 'Status selesai namun URL gambar hasil tidak ditemukan dalam respons Studio AI.'
         });
       }
 

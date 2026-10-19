@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 
 // Vercel Serverless Function: /api/contact-generate
-// Arsitektur cont-ACT AI Awan (fal.ai) — arahan Bapak & Bey 18-19 Okt 2026
+// Arsitektur cont-ACT Studio AI AutoClaryTech — arahan Bapak & Bey 18-19 Okt 2026
 
 export const config = {
   api: {
@@ -160,35 +160,37 @@ export default async function handler(req, res) {
   const tujuanBersih = String(tujuanKonten || 'hard_sell').trim();
   const waBersih = formatNomorWa(nomorWa);
 
-  // Pemetaan prompt foto studio komersial per suasana (Model fal-ai/flux-pro/kontext)
+  // Pemetaan prompt foto studio komersial per suasana (fleksibel pilihan preset / ketik bebas pengguna)
   let promptStudio = '';
-  if (suasana === 'kafe_kayu') {
-    promptStudio = `High-end commercial advertising food photography of ${namaBersih}, placed neatly on a rustic warm solid wooden dining table with visible natural dark wood grain and rich organic timber texture. Cozy warm ambient cafe morning lighting, gentle natural contact shadows, soft warm rim light, blurred cozy cafe background with warm bokeh, sharp focus on product packaging and details, photorealistic 8k, authentic culinary commercial presentation`;
-  } else if (suasana === 'marmer_mewah') {
+  const suasanaLower = String(suasana || '').toLowerCase();
+  if (suasanaLower.includes('kafe') || suasanaLower.includes('kayu')) {
+    promptStudio = `High-end commercial advertising food and product photography of ${namaBersih}, placed neatly on a rustic warm solid wooden dining table with visible natural dark wood grain and rich organic timber texture. Cozy warm ambient cafe morning lighting, gentle natural contact shadows, soft warm rim light, blurred cozy cafe background with warm bokeh, sharp focus on product packaging and details, photorealistic 8k, authentic culinary commercial presentation`;
+  } else if (suasanaLower.includes('marmer') || suasanaLower.includes('mewah')) {
     promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a luxury polished dark marble countertop with subtle natural stone veining. Dramatic warm spotlighting, subtle clean reflections, clean minimalist studio background, sharp focus on product packaging, photorealistic 8k, prestigious commercial showcase`;
-  } else if (suasana === 'alami_botanical') {
+  } else if (suasanaLower.includes('alami') || suasanaLower.includes('botanical') || suasanaLower.includes('daun') || suasanaLower.includes('tropis')) {
     promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a natural light bamboo or light wooden surface surrounded by fresh green tropical leaves and organic botanical accents. Soft natural morning daylight, gentle shadows, fresh vibrant organic atmosphere, sharp focus on product details, photorealistic 8k, clean eco-friendly commercial aesthetic`;
-  } else if (suasana === 'pastel_modern') {
+  } else if (suasanaLower.includes('pastel') || suasanaLower.includes('podium')) {
     promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a sleek modern pastel podium with contemporary minimalist studio setting. Soft diffused studio lighting, gentle geometric shadows, clean elegant pastel aesthetic, sharp focus on product details, photorealistic 8k, modern commercial presentation`;
   } else if (suasana && typeof suasana === 'string' && suasana.trim().length > 3) {
-    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on ${suasana.trim().slice(0, 200)}. Natural contact shadows, soft ambient warm rim lighting, sharp focus on packaging details, photorealistic 8k, authentic commercial presentation`;
+    const suasanaKustom = suasana.trim().slice(0, 200);
+    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly in ${suasanaKustom}. Commercial studio lighting, natural contact shadows, soft ambient warm rim lighting, sharp focus on product packaging details, photorealistic 8k, authentic commercial presentation`;
   } else {
-    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a luxury polished dark marble counter with dramatic warm spotlighting. Natural contact shadows, sharp focus on packaging details, photorealistic 8k, authentic commercial presentation`;
+    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a rustic warm solid wooden dining table with visible natural wood grain. Cozy warm ambient lighting, natural contact shadows, sharp focus on packaging details, photorealistic 8k, authentic commercial presentation`;
   }
 
-  // Kunci API fal.ai dari Environment Serverless Vercel
+  // Kunci API studio dari Environment Serverless Vercel
   const FAL_KEY = process.env.FAL_KEY;
 
   if (!FAL_KEY) {
     // Mode Jujur: Laporkan bila kunci FAL_KEY di serverless Vercel belum disematkan oleh Bapak
     return res.status(503).json({
       status: 'key_pending',
-      message: 'Layanan AI Awan cont-ACT sedang dalam sinkronisasi kredensial Vercel (FAL_KEY). Mohon hubungi admin atau gunakan simulator visual.'
+      message: 'Layanan Studio Foto AI cont-ACT sedang dalam sinkronisasi kredensial server. Mohon hubungi admin atau gunakan simulator visual.'
     });
   }
 
   try {
-    // Panggil Queue fal.ai
+    // Panggil Queue Studio AI
     const falEndpoint = 'https://queue.fal.run/fal-ai/flux-pro/kontext';
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000); // 15 detik batas timeout antrean awal
@@ -211,10 +213,10 @@ export default async function handler(req, res) {
 
     if (!falResp.ok) {
       const errText = await falResp.text();
-      console.error('Fal.ai queue error:', falResp.status, errText);
+      console.error('Studio AI queue error:', falResp.status, errText);
       return res.status(502).json({
         status: 'error',
-        message: 'Gagal menghubungkan ke antrean AI Cloud fal.ai: ' + falResp.status
+        message: 'Gagal menghubungkan ke antrean Studio Foto AI: ' + falResp.status
       });
     }
 
@@ -225,7 +227,7 @@ export default async function handler(req, res) {
     await simpanKuotaPersisten(kunciGlobal, totalHarian + 1, skrgTanggal);
     const sisaKuota = Math.max(0, MAKS_KUOTA_GRATIS - (pemakaianSaatIni + 1));
 
-    // Racik Paket Konten Kreator 360 Derajat (Caption, Video Script, Status WA, Rencana 7 Hari, 10 Tagar) via LLM Awan fal.ai
+    // Racik Paket Konten Kreator 360 Derajat via AI Copywriter
     const paketKonten = await racikPaketKontenLlm(FAL_KEY, namaBersih, kategoriBersih, keunggulanBersih, suasana, tujuanBersih, waBersih);
 
     let linkWa = '';
@@ -268,7 +270,7 @@ function formatNomorWa(no) {
   return bersih;
 }
 
-// Integrasi LLM Awan fal.ai (fal-ai/any-llm) untuk copywriting presisi & 10 tagar relevan
+// Integrasi AI Copywriter untuk copywriting presisi & 10 tagar relevan
 async function racikPaketKontenLlm(falKey, nama, kategori, keunggulan, suasana, tujuanKonten, nomorWa) {
   const penjelasanTujuan = {
     hard_sell: 'Fokus penjualan langsung, manfaat nyata produk, dan dorong pemesanan segera.',
@@ -287,6 +289,12 @@ Data Produk Klien:
 - Sudut Pandang/Tujuan Konten: ${penjelasanTujuan}
 - Kontak Pemesanan: ${nomorWa ? 'WhatsApp ' + nomorWa : 'Tautan di Profil / Bio'}
 
+[ATURAN KERAS ANTI-PLACEHOLDER & KEJUJURAN]:
+1. DILARANG KERAS menggunakan teks placeholder harfiah seperti [Emoji ...], [Masukkan ...], [Isi ...], atau [Ganti ...]. Gunakan emoji asli Unicode (seperti ✨, 🔥, 📦, 🥟) langsung di dalam kalimat!
+2. DILARANG KERAS menggunakan kata klaim mutlak atau jaminan fiktif seperti 'dijamin' atau 'garansi' KECUALI jika secara eksplisit tercantum dalam data keunggulan produk.
+3. DILARANG mengarang diskon, harga potongan, promo, atau klaim stok terbatas fiktif (seperti "lagi promo hari ini aja", "diskon 50%") jika tidak tertulis di data klien.
+4. DILARANG mengarang kata sifat atau atribut fiktif pada hashtag (seperti #homemade, #tradisional, #organik) jika tidak disebutkan di data keunggulan produk.
+
 Tugas: Buat 5 Aset Konten Kreator Siap Pakai:
 1. CAPTION FEED (Instagram/Facebook): Hook memikat pembuka, elaborasi manfaat produk yang menyentuh kebutuhan konsumen secara jujur berdasarkan data keunggulan di atas, dan Call to Action pemesanan yang jelas.
 2. SKRIP VIDEO REELS & TIKTOK (15–30 Detik):
@@ -295,26 +303,19 @@ Tugas: Buat 5 Aset Konten Kreator Siap Pakai:
    - Narasi Voiceover
    - CTA Penutup
 3. STATUS WHATSAPP (Story / Chat Broadcast): Teks ringkas, ramah, mengundang calon pembeli membalas chat secara spontan.
-   [ATURAN KERAS STATUS WA]:
-   - DILARANG mengarang promo, diskon, harga potongan, atau klaim stok terbatas fiktif (seperti "lagi ada promo terbatas hari ini aja", "diskon 50%", "stok tinggal 5") KECUALI jika secara eksplisit tertulis di data keunggulan produk.
-   - HANYA ceritakan fakta produk, kualitas rasa/bahan, dan keunggulan nyata dari data klien.
 4. RENCANA KONTEN 7 HARI: Ide posting tematik Hari 1 s.d. Hari 7 (kombinasi Reels, Feed, dan Story) agar pemilik usaha konsisten jualan selama seminggu penuh.
 5. HASHTAGS: Tepat 10 tagar relevan, tertarget, dan populer.
-   [ATURAN KERAS HASHTAGS]:
-   - WAJIB TEPAT 10 TAGAR murni berawalan tanda #.
-   - DILARANG menyertakan nama kota apa pun (seperti #KulinerBandung, #KulinerJakarta, dll).
-   - DILARANG menambahkan teks penjelasan, saran, atau tanda kurung apa pun (seperti "(ganti kota jika perlu)").
-   - HANYA keluarkan 10 tagar murni dipisahkan spasi tunggal.
+   [ATURAN HASHTAGS]: TEPAT 10 TAGAR murni awalan #, tanpa nama kota, tanpa tanda kurung, tanpa atribut fiktif.
 
 Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
 ===CAPTION===
-[Teks caption feed lengkap di sini, gunakan emoji yang memikat]
+[Teks caption feed lengkap di sini, gunakan emoji asli yang memikat]
 
 ===VIDEOSCRIPT===
 [Teks skrip video lengkap dengan pembagian Hook 3 Detik, Panduan Visual B-roll, Narasi Suara, dan CTA Penutup]
 
 ===WASTATUS===
-[Teks status WhatsApp ringkas dan ramah tanpa klaim promo karangan]
+[Teks status WhatsApp ringkas dan ramah tanpa klaim jaminan fiktif]
 
 ===IDE7HARI===
 [Rencana konten Hari 1 sampai Hari 7]
@@ -352,9 +353,11 @@ Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
       let ideKonten7Hari = ideMatch ? ideMatch[1].trim() : '';
       let hashtags = hashMatch ? hashMatch[1].trim() : '';
 
-      // Sanitasi ketat keluaran LLM
-      const hashtagsBersih = bersihkanHashtags(hashtags, kategori);
+      // Sanitasi ketat keluaran AI Copywriter
+      caption = bersihkanTeksPlaceholder(caption);
+      videoScript = bersihkanTeksPlaceholder(videoScript);
       const waStatusBersih = bersihkanWaStatus(waStatus, nama, keunggulan, nomorWa);
+      const hashtagsBersih = bersihkanHashtags(hashtags, kategori, nama, keunggulan);
 
       if (caption && hashtagsBersih) {
         return {
@@ -367,15 +370,28 @@ Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
       }
     }
   } catch (err) {
-    console.warn('Fallback LLM awan:', err.message);
+    console.warn('Fallback AI Copywriter:', err.message);
   }
 
-  // Fallback cerdas jika LLM awan timeout
+  // Fallback cerdas jika AI Copywriter timeout
   return racikPaketKontenFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa);
 }
 
-// Sanitasi Hashtag: Menjamin tepat 10 tagar murni tanpa nama kota & tanpa tanda kurung
-function bersihkanHashtags(rawHashtags, kategori) {
+// Fungsi Pembersih Placeholder Teks Bocor seperti [Emoji bakpao], [Masukkan ...]
+function bersihkanTeksPlaceholder(teks) {
+  if (!teks || typeof teks !== 'string') return '';
+  return teks
+    .replace(/\[\s*emoji[^\]]*\]/gi, '')
+    .replace(/\[\s*masukkan[^\]]*\]/gi, '')
+    .replace(/\[\s*isi[^\]]*\]/gi, '')
+    .replace(/\[\s*ganti[^\]]*\]/gi, '')
+    .replace(/\[\s*link[^\]]*\]/gi, '')
+    .replace(/\[\s*nomor[^\]]*\]/gi, '')
+    .trim();
+}
+
+// Sanitasi Hashtag: Menjamin tepat 10 tagar murni tanpa kota, tanpa tanda kurung & tanpa atribut fiktif
+function bersihkanHashtags(rawHashtags, kategori, nama, keunggulan) {
   if (!rawHashtags || typeof rawHashtags !== 'string') {
     return '#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enaksekali #reelskuliner';
   }
@@ -390,7 +406,20 @@ function bersihkanHashtags(rawHashtags, kategori) {
   const daftarKota = ['bandung', 'jakarta', 'surabaya', 'jogja', 'yogyakarta', 'semarang', 'solo', 'bali', 'medan', 'makassar', 'malang', 'bogor', 'bekasi', 'tangerang', 'depok'];
   tags = tags.filter(t => !daftarKota.some(k => t.toLowerCase().includes(k)));
 
-  // 4. Cadangan tagar murni per kategori (bebas kota)
+  // 4. Buang hashtag yang mengarang atribut fiktif jika tidak ada di data klien
+  const kataKunciData = `${nama || ''} ${keunggulan || ''}`.toLowerCase();
+  const atributSensitif = ['homemade', 'tradisional', 'kuno', 'organik', 'tanpapengawet', 'resepkuno', 'jadul'];
+  tags = tags.filter(t => {
+    const tLow = t.toLowerCase();
+    for (const attr of atributSensitif) {
+      if (tLow.includes(attr) && !kataKunciData.includes(attr)) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  // 5. Cadangan tagar murni per kategori (bebas kota & bebas klaim fiktif)
   const cadanganKategori = {
     kuliner: ['#kulinerindonesia', '#kulineran', '#cemilanenak', '#makananviral', '#jajanankekinian', '#racuntiktok', '#fypkuliner', '#foodies', '#enaksekali', '#reelskuliner'],
     skincare: ['#skincareroutine', '#racunskincare', '#kulitglowing', '#skincarebpom', '#beautytips', '#fypindonesia', '#viralreels', '#cantikalami', '#perawatanwajah', '#racuntiktok'],
@@ -411,15 +440,25 @@ function bersihkanHashtags(rawHashtags, kategori) {
   return tags.slice(0, 10).join(' ');
 }
 
-// Sanitasi Status WA: Membersihkan klaim promo fiktif jika tidak ada di input klien
+// Sanitasi Status WA: Membersihkan klaim promo/garansi fiktif jika tidak ada di input klien
 function bersihkanWaStatus(waRaw, nama, keunggulan, nomorWa) {
   if (!waRaw || typeof waRaw !== 'string') return racikWaStatusFallback(nama, '', keunggulan, nomorWa);
   let hasil = waRaw
     .replace(/Lagi ada promo TERBATAS hari ini aja lho!?/gi, '')
     .replace(/Promo terbatas hari ini aja lho!?/gi, '')
     .replace(/Promo terbatas hari ini!?/gi, '')
-    .replace(/Slot hari ini terbatas hanya \d+ porsi/gi, 'Siap dipesan untuk Anda')
-    .trim();
+    .replace(/Slot hari ini terbatas hanya \d+ porsi/gi, 'Siap dipesan untuk Anda');
+
+  // Bersihkan placeholder emoji [Emoji ...]
+  hasil = bersihkanTeksPlaceholder(hasil);
+
+  // Jika kata 'dijamin' tidak ada di keunggulan yang ditulis klien, ubah menjadi 'terasa' atau hapus
+  const keunggulanLow = String(keunggulan || '').toLowerCase();
+  if (!keunggulanLow.includes('dijamin')) {
+    hasil = hasil.replace(/\bdijamin\b/gi, 'terasa');
+  }
+
+  hasil = hasil.trim();
   return hasil || racikWaStatusFallback(nama, '', keunggulan, nomorWa);
 }
 
