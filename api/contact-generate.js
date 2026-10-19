@@ -160,22 +160,22 @@ export default async function handler(req, res) {
   const tujuanBersih = String(tujuanKonten || 'hard_sell').trim();
   const waBersih = formatNomorWa(nomorWa);
 
-  // Pemetaan prompt foto studio komersial per suasana (fleksibel pilihan preset / ketik bebas pengguna)
+  // Pemetaan prompt foto studio komersial (bebas, fleksibel, tidak dibatasi)
   let promptStudio = '';
-  const suasanaLower = String(suasana || '').toLowerCase();
-  if (suasanaLower.includes('kafe') || suasanaLower.includes('kayu')) {
-    promptStudio = `High-end commercial advertising food and product photography of ${namaBersih}, placed neatly on a rustic warm solid wooden dining table with visible natural dark wood grain and rich organic timber texture. Cozy warm ambient cafe morning lighting, gentle natural contact shadows, soft warm rim light, blurred cozy cafe background with warm bokeh, sharp focus on product packaging and details, photorealistic 8k, authentic culinary commercial presentation`;
-  } else if (suasanaLower.includes('marmer') || suasanaLower.includes('mewah')) {
-    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a luxury polished dark marble countertop with subtle natural stone veining. Dramatic warm spotlighting, subtle clean reflections, clean minimalist studio background, sharp focus on product packaging, photorealistic 8k, prestigious commercial showcase`;
-  } else if (suasanaLower.includes('alami') || suasanaLower.includes('botanical') || suasanaLower.includes('daun') || suasanaLower.includes('tropis')) {
-    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a natural light bamboo or light wooden surface surrounded by fresh green tropical leaves and organic botanical accents. Soft natural morning daylight, gentle shadows, fresh vibrant organic atmosphere, sharp focus on product details, photorealistic 8k, clean eco-friendly commercial aesthetic`;
-  } else if (suasanaLower.includes('pastel') || suasanaLower.includes('podium')) {
-    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a sleek modern pastel podium with contemporary minimalist studio setting. Soft diffused studio lighting, gentle geometric shadows, clean elegant pastel aesthetic, sharp focus on product details, photorealistic 8k, modern commercial presentation`;
-  } else if (suasana && typeof suasana === 'string' && suasana.trim().length > 3) {
+  if (suasana && typeof suasana === 'string' && suasana.trim().length > 2) {
     const suasanaKustom = suasana.trim().slice(0, 200);
-    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly in ${suasanaKustom}. Commercial studio lighting, natural contact shadows, soft ambient warm rim lighting, sharp focus on product packaging details, photorealistic 8k, authentic commercial presentation`;
+    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, naturally presented in ${suasanaKustom}. Professional commercial studio lighting, natural contact shadows, sharp focus on product packaging and authentic textures, photorealistic 8k, authentic commercial catalog presentation`;
   } else {
-    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a rustic warm solid wooden dining table with visible natural wood grain. Cozy warm ambient lighting, natural contact shadows, sharp focus on packaging details, photorealistic 8k, authentic commercial presentation`;
+    // Tanpa batasan kaku: sesuaikan secara elegan dan natural dengan kategori produk
+    if (kategoriBersih.includes('kuliner') || kategoriBersih.includes('makan') || kategoriBersih.includes('minum')) {
+      promptStudio = `High-end commercial advertising culinary photography of ${namaBersih}. Presented beautifully on a clean elegant tabletop setting matching the dish, soft appetizing commercial lighting, natural contact shadows, photorealistic 8k, authentic mouthwatering presentation`;
+    } else if (kategoriBersih.includes('skincare') || kategoriBersih.includes('kosmetik') || kategoriBersih.includes('kecantikan')) {
+      promptStudio = `High-end luxury commercial cosmetics studio photography of ${namaBersih}. Elegant minimalist studio podium, clean soft diffused lighting, subtle sophisticated reflections, pure modern aesthetic, sharp focus on product packaging, photorealistic 8k`;
+    } else if (kategoriBersih.includes('fashion') || kategoriBersih.includes('baju') || kategoriBersih.includes('tas') || kategoriBersih.includes('sepatu')) {
+      promptStudio = `High-end commercial fashion studio photography of ${namaBersih}. Clean stylish contemporary boutique studio backdrop, softbox studio lighting, crisp fabric textures and details, photorealistic 8k, modern commercial showcase`;
+    } else {
+      promptStudio = `High-end commercial advertising product photography of ${namaBersih}. Clean professional studio setting with neutral elegant background, soft balanced studio lighting, natural contact shadows, sharp focus on product details, photorealistic 8k, authentic commercial presentation`;
+    }
   }
 
   // Kunci API studio dari Environment Serverless Vercel

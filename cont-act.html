@@ -386,18 +386,12 @@
           </select>
 
           <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:4px;" for="gen-suasana-foto">
-            6. Suasana / Latar Foto Studio Produk:
+            6. Suasana / Latar Foto Studio Produk (Opsional &amp; Bebas):
           </label>
           <div style="font-size:11px; color:var(--redup); margin-bottom:8px;">
-            Pilih rekomendasi cepat atau ketik bebas suasana studio impian Anda:
+            Kosongkan agar AI memilihkan latar studio paling estetik dan pas dengan karakter produk Anda, atau ketik bebas sesuai keinginan:
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;" id="preset-suasana-container">
-            <button type="button" class="btn-preset-suasana active" onclick="pilihPresetSuasana(this, 'Meja Kayu Kafe Estetik &amp; Hangat')" style="padding:5px 9px; font-size:11px; font-weight:700; border-radius:6px; cursor:pointer; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">Meja Kayu Kafe</button>
-            <button type="button" class="btn-preset-suasana" onclick="pilihPresetSuasana(this, 'Studio Marmer Mewah &amp; Spotlight Elegan')" style="padding:5px 9px; font-size:11px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1;">Marmer Mewah</button>
-            <button type="button" class="btn-preset-suasana" onclick="pilihPresetSuasana(this, 'Nuansa Alami Segar &amp; Daun Tropis')" style="padding:5px 9px; font-size:11px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1;">Alami &amp; Tropis</button>
-            <button type="button" class="btn-preset-suasana" onclick="pilihPresetSuasana(this, 'Podium Minimalis Modern Pastel')" style="padding:5px 9px; font-size:11px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1;">Podium Pastel</button>
-          </div>
-          <input type="text" id="gen-suasana-foto" class="form-input" placeholder="Ketik bebas suasana studio di sini (contoh: Meja piknik kayu di taman bunga)" value="Meja Kayu Kafe Estetik &amp; Hangat" style="background:#fff; margin-bottom:12px;">
+          <input type="text" id="gen-suasana-foto" class="form-input" placeholder="Contoh: Meja makan kafe estetik, podium kosmetik mewah, latar butik minimalis, dsb." value="" style="background:#fff; margin-bottom:12px;">
 
           <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;" for="gen-nomor-wa">
             7. Nomor WhatsApp Pemesanan Anda (Opsional):
@@ -414,7 +408,7 @@
         </div>
       </div>
 
-      <!-- KOLOM KANAN: HASIL KONTEN KREATOR 360° (FOTO STUDIO + REELS + CAPTION + WA STORY + JADWAL 7 HARI) -->
+      <!-- KOLOM KANAN: HASIL KONTEN KREATOR SIAP PAKAI (FOTO STUDIO + REELS + CAPTION + WA STORY + JADWAL 7 HARI) -->
       <div>
         <!-- Kotak Animasi Loading Saat Memproses (Visual Stepper 4 Fase) -->
         <div id="gen-loading-state" style="display:none; background:#FFFFFF; border:1.5px solid #CBD5E1; border-radius:var(--r); padding:24px 20px; text-align:left; box-shadow:var(--timbul-kecil);">
@@ -462,7 +456,7 @@
               <div id="step-3-icon" style="width:26px; height:26px; border-radius:50%; background:#E2E8F0; color:#64748B; display:flex; align-items:center; justify-content:center; font:700 12px var(--f-mono); flex-shrink:0;">3</div>
               <div style="flex:1;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <strong style="font-size:13px; color:var(--ink);">Fase 3: Pembuatan Paket Konten 360°</strong>
+                  <strong style="font-size:13px; color:var(--ink);">Fase 3: Pembuatan Paket Konten Siap Pakai</strong>
                   <span id="step-3-badge" style="font-size:11px; font-weight:800; color:#64748B;">Menunggu</span>
                 </div>
                 <div style="font-size:11px; color:var(--redup); margin-top:2px;">Meracik skrip Reels/TikTok, caption jualan, status WA &amp; rencana posting 7 hari.</div>
@@ -491,21 +485,18 @@
         <div id="gen-result-state" style="display:none; background:#fff; border:1.5px solid #059669; border-radius:var(--r); padding:20px; box-shadow:var(--timbul-kecil);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
             <span style="background:#ECFDF5; color:#065F46; font:800 11px var(--f-mono); padding:4px 10px; border-radius:6px;">
-              <svg class="ikon ikon-s" style="width:14px; height:14px; vertical-align:text-bottom; margin-right:4px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>PAKET KONTEN KREATOR 360° SIAP PAKAI
+              <svg class="ikon ikon-s" style="width:14px; height:14px; vertical-align:text-bottom; margin-right:4px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>PAKET KONTEN KREATOR SIAP PAKAI
             </span>
             <span id="badge-status-selesai" style="font-size:12px; color:#059669; font-weight:700;">Memuat Hasil Studio...</span>
           </div>
 
-          <!-- RINGKASAN BUKTI KELENGKAPAN 360° -->
+          <!-- RINGKASAN BUKTI KELENGKAPAN KONTEN -->
           <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:10px 12px; margin-bottom:14px; display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:8px; font-size:11px; text-align:center;">
             <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:6px; padding:6px 4px;">
               <span style="color:#059669; font-weight:800;">Foto Studio Polos</span>
             </div>
             <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:6px; padding:6px 4px;">
               <span style="color:#059669; font-weight:800;">Banner Berteks</span>
-            </div>
-            <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:6px; padding:6px 4px;">
-              <span style="color:#059669; font-weight:800;">360° Parallax</span>
             </div>
             <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:6px; padding:6px 4px;">
               <span style="color:#059669; font-weight:800;">Video Reels 9:16</span>
@@ -524,17 +515,8 @@
             <button type="button" id="tab-btn-jadwal" onclick="gantiTabKonten('jadwal')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">Rencana 7 Hari</button>
           </div>
 
-          <!-- PANEL 1: FOTO STUDIO & BANNER PROMOSI (DENGAN TEKS PENGUAT PRODUK & 360° VIEW) -->
+          <!-- PANEL 1: FOTO STUDIO & BANNER PROMOSI (DENGAN TEKS PENGUAT PRODUK) -->
           <div id="tab-pane-foto" style="display:block;">
-            
-            <!-- Kontrol Mode Tampilan: Banner Promosi / Rotasi 360° -->
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-              <span style="font:800 12px var(--f-judul); color:var(--ink);">Format Tampilan Gambar:</span>
-              <div style="display:inline-flex; background:#E2E8F0; border-radius:6px; padding:2px;">
-                <button type="button" id="btn-mode-banner" onclick="setModeTampilanFoto('banner')" style="padding:4px 9px; font-size:11px; font-weight:700; border-radius:4px; border:none; cursor:pointer; background:#08694F; color:#fff;">Banner Promosi</button>
-                <button type="button" id="btn-mode-360" onclick="setModeTampilanFoto('360')" style="padding:4px 9px; font-size:11px; font-weight:700; border-radius:4px; border:none; cursor:pointer; background:transparent; color:#475569;">Parallax 360°</button>
-              </div>
-            </div>
 
             <!-- Wadah Gambar Preview Box (Aspek Rasio 1:1 Presisi Penuh Menyatu) -->
             <div id="gen-preview-box" style="position:relative; width:100%; max-width:480px; aspect-ratio:1/1; border-radius:12px; overflow:hidden; margin:0 auto 14px; background:#0F172A; border:1px solid #CBD5E1; text-align:center; transition:transform 0.1s ease-out; box-shadow:0 8px 24px rgba(0,0,0,0.12);">
@@ -620,10 +602,6 @@
                 <span style="letter-spacing:0.02em;">AutoClary<span style="color:#00d2b4;">Tech</span></span>
               </div>
 
-              <!-- Hint interaktif Parallax 360 -->
-              <div id="hint-360" style="display:none; position:absolute; bottom:10px; left:10px; background:rgba(15,23,42,0.85); color:#F8FAFC; font:700 10px var(--f-mono); padding:4px 8px; border-radius:4px; backdrop-filter:blur(4px); pointer-events:none;">
-                Putar 3D: geser kursor atau usap layar
-              </div>
             </div>
 
             <!-- KOTAK EDITOR TEKS PENGUAT PRODUK (GAYA CANVA & FIGMA) -->
@@ -1724,21 +1702,6 @@ Yuk nikmati selagi hangat!`,
     updateBadgeKuota();
   });
 
-  // Pemilih Preset Suasana Studio Cepat (Tetap Bebas Diketik Pengguna)
-  function pilihPresetSuasana(btn, teks) {
-    const input = document.getElementById('gen-suasana-foto');
-    if (input) input.value = teks;
-    document.querySelectorAll('.btn-preset-suasana').forEach(b => {
-      b.style.background = '#F8FAFC';
-      b.style.color = '#475569';
-      b.style.borderColor = '#CBD5E1';
-    });
-    if (btn) {
-      btn.style.background = '#ECFDF5';
-      btn.style.color = '#065F46';
-      btn.style.borderColor = '#A7F3D0';
-    }
-  }
 
   // Fungsi kompresi foto kamera HP ke crop-center 1:1 persegi 1024x1024 untuk payload aman & hasil konsisten
   function kompresFotoBase64(img) {
@@ -1857,7 +1820,7 @@ Yuk nikmati selagi hangat!`,
         }
 
         if (selesai && imageUrlHasil) {
-          // Fase 3 Selesai: Penyusunan Paket Konten 360 Derajat
+          // Fase 3 Selesai: Penyusunan Paket Konten Siap Pakai
           setTahapProses(3, 92, 'Fase 3: Merangkum skrip Reels/TikTok, caption feed, status WA & rencana 7 hari...');
           await new Promise(r => setTimeout(r, 500));
 
@@ -2118,14 +2081,13 @@ Yuk nikmati selagi hangat!`,
 
   /* ==========================================================
      MANAJEMEN TEKS PENGUAT PRODUK DI GAMBAR (BANNER PROMOSI)
-     & PEMBUATAN VIDEO REELS / TIKTOK 9:16 (BUKTI NYATA 360°)
+     & PEMBUATAN VIDEO REELS / TIKTOK 9:16
      ========================================================== */
 
   let currentStudioImgUrl = null;
   let currentProdukNama = 'Produk Unggulan';
   let currentProdukKeunggulan = '';
   let currentNomorWa = '';
-  let modeTampilanFoto = 'banner'; // 'banner' atau '360'
   let currentBadgeColor = 'rgba(5, 150, 105, 0.95)';
   let currentLayoutStyle = 'dock'; // 'dock' (katalog bawah), 'clean' (minimalis bersih), 'top' (headline atas)
   let currentFontPreset = 'outfit'; // 'outfit' (modern rounded), 'jakarta' (clean sans), 'playfair' (luxury serif)
@@ -2283,99 +2245,6 @@ Yuk nikmati selagi hangat!`,
       }
     }
   }
-
-  let parallaxAutoAnimId = null;
-  let isUserInteracting360 = false;
-
-  function stopParallaxAuto() {
-    if (parallaxAutoAnimId) {
-      cancelAnimationFrame(parallaxAutoAnimId);
-      parallaxAutoAnimId = null;
-    }
-  }
-
-  function startParallaxAuto() {
-    stopParallaxAuto();
-    const box = document.getElementById('gen-preview-box');
-    if (!box) return;
-    const t0 = performance.now();
-    function loop(now) {
-      if (modeTampilanFoto !== '360') return;
-      if (!isUserInteracting360) {
-        const sec = (now - t0) / 1000;
-        const rotY = Math.sin(sec * 1.6) * 12;
-        const rotX = Math.cos(sec * 1.6) * 5;
-        box.style.transform = `perspective(800px) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) scale(1.02)`;
-      }
-      parallaxAutoAnimId = requestAnimationFrame(loop);
-    }
-    parallaxAutoAnimId = requestAnimationFrame(loop);
-  }
-
-  function setModeTampilanFoto(mode) {
-    modeTampilanFoto = mode;
-    const btnBanner = document.getElementById('btn-mode-banner');
-    const btn360 = document.getElementById('btn-mode-360');
-    const overlay = document.getElementById('gen-teks-penguat-overlay');
-    const hint360 = document.getElementById('hint-360');
-    const previewBox = document.getElementById('gen-preview-box');
-
-    if (mode === '360') {
-      if (btn360) { btn360.style.background = '#08694F'; btn360.style.color = '#FFFFFF'; }
-      if (btnBanner) { btnBanner.style.background = 'transparent'; btnBanner.style.color = '#475569'; }
-      if (overlay) overlay.style.display = 'none';
-      if (hint360) hint360.style.display = 'block';
-      if (previewBox) {
-        previewBox.style.cursor = 'grab';
-        previewBox.style.boxShadow = '0 12px 30px rgba(0, 168, 150, 0.25)';
-      }
-      startParallaxAuto();
-    } else {
-      stopParallaxAuto();
-      if (btnBanner) { btnBanner.style.background = '#08694F'; btnBanner.style.color = '#FFFFFF'; }
-      if (btn360) { btn360.style.background = 'transparent'; btn360.style.color = '#475569'; }
-      const chk = document.getElementById('chk-toggle-teks-penguat');
-      if (overlay) overlay.style.display = (chk && chk.checked) ? 'flex' : 'none';
-      if (hint360) hint360.style.display = 'none';
-      if (previewBox) {
-        previewBox.style.cursor = 'default';
-        previewBox.style.transform = 'none';
-        previewBox.style.boxShadow = 'var(--timbul-kecil)';
-      }
-    }
-  }
-
-  // Listener Parallax 360 Mouse & Touch
-  (function initParallax360() {
-    window.addEventListener('DOMContentLoaded', () => {
-      const box = document.getElementById('gen-preview-box');
-      if (!box) return;
-
-      function handleMove(clientX, clientY) {
-        if (modeTampilanFoto !== '360') return;
-        isUserInteracting360 = true;
-        const rect = box.getBoundingClientRect();
-        const x = clientX - rect.left - rect.width / 2;
-        const y = clientY - rect.top - rect.height / 2;
-        const rotY = (x / (rect.width / 2)) * 18;
-        const rotX = -(y / (rect.height / 2)) * 14;
-        box.style.transform = `perspective(800px) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg) scale(1.02)`;
-      }
-
-      box.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
-      box.addEventListener('mouseleave', () => {
-        isUserInteracting360 = false;
-      });
-      box.addEventListener('touchmove', (e) => {
-        if (e.touches && e.touches[0]) {
-          handleMove(e.touches[0].clientX, e.touches[0].clientY);
-        }
-      }, { passive: true });
-      box.addEventListener('touchend', () => {
-        isUserInteracting360 = false;
-      });
-    });
-  })();
 
   // Render & Unduh Komposit Poster Banner dengan Teks Penguat (Resolusi 1080x1080 Menyatu Alami)
   function unduhPosterPromosiBerteks() {
