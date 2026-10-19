@@ -2604,30 +2604,6 @@ Yuk nikmati selagi hangat!`,
     if (modal) modal.style.display = 'none';
   }
 
-  function aktivasiVideoDenganKode() {
-    const input = document.getElementById('input-kode-aktivasi-video');
-    const errorMsg = document.getElementById('msg-kode-aktivasi-error');
-    if (!input) return;
-    const kode = input.value.trim().toUpperCase();
-    if (!kode) {
-      if (errorMsg) { errorMsg.textContent = 'Mohon masukkan kode aktivasi dari Admin.'; errorMsg.style.display = 'block'; }
-      return;
-    }
-    const kodeBersih = kode.replace(/[^A-Z0-9]/g, '');
-    if (kodeBersih === '19900' || kodeBersih === 'ACT19900' || kodeBersih.startsWith('ACT') || kodeBersih.length === 6) {
-      localStorage.setItem('act_video_terbayar', '1');
-      perbaruiStatusTombolVideo();
-      tutupModalBeliVideo();
-      alert('Aktivasi Berhasil! Unduhan video Reels Anda telah dibuka.');
-      unduhVideoReels();
-    } else {
-      if (errorMsg) {
-        errorMsg.textContent = 'Kode aktivasi tidak valid. Silakan hubungi Admin via WhatsApp.';
-        errorMsg.style.display = 'block';
-      }
-    }
-  }
-
   function aksiUnduhAtauBeliVideo() {
     if (cekStatusAksesVideo()) {
       unduhVideoReels();
@@ -3083,31 +3059,16 @@ Yuk nikmati selagi hangat!`,
         <!-- Alur Pemenuhan Transparan -->
         <div style="background:#1E293B; border-left:3px solid #00D2B4; padding:8px 10px; border-radius:4px; font-size:11px; color:#94A3B8; line-height:1.5;">
           <strong style="color:#F8FAFC;">Alur Pemenuhan:</strong>
-          Setelah transfer, kirim bukti ke WhatsApp Admin. Admin akan <strong>mengirimkan berkas master MP4 langsung ke chat WhatsApp Anda</strong> (atau memberikan kode aktivasi jika tab studio ini masih terbuka).
+          Setelah transfer, klik tombol WhatsApp di bawah untuk konfirmasi bukti transfer beserta nama produk Anda. Admin akan <strong>langsung mengirimkan berkas master video MP4 Reels siap posting ke chat WhatsApp Anda</strong>.
         </div>
       </div>
 
-      <!-- Bagian 1: Tombol WhatsApp -->
-      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;">
-        <a id="btn-wa-konfirmasi-video" href="https://wa.me/6285727240341?text=Halo%20Admin%20AutoClaryTech,%20saya%20sudah%20transfer%20pembayaran%20Video%20Reels%20cont-ACT%20(Rp19.900)%20ke%20rekening%20BRI%20Artareksa.%20Mohon%20kirim%20video%20atau%20kode%20aktivasi." target="_blank" class="tombol tombol-utama" style="width:100%; box-sizing:border-box; text-align:center; padding:11px; font-size:12.5px; font-weight:800; background:#059669; border-color:#047857; display:flex; align-items:center; justify-content:center; gap:6px;">
-          <span>1. Kirim Bukti Transfer via WhatsApp</span>
+      <!-- Tombol WhatsApp Resmi -->
+      <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+        <a id="btn-wa-konfirmasi-video" href="https://wa.me/6285727240341?text=Halo%20Admin%20AutoClaryTech,%20saya%20sudah%20transfer%20pembayaran%20Video%20Reels%20cont-ACT%20(Rp19.900)%20ke%20rekening%20BRI%20Artareksa.%20Mohon%20kirimkan%20berkas%20video%20MP4%20ke%20nomor%20ini." target="_blank" class="tombol tombol-utama" style="width:100%; box-sizing:border-box; text-align:center; padding:12px; font-size:13px; font-weight:800; background:#059669; border-color:#047857; display:flex; align-items:center; justify-content:center; gap:6px;">
+          <span>Kirim Bukti Transfer via WhatsApp</span>
           <svg class="ikon ikon-s" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
-      </div>
-
-      <!-- Bagian 2: Buka Kunci Langsung dengan Kode Admin -->
-      <div style="background:#0F172A; border:1px solid #1E293B; border-radius:8px; padding:12px; margin-bottom:10px;">
-        <div style="font-size:11.5px; font-weight:700; color:#F8FAFC; margin-bottom:4px;">
-          2. Punya Kode Aktivasi dari Admin?
-        </div>
-        <div style="font-size:11px; color:#94A3B8; margin-bottom:8px;">
-          Jika Admin memberikan kode buka kunci lewat WhatsApp, masukkan di sini untuk unduh langsung:
-        </div>
-        <div style="display:flex; gap:6px;">
-          <input type="text" id="input-kode-aktivasi-video" placeholder="Contoh: ACT-19900" style="flex:1; background:#1E293B; border:1px solid #334155; border-radius:6px; color:#F8FAFC; padding:7px 10px; font-size:12px; font-family:var(--f-mono); text-transform:uppercase;">
-          <button type="button" onclick="aktivasiVideoDenganKode()" style="background:#0284C7; color:#fff; border:none; padding:7px 12px; border-radius:6px; font-size:11.5px; font-weight:700; cursor:pointer; white-space:nowrap;">Buka Kunci</button>
-        </div>
-        <div id="msg-kode-aktivasi-error" style="display:none; color:#EF4444; font-size:10.5px; margin-top:4px;"></div>
       </div>
 
       <div style="text-align:center;">
