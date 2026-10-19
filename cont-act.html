@@ -513,24 +513,43 @@
               <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:380px; object-fit:contain; display:block; margin:0 auto;"></canvas>
               <img id="gen-result-img" src="" alt="Hasil Studio Foto AI" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:none; margin:0 auto; border-radius:8px;">
               
-              <!-- OVERLAY TEKS PENGUAT PRODUK (BANNER PROMOSI FEED) -->
-              <div id="gen-teks-penguat-overlay" style="position:absolute; top:12px; left:12px; right:12px; pointer-events:none; display:flex; flex-direction:column; gap:6px;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <div id="overlay-badge-tag" style="display:inline-flex; align-items:center; gap:5px; background:linear-gradient(135deg, #059669, #047857); color:#FFFFFF; font:800 11px var(--f-judul); padding:4px 10px; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.25); text-transform:uppercase; letter-spacing:0.04em;">
-                    ⭐ PRODUK UNGGULAN
+              <!-- OVERLAY TEKS PENGUAT PRODUK (BANNER PROMOSI FEED MENYATU ALAMI ALA CANVA/FIGMA) -->
+              <div id="gen-teks-penguat-overlay" style="position:absolute; inset:0; pointer-events:none; display:flex; flex-direction:column; justify-content:space-between; transition:all 0.3s ease;">
+                
+                <!-- BAGIAN ATAS: VIGNETTE LEMBUT MENYATU ALAMI TANPA KOTAK KAKU -->
+                <div id="overlay-vignette-wrap" style="background:linear-gradient(180deg, rgba(2,6,23,0.88) 0%, rgba(15,23,42,0.50) 65%, rgba(15,23,42,0) 100%); padding:16px 16px 32px; text-align:left; transition:all 0.3s ease;">
+                  
+                  <!-- BARIS 1: FLOATING CAPSULE BADGE & LABEL -->
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <div id="overlay-badge-tag" style="display:inline-flex; align-items:center; gap:6px; background:rgba(5, 150, 105, 0.9); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.3); color:#FFFFFF; font:800 11px var(--f-judul); padding:4px 12px; border-radius:999px; box-shadow:0 4px 12px rgba(0,0,0,0.35); text-transform:uppercase; letter-spacing:0.04em;">
+                      ⭐ PRODUK UNGGULAN
+                    </div>
+                    <div id="overlay-label-banner" style="background:rgba(255,255,255,0.15); color:#F8FAFC; font:700 10px var(--f-mono); padding:3px 10px; border-radius:999px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.2);">
+                      PROMO FEED
+                    </div>
                   </div>
-                  <div id="overlay-label-banner" style="background:rgba(15,23,42,0.75); color:#F8FAFC; font:700 10px var(--f-mono); padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
-                    FEED PROMOSI
+
+                  <!-- BARIS 2: HEADLINE TEBAL BERKARAKTER (MENYATU DENGAN BAYANGAN LEMBUT) -->
+                  <div id="overlay-teks-headline" style="font:800 18px/1.25 var(--f-judul); color:#FFFFFF; text-shadow:0 2px 10px rgba(0,0,0,0.92), 0 1px 3px rgba(0,0,0,0.85); letter-spacing:-0.015em; max-width:95%;">
+                    Tas Laptop Sleeve Kulit Sintetis Premium
+                  </div>
+
+                  <!-- BARIS 3: FITUR CHIPS / PILLS BERIKON E-COMMERCE (ALA FIGMA / CANVA) -->
+                  <div id="overlay-chips-list" style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
+                    <span class="banner-chip" style="background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10px var(--f-teks); padding:3px 9px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
+                      💧 Tahan Percikan Air
+                    </span>
+                    <span class="banner-chip" style="background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10px var(--f-teks); padding:3px 9px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
+                      🧵 Jahitan Kuat
+                    </span>
+                    <span class="banner-chip" style="background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10px var(--f-teks); padding:3px 9px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
+                      🛡️ Anti Gores
+                    </span>
                   </div>
                 </div>
-                <div id="overlay-headline-box" style="background:rgba(15, 23, 42, 0.85); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.22); border-radius:8px; padding:10px 12px; color:#FFFFFF; text-align:left; box-shadow:0 4px 14px rgba(0,0,0,0.35);">
-                  <div id="overlay-teks-headline" style="font:800 15px var(--f-judul); line-height:1.3; color:#FFFFFF; letter-spacing:-0.01em;">
-                    100% Produk Berkualitas • Pilihan Terpercaya
-                  </div>
-                  <div id="overlay-teks-sub" style="font-size:11px; color:#94A3B8; margin-top:3px; line-height:1.4;">
-                    Dibuat dengan standar mutu tinggi &amp; siap kirim hari ini.
-                  </div>
-                </div>
+
+                <!-- Area bawah bebas agar produk di tengah/bawah tidak tertutup -->
+                <div style="height:30px;"></div>
               </div>
 
               <!-- WATERMARK BADGE RESMI ACT -->
@@ -545,28 +564,36 @@
               </div>
             </div>
 
-            <!-- KOTAK EDITOR TEKS PENGUAT PRODUK -->
+            <!-- KOTAK EDITOR TEKS PENGUAT PRODUK (GAYA CANVA & FIGMA) -->
             <div style="background:#F8FAFC; border:1px solid #CBD5E1; border-radius:8px; padding:12px; margin-bottom:12px; text-align:left;">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:6px;">
                 <label style="font:800 12px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:6px; cursor:pointer;" for="chk-toggle-teks-penguat">
                   <input type="checkbox" id="chk-toggle-teks-penguat" checked onchange="toggleTeksPenguat(this.checked)" style="width:15px; height:15px; accent-color:#059669; cursor:pointer;">
-                  <span>✍️ Pasang Teks Penguat Produk di Gambar</span>
+                  <span>✍️ Pasang Banner Promosi (Menyatu Alami ala Canva / Figma)</span>
                 </label>
-                <span style="font-size:10px; color:#059669; font-weight:700; background:#ECFDF5; padding:2px 6px; border-radius:4px;">Rekomendasi Feed Jualan</span>
+                <span style="font-size:10px; color:#059669; font-weight:700; background:#ECFDF5; padding:2px 6px; border-radius:4px;">Desain Tipografi Feed</span>
               </div>
 
               <div id="box-editor-teks-penguat">
-                <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px;">
-                  <span style="font-size:11px; color:var(--redup); align-self:center; margin-right:2px;">Preset Badge:</span>
-                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('⭐ KUALITAS PREMIUM')" style="padding:2px 7px; font-size:10px; font-weight:700; border-radius:4px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0; cursor:pointer;">Kualitas Premium</button>
-                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('🔥 PALING LARIS')" style="padding:2px 7px; font-size:10px; font-weight:700; border-radius:4px; background:#FFFBEB; color:#92400E; border:1px solid #FDE68A; cursor:pointer;">Paling Laris</button>
-                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('🛡️ 100% ORIGINAL')" style="padding:2px 7px; font-size:10px; font-weight:700; border-radius:4px; background:#EFF6FF; color:#1E40AF; border:1px solid #BFDBFE; cursor:pointer;">100% Original</button>
-                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('📦 SIAP KIRIM HARI INI')" style="padding:2px 7px; font-size:10px; font-weight:700; border-radius:4px; background:#F1F5F9; color:#334155; border:1px solid #CBD5E1; cursor:pointer;">Siap Kirim</button>
+                <!-- Preset Badge Jualan Cepat -->
+                <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px;">
+                  <span style="font-size:11px; color:var(--redup); align-self:center; margin-right:2px;">Pilihan Badge:</span>
+                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('⭐ KUALITAS PREMIUM', '#059669')" style="padding:3px 8px; font-size:10px; font-weight:700; border-radius:999px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0; cursor:pointer;">Kualitas Premium</button>
+                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('🔥 PALING LARIS', '#DC2626')" style="padding:3px 8px; font-size:10px; font-weight:700; border-radius:999px; background:#FEF2F2; color:#991B1B; border:1px solid #FECACA; cursor:pointer;">Paling Laris</button>
+                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('🛡️ 100% ORIGINAL', '#2563EB')" style="padding:3px 8px; font-size:10px; font-weight:700; border-radius:999px; background:#EFF6FF; color:#1E40AF; border:1px solid #BFDBFE; cursor:pointer;">100% Original</button>
+                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('📦 READY STOCK', '#4B5563')" style="padding:3px 8px; font-size:10px; font-weight:700; border-radius:999px; background:#F1F5F9; color:#374151; border:1px solid #CBD5E1; cursor:pointer;">Ready Stock</button>
+                  <button type="button" class="btn-preset-badge" onclick="pilihBadgePenguat('🏷️ PROMO HARI INI', '#D97706')" style="padding:3px 8px; font-size:10px; font-weight:700; border-radius:999px; background:#FFFBEB; color:#92400E; border:1px solid #FDE68A; cursor:pointer;">Promo Hari Ini</button>
                 </div>
 
-                <input type="text" id="input-teks-headline" class="form-input" placeholder="Teks Headline Utama (contoh: 100% Kulit Sintetis Premium • Muat Laptop 14 Inch)" style="background:#fff; margin-bottom:6px; font-size:12px; padding:8px 10px;" oninput="updateTeksPenguatPreview()">
+                <div style="margin-bottom:8px;">
+                  <label style="font:700 11px var(--f-judul); color:var(--ink); margin-bottom:3px; display:block;">Judul Headline Poster:</label>
+                  <input type="text" id="input-teks-headline" class="form-input" placeholder="Contoh: Tas Laptop Sleeve Kulit Sintetis Premium" style="background:#fff; font-size:12px; padding:8px 10px;" oninput="updateTeksPenguatPreview()">
+                </div>
                 
-                <input type="text" id="input-teks-sub" class="form-input" placeholder="Sub-teks Keunggulan (contoh: Tahan Percikan Air • Desain Ramping Profesional)" style="background:#fff; font-size:11px; padding:7px 10px;" oninput="updateTeksPenguatPreview()">
+                <div>
+                  <label style="font:700 11px var(--f-judul); color:var(--ink); margin-bottom:3px; display:block;">3 Poin Keunggulan Chips (Pisahkan dengan Koma):</label>
+                  <input type="text" id="input-teks-sub" class="form-input" placeholder="Contoh: Tahan Percikan Air, Jahitan Rapi Kuat, Lapisan Anti Gores" style="background:#fff; font-size:11px; padding:7px 10px;" oninput="updateTeksPenguatPreview()">
+                </div>
               </div>
             </div>
 
@@ -1911,8 +1938,8 @@ Yuk nikmati selagi hangat!`,
     // Isi teks penguat produk otomatis
     const elHeadInput = document.getElementById('input-teks-headline');
     const elSubInput = document.getElementById('input-teks-sub');
-    if (elHeadInput) elHeadInput.value = currentProdukNama + ' • ' + currentProdukKeunggulan;
-    if (elSubInput) elSubInput.value = 'Pilihan tepat penunjang gaya hidup & bisnis • Siap kirim hari ini.';
+    if (elHeadInput) elHeadInput.value = currentProdukNama;
+    if (elSubInput) elSubInput.value = currentProdukKeunggulan;
     updateTeksPenguatPreview();
 
     // Isi 5 Tab Konten Kreator
@@ -1960,18 +1987,39 @@ Yuk nikmati selagi hangat!`,
   let currentProdukKeunggulan = 'Kualitas Terbaik & Terpercaya';
   let currentNomorWa = '';
   let modeTampilanFoto = 'banner'; // 'banner' atau '360'
+  let currentBadgeColor = 'rgba(5, 150, 105, 0.9)';
+
+  function ambilDaftarChipsKeunggulan() {
+    const elSub = document.getElementById('input-teks-sub');
+    let raw = (elSub && elSub.value.trim()) || currentProdukKeunggulan;
+    const parts = raw.split(/[,•|]+/).map(s => s.trim()).filter(s => s.length > 0);
+    if (parts.length > 0) {
+      return parts.slice(0, 3).map(p => {
+        if (!p.startsWith('✓') && !p.startsWith('💧') && !p.startsWith('🧵') && !p.startsWith('🛡️') && !p.startsWith('⭐') && !p.startsWith('📦')) {
+          return '✓ ' + p;
+        }
+        return p;
+      });
+    }
+    return ['✓ Kualitas Premium', '✓ Desain Ramping', '✓ Siap Kirim'];
+  }
 
   function updateTeksPenguatPreview() {
     const elHeadInput = document.getElementById('input-teks-headline');
-    const elSubInput = document.getElementById('input-teks-sub');
     const elOverlayHead = document.getElementById('overlay-teks-headline');
-    const elOverlaySub = document.getElementById('overlay-teks-sub');
+    const chipsList = document.getElementById('overlay-chips-list');
 
-    const teksHead = (elHeadInput && elHeadInput.value.trim()) || (currentProdukNama + ' • ' + currentProdukKeunggulan);
-    const teksSub = (elSubInput && elSubInput.value.trim()) || 'Pilihan tepat penunjang kebutuhan Anda • Siap kirim hari ini.';
-
+    const teksHead = (elHeadInput && elHeadInput.value.trim()) || currentProdukNama;
     if (elOverlayHead) elOverlayHead.textContent = teksHead;
-    if (elOverlaySub) elOverlaySub.textContent = teksSub;
+
+    const chips = ambilDaftarChipsKeunggulan();
+    if (chipsList) {
+      chipsList.innerHTML = chips.map(c => `
+        <span class="banner-chip" style="background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10px var(--f-teks); padding:3px 9px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
+          ${c}
+        </span>
+      `).join('');
+    }
   }
 
   function toggleTeksPenguat(aktif) {
@@ -1981,9 +2029,15 @@ Yuk nikmati selagi hangat!`,
     if (elBoxEditor) elBoxEditor.style.opacity = aktif ? '1' : '0.4';
   }
 
-  function pilihBadgePenguat(badgeText) {
+  function pilihBadgePenguat(badgeText, color) {
     const elBadge = document.getElementById('overlay-badge-tag');
-    if (elBadge) elBadge.textContent = badgeText;
+    if (elBadge) {
+      elBadge.textContent = badgeText;
+      if (color) {
+        currentBadgeColor = color;
+        elBadge.style.background = color;
+      }
+    }
   }
 
   let parallaxAutoAnimId = null;
@@ -2106,71 +2160,87 @@ Yuk nikmati selagi hangat!`,
 
     const chk = document.getElementById('chk-toggle-teks-penguat');
     if (chk && chk.checked) {
-      // 2. Vignette bayangan atas semi-transparan
-      const gradTop = ctx.createLinearGradient(0, 0, 0, 360);
-      gradTop.addColorStop(0, 'rgba(15, 23, 42, 0.88)');
-      gradTop.addColorStop(0.65, 'rgba(15, 23, 42, 0.45)');
+      // 2. Gradasi Vignette Halus Alami (Zero Hard Box!)
+      const gradTop = ctx.createLinearGradient(0, 0, 0, 480);
+      gradTop.addColorStop(0, 'rgba(2, 6, 23, 0.90)');
+      gradTop.addColorStop(0.55, 'rgba(15, 23, 42, 0.52)');
       gradTop.addColorStop(1, 'rgba(15, 23, 42, 0)');
       ctx.fillStyle = gradTop;
-      ctx.fillRect(0, 0, 1080, 360);
+      ctx.fillRect(0, 0, 1080, 480);
 
-      // 3. Gambar Badge Penguat Nilai Jual
+      // 3. Floating Capsule Badge Pill di Kiri Atas
       const badgeText = document.getElementById('overlay-badge-tag')?.textContent?.trim() || '⭐ PRODUK UNGGULAN';
       ctx.font = '800 22px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       const badgeW = ctx.measureText(badgeText).width + 36;
-      const badgeH = 46;
-      const bx = 40;
-      const by = 40;
+      const bx = 48;
+      const by = 48;
 
-      ctx.fillStyle = '#059669';
+      ctx.fillStyle = currentBadgeColor || 'rgba(5, 150, 105, 0.95)';
       ctx.beginPath();
-      ctx.roundRect(bx, by, badgeW, badgeH, 10);
+      ctx.roundRect(bx, by, badgeW, 46, 23);
       ctx.fill();
 
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'left';
       ctx.fillText(badgeText, bx + 18, by + 31);
 
-      // Label FEED PROMOSI di kanan atas
-      const labelKanan = 'FEED PROMOSI';
-      ctx.font = '700 20px monospace';
+      // Label PROMO FEED di kanan atas
+      const labelKanan = 'PROMO FEED';
+      ctx.font = '700 20px "IBM Plex Mono", monospace';
       const labelW = ctx.measureText(labelKanan).width + 28;
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.16)';
       ctx.beginPath();
-      ctx.roundRect(1080 - 40 - labelW, by, labelW, badgeH, 8);
+      ctx.roundRect(1080 - 48 - labelW, by, labelW, 46, 23);
       ctx.fill();
-      ctx.fillStyle = '#F8FAFC';
-      ctx.fillText(labelKanan, 1080 - 40 - labelW + 14, by + 30);
-
-      // 4. Container Headline Glassmorphism Box
-      const elHead = document.getElementById('overlay-teks-headline');
-      const elSub = document.getElementById('overlay-teks-sub');
-      const headText = elHead ? elHead.textContent.trim() : (currentProdukNama + ' • ' + currentProdukKeunggulan);
-      const subText = elSub ? elSub.textContent.trim() : 'Pilihan tepat penunjang kebutuhan Anda.';
-
-      const boxX = 40;
-      const boxY = 104;
-      const boxW = 1000;
-      const boxH = 130;
-
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-      ctx.beginPath();
-      ctx.roundRect(boxX, boxY, boxW, boxH, 16);
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+      ctx.lineWidth = 1.5;
       ctx.stroke();
 
-      // Headline Text
-      ctx.fillStyle = '#FFFFFF';
-      ctx.font = '800 34px "Bricolage Grotesque", "Instrument Sans", sans-serif';
-      ctx.textAlign = 'left';
-      ctx.fillText(headText.slice(0, 55), boxX + 24, boxY + 52);
+      ctx.fillStyle = '#F8FAFC';
+      ctx.fillText(labelKanan, 1080 - 48 - labelW + 14, by + 30);
 
-      // Sub-headline Text
-      ctx.fillStyle = '#94A3B8';
-      ctx.font = '600 22px "Bricolage Grotesque", "Instrument Sans", sans-serif';
-      ctx.fillText(subText.slice(0, 75), boxX + 24, boxY + 98);
+      // 4. Headline Tipografi Tebal Menyatu Alami dengan Bayangan Lembut (No Box)
+      const elHead = document.getElementById('overlay-teks-headline');
+      const headText = (elHead && elHead.textContent.trim()) || currentProdukNama;
+
+      ctx.save();
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
+      ctx.shadowBlur = 18;
+      ctx.shadowOffsetY = 4;
+      ctx.font = '800 42px "Bricolage Grotesque", "Instrument Sans", sans-serif';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'left';
+      ctx.fillText(headText.slice(0, 48), 48, 152);
+      ctx.restore();
+
+      // 5. Chips Fitur Keunggulan Berikon (Ala Canva Pro / Figma)
+      const chips = ambilDaftarChipsKeunggulan();
+      let chipX = 48;
+      const chipY = 190;
+      const chipH = 44;
+
+      chips.slice(0, 3).forEach(chipTeks => {
+        ctx.font = '700 20px "Instrument Sans", sans-serif';
+        const cTextW = ctx.measureText(chipTeks).width;
+        const chipW = cTextW + 36;
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.18)';
+        ctx.beginPath();
+        ctx.roundRect(chipX, chipY, chipW, chipH, 22);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.32)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.save();
+        ctx.shadowColor = 'rgba(0,0,0,0.85)';
+        ctx.shadowBlur = 6;
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText(chipTeks, chipX + 18, chipY + 29);
+        ctx.restore();
+
+        chipX += chipW + 12;
+      });
     }
 
     // 5. Watermark Badge Resmi ACT di pojok kanan bawah
@@ -2496,8 +2566,8 @@ Yuk nikmati selagi hangat!`,
     // Isi teks penguat produk otomatis
     const elHeadInput = document.getElementById('input-teks-headline');
     const elSubInput = document.getElementById('input-teks-sub');
-    if (elHeadInput) elHeadInput.value = currentProdukNama + ' • ' + currentProdukKeunggulan;
-    if (elSubInput) elSubInput.value = 'Pilihan tepat penunjang kebutuhan Anda • Siap kirim hari ini.';
+    if (elHeadInput) elHeadInput.value = currentProdukNama;
+    if (elSubInput) elSubInput.value = currentProdukKeunggulan;
     updateTeksPenguatPreview();
 
     let caption = '';
