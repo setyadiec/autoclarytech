@@ -23,7 +23,7 @@
   <!-- Fonts & Core Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/act-soft.css">
   <link rel="stylesheet" href="/assets/act-soft.css">
   <script src="./assets/act-soft.js" defer></script>
@@ -31,9 +31,12 @@
 
   <style>
     :root {
-      --f-judul: 'Bricolage Grotesque', 'Instrument Sans', system-ui, sans-serif;
-      --f-teks: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --f-judul: 'Plus Jakarta Sans', 'Outfit', system-ui, sans-serif;
+      --f-teks: 'Plus Jakarta Sans', 'Instrument Sans', system-ui, -apple-system, sans-serif;
       --f-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
+      --f-outfit: 'Outfit', sans-serif;
+      --f-jakarta: 'Plus Jakarta Sans', sans-serif;
+      --f-playfair: 'Playfair Display', Georgia, serif;
     }
     body {
       font-family: var(--f-teks);
@@ -524,13 +527,16 @@
                   <div id="overlay-watermark-tag" style="display:inline-flex; align-items:center; gap:5px; background:rgba(11,19,41,0.75); color:#FFFFFF; font:700 10px var(--f-teks); padding:4px 10px; border-radius:999px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.22); box-shadow:0 2px 8px rgba(0,0,0,0.25);">
                     <img src="/assets/logo_icon_mark_bapak.png" alt="Logo ACT" style="width:13px; height:13px; display:block; object-fit:contain;">
                     <span style="letter-spacing:0.02em;">AutoClary<span style="color:#00d2b4;">Tech</span></span>
+                     <!-- TOP HEADLINE WRAP (HANYA MUNCUL PADA MODE 'TOP' ATAU 'CLEAN') -->
+                <div id="overlay-top-wrap" style="display:none; padding:10px 14px 20px; text-align:left; background:linear-gradient(180deg, rgba(2,6,23,0.85) 0%, rgba(15,23,42,0.4) 70%, rgba(15,23,42,0) 100%);">
+                  <div id="overlay-teks-eyebrow-top" style="font:700 10px 'Plus Jakarta Sans', sans-serif; letter-spacing:0.14em; text-transform:uppercase; color:#34D399; margin-bottom:3px; text-shadow:0 1px 2px rgba(0,0,0,0.8);">
+                    EDISI SPESIAL • AUTO CLARY TECH
                   </div>
-                </div>
-
-                <!-- TOP HEADLINE WRAP (HANYA MUNCUL PADA MODE 'TOP' ATAU 'CLEAN') -->
-                <div id="overlay-top-wrap" style="display:none; padding:0 14px; text-align:left;">
-                  <div id="overlay-teks-headline-top" style="font:800 18px/1.25 var(--f-judul); color:#FFFFFF; text-shadow:0 2px 10px rgba(0,0,0,0.92), 0 1px 3px rgba(0,0,0,0.85); letter-spacing:-0.015em; max-width:95%;">
+                  <div id="overlay-teks-headline-top" style="font:800 20px/1.2 'Outfit', 'Plus Jakarta Sans', sans-serif; color:#FFFFFF; text-shadow:0 2px 10px rgba(0,0,0,0.92); letter-spacing:-0.02em; max-width:98%; word-break:break-word;">
                     Tas Laptop Sleeve Kulit Sintetis Premium
+                  </div>
+                  <div id="overlay-teks-tagline-top" style="font:500 11.5px/1.35 'Plus Jakarta Sans', sans-serif; color:#E2E8F0; text-shadow:0 1px 3px rgba(0,0,0,0.8); margin-top:3px; max-width:95%;">
+                    Sentuhan kulit sintetis elegan dengan perlindungan maksimal.
                   </div>
                 </div>
 
@@ -538,26 +544,37 @@
                 <div style="flex:1;"></div>
 
                 <!-- BOTTOM DOCK CARD (GAYA KATALOG E-COMMERCE MENYATU ALAMI ALA CANVA/FIGMA) -->
-                <div id="overlay-bottom-dock" style="margin:0 10px 10px; background:rgba(15, 23, 42, 0.85); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(255, 255, 255, 0.22); border-radius:12px; padding:10px 12px; text-align:left; box-shadow:0 8px 24px rgba(0,0,0,0.45); transition:all 0.3s ease;">
+                <div id="overlay-bottom-dock" style="margin:0 10px 10px; background:rgba(15, 23, 42, 0.85); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(255, 255, 255, 0.22); border-radius:14px; padding:12px 14px; text-align:left; box-shadow:0 8px 24px rgba(0,0,0,0.45); transition:all 0.3s ease;">
                   
-                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                    <div id="overlay-teks-headline" style="font:800 15px/1.25 var(--f-judul); color:#FFFFFF; text-shadow:0 1px 4px rgba(0,0,0,0.8); max-width:75%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-                      Tas Laptop Sleeve Kulit Sintetis Premium
+                  <!-- BARIS 1: EYEBROW & LABEL PROMO FEED -->
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                    <div id="overlay-teks-eyebrow" style="font:700 9.5px 'Plus Jakarta Sans', sans-serif; letter-spacing:0.14em; text-transform:uppercase; color:#34D399; text-shadow:0 1px 2px rgba(0,0,0,0.8);">
+                      EDISI SPESIAL • KOLEKSI RESMI
                     </div>
-                    <div id="overlay-label-banner" style="background:rgba(255,255,255,0.18); color:#F8FAFC; font:700 9px var(--f-mono); padding:2px 8px; border-radius:999px; border:1px solid rgba(255,255,255,0.25); white-space:nowrap;">
+                    <div id="overlay-label-banner" style="background:rgba(255,255,255,0.18); color:#F8FAFC; font:700 9px var(--f-mono); padding:2px 8px; border-radius:999px; border:1px solid rgba(255,255,255,0.25); white-space:nowrap; letter-spacing:0.04em;">
                       PROMO FEED
                     </div>
                   </div>
 
-                  <!-- FITUR CHIPS / PILLS BERIKON E-COMMERCE -->
+                  <!-- BARIS 2: HEADLINE DISPLAY DINAMIS & LUWES -->
+                  <div id="overlay-teks-headline" style="font:800 18px/1.2 'Outfit', 'Plus Jakarta Sans', sans-serif; color:#FFFFFF; text-shadow:0 2px 10px rgba(0,0,0,0.9); letter-spacing:-0.02em; margin-bottom:4px; max-width:98%; word-break:break-word;">
+                    Tas Laptop Sleeve Kulit Sintetis Premium
+                  </div>
+
+                  <!-- BARIS 3: SUB-TAGLINE / KETERANGAN PRODUK MEWAH -->
+                  <div id="overlay-teks-tagline" style="font:500 11px/1.35 'Plus Jakarta Sans', sans-serif; color:#CBD5E1; text-shadow:0 1px 3px rgba(0,0,0,0.8); margin-bottom:8px; max-width:96%;">
+                    Perlindungan elegan anti gores dengan material sintetis lembut.
+                  </div>
+
+                  <!-- BARIS 4: FITUR CHIPS / PILLS BERIKON E-COMMERCE -->
                   <div id="overlay-chips-list" style="display:flex; gap:5px; flex-wrap:wrap;">
-                    <span class="banner-chip" style="background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10px var(--f-teks); padding:3px 9px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
+                    <span class="banner-chip" style="background:rgba(255,255,255,0.18); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10.5px 'Plus Jakarta Sans', sans-serif; padding:3px 10px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
                       💧 Tahan Percikan Air
                     </span>
-                    <span class="banner-chip" style="background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10px var(--f-teks); padding:3px 9px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
+                    <span class="banner-chip" style="background:rgba(255,255,255,0.18); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10.5px 'Plus Jakarta Sans', sans-serif; padding:3px 10px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
                       🧵 Jahitan Kuat
                     </span>
-                    <span class="banner-chip" style="background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10px var(--f-teks); padding:3px 9px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
+                    <span class="banner-chip" style="background:rgba(255,255,255,0.18); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10.5px 'Plus Jakarta Sans', sans-serif; padding:3px 10px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
                       🛡️ Anti Gores
                     </span>
                   </div>
@@ -596,6 +613,14 @@
                   <button type="button" class="btn-layout-style" id="btn-layout-top" onclick="pilihLayoutStyle('top')" style="padding:4px 10px; font-size:11px; font-weight:700; border-radius:6px; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; cursor:pointer;">🔝 Headline Atas</button>
                 </div>
 
+                <!-- Pemilih Bentuk Tipografi (Font Presets) -->
+                <div style="display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin-bottom:10px;">
+                  <span style="font-size:11px; color:var(--redup); font-weight:700;">Bentuk Font:</span>
+                  <button type="button" class="btn-font-preset" id="btn-font-outfit" onclick="pilihFontPreset('outfit')" style="padding:4px 10px; font-size:11px; font-weight:700; border-radius:6px; background:#08694F; color:#fff; border:1px solid #065F46; cursor:pointer;">🌟 Outfit Modern (Luwes & Bulat)</button>
+                  <button type="button" class="btn-font-preset" id="btn-font-jakarta" onclick="pilihFontPreset('jakarta')" style="padding:4px 10px; font-size:11px; font-weight:700; border-radius:6px; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; cursor:pointer;">💼 Jakarta Sans (Elegan)</button>
+                  <button type="button" class="btn-font-preset" id="btn-font-playfair" onclick="pilihFontPreset('playfair')" style="padding:4px 10px; font-size:11px; font-weight:700; border-radius:6px; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; cursor:pointer;">👑 Playfair Luxury (Serif Mewah)</button>
+                </div>
+
                 <!-- Preset Badge Jualan Cepat -->
                 <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px;">
                   <span style="font-size:11px; color:var(--redup); align-self:center; margin-right:2px;">Pilihan Badge:</span>
@@ -609,6 +634,11 @@
                 <div style="margin-bottom:8px;">
                   <label style="font:700 11px var(--f-judul); color:var(--ink); margin-bottom:3px; display:block;">Judul Headline Poster:</label>
                   <input type="text" id="input-teks-headline" class="form-input" placeholder="Contoh: Tas Laptop Sleeve Kulit Sintetis Premium" style="background:#fff; font-size:12px; padding:8px 10px;" oninput="updateTeksPenguatPreview()">
+                </div>
+
+                <div style="margin-bottom:8px;">
+                  <label style="font:700 11px var(--f-judul); color:var(--ink); margin-bottom:3px; display:block;">Tagline / Keterangan Singkat Produk:</label>
+                  <input type="text" id="input-teks-tagline" class="form-input" placeholder="Contoh: Perlindungan elegan anti gores dengan material kulit sintetis lembut" style="background:#fff; font-size:12px; padding:7px 10px;" oninput="updateTeksPenguatPreview()">
                 </div>
                 
                 <div>
@@ -1960,8 +1990,12 @@ Yuk nikmati selagi hangat!`,
     // Isi teks penguat produk otomatis
     const elHeadInput = document.getElementById('input-teks-headline');
     const elSubInput = document.getElementById('input-teks-sub');
+    const elTaglineInput = document.getElementById('input-teks-tagline');
     if (elHeadInput) elHeadInput.value = currentProdukNama;
     if (elSubInput) elSubInput.value = currentProdukKeunggulan;
+    if (elTaglineInput && (!elTaglineInput.value || elTaglineInput.value.trim() === '')) {
+      elTaglineInput.value = 'Perlindungan elegan anti gores dengan material sintetis lembut.';
+    }
     updateTeksPenguatPreview();
 
     // Isi 5 Tab Konten Kreator
@@ -2011,6 +2045,7 @@ Yuk nikmati selagi hangat!`,
   let modeTampilanFoto = 'banner'; // 'banner' atau '360'
   let currentBadgeColor = 'rgba(5, 150, 105, 0.95)';
   let currentLayoutStyle = 'dock'; // 'dock' (katalog bawah), 'clean' (minimalis bersih), 'top' (headline atas)
+  let currentFontPreset = 'outfit'; // 'outfit' (modern rounded), 'jakarta' (clean sans), 'playfair' (luxury serif)
 
   function ambilDaftarChipsKeunggulan() {
     const elSub = document.getElementById('input-teks-sub');
@@ -2025,6 +2060,54 @@ Yuk nikmati selagi hangat!`,
       });
     }
     return ['✓ Kualitas Premium', '✓ Desain Ramping', '✓ Siap Kirim'];
+  }
+
+  function pilihFontPreset(font) {
+    currentFontPreset = font;
+    const btnOutfit = document.getElementById('btn-font-outfit');
+    const btnJakarta = document.getElementById('btn-font-jakarta');
+    const btnPlayfair = document.getElementById('btn-font-playfair');
+
+    [btnOutfit, btnJakarta, btnPlayfair].forEach(btn => {
+      if (btn) {
+        btn.style.background = '#F8FAFC';
+        btn.style.color = '#475569';
+        btn.style.borderColor = '#CBD5E1';
+      }
+    });
+
+    const activeBtn = document.getElementById('btn-font-' + font);
+    if (activeBtn) {
+      activeBtn.style.background = '#08694F';
+      activeBtn.style.color = '#FFFFFF';
+      activeBtn.style.borderColor = '#065F46';
+    }
+
+    const elHead = document.getElementById('overlay-teks-headline');
+    const elHeadTop = document.getElementById('overlay-teks-headline-top');
+
+    let appliedFont = "'Outfit', 'Plus Jakarta Sans', sans-serif";
+    let letterSpacing = "-0.02em";
+
+    if (font === 'outfit') {
+      appliedFont = "'Outfit', 'Plus Jakarta Sans', sans-serif";
+      letterSpacing = "-0.02em";
+    } else if (font === 'jakarta') {
+      appliedFont = "'Plus Jakarta Sans', sans-serif";
+      letterSpacing = "-0.015em";
+    } else if (font === 'playfair') {
+      appliedFont = "'Playfair Display', Georgia, serif";
+      letterSpacing = "0.01em";
+    }
+
+    if (elHead) {
+      elHead.style.fontFamily = appliedFont;
+      elHead.style.letterSpacing = letterSpacing;
+    }
+    if (elHeadTop) {
+      elHeadTop.style.fontFamily = appliedFont;
+      elHeadTop.style.letterSpacing = letterSpacing;
+    }
   }
 
   function pilihLayoutStyle(style) {
@@ -2077,18 +2160,26 @@ Yuk nikmati selagi hangat!`,
 
   function updateTeksPenguatPreview() {
     const elHeadInput = document.getElementById('input-teks-headline');
+    const elTaglineInput = document.getElementById('input-teks-tagline');
     const elOverlayHead = document.getElementById('overlay-teks-headline');
     const elOverlayHeadTop = document.getElementById('overlay-teks-headline-top');
+    const elOverlayTagline = document.getElementById('overlay-teks-tagline');
+    const elOverlayTaglineTop = document.getElementById('overlay-teks-tagline-top');
     const chipsList = document.getElementById('overlay-chips-list');
 
     const teksHead = (elHeadInput && elHeadInput.value.trim()) || currentProdukNama;
+    const defaultTagline = 'Perlindungan elegan anti gores dengan material sintetis lembut.';
+    const teksTagline = (elTaglineInput && elTaglineInput.value.trim()) || defaultTagline;
+
     if (elOverlayHead) elOverlayHead.textContent = teksHead;
     if (elOverlayHeadTop) elOverlayHeadTop.textContent = teksHead;
+    if (elOverlayTagline) elOverlayTagline.textContent = teksTagline;
+    if (elOverlayTaglineTop) elOverlayTaglineTop.textContent = teksTagline;
 
     const chips = ambilDaftarChipsKeunggulan();
     if (chipsList) {
       chipsList.innerHTML = chips.map(c => `
-        <span class="banner-chip" style="background:rgba(255,255,255,0.18); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10px var(--f-teks); padding:3px 9px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
+        <span class="banner-chip" style="background:rgba(255,255,255,0.18); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25); color:#F8FAFC; font:700 10.5px 'Plus Jakarta Sans', sans-serif; padding:3px 10px; border-radius:999px; text-shadow:0 1px 2px rgba(0,0,0,0.8); display:inline-flex; align-items:center; gap:4px;">
           ${c}
         </span>
       `).join('');
@@ -2283,18 +2374,35 @@ Yuk nikmati selagi hangat!`,
       if (logoMark && logoMark.complete && logoMark.naturalWidth > 0) {
         ctx.drawImage(logoMark, actX + 14, actY + 9, 28, 28);
       }
-      ctx.font = '700 18px "Bricolage Grotesque", "Instrument Sans", sans-serif';
+      ctx.font = '700 18px "Plus Jakarta Sans", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.fillText('AutoClary', actX + 48, actY + 30);
       ctx.fillStyle = '#00D2B4';
       ctx.fillText('Tech', actX + 138, actY + 30);
 
+      // Konfigurasi Font Headline Sesuai Preset
+      let headlineFontName = '"Outfit", "Plus Jakarta Sans", sans-serif';
+      let headlineSize = 44;
+      if (currentFontPreset === 'outfit') {
+        headlineFontName = '"Outfit", "Plus Jakarta Sans", sans-serif';
+        headlineSize = 44;
+      } else if (currentFontPreset === 'jakarta') {
+        headlineFontName = '"Plus Jakarta Sans", sans-serif';
+        headlineSize = 42;
+      } else if (currentFontPreset === 'playfair') {
+        headlineFontName = '"Playfair Display", Georgia, serif';
+        headlineSize = 46;
+      }
+
+      const elTaglineInput = document.getElementById('input-teks-tagline');
+      const taglineText = (elTaglineInput && elTaglineInput.value.trim()) || 'Perlindungan elegan anti gores dengan material sintetis lembut.';
+
       if (currentLayoutStyle === 'dock') {
-        // GAYA KATALOG DOCK (DI BAGIAN BAWAH DENGAN SUDUT BULAT MEWAH ALA FIGMA/CANVA)
+        // GAYA KATALOG DOCK (DI BAGIAN BAWAH DENGAN SUDUT BULAT MEWAH)
         const dockX = 48;
-        const dockY = 820;
+        const dockY = 770;
         const dockW = 984;
-        const dockH = 212;
+        const dockH = 262;
 
         ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
         ctx.beginPath();
@@ -2304,21 +2412,17 @@ Yuk nikmati selagi hangat!`,
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        // Judul Produk
-        ctx.save();
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
-        ctx.shadowBlur = 10;
-        ctx.font = '800 36px "Bricolage Grotesque", "Instrument Sans", sans-serif';
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillText(headText.slice(0, 36), dockX + 28, dockY + 54);
-        ctx.restore();
+        // Eyebrow Brand Tag
+        ctx.font = '700 17px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = '#34D399';
+        ctx.fillText('EDISI SPESIAL • KOLEKSI RESMI', dockX + 28, dockY + 42);
 
         // Label PROMO FEED di kanan atas dock
         const labelKanan = 'PROMO FEED';
         ctx.font = '700 18px "IBM Plex Mono", monospace';
         const labelW = ctx.measureText(labelKanan).width + 24;
         const lx = dockX + dockW - 28 - labelW;
-        const ly = dockY + 24;
+        const ly = dockY + 22;
         ctx.fillStyle = 'rgba(255, 255, 255, 0.16)';
         ctx.beginPath();
         ctx.roundRect(lx, ly, labelW, 36, 18);
@@ -2329,13 +2433,27 @@ Yuk nikmati selagi hangat!`,
         ctx.fillStyle = '#F8FAFC';
         ctx.fillText(labelKanan, lx + 12, ly + 24);
 
-        // Chips Keunggulan di baris kedua
+        // Headline Judul Produk Luwes
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+        ctx.shadowBlur = 12;
+        ctx.font = `800 ${headlineSize}px ${headlineFontName}`;
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText(headText.slice(0, 36), dockX + 28, dockY + 95);
+        ctx.restore();
+
+        // Sub-tagline / Keterangan
+        ctx.font = '500 21px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = '#CBD5E1';
+        ctx.fillText(taglineText.slice(0, 55), dockX + 28, dockY + 135);
+
+        // Chips Keunggulan di baris keempat
         let chipX = dockX + 28;
-        const chipY = dockY + 84;
+        const chipY = dockY + 160;
         const chipH = 46;
 
         chips.slice(0, 3).forEach(chipTeks => {
-          ctx.font = '700 20px "Instrument Sans", sans-serif';
+          ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
           const cTextW = ctx.measureText(chipTeks).width;
           const chipW = cTextW + 36;
 
@@ -2357,10 +2475,10 @@ Yuk nikmati selagi hangat!`,
           chipX += chipW + 12;
         });
 
-        // Micro-copy di baris ketiga
-        ctx.font = '600 18px "Instrument Sans", sans-serif';
+        // Micro-copy di baris paling bawah dock
+        ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
         ctx.fillStyle = '#94A3B8';
-        ctx.fillText('⚡ Siap Kirim Hari Ini • Garansi Resmi Kualitas Terbaik', dockX + 28, dockY + 174);
+        ctx.fillText('⚡ Siap Kirim Hari Ini • Garansi Resmi AutoClaryTech', dockX + 28, dockY + 238);
 
       } else if (currentLayoutStyle === 'clean') {
         // GAYA MINIMALIST CLEAN (TEXT SHADOW TEBAL TANPA DOCK BOX)
@@ -2368,19 +2486,27 @@ Yuk nikmati selagi hangat!`,
         ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
         ctx.shadowBlur = 24;
         ctx.shadowOffsetY = 4;
-        ctx.font = '800 44px "Bricolage Grotesque", "Instrument Sans", sans-serif';
+        ctx.font = `800 ${headlineSize}px ${headlineFontName}`;
         ctx.fillStyle = '#FFFFFF';
-        ctx.fillText(headText.slice(0, 38), 48, 920);
+        ctx.fillText(headText.slice(0, 38), 48, 880);
+        ctx.restore();
+
+        ctx.save();
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+        ctx.shadowBlur = 14;
+        ctx.font = '500 22px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = '#E2E8F0';
+        ctx.fillText(taglineText.slice(0, 55), 48, 920);
         ctx.restore();
 
         let chipX = 48;
         const chipY = 956;
         chips.slice(0, 3).forEach(chipTeks => {
-          ctx.font = '700 20px "Instrument Sans", sans-serif';
+          ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
           const cTextW = ctx.measureText(chipTeks).width;
           const chipW = cTextW + 36;
 
-          ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
+          ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
           ctx.beginPath();
           ctx.roundRect(chipX, chipY, chipW, 46, 23);
           ctx.fill();
@@ -2395,25 +2521,33 @@ Yuk nikmati selagi hangat!`,
 
       } else if (currentLayoutStyle === 'top') {
         // GAYA TOP HEADLINE
-        const gradTop = ctx.createLinearGradient(0, 0, 0, 320);
+        const gradTop = ctx.createLinearGradient(0, 0, 0, 360);
         gradTop.addColorStop(0, 'rgba(2, 6, 23, 0.88)');
-        gradTop.addColorStop(0.7, 'rgba(15, 23, 42, 0.45)');
+        gradTop.addColorStop(0.75, 'rgba(15, 23, 42, 0.45)');
         gradTop.addColorStop(1, 'rgba(15, 23, 42, 0)');
         ctx.fillStyle = gradTop;
-        ctx.fillRect(0, 0, 1080, 320);
+        ctx.fillRect(0, 0, 1080, 360);
+
+        ctx.font = '700 18px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = '#34D399';
+        ctx.fillText('EDISI SPESIAL • AUTO CLARY TECH', 48, 120);
 
         ctx.save();
         ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
         ctx.shadowBlur = 18;
-        ctx.font = '800 42px "Bricolage Grotesque", "Instrument Sans", sans-serif';
+        ctx.font = `800 ${headlineSize}px ${headlineFontName}`;
         ctx.fillStyle = '#FFFFFF';
-        ctx.fillText(headText.slice(0, 44), 48, 156);
+        ctx.fillText(headText.slice(0, 40), 48, 172);
         ctx.restore();
 
+        ctx.font = '500 21px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = '#E2E8F0';
+        ctx.fillText(taglineText.slice(0, 55), 48, 208);
+
         let chipX = 48;
-        const chipY = 196;
+        const chipY = 236;
         chips.slice(0, 3).forEach(chipTeks => {
-          ctx.font = '700 20px "Instrument Sans", sans-serif';
+          ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
           const cTextW = ctx.measureText(chipTeks).width;
           const chipW = cTextW + 36;
 
