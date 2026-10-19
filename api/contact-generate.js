@@ -234,7 +234,7 @@ export default async function handler(req, res) {
 // Integrasi LLM Awan fal.ai (fal-ai/any-llm) untuk copywriting presisi & 10 tagar relevan
 async function racikNaskahLlm(falKey, nama, kategori, keunggulan, suasana) {
   const promptLlm = `Kamu adalah copywriter profesional Indonesia untuk promosi produk UMKM di Instagram, TikTok, dan WhatsApp.
-Tugas: Buat naskah caption jualan medsos yang memikat, persuasif, membangkitkan minat pembeli, dan bikin laku jualan.
+Tugas: Buat naskah caption jualan medsos yang memikat, persuasif, membangkitkan minat pembeli, dan meningkatkan penjualan produk.
 Data Produk Klien:
 - Nama Produk: ${nama}
 - Kategori Usaha: ${kategori}
@@ -296,8 +296,8 @@ function racikNaskahFallback(nama, kategori, keunggulan) {
   let hashtags = '';
 
   if (kategori === 'kuliner') {
-    caption = `Pilihan tepat untuk penikmat kuliner berkualitas! ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi: ${keunggulan}. Sangat pas untuk menemani waktu kerja, kumpul keluarga, maupun hidangan spesial.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang. Silakan klik tautan di bio untuk informasi dan pemesanan!`;
-    hashtags = `#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enakbanget #reelskuliner`;
+    caption = `Pilihan tepat untuk penikmat kuliner berkualitas! ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi: ${keunggulan}. Sangat tepat untuk menemani waktu kerja, kumpul keluarga, maupun hidangan spesial.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang. Silakan klik tautan di bio untuk informasi dan pemesanan!`;
+    hashtags = `#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enaksekali #reelskuliner`;
   } else if (kategori === 'skincare') {
     caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nPromo Khusus Hari Ini:\nDapatkan penawaran istimewa untuk pembelian pekan ini. Silakan kunjungi tautan di profil sebelum masa promo berakhir.`;
     hashtags = `#skincareroutine #racunskincare #kulitglowing #skincarebpom #beautytips #fypindonesia #viralreels #cantikalami #perawatanwajah #racuntiktok`;

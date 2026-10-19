@@ -206,7 +206,7 @@
     h += '</div><button class="hk-btn" type="submit">Hitung sekarang</button>' +
       '<div class="hk-kurang" role="alert"></div>' +
       '<div class="hk-hasil" aria-live="polite"><table></table><p class="hk-cat">Angka ini murni dari angka yang Anda isi sendiri. Tidak ada yang kami tambahkan.</p></div></form>' +
-      '<div class="hk-daftar" id="daftar"><h3>Ingin tahu cara mencatatnya tanpa ribet?</h3>' +
+      '<div class="hk-daftar" id="daftar"><h3>Ingin tahu cara mencatatnya tanpa repot?</h3>' +
       '<p>Tinggalkan nama Anda. Isi kontak bila ingin dihubungi tim AutoClaryTech. Hasil hitungan di atas ikut terkirim supaya tim kami bisa membacanya.</p>' +
       '<form class="hk-form"><div class="hk-grid">' +
       '<div><label for="' + id + '-nama">Nama Anda</label><input id="' + id + '-nama" name="nama" required autocomplete="name"></div>' +
