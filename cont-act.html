@@ -725,13 +725,13 @@
                 </div>
               </div>
 
-              <!-- KONTROL PEMUTARAN & DOWNLOAD VIDEO -->
-              <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
+              <!-- KONTROL PEMUTARAN & PEMBELIAN VIDEO REELS -->
+              <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; align-items:center;">
                 <button type="button" id="btn-play-reels" onclick="togglePlayReels()" class="tombol tombol-kecil" style="background:#1E293B; border:1px solid #475569; color:#FFFFFF; font-weight:700; font-size:12px;">
                   Putar Preview
                 </button>
-                <button type="button" id="btn-unduh-video" onclick="unduhVideoReels()" class="tombol tombol-kecil" style="background:#059669; border:1px solid #047857; color:#FFFFFF; font-weight:800; font-size:12px;">
-                  Unduh Video Reels (.mp4)
+                <button type="button" id="btn-unduh-video" onclick="aksiUnduhAtauBeliVideo()" class="tombol tombol-kecil" style="background:#D97706; border:1px solid #B45309; color:#FFFFFF; font-weight:800; font-size:12px;">
+                  <span id="label-btn-unduh-video">Beli video Rp19.900</span>
                 </button>
               </div>
             </div>
@@ -748,17 +748,6 @@
                 </button>
               </div>
               <div id="hasil-video-script" style="font-size:12px; color:var(--teks); line-height:1.6; white-space:pre-wrap; max-height:180px; overflow-y:auto; background:#fff; padding:12px; border-radius:6px; border:1px solid #E2E8F0;"></div>
-            </div>
-
-            <!-- JALUR LANJUTAN: RENDER 3D AI STUDIO WORKSTATION -->
-            <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-              <div>
-                <strong style="font-size:12px; color:#1E40AF;">Butuh Video 3D Motion AI Render Studio?</strong>
-                <div style="font-size:11px; color:#3B82F6; margin-top:2px;">Render video motion 3D tingkat lanjut bertenaga workstation GPU AutoClaryTech.</div>
-              </div>
-              <a id="btn-request-video-studio" href="#" target="_blank" class="tombol tombol-kecil" style="background:#1E40AF; border-color:#1E3A8A; color:#fff; font-size:11px; font-weight:700;">
-                Hubungi Studio via WA
-              </a>
             </div>
           </div>
 
@@ -2068,13 +2057,6 @@ Yuk nikmati selagi hangat!`,
       }
     }
 
-    // Update link WhatsApp Studio ACT untuk video 3D
-    const btnReqStudio = document.getElementById('btn-request-video-studio');
-    if (btnReqStudio) {
-      const waMsg = `Halo Studio AutoClaryTech, saya baru saja membuat foto studio untuk produk ${currentProdukNama}. Bisakah saya memesan render video 3D motion AI profesional untuk produk ini?`;
-      btnReqStudio.href = `https://wa.me/6285728888068?text=${encodeURIComponent(waMsg)}`;
-    }
-
     gantiTabKonten('foto');
   }
 
@@ -2698,6 +2680,69 @@ Yuk nikmati selagi hangat!`,
     if (target) target.scrollIntoView({ behavior: 'smooth' });
   }
 
+  // ============================================================
+  // KONFIGURASI HARGA & AKSES VIDEO REELS (BERBAYAR)
+  // Sesuai Dhawuh Bapak 19 Okt 2026: Gambar = Freemium, Video = Berbayar
+  // ============================================================
+  const HARGA_VIDEO_REELS = 19900;
+  const TEKS_HARGA_VIDEO_REELS = 'Rp19.900';
+  const NOMOR_WA_ADMIN_BAYAR = '6285727240341';
+  const REKENING_PEMBAYARAN = {
+    bank: 'Bank BRI (KC Temanggung)',
+    nomor: '0102-01-032414-53-6',
+    atasNama: 'ARTAREKSA TEKNOLOGI EKONOMI'
+  };
+
+  function cekStatusAksesVideo() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('terbayar') === '1' || localStorage.getItem('act_video_terbayar') === '1') {
+      return true;
+    }
+    return false;
+  }
+
+  function perbaruiStatusTombolVideo() {
+    const btnUnduh = document.getElementById('btn-unduh-video');
+    const labelBtn = document.getElementById('label-btn-unduh-video');
+    if (!btnUnduh) return;
+    if (cekStatusAksesVideo()) {
+      btnUnduh.style.background = '#059669';
+      btnUnduh.style.borderColor = '#047857';
+      if (labelBtn) labelBtn.textContent = 'Unduh Video Reels (.mp4)';
+      else btnUnduh.textContent = 'Unduh Video Reels (.mp4)';
+    } else {
+      btnUnduh.style.background = '#D97706';
+      btnUnduh.style.borderColor = '#B45309';
+      if (labelBtn) labelBtn.textContent = `Beli video ${TEKS_HARGA_VIDEO_REELS}`;
+      else btnUnduh.textContent = `Beli video ${TEKS_HARGA_VIDEO_REELS}`;
+    }
+  }
+
+  function bukaModalBeliVideo() {
+    const modal = document.getElementById('modal-beli-video');
+    const elHarga = document.getElementById('modal-harga-video');
+    const btnWa = document.getElementById('btn-wa-konfirmasi-video');
+    if (elHarga) elHarga.textContent = TEKS_HARGA_VIDEO_REELS;
+    if (btnWa) {
+      const namaProd = currentProdukNama || 'Produk';
+      btnWa.href = `https://wa.me/${NOMOR_WA_ADMIN_BAYAR}?text=${encodeURIComponent(`Halo Admin AutoClaryTech, saya sudah transfer pembayaran Video Reels cont-ACT (${TEKS_HARGA_VIDEO_REELS}) untuk produk ${namaProd} ke rekening BRI Artareksa. Mohon verifikasi dan aktivasi unduhan video.`)}`;
+    }
+    if (modal) modal.style.display = 'flex';
+  }
+
+  function tutupModalBeliVideo() {
+    const modal = document.getElementById('modal-beli-video');
+    if (modal) modal.style.display = 'none';
+  }
+
+  function aksiUnduhAtauBeliVideo() {
+    if (cekStatusAksesVideo()) {
+      unduhVideoReels();
+    } else {
+      bukaModalBeliVideo();
+    }
+  }
+
   // STUDIO ANIMASI REELS & TIKTOK 9:16
   let reelsCanvas = null;
   let reelsCtx = null;
@@ -2707,6 +2752,7 @@ Yuk nikmati selagi hangat!`,
   const REELS_DURASI = 9000;
 
   function mulaiStudioReels() {
+    perbaruiStatusTombolVideo();
     reelsCanvas = document.getElementById('reels-video-canvas');
     if (!reelsCanvas) return;
     reelsCtx = reelsCanvas.getContext('2d');
@@ -2714,7 +2760,7 @@ Yuk nikmati selagi hangat!`,
     reelsStartTime = performance.now();
     const btnPlay = document.getElementById('btn-play-reels');
     const overlay = document.getElementById('reels-play-overlay');
-    if (btnPlay) btnPlay.textContent = '⏸️ Jeda Preview';
+    if (btnPlay) btnPlay.textContent = 'Jeda Preview';
     if (overlay) overlay.style.display = 'none';
 
     renderLoopReels();
@@ -2904,8 +2950,13 @@ Yuk nikmati selagi hangat!`,
     }
   }
 
-  // Rekam & Unduh Video Reels WebM
+  // Rekam & Unduh Video Reels WebM (Hanya jika terbayar)
   async function unduhVideoReels() {
+    if (!cekStatusAksesVideo()) {
+      bukaModalBeliVideo();
+      return;
+    }
+
     if (!reelsCanvas) {
       reelsCanvas = document.getElementById('reels-video-canvas');
       if (reelsCanvas) reelsCtx = reelsCanvas.getContext('2d');
@@ -2927,7 +2978,7 @@ Yuk nikmati selagi hangat!`,
       stream = reelsCanvas.captureStream(30);
     } catch(e) {
       alert('Fitur perekaman video tidak didukung di browser ini.');
-      if (btnUnduh) { btnUnduh.disabled = false; btnUnduh.textContent = 'Unduh Video Reels (.mp4)'; }
+      if (btnUnduh) { btnUnduh.disabled = false; perbaruiStatusTombolVideo(); }
       return;
     }
 
@@ -2968,7 +3019,7 @@ Yuk nikmati selagi hangat!`,
         btnUnduh.disabled = false;
         btnUnduh.textContent = 'Video Berhasil Diunduh (.mp4)';
         setTimeout(() => {
-          btnUnduh.textContent = 'Unduh Video Reels (.mp4)';
+          perbaruiStatusTombolVideo();
         }, 3000);
       }
     };
@@ -3071,13 +3122,6 @@ Yuk nikmati selagi hangat!`,
       }
     }
 
-    // Update link WhatsApp Studio ACT untuk video 3D
-    const btnReqStudio = document.getElementById('btn-request-video-studio');
-    if (btnReqStudio) {
-      const waMsg = `Halo Studio AutoClaryTech, saya baru saja membuat foto studio untuk produk ${currentProdukNama}. Bisakah saya memesan render video 3D motion AI profesional untuk produk ini?`;
-      btnReqStudio.href = `https://wa.me/6285728888068?text=${encodeURIComponent(waMsg)}`;
-    }
-
     // Refresh canvas jika pengguna sudah mengunggah foto
     if (uploadedFotoImg) {
       gambarStudioCanvas(uploadedFotoImg);
@@ -3113,7 +3157,48 @@ Yuk nikmati selagi hangat!`,
     });
   }
 
+  // Inisialisasi status tombol video
+  perbaruiStatusTombolVideo();
 </script>
+
+  <!-- MODAL PEMBELIAN VIDEO REELS (BERBAYAR RP19.900) -->
+  <div id="modal-beli-video" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.85); backdrop-filter:blur(6px); z-index:9999; align-items:center; justify-content:center; padding:16px;">
+    <div style="background:#111827; border:1px solid #1F2937; border-radius:14px; max-width:440px; width:100%; box-sizing:border-box; padding:24px; color:#E2E8F0; position:relative; box-shadow:0 20px 40px rgba(0,0,0,0.6);">
+      <button type="button" onclick="tutupModalBeliVideo()" style="position:absolute; top:14px; right:14px; background:none; border:none; color:#94A3B8; font-size:22px; cursor:pointer; line-height:1;">&times;</button>
+      
+      <div style="font:800 18px var(--f-judul); color:#00D2B4; margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+        <svg class="ikon ikon-s" viewBox="0 0 24 24" style="stroke:#00D2B4;"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+        Beli Video Reels (.mp4)
+      </div>
+      <p style="font-size:13px; color:#94A3B8; line-height:1.5; margin:0 0 16px;">
+        Dapatkan berkas unduhan video animasi vertikal 9:16 resolusi penuh tanpa batas untuk promosi produk usaha Anda.
+      </p>
+
+      <div style="background:#0F172A; border:1px solid #1E293B; border-radius:10px; padding:16px; margin-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; border-bottom:1px solid #1E293B; padding-bottom:8px;">
+          <span style="font-size:12px; color:#94A3B8;">Biaya Pembuatan Video:</span>
+          <span style="font-size:22px; font-weight:800; color:#FBBF24;" id="modal-harga-video">Rp19.900</span>
+        </div>
+
+        <div style="font-size:11px; color:#94A3B8; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">Rekening Resmi Transfer Bank BRI:</div>
+        <div style="background:#1E293B; padding:10px 12px; border-radius:6px; font-family:var(--f-mono); font-size:14px; font-weight:800; color:#38BDF8; display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+          <span>0102-01-032414-53-6</span>
+          <button type="button" onclick="navigator.clipboard.writeText('010201032414536'); alert('Nomor rekening BRI disalin!');" style="background:#0284C7; color:#fff; border:none; padding:3px 8px; border-radius:4px; font-size:10px; cursor:pointer;">Salin</button>
+        </div>
+        <div style="font-size:11px; color:#CBD5E1;">Atas Nama: <strong>ARTAREKSA TEKNOLOGI EKONOMI</strong></div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <a id="btn-wa-konfirmasi-video" href="https://wa.me/6285727240341?text=Halo%20Admin%20AutoClaryTech,%20saya%20sudah%20transfer%20pembayaran%20Video%20Reels%20cont-ACT%20(Rp19.900)%20ke%20rekening%20BRI%20Artareksa.%20Mohon%20verifikasi%20dan%20aktivasi." target="_blank" class="tombol tombol-utama" style="width:100%; box-sizing:border-box; text-align:center; padding:12px; font-size:13px; font-weight:800; background:#059669; border-color:#047857; display:flex; align-items:center; justify-content:center; gap:6px;">
+          <span>Konfirmasi Pembayaran via WhatsApp</span>
+          <svg class="ikon ikon-s" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="bayar/video.html" target="_blank" style="text-align:center; font-size:11px; color:#94A3B8; text-decoration:underline; padding:4px;">
+          Lihat panduan pembayaran resmi di /bayar/video.html
+        </a>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
