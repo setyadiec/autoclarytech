@@ -511,7 +511,7 @@
             <!-- Wadah Gambar Preview Box (Aspek Rasio 1:1 Presisi Penuh Menyatu) -->
             <div id="gen-preview-box" style="position:relative; width:100%; max-width:480px; aspect-ratio:1/1; border-radius:12px; overflow:hidden; margin:0 auto 14px; background:#0F172A; border:1px solid #CBD5E1; text-align:center; transition:transform 0.1s ease-out; box-shadow:0 8px 24px rgba(0,0,0,0.12);">
               <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; height:100%; object-fit:cover; display:block;"></canvas>
-              <img id="gen-result-img" src="" alt="Hasil Studio Foto AI" style="width:100%; height:100%; object-fit:cover; display:none; margin:0;">
+              <img id="gen-result-img" crossorigin="anonymous" src="" alt="Hasil Studio Foto AI" style="width:100%; height:100%; object-fit:cover; display:none; margin:0;">
               
               <!-- OVERLAY TEKS PENGUAT PRODUK (BANNER PROMOSI FEED MENYATU ALAMI ALA CANVA/FIGMA) -->
               <div id="gen-teks-penguat-overlay" style="position:absolute; inset:0; pointer-events:none; display:flex; flex-direction:column; justify-content:space-between; transition:all 0.3s ease;">
@@ -1938,6 +1938,7 @@ Yuk nikmati selagi hangat!`,
     }
 
     canvas.style.display = 'none';
+    resultImg.crossOrigin = 'anonymous';
     resultImg.src = imageUrl;
     resultImg.style.display = 'block';
 
@@ -2431,11 +2432,32 @@ Yuk nikmati selagi hangat!`,
       }
     }
 
-    // Trigger Download Canvas ke WebP / JPEG
-    const link = document.createElement('a');
-    link.download = `banner-${currentProdukNama.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'promosi'}.jpg`;
-    link.href = c.toDataURL('image/jpeg', 0.95);
-    link.click();
+    // Trigger Download Canvas ke JPEG / WebP dengan penanganan CORS aman
+    try {
+      const dataUrl = c.toDataURL('image/jpeg', 0.95);
+      const link = document.createElement('a');
+      link.download = `banner-${(currentProdukNama || 'promosi').toLowerCase().replace(/[^a-z0-9]/g, '-')}.jpg`;
+      link.href = dataUrl;
+      link.click();
+    } catch (corsErr) {
+      console.warn('CORS tainted canvas, mencoba export via Blob:', corsErr);
+      try {
+        c.toBlob(blob => {
+          if (blob) {
+            const blobUrl = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.download = `banner-${(currentProdukNama || 'promosi').toLowerCase().replace(/[^a-z0-9]/g, '-')}.jpg`;
+            link.href = blobUrl;
+            link.click();
+            setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+          } else {
+            window.open(currentStudioImgUrl || '#', '_blank');
+          }
+        }, 'image/jpeg', 0.95);
+      } catch (blobErr) {
+        window.open(currentStudioImgUrl || '#', '_blank');
+      }
+    }
   }
 
   // Lanjut ke Proses Video / Reels
