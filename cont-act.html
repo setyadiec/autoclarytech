@@ -24,11 +24,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/act-soft.css">
   <link rel="stylesheet" href="/assets/act-soft.css">
-  <script src="/assets/act-soft.js" defer></script>
+  <script src="./assets/act-soft.js" defer></script>
   <meta name="theme-color" content="#E4E9F2">
 
   <style>
+    :root {
+      --f-judul: 'Bricolage Grotesque', 'Instrument Sans', system-ui, sans-serif;
+      --f-teks: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --f-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
+    }
+    body {
+      font-family: var(--f-teks);
+    }
     /* Scoped Slider & Interactive Styles */
     .hero-badge-act {
       display: inline-flex; align-items: center; gap: 8px;
@@ -507,7 +516,7 @@
               <!-- OVERLAY TEKS PENGUAT PRODUK (BANNER PROMOSI FEED) -->
               <div id="gen-teks-penguat-overlay" style="position:absolute; top:12px; left:12px; right:12px; pointer-events:none; display:flex; flex-direction:column; gap:6px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <div id="overlay-badge-tag" style="display:inline-flex; align-items:center; gap:5px; background:linear-gradient(135deg, #059669, #047857); color:#FFFFFF; font:800 11px 'Plus Jakarta Sans', sans-serif; padding:4px 10px; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.25); text-transform:uppercase; letter-spacing:0.04em;">
+                  <div id="overlay-badge-tag" style="display:inline-flex; align-items:center; gap:5px; background:linear-gradient(135deg, #059669, #047857); color:#FFFFFF; font:800 11px var(--f-judul); padding:4px 10px; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.25); text-transform:uppercase; letter-spacing:0.04em;">
                     ⭐ PRODUK UNGGULAN
                   </div>
                   <div id="overlay-label-banner" style="background:rgba(15,23,42,0.75); color:#F8FAFC; font:700 10px var(--f-mono); padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
@@ -515,7 +524,7 @@
                   </div>
                 </div>
                 <div id="overlay-headline-box" style="background:rgba(15, 23, 42, 0.85); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.22); border-radius:8px; padding:10px 12px; color:#FFFFFF; text-align:left; box-shadow:0 4px 14px rgba(0,0,0,0.35);">
-                  <div id="overlay-teks-headline" style="font:800 15px 'Plus Jakarta Sans', sans-serif; line-height:1.3; color:#FFFFFF; letter-spacing:-0.01em;">
+                  <div id="overlay-teks-headline" style="font:800 15px var(--f-judul); line-height:1.3; color:#FFFFFF; letter-spacing:-0.01em;">
                     100% Produk Berkualitas • Pilihan Terpercaya
                   </div>
                   <div id="overlay-teks-sub" style="font-size:11px; color:#94A3B8; margin-top:3px; line-height:1.4;">
@@ -525,7 +534,7 @@
               </div>
 
               <!-- WATERMARK BADGE RESMI ACT -->
-              <div id="gen-badge-overlay" style="position:absolute; bottom:10px; right:10px; display:inline-flex; align-items:center; gap:6px; background:rgba(11,19,41,0.8); color:#FFFFFF; font:700 11px 'Plus Jakarta Sans', sans-serif; padding:5px 10px; border-radius:6px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); box-shadow:0 2px 8px rgba(0,0,0,0.35); pointer-events:none;">
+              <div id="gen-badge-overlay" style="position:absolute; bottom:10px; right:10px; display:inline-flex; align-items:center; gap:6px; background:rgba(11,19,41,0.8); color:#FFFFFF; font:700 11px var(--f-teks); padding:5px 10px; border-radius:6px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); box-shadow:0 2px 8px rgba(0,0,0,0.35); pointer-events:none;">
                 <img src="/assets/logo_icon_mark_bapak.png" alt="Logo ACT" style="width:15px; height:15px; display:block; object-fit:contain;">
                 <span style="letter-spacing:0.02em;">AutoClary<span style="color:#00d2b4;">Tech</span></span>
               </div>
@@ -1555,7 +1564,7 @@ Yuk nikmati selagi hangat!`,
     if (actLogoWatermarkImg && actLogoWatermarkImg.complete && actLogoWatermarkImg.naturalWidth > 0) {
       const logoSize = 36;
       const text = 'AutoClaryTech';
-      ctx.font = 'bold 24px "Plus Jakarta Sans", -apple-system, sans-serif';
+      ctx.font = 'bold 24px "Bricolage Grotesque", "Instrument Sans", -apple-system, sans-serif';
       const textW = ctx.measureText(text).width;
       const totalW = logoSize + 12 + textW;
       const startX = (w - totalW) / 2;
@@ -1565,7 +1574,7 @@ Yuk nikmati selagi hangat!`,
       ctx.fillText(text, startX + logoSize + 12, h - 25);
     } else {
       ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
-      ctx.font = 'bold 22px "Plus Jakarta Sans", -apple-system, sans-serif';
+      ctx.font = 'bold 22px "Bricolage Grotesque", "Instrument Sans", -apple-system, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('AutoClaryTech', w/2, h - 32);
     }
@@ -2107,7 +2116,7 @@ Yuk nikmati selagi hangat!`,
 
       // 3. Gambar Badge Penguat Nilai Jual
       const badgeText = document.getElementById('overlay-badge-tag')?.textContent?.trim() || '⭐ PRODUK UNGGULAN';
-      ctx.font = '800 22px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '800 22px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       const badgeW = ctx.measureText(badgeText).width + 36;
       const badgeH = 46;
       const bx = 40;
@@ -2154,13 +2163,13 @@ Yuk nikmati selagi hangat!`,
 
       // Headline Text
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = '800 34px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '800 34px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.textAlign = 'left';
       ctx.fillText(headText.slice(0, 55), boxX + 24, boxY + 52);
 
       // Sub-headline Text
       ctx.fillStyle = '#94A3B8';
-      ctx.font = '600 22px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '600 22px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillText(subText.slice(0, 75), boxX + 24, boxY + 98);
     }
 
@@ -2176,7 +2185,7 @@ Yuk nikmati selagi hangat!`,
       ctx.roundRect(bX, bY, bW, bH, 10);
       ctx.fill();
       ctx.drawImage(logoMark, bX + 12, bY + 9, 28, 28);
-      ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '700 20px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'left';
       ctx.fillText('AutoClary', bX + 48, bY + 31);
@@ -2309,19 +2318,19 @@ Yuk nikmati selagi hangat!`,
       ctx.beginPath();
       ctx.roundRect(40, 50, 160, 34, 6);
       ctx.fill();
-      ctx.font = '800 14px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '800 14px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'center';
       ctx.fillText('🔥 VIRAL HARI INI', 120, 73);
 
-      ctx.font = '800 26px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '800 26px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'left';
       ctx.fillText('Pecinta ' + (currentProdukNama || 'produk ini').slice(0, 25), 40, 125);
       ctx.fillStyle = '#00D2B4';
       ctx.fillText('WAJIB TAHU INI! 😱', 40, 160);
 
-      ctx.font = '600 15px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '600 15px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#E2E8F0';
       ctx.fillText('Tonton sampai habis untuk penawaran terbaik!', 40, h - 90);
       ctx.restore();
@@ -2337,20 +2346,20 @@ Yuk nikmati selagi hangat!`,
       ctx.beginPath();
       ctx.roundRect(40, 50, 190, 34, 6);
       ctx.fill();
-      ctx.font = '800 14px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '800 14px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'center';
       ctx.fillText('⭐ KUALITAS TERBAIK', 135, 73);
 
-      ctx.font = '800 24px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '800 24px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'left';
       ctx.fillText(currentProdukNama.slice(0, 30), 40, 125);
       ctx.fillStyle = '#FDE047';
-      ctx.font = '700 19px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '700 19px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillText(currentProdukKeunggulan.slice(0, 40), 40, 160);
 
-      ctx.font = '600 15px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '600 15px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#E2E8F0';
       ctx.fillText('Bahan bermutu tinggi & jaminan kepuasan.', 40, h - 90);
       ctx.restore();
@@ -2366,24 +2375,24 @@ Yuk nikmati selagi hangat!`,
       ctx.beginPath();
       ctx.roundRect(40, 50, 170, 34, 6);
       ctx.fill();
-      ctx.font = '800 14px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '800 14px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#0F172A';
       ctx.textAlign = 'center';
       ctx.fillText('💬 PESAN SEKARANG', 125, 73);
 
-      ctx.font = '800 24px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '800 24px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'left';
       ctx.fillText('Dapatkan Produk Asli Hari Ini!', 40, 125);
       ctx.fillStyle = '#00D2B4';
-      ctx.font = '700 18px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '700 18px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillText('Klik Link di Bio / Hubungi WhatsApp', 40, 160);
 
       ctx.fillStyle = '#25D366';
       ctx.beginPath();
       ctx.roundRect(40, h - 120, w - 80, 52, 10);
       ctx.fill();
-      ctx.font = '800 18px "Plus Jakarta Sans", sans-serif';
+      ctx.font = '800 18px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#0F172A';
       ctx.textAlign = 'center';
       const noTeks = currentNomorWa ? 'WhatsApp: ' + currentNomorWa : 'Ketik "MAU" di Komentar';
@@ -2571,7 +2580,7 @@ Yuk nikmati selagi hangat!`,
       const ctx = canvasEl.getContext('2d');
       gambarStudioCanvas(null);
       ctx.fillStyle = '#00A896';
-      ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
+      ctx.font = 'bold 18px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText(nama, canvasEl.width/2, canvasEl.height * 0.5);
     }
