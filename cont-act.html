@@ -566,7 +566,7 @@
               </div>
 
               <!-- WATERMARK BADGE RESMI ACT (Fallback jika overlay dimatikan) -->
-              <div id="gen-badge-overlay" style="position:absolute; bottom:10px; right:10px; display:inline-flex; align-items:center; gap:6px; background:rgba(11,19,41,0.8); color:#FFFFFF; font:700 11px var(--f-teks); padding:5px 10px; border-radius:6px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); box-shadow:0 2px 8px rgba(0,0,0,0.35); pointer-events:none;">
+              <div id="gen-badge-overlay" style="display:none; position:absolute; bottom:10px; right:10px; align-items:center; gap:6px; background:rgba(11,19,41,0.8); color:#FFFFFF; font:700 11px var(--f-teks); padding:5px 10px; border-radius:6px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); box-shadow:0 2px 8px rgba(0,0,0,0.35); pointer-events:none;">
                 <img src="/assets/logo_icon_mark_bapak.png" alt="Logo ACT" style="width:15px; height:15px; display:block; object-fit:contain;">
                 <span style="letter-spacing:0.02em;">AutoClary<span style="color:#00d2b4;">Tech</span></span>
               </div>
@@ -2097,8 +2097,10 @@ Yuk nikmati selagi hangat!`,
   function toggleTeksPenguat(aktif) {
     const elOverlay = document.getElementById('gen-teks-penguat-overlay');
     const elBoxEditor = document.getElementById('box-editor-teks-penguat');
+    const elBadgeFallback = document.getElementById('gen-badge-overlay');
     if (elOverlay) elOverlay.style.display = aktif ? 'flex' : 'none';
     if (elBoxEditor) elBoxEditor.style.opacity = aktif ? '1' : '0.4';
+    if (elBadgeFallback) elBadgeFallback.style.display = aktif ? 'none' : 'inline-flex';
   }
 
   function pilihBadgePenguat(badgeText, color) {
