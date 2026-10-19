@@ -124,6 +124,8 @@ export default async function handler(req, res) {
     kategori,
     keunggulan,
     suasana,
+    tujuanKonten,
+    nomorWa,
     clientId
   } = req.body || {};
 
@@ -137,7 +139,7 @@ export default async function handler(req, res) {
 
   // Cek Kuota Klien Sisi Server (3x Gratis per IP + Perangkat secara Persisten di Supabase)
   const forwarded = req.headers['x-forwarded-for'];
-  const clientIp = forwarded ? forwarded.split(',')[0].trim() : (req.headers['x-real-ip'] || req.socket.remoteAddress || '127.0.0.1');
+  const clientIp = forwarded ? forwarded.split(',')[0].trim() : (req.headers['x-real-ip'] || req.socket?.remoteAddress || '127.0.0.1');
   const userAgentSnippet = (req.headers['user-agent'] || 'generic').slice(0, 40);
   const serverClientKey = hitungHashKunci(clientIp, userAgentSnippet);
 
@@ -155,7 +157,22 @@ export default async function handler(req, res) {
   const namaBersih = String(namaProduk || 'Produk Unggulan').trim().slice(0, 100);
   const kategoriBersih = String(kategori || 'umum').trim().toLowerCase();
   const keunggulanBersih = String(keunggulan || 'kualitas terbaik & terpercaya').trim().slice(0, 200);
-  const suasanaBersih = String(suasana || 'Meja marmer hitam elegan dengan pencahayaan warm spotlight dramatis').trim().slice(0, 300);
+  const tujuanBersih = String(tujuanKonten || 'hard_sell').trim();
+  const waBersih = formatNomorWa(nomorWa);
+
+  // Pemetaan suasana visual studio foto
+  let deskripsiSuasana = 'Meja marmer hitam elegan dengan pencahayaan warm spotlight dramatis';
+  if (suasana === 'kafe_kayu') {
+    deskripsiSuasana = 'Rustic warm wooden cafe table with cozy ambient morning light and blurred cafe background';
+  } else if (suasana === 'marmer_mewah') {
+    deskripsiSuasana = 'Luxury polished marble counter with dramatic warm spotlight, subtle reflections, and clean minimalist background';
+  } else if (suasana === 'alami_botanical') {
+    deskripsiSuasana = 'Fresh natural light wooden surface surrounded by lush green tropical botanical leaves and bright morning daylight';
+  } else if (suasana === 'pastel_modern') {
+    deskripsiSuasana = 'Sleek pastel podium with clean contemporary minimalist studio lighting and subtle soft geometric shadows';
+  } else if (suasana && typeof suasana === 'string' && suasana.trim().length > 3) {
+    deskripsiSuasana = suasana.trim().slice(0, 300);
+  }
 
   // Kunci API fal.ai dari Environment Serverless Vercel
   const FAL_KEY = process.env.FAL_KEY;
@@ -169,7 +186,7 @@ export default async function handler(req, res) {
   }
 
   // Susun Prompt Foto Studio Komersial (Model fal-ai/flux-pro/kontext)
-  const promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on ${suasanaBersih}. Natural contact shadows, soft ambient warm rim lighting, clean reflective surface, sharp focus on packaging details, photorealistic 8k, authentic presentation, award-winning product showcase`;
+  const promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on ${deskripsiSuasana}. Natural contact shadows, soft ambient warm rim lighting, clean reflective surface, sharp focus on packaging details, photorealistic 8k, authentic commercial presentation, award-winning product showcase`;
 
   try {
     // Panggil Queue fal.ai
@@ -209,8 +226,13 @@ export default async function handler(req, res) {
     await simpanKuotaPersisten(kunciGlobal, totalHarian + 1, skrgTanggal);
     const sisaKuota = Math.max(0, MAKS_KUOTA_GRATIS - (pemakaianSaatIni + 1));
 
-    // Racik Naskah Copywriting Jualan & 10 Tagar Relevan via LLM Awan fal.ai
-    const { caption, hashtags } = await racikNaskahLlm(FAL_KEY, namaBersih, kategoriBersih, keunggulanBersih, suasanaBersih);
+    // Racik Paket Konten Kreator 360 Derajat (Caption, Video Script, Status WA, Rencana 7 Hari, 10 Tagar) via LLM Awan fal.ai
+    const paketKonten = await racikPaketKontenLlm(FAL_KEY, namaBersih, kategoriBersih, keunggulanBersih, deskripsiSuasana, tujuanBersih, waBersih);
+
+    let linkWa = '';
+    if (waBersih) {
+      linkWa = `https://wa.me/${waBersih}?text=${encodeURIComponent('Halo, saya tertarik dengan ' + namaBersih + ' yang ada di konten Anda. Boleh minta info detail dan cara pemesanannya?')}`;
+    }
 
     return res.status(200).json({
       status: 'queued',
@@ -218,8 +240,12 @@ export default async function handler(req, res) {
       statusUrl: falData.status_url,
       responseUrl: falData.response_url,
       sisaKuota: sisaKuota,
-      caption: caption,
-      hashtags: hashtags
+      caption: paketKonten.caption,
+      videoScript: paketKonten.videoScript,
+      waStatus: paketKonten.waStatus,
+      ideKonten7Hari: paketKonten.ideKonten7Hari,
+      hashtags: paketKonten.hashtags,
+      linkWa: linkWa
     });
 
   } catch (err) {
@@ -231,32 +257,67 @@ export default async function handler(req, res) {
   }
 }
 
+function formatNomorWa(no) {
+  if (!no) return '';
+  let bersih = String(no).replace(/[^0-9]/g, '');
+  if (!bersih) return '';
+  if (bersih.startsWith('0')) {
+    bersih = '62' + bersih.slice(1);
+  } else if (!bersih.startsWith('62')) {
+    bersih = '62' + bersih;
+  }
+  return bersih;
+}
+
 // Integrasi LLM Awan fal.ai (fal-ai/any-llm) untuk copywriting presisi & 10 tagar relevan
-async function racikNaskahLlm(falKey, nama, kategori, keunggulan, suasana) {
-  const promptLlm = `Kamu adalah copywriter profesional Indonesia untuk promosi produk UMKM di Instagram, TikTok, dan WhatsApp.
-Tugas: Buat naskah caption jualan medsos yang memikat, persuasif, membangkitkan minat pembeli, dan meningkatkan penjualan produk.
+async function racikPaketKontenLlm(falKey, nama, kategori, keunggulan, suasana, tujuanKonten, nomorWa) {
+  const penjelasanTujuan = {
+    hard_sell: 'Fokus penjualan langsung, urgensi promo terbatas, dorong beli sekarang.',
+    storytelling: 'Fokus cerita proses, kualitas bahan baku pilihan, membangun kepercayaan pembeli.',
+    edukasi: 'Fokus problem-solution, edukasi masalah konsumen yang tuntas dengan produk ini.'
+  }[tujuanKonten] || 'Meningkatkan penjualan dan minat beli produk.';
+
+  const promptLlm = `Kamu adalah Senior Content Creator & Copywriter Khusus Produk UMKM di Indonesia (Instagram Reels, TikTok, dan WhatsApp).
+Tujuan Utama: Menciptakan konten yang terbukti meningkatkan omzet dan closing penjualan produk secara nyata.
+
 Data Produk Klien:
 - Nama Produk: ${nama}
 - Kategori Usaha: ${kategori}
 - Keunggulan Utama: ${keunggulan}
-- Suasana Foto Studio: ${suasana}
+- Suasana Foto: ${suasana}
+- Sudut Pandang/Tujuan Konten: ${penjelasanTujuan}
+- Kontak Pemesanan: ${nomorWa ? 'WhatsApp ' + nomorWa : 'Tautan di Profil / Bio'}
 
-Instruksi Formula:
-1. Hook emosional yang mengena dan relevan dengan produk.
-2. Jelaskan manfaat nyata dan keunggulan spesifik produk tersebut (jangan generik).
-3. Call to Action (CTA) pemesanan yang jelas.
-4. Tepat 10 tagar (hashtag) yang relevan, tertarget, dan populer.
+Tugas: Buat 5 Aset Konten Kreator Siap Pakai:
+1. CAPTION FEED (Instagram/Facebook): Hook memikat pembuka, elaborasi manfaat produk yang menyentuh kebutuhan konsumen, penawaran menarik, dan Call to Action pemesanan yang jelas.
+2. SKRIP VIDEO REELS & TIKTOK (15–30 Detik):
+   - Hook 3 Detik (Teks di layar & narasi pembuka yang menghentikan scroll)
+   - Panduan Visual B-roll Kamera HP (adegan yang harus direkam)
+   - Narasi Voiceover
+   - CTA Penutup
+3. STATUS WHATSAPP (Story / Chat Broadcast): Teks ringkas, ramah, mengundang calon pembeli membalas chat secara spontan.
+4. RENCANA KONTEN 7 HARI: Ide posting tematik Hari 1 s.d. Hari 7 (kombinasi Reels, Feed, dan Story) agar pemilik usaha konsisten jualan selama seminggu penuh.
+5. HASHTAGS: Tepat 10 tagar relevan, tertarget, dan populer.
 
 Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
-CAPTION:
-[Isi caption lengkap di sini, gunakan emoji yang memikat pembeli]
+===CAPTION===
+[Teks caption feed lengkap di sini, gunakan emoji yang memikat]
 
-HASHTAGS:
+===VIDEOSCRIPT===
+[Teks skrip video lengkap dengan pembagian Hook 3 Detik, Panduan Visual B-roll, Narasi Suara, dan CTA Penutup]
+
+===WASTATUS===
+[Teks status WhatsApp ringkas dan ramah]
+
+===IDE7HARI===
+[Rencana konten Hari 1 sampai Hari 7]
+
+===HASHTAGS===
 #tagar1 #tagar2 #tagar3 #tagar4 #tagar5 #tagar6 #tagar7 #tagar8 #tagar9 #tagar10`;
 
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000); // 10 detik batas waktu LLM
+    const timeout = setTimeout(() => controller.abort(), 12000); // 12 detik batas waktu LLM
     const resp = await fetch('https://fal.run/fal-ai/any-llm', {
       method: 'POST',
       headers: {
@@ -272,14 +333,26 @@ HASHTAGS:
       const data = await resp.json();
       const outputText = String(data.output || '');
 
-      const capMatch = outputText.match(/CAPTION:\s*([\s\S]*?)(?=HASHTAGS:|$)/i);
-      const hashMatch = outputText.match(/HASHTAGS:\s*([\s\S]*?)$/i);
+      const capMatch = outputText.match(/===CAPTION===([\s\S]*?)(?====VIDEOSCRIPT===|$)/i);
+      const vidMatch = outputText.match(/===VIDEOSCRIPT===([\s\S]*?)(?====WASTATUS===|$)/i);
+      const waMatch = outputText.match(/===WASTATUS===([\s\S]*?)(?====IDE7HARI===|$)/i);
+      const ideMatch = outputText.match(/===IDE7HARI===([\s\S]*?)(?====HASHTAGS===|$)/i);
+      const hashMatch = outputText.match(/===HASHTAGS===([\s\S]*?)$/i);
 
       let caption = capMatch ? capMatch[1].trim() : '';
+      let videoScript = vidMatch ? vidMatch[1].trim() : '';
+      let waStatus = waMatch ? waMatch[1].trim() : '';
+      let ideKonten7Hari = ideMatch ? ideMatch[1].trim() : '';
       let hashtags = hashMatch ? hashMatch[1].trim() : '';
 
       if (caption && hashtags) {
-        return { caption, hashtags };
+        return {
+          caption,
+          videoScript: videoScript || racikVideoScriptFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa),
+          waStatus: waStatus || racikWaStatusFallback(nama, kategori, keunggulan, nomorWa),
+          ideKonten7Hari: ideKonten7Hari || racikIde7HariFallback(nama, kategori),
+          hashtags
+        };
       }
     }
   } catch (err) {
@@ -287,30 +360,96 @@ HASHTAGS:
   }
 
   // Fallback cerdas jika LLM awan timeout
-  return racikNaskahFallback(nama, kategori, keunggulan);
+  return racikPaketKontenFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa);
 }
 
 // Helper peracik copywriting jualan formula Hook Menarik + Manfaat + CTA
-function racikNaskahFallback(nama, kategori, keunggulan) {
+function racikPaketKontenFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa) {
   let caption = '';
   let hashtags = '';
+  const ctaText = nomorWa ? `Pemesanan via WhatsApp: https://wa.me/${nomorWa}` : 'Silakan klik tautan di bio untuk informasi dan pemesanan!';
 
   if (kategori === 'kuliner') {
-    caption = `Pilihan tepat untuk penikmat kuliner berkualitas! ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi: ${keunggulan}. Sangat tepat untuk menemani waktu kerja, kumpul keluarga, maupun hidangan spesial.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang. Silakan klik tautan di bio untuk informasi dan pemesanan!`;
+    caption = `Pilihan tepat untuk penikmat kuliner berkualitas! ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi: ${keunggulan}. Sangat tepat untuk menemani waktu kerja, kumpul keluarga, maupun hidangan spesial.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang.\n${ctaText}`;
     hashtags = `#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enaksekali #reelskuliner`;
   } else if (kategori === 'skincare') {
-    caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nPromo Khusus Hari Ini:\nDapatkan penawaran istimewa untuk pembelian pekan ini. Silakan kunjungi tautan di profil sebelum masa promo berakhir.`;
+    caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nPromo Khusus Hari Ini:\nDapatkan penawaran istimewa untuk pembelian pekan ini.\n${ctaText}`;
     hashtags = `#skincareroutine #racunskincare #kulitglowing #skincarebpom #beautytips #fypindonesia #viralreels #cantikalami #perawatanwajah #racuntiktok`;
   } else if (kategori === 'fashion') {
-    caption = `Tampil percaya diri dengan busana yang nyaman dan elegan: ${nama}.\n\nDirancang menggunakan material berkualitas yang jatuh rapi di badan: ${keunggulan}. Pilihan serasi baik untuk agenda formal maupun kegiatan santai harian.\n\nPersediaan Terbatas:\nAmankan ukuran dan varian pilihan Anda sekarang juga melalui tautan di profil.`;
+    caption = `Tampil percaya diri dengan busana yang nyaman dan elegan: ${nama}.\n\nDirancang menggunakan material berkualitas yang jatuh rapi di badan: ${keunggulan}. Pilihan serasi baik untuk agenda formal maupun kegiatan santai harian.\n\nPersediaan Terbatas:\nAmankan ukuran dan varian pilihan Anda sekarang juga!\n${ctaText}`;
     hashtags = `#ootdindonesia #fashionviral #outfitharian #racuntiktok #bajubagus #hijabstyle #reelsfashion #fypoutfit #racunshopee #styleinspo`;
   } else if (kategori === 'herbal') {
-    caption = `Kesehatan adalah investasi terbaik untuk masa depan keluarga. Jaga stamina harian dengan ${nama}.\n\nKhasiat alami murni untuk mendukung daya tahan tubuh secara optimal: ${keunggulan}. Tanpa bahan tambahan yang merugikan, aman untuk konsumsi harian.\n\nPemesanan & Konsultasi:\nHubungi kami melalui tautan di profil untuk mendapatkan produk asli bergaransi.`;
+    caption = `Kesehatan adalah investasi terbaik untuk masa depan keluarga. Jaga stamina harian dengan ${nama}.\n\nKhasiat alami murni untuk mendukung daya tahan tubuh secara optimal: ${keunggulan}. Tanpa bahan tambahan yang merugikan, aman untuk konsumsi harian.\n\nPemesanan & Konsultasi:\n${ctaText}`;
     hashtags = `#hidupsehat #herbalalami #kesehatantubuh #suplemenalami #madumurni #tipssehat #herbalindonesia #fypkesehatan #sehatberkah #racunsehat`;
   } else {
-    caption = `Solusi fungsional untuk menunjang aktivitas harian Anda: ${nama}.\n\nKualitas teruji, andal, dan ${keunggulan}. Dibuat secara presisi untuk memberikan kemudahan serta efisiensi maksimal.\n\nPromo Perdana:\nDapatkan penawaran harga terbaik khusus hari ini dengan mengunjungi tautan di profil.`;
+    caption = `Solusi fungsional untuk menunjang aktivitas harian Anda: ${nama}.\n\nKualitas teruji, andal, dan ${keunggulan}. Dibuat secara presisi untuk memberikan kemudahan serta efisiensi maksimal.\n\nPromo Perdana:\nDapatkan penawaran harga terbaik khusus hari ini!\n${ctaText}`;
     hashtags = `#produkviral #racuntiktok #barangunik #solusicerdas #fypindonesia #viralhariini #tokoonline #belanjaonline #murahberkualitas #reelsindonesia`;
   }
 
-  return { caption, hashtags };
+  return {
+    caption,
+    videoScript: racikVideoScriptFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa),
+    waStatus: racikWaStatusFallback(nama, kategori, keunggulan, nomorWa),
+    ideKonten7Hari: racikIde7HariFallback(nama, kategori),
+    hashtags
+  };
 }
+
+function racikVideoScriptFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa) {
+  const ctaWa = nomorWa ? `Ketik 'MAU' atau klik link WhatsApp di bio!` : `Ketik 'MAU' di komentar atau cek tautan bio sekarang!`;
+  
+  if (kategori === 'kuliner') {
+    return `[DURASI: 20 DETIK]\n\n` +
+      `00:00 - 00:03 (HOOK PEMBUKA)\n` +
+      `• Teks di Layar: "Pecinta kuliner wajib tahu ini!"\n` +
+      `• Visual Kamera HP: Close-up dramatis produk ${nama}, perlihatkan tekstur lezat dan kepulan asap / kesegaran produk.\n` +
+      `• Suara/Voiceover: "Jangan tonton video ini kalau kamu gampang lapar!"\n\n` +
+      `00:03 - 00:12 (BEDAH PRODUK & KEUNGGULAN)\n` +
+      `• Visual Kamera HP: Tunjukkan potongan produk, saat disajikan, atau dinikmati suapan pertama dengan ekspresi puas.\n` +
+      `• Suara/Voiceover: "Ini dia ${nama}. Dibuat dari bahan pilihan: ${keunggulan}. Rasanya benar-benar bikin nagih sejak gigitan pertama."\n\n` +
+      `00:12 - 00:20 (CALL TO ACTION & PROMO)\n` +
+      `• Visual Kamera HP: Tampilkan kemasan rapi siap kirim dan tulisan promo terbatas.\n` +
+      `• Suara/Voiceover: "Khusus pemesanan hari ini ada harga promo spesial. ${ctaWa}"`;
+  } else if (kategori === 'skincare') {
+    return `[DURASI: 20 DETIK]\n\n` +
+      `00:00 - 00:03 (HOOK PEMBUKA)\n` +
+      `• Teks di Layar: "Stop salah pilih skincare!"\n` +
+      `• Visual Kamera HP: Teteskan atau usap lembut produk ${nama} ke kulit tangan / wajah, perlihatkan tekstur yang cepat meresap.\n` +
+      `• Suara/Voiceover: "Punya masalah kulit kusam yang bikin gak percaya diri?"\n\n` +
+      `00:03 - 00:12 (SOLUSI & BENEFIT)\n` +
+      `• Visual Kamera HP: Tunjukkan botol kemasan ${nama} yang elegan dan kulit sehat bercahaya alami.\n` +
+      `• Suara/Voiceover: "Cobain rutin pakai ${nama}. Formula ringannya efektif untuk ${keunggulan} tanpa rasa lengket."\n\n` +
+      `00:12 - 00:20 (CALL TO ACTION)\n` +
+      `• Visual Kamera HP: Tunjukkan promo paket bundling hari ini.\n` +
+      `• Suara/Voiceover: "Amankan jatah promo sebelum kehabisan slot. ${ctaWa}"`;
+  } else {
+    return `[DURASI: 20 DETIK]\n\n` +
+      `00:00 - 00:03 (HOOK PEMBUKA)\n` +
+      `• Teks di Layar: "Akhirnya nemu solusi yang pas!"\n` +
+      `• Visual Kamera HP: Tunjukkan produk ${nama} langsung saat digunakan dalam situasi nyata.\n` +
+      `• Suara/Voiceover: "Sering repot cari produk yang benar-benar berkualitas?"\n\n` +
+      `00:03 - 00:12 (PEMBUKTIAN KUALITAS)\n` +
+      `• Visual Kamera HP: Sorot detail kerapian bahan, ketahanan, dan keunggulan utama: ${keunggulan}.\n` +
+      `• Suara/Voiceover: "Kini hadir ${nama}. Terbukti ${keunggulan}, praktis, dan bikin hari-hari kamu jauh lebih mudah."\n\n` +
+      `00:12 - 00:20 (CALL TO ACTION)\n` +
+      `• Visual Kamera HP: Kemasan rapi dan teks promo terbatas.\n` +
+      `• Suara/Voiceover: "Persediaan terbatas minggu ini. Langsung pesan sekarang lewat ${ctaWa}"`;
+  }
+}
+
+function racikWaStatusFallback(nama, kategori, keunggulan, nomorWa) {
+  const kontak = nomorWa ? `\n\nBalas status ini atau klik wa.me/${nomorWa} yaa!` : `\n\nBalas status ini langsung untuk amankan porsi kamu!`;
+  return `Halo semuanyaa! Yang dari kemarin nanyain stok ${nama} ready kapan...\n\nHari ini baru aja selesai diproduksi segar! Tetap dengan keunggulan: ${keunggulan}.\n\nSlot hari ini terbatas hanya 25 porsi/paket yaa. Siapa cepat dia dapat!${kontak}`;
+}
+
+function racikIde7HariFallback(nama, kategori) {
+  return `📅 RENCANA KONTEN 7 HARI UNTUK MENINGKATKAN OMZET:
+• HARI 1 (Reels/TikTok): Video Hook Penasaran — "3 Alasan Kenapa ${nama} Selalu Dicari Pelanggan".
+• HARI 2 (Instagram Feed): Foto Studio Katalog Premium + Cerita di Balik Bahan Pilihan.
+• HARI 3 (WhatsApp Story): Video Singkat Packing Pesanan — Menunjukkan antusiasme pembeli (Social Proof).
+• HARI 4 (Reels/TikTok): Video Before-After / Review Jujur Pelanggan Pertama.
+• HARI 5 (Instagram Feed & Reels): Edukasi Masalah Konsumen & Kenapa ${nama} Jadi Solusi Terbaik.
+• HARI 6 (WhatsApp Story & Feed): Promo Kilat Akhir Pekan (Beli 2 Lebih Hemat / Gratis Ongkir).
+• HARI 7 (Reels/Story): Video Interaksi Santai / FAQ — Menjawab 3 pertanyaan yang paling sering ditanyakan pelanggan.`;
+}
+

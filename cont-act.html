@@ -337,19 +337,43 @@
           <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;" for="gen-keunggulan">
             4. Keunggulan / Manfaat Utama Produk (Opsional):
           </label>
-          <input type="text" id="gen-keunggulan" class="form-input" placeholder="Contoh: Pedas gurih nagih, tanpa pengawet buatan" style="background:#fff;">
+          <input type="text" id="gen-keunggulan" class="form-input" placeholder="Contoh: Pedas gurih nagih, tanpa pengawet buatan" style="background:#fff; margin-bottom:12px;">
+
+          <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;" for="gen-tujuan-konten">
+            5. Sudut Pandang / Tujuan Penjualan (Pencetak Omzet):
+          </label>
+          <select id="gen-tujuan-konten" class="form-select" style="background:#fff; margin-bottom:12px;">
+            <option value="hard_sell">Promo Kilat &amp; Dorong Beli Hari Ini (Diskon / Urgensi Terbatas)</option>
+            <option value="storytelling">Storytelling Kualitas &amp; Bahan Baku (Membangun Kepercayaan)</option>
+            <option value="edukasi">Edukasi Solusi Masalah Konsumen (Problem - Solution)</option>
+          </select>
+
+          <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;" for="gen-suasana-foto">
+            6. Suasana / Latar Foto Studio Produk:
+          </label>
+          <select id="gen-suasana-foto" class="form-select" style="background:#fff; margin-bottom:12px;">
+            <option value="kafe_kayu">Meja Kayu Kafe Estetik &amp; Hangat (Makanan, Minuman &amp; Santai)</option>
+            <option value="marmer_mewah">Studio Marmer Mewah &amp; Spotlight Elegan (Skincare &amp; Kemasan Mewah)</option>
+            <option value="alami_botanical">Nuansa Alami Segar &amp; Daun Tropis (Herbal, Madu &amp; Produk Alami)</option>
+            <option value="pastel_modern">Podium Minimalis Modern Pastel (Fashion, Hijab &amp; Aksesoris)</option>
+          </select>
+
+          <label style="display:block; font:800 14px var(--f-judul); color:var(--ink); margin-bottom:6px;" for="gen-nomor-wa">
+            7. Nomor WhatsApp Pemesanan Anda (Opsional):
+          </label>
+          <input type="text" id="gen-nomor-wa" class="form-input" placeholder="Contoh: 081234567890 (otomatis disematkan ke tautan order)" style="background:#fff;">
         </div>
 
         <!-- Tombol Eksekusi Studio -->
         <button type="button" id="btn-proses-studio" onclick="prosesKontenStudio()" class="tombol tombol-utama" style="width:100%; padding:14px; font-size:15px; font-weight:800; justify-content:center; background:#08694F; border-color:#065F46; box-shadow:0 4px 14px rgba(8,105,79,0.3);">
-          <svg class="ikon ikon-s" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg><span>Proses Mockup &amp; Naskah Jualan (Gratis)</span>
+          <svg class="ikon ikon-s" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg><span>Proses Paket Konten Lengkap (Gratis)</span>
         </button>
         <div style="font-size:11px; color:var(--redup); text-align:center; margin-top:8px;">
           Tanpa perlu daftar &bull; Diproses langsung oleh AI Studio Awan (fal.ai)
         </div>
       </div>
 
-      <!-- KOLOM KANAN: HASIL STUDIO (PREVIEW STUDIO + CAPTION JUALAN + HASHTAG) -->
+      <!-- KOLOM KANAN: HASIL KONTEN KREATOR 360° (FOTO STUDIO + REELS + CAPTION + WA STORY + JADWAL 7 HARI) -->
       <div>
         <!-- Kotak Animasi Loading Saat Memproses -->
         <div id="gen-loading-state" style="display:none; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:var(--r); padding:36px 20px; text-align:center;">
@@ -360,52 +384,127 @@
 
         <!-- Kotak Hasil Siap Pakai -->
         <div id="gen-result-state" style="display:none; background:#fff; border:1.5px solid #059669; border-radius:var(--r); padding:20px; box-shadow:var(--timbul-kecil);">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-            <span style="background:#ECFDF5; color:#065F46; font:800 11px var(--f-mono); padding:3px 8px; border-radius:6px;">
-              <svg class="ikon ikon-s" style="width:14px; height:14px; vertical-align:text-bottom; margin-right:4px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>KONTEN SIAP PAKAI
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px;">
+            <span style="background:#ECFDF5; color:#065F46; font:800 11px var(--f-mono); padding:4px 10px; border-radius:6px;">
+              <svg class="ikon ikon-s" style="width:14px; height:14px; vertical-align:text-bottom; margin-right:4px;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>PAKET KONTEN KREATOR 360° SIAP PAKAI
             </span>
             <span style="font-size:12px; color:#059669; font-weight:700;">100% Selesai</span>
           </div>
 
-          <!-- Pratinjau Visual Studio Canvas/Image (Bersih Tanpa Bingkai Gelap) -->
-          <div id="gen-preview-box" style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:16px; background:#F8FAFC; border:1px solid #E2E8F0; text-align:center;">
-            <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:360px; object-fit:contain; display:block; margin:0 auto;"></canvas>
-            <img id="gen-result-img" src="" alt="Hasil Studio AI Awan" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:none; margin:0 auto; border-radius:8px;">
-            <div id="gen-badge-overlay" style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.5); color:#fff; font-size:10px; padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
-              Studio cont-ACT
-            </div>
-          </div>
-          <div style="margin-bottom:16px;">
-            <a id="btn-download-foto" href="#" download="foto-studio-contact-ai.jpg" class="tombol tombol-kecil" style="width:100%; justify-content:center; background:#F8FAFC; border:1px solid #CBD5E1; color:var(--ink); font-weight:700;">
-              <svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              <span>Download Foto Studio AI Asli (Resolusi Penuh)</span>
-            </a>
+          <!-- TAB NAVIGASI ASET KONTEN -->
+          <div style="display:flex; gap:6px; margin-bottom:14px; overflow-x:auto; padding-bottom:6px;" id="tabs-konten-bar">
+            <button type="button" id="tab-btn-foto" onclick="gantiTabKonten('foto')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#08694F; color:#fff; border:1px solid #065F46; white-space:nowrap;">Foto Studio</button>
+            <button type="button" id="tab-btn-video" onclick="gantiTabKonten('video')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">Skrip Reels/TikTok</button>
+            <button type="button" id="tab-btn-caption" onclick="gantiTabKonten('caption')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">Caption Feed</button>
+            <button type="button" id="tab-btn-wa" onclick="gantiTabKonten('wa')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">Status WhatsApp</button>
+            <button type="button" id="tab-btn-jadwal" onclick="gantiTabKonten('jadwal')" style="padding:7px 11px; font-size:12px; font-weight:700; border-radius:6px; cursor:pointer; background:#F8FAFC; color:#475569; border:1px solid #CBD5E1; white-space:nowrap;">Rencana 7 Hari</button>
           </div>
 
-          <!-- Bagian Caption Jualan -->
-          <div style="margin-bottom:14px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-              <span style="font:800 12px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:6px;"><svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Naskah Caption Jualan (Formula Hook + CTA):</span>
-              <button type="button" onclick="salinTeks('hasil-caption', this)" class="tombol tombol-kecil" style="padding:4px 8px; font-size:11px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
-                <svg class="ikon ikon-s" style="width:12px; height:12px; margin-right:4px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Salin Caption</span>
-              </button>
+          <!-- PANEL 1: FOTO STUDIO -->
+          <div id="tab-pane-foto" style="display:block;">
+            <div id="gen-preview-box" style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:14px; background:#F8FAFC; border:1px solid #E2E8F0; text-align:center;">
+              <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:360px; object-fit:contain; display:block; margin:0 auto;"></canvas>
+              <img id="gen-result-img" src="" alt="Hasil Studio AI Awan" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:none; margin:0 auto; border-radius:8px;">
+              <div id="gen-badge-overlay" style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.5); color:#fff; font-size:10px; padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
+                Studio cont-ACT
+              </div>
             </div>
-            <div id="hasil-caption" style="font-size:12px; color:var(--teks); line-height:1.6; white-space:pre-wrap; max-height:120px; overflow-y:auto; background:#fff; padding:10px; border-radius:6px; border:1px solid #E2E8F0;"></div>
+            <div>
+              <a id="btn-download-foto" href="#" download="foto-studio-contact-ai.jpg" class="tombol tombol-kecil" style="width:100%; justify-content:center; background:#F8FAFC; border:1px solid #CBD5E1; color:var(--ink); font-weight:700;">
+                <svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Download Foto Studio AI Asli (Resolusi Penuh)</span>
+              </a>
+            </div>
           </div>
 
-          <!-- Bagian 10 Hashtag Relevan -->
-          <div style="margin-bottom:14px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-              <span style="font:800 12px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:6px;"><svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> 10 Hashtag Relevan:</span>
-              <button type="button" onclick="salinTeks('hasil-hashtag', this)" class="tombol tombol-kecil" style="padding:4px 8px; font-size:11px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
-                <svg class="ikon ikon-s" style="width:12px; height:12px; margin-right:4px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Salin Hashtag</span>
-              </button>
+          <!-- PANEL 2: SKRIP VIDEO REELS & TIKTOK -->
+          <div id="tab-pane-video" style="display:none;">
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:14px; margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font:800 12px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:6px;">
+                  <svg class="ikon ikon-s" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                  Skrip Video Reels/TikTok (15–30 Detik):
+                </span>
+                <button type="button" onclick="salinTeks('hasil-video-script', this)" class="tombol tombol-kecil" style="padding:4px 8px; font-size:11px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
+                  <svg class="ikon ikon-s" style="width:12px; height:12px; margin-right:4px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Salin Skrip</span>
+                </button>
+              </div>
+              <div id="hasil-video-script" style="font-size:12px; color:var(--teks); line-height:1.6; white-space:pre-wrap; max-height:220px; overflow-y:auto; background:#fff; padding:12px; border-radius:6px; border:1px solid #E2E8F0;"></div>
             </div>
-            <div id="hasil-hashtag" style="font-size:12px; color:#0369A1; line-height:1.5; font-family:var(--f-mono); background:#fff; padding:8px 10px; border-radius:6px; border:1px solid #E2E8F0; word-break:break-all;"></div>
+            <div style="background:#FEF3C7; border:1px solid #FDE68A; border-radius:8px; padding:10px 12px; font-size:11px; color:#92400E;">
+              <strong>Tips Konten Kreator:</strong> Rekam video menggunakan kamera HP dekat jendela (cahaya alami). Tampilkan produk di 3 detik pertama agar penonton tidak melewati video Anda!
+            </div>
           </div>
 
-          <!-- Rekomendasi Jam Posting -->
-          <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:10px 12px; font-size:12px; color:#1E40AF; display:flex; align-items:center; gap:8px;">
+          <!-- PANEL 3: CAPTION FEED & TAGAR -->
+          <div id="tab-pane-caption" style="display:none;">
+            <!-- Bagian Caption Jualan -->
+            <div style="margin-bottom:12px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <span style="font:800 12px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:6px;">
+                  <svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg> Naskah Caption Feed (Formula Hook + CTA):
+                </span>
+                <button type="button" onclick="salinTeks('hasil-caption', this)" class="tombol tombol-kecil" style="padding:4px 8px; font-size:11px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
+                  <svg class="ikon ikon-s" style="width:12px; height:12px; margin-right:4px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Salin Caption</span>
+                </button>
+              </div>
+              <div id="hasil-caption" style="font-size:12px; color:var(--teks); line-height:1.6; white-space:pre-wrap; max-height:140px; overflow-y:auto; background:#fff; padding:10px; border-radius:6px; border:1px solid #E2E8F0;"></div>
+            </div>
+
+            <!-- Bagian 10 Hashtag Relevan -->
+            <div style="margin-bottom:12px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <span style="font:800 12px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:6px;">
+                  <svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> 10 Hashtag Relevan:
+                </span>
+                <button type="button" onclick="salinTeks('hasil-hashtag', this)" class="tombol tombol-kecil" style="padding:4px 8px; font-size:11px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
+                  <svg class="ikon ikon-s" style="width:12px; height:12px; margin-right:4px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Salin Hashtag</span>
+                </button>
+              </div>
+              <div id="hasil-hashtag" style="font-size:12px; color:#0369A1; line-height:1.5; font-family:var(--f-mono); background:#fff; padding:8px 10px; border-radius:6px; border:1px solid #E2E8F0; word-break:break-all;"></div>
+            </div>
+          </div>
+
+          <!-- PANEL 4: STATUS WHATSAPP -->
+          <div id="tab-pane-wa" style="display:none;">
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:14px; margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font:800 12px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:6px;">
+                  <svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                  Teks Status WhatsApp Story / Chat Broadcast:
+                </span>
+                <button type="button" onclick="salinTeks('hasil-wa-status', this)" class="tombol tombol-kecil" style="padding:4px 8px; font-size:11px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
+                  <svg class="ikon ikon-s" style="width:12px; height:12px; margin-right:4px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Salin Status WA</span>
+                </button>
+              </div>
+              <div id="hasil-wa-status" style="font-size:12px; color:var(--teks); line-height:1.6; white-space:pre-wrap; max-height:160px; overflow-y:auto; background:#fff; padding:12px; border-radius:6px; border:1px solid #E2E8F0;"></div>
+            </div>
+            <div id="box-tombol-wa-order" style="display:none; margin-bottom:12px;">
+              <a id="btn-buka-wa" href="#" target="_blank" class="tombol tombol-kecil" style="width:100%; justify-content:center; background:#25D366; border-color:#1EBE5D; color:#fff; font-weight:800;">
+                <svg class="ikon ikon-s" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span>Uji Tautan Order WhatsApp Pelanggan</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- PANEL 5: RENCANA KONTEN 7 HARI -->
+          <div id="tab-pane-jadwal" style="display:none;">
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:14px; margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font:800 12px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:6px;">
+                  <svg class="ikon ikon-s" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Rencana Konten 7 Hari Produk Anda:
+                </span>
+                <button type="button" onclick="salinTeks('hasil-jadwal-7hari', this)" class="tombol tombol-kecil" style="padding:4px 8px; font-size:11px; background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
+                  <svg class="ikon ikon-s" style="width:12px; height:12px; margin-right:4px;" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Salin Jadwal 7 Hari</span>
+                </button>
+              </div>
+              <div id="hasil-jadwal-7hari" style="font-size:12px; color:var(--teks); line-height:1.6; white-space:pre-wrap; max-height:220px; overflow-y:auto; background:#fff; padding:12px; border-radius:6px; border:1px solid #E2E8F0;"></div>
+            </div>
+          </div>
+
+          <!-- Rekomendasi Jam Posting Emas -->
+          <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:10px 12px; font-size:12px; color:#1E40AF; display:flex; align-items:center; gap:8px; margin-top:14px;">
             <svg class="ikon ikon-s" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             <div><strong>Saran Jam Posting Umum:</strong> 12:00–13:00 WIB &amp; 19:00–21:00 WIB (Waktu istirahat &amp; santai malam).</div>
           </div>
@@ -416,7 +515,7 @@
           <div style="margin-bottom:10px;"><svg class="ikon" style="width:36px; height:36px; stroke:var(--redup); margin:0 auto;" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
           <div style="font:800 16px var(--f-judul); color:var(--ink); margin-bottom:6px;">Hasil Siap Saji Akan Muncul di Sini</div>
           <p style="font-size:13px; color:var(--redup); max-width:280px; margin:0 auto; line-height:1.5;">
-            Upload foto produk Anda di sebelah kiri dan klik proses. Naskah caption promosi, 10 tagar relevan, dan foto studio resolusi tinggi akan diproses otomatis oleh AI Studio Awan!
+            Upload foto produk Anda di sebelah kiri dan klik proses. Naskah caption promosi, skrip video Reels/TikTok, status WhatsApp, dan foto studio resolusi tinggi akan diproses otomatis oleh AI Studio Awan!
           </p>
         </div>
 
@@ -1336,7 +1435,9 @@ Yuk nikmati selagi hangat!`,
     const namaProduk = document.getElementById('gen-nama-produk').value.trim() || 'Produk Unggulan Kami';
     const kategori = document.getElementById('gen-kategori-produk').value;
     const keunggulan = document.getElementById('gen-keunggulan').value.trim() || 'kualitas terbaik & terpercaya';
-    const suasanaDipilih = (document.getElementById('prompt-input') && document.getElementById('prompt-input').value.trim()) || 'Meja marmer hitam elegan dengan pencahayaan warm spotlight dramatis';
+    const tujuanKonten = (document.getElementById('gen-tujuan-konten') && document.getElementById('gen-tujuan-konten').value) || 'hard_sell';
+    const suasanaDipilih = (document.getElementById('gen-suasana-foto') && document.getElementById('gen-suasana-foto').value) || 'kafe_kayu';
+    const nomorWa = (document.getElementById('gen-nomor-wa') && document.getElementById('gen-nomor-wa').value.trim()) || '';
 
     const loadingState = document.getElementById('gen-loading-state');
     const emptyState = document.getElementById('gen-empty-state');
@@ -1363,7 +1464,9 @@ Yuk nikmati selagi hangat!`,
           namaProduk: namaProduk,
           kategori: kategori,
           keunggulan: keunggulan,
+          tujuanKonten: tujuanKonten,
           suasana: suasanaDipilih,
+          nomorWa: nomorWa,
           clientId: getClientId()
         })
       });
@@ -1416,7 +1519,7 @@ Yuk nikmati selagi hangat!`,
         if (selesai && imageUrlHasil) {
           // Sukses render AI Awan!
           setSisaKuota(getSisaKuota() - 1);
-          tampilkanHasilAiAwan(imageUrlHasil, resData.caption, resData.hashtags);
+          tampilkanHasilAiAwan(imageUrlHasil, resData);
           return;
         }
       }
@@ -1424,17 +1527,39 @@ Yuk nikmati selagi hangat!`,
       // Jika fal.ai pending kredensial atau timeout, fallback anggun ke generator lokal
       console.warn('AI Cloud tidak merespons atau sedang sinkronisasi key; beralih ke generator lokal.');
       setSisaKuota(getSisaKuota() - 1);
-      tampilkanHasilKonten(namaProduk, kategori, keunggulan);
+      tampilkanHasilKonten(namaProduk, kategori, keunggulan, tujuanKonten, suasanaDipilih, nomorWa);
 
     } catch (err) {
       console.error('Proses generator error:', err);
       // Fallback lokal jika jaringan offline
       setSisaKuota(getSisaKuota() - 1);
-      tampilkanHasilKonten(namaProduk, kategori, keunggulan);
+      tampilkanHasilKonten(namaProduk, kategori, keunggulan, tujuanKonten, suasanaDipilih, nomorWa);
     }
   }
 
-  function tampilkanHasilAiAwan(imageUrl, caption, hashtags) {
+  function gantiTabKonten(namaTab) {
+    const tabs = ['foto', 'video', 'caption', 'wa', 'jadwal'];
+    tabs.forEach(t => {
+      const elBtn = document.getElementById('tab-btn-' + t);
+      const elPane = document.getElementById('tab-pane-' + t);
+      if (elBtn) {
+        if (t === namaTab) {
+          elBtn.style.background = '#08694F';
+          elBtn.style.color = '#FFFFFF';
+          elBtn.style.borderColor = '#065F46';
+        } else {
+          elBtn.style.background = '#F8FAFC';
+          elBtn.style.color = '#475569';
+          elBtn.style.borderColor = '#CBD5E1';
+        }
+      }
+      if (elPane) {
+        elPane.style.display = (t === namaTab) ? 'block' : 'none';
+      }
+    });
+  }
+
+  function tampilkanHasilAiAwan(imageUrl, resData) {
     document.getElementById('gen-loading-state').style.display = 'none';
     document.getElementById('gen-result-state').style.display = 'block';
 
@@ -1457,11 +1582,35 @@ Yuk nikmati selagi hangat!`,
     btnDownload.download = 'foto-studio-contact-ai.jpg';
     btnDownload.querySelector('span').textContent = 'Download Foto Studio AI Asli (Resolusi Penuh)';
 
-    document.getElementById('hasil-caption').textContent = caption;
-    document.getElementById('hasil-hashtag').textContent = hashtags;
+    // Isi 5 Tab Konten Kreator
+    document.getElementById('hasil-caption').textContent = resData.caption || '';
+    document.getElementById('hasil-hashtag').textContent = resData.hashtags || '';
+    
+    if (document.getElementById('hasil-video-script')) {
+      document.getElementById('hasil-video-script').textContent = resData.videoScript || '';
+    }
+    if (document.getElementById('hasil-wa-status')) {
+      document.getElementById('hasil-wa-status').textContent = resData.waStatus || '';
+    }
+    if (document.getElementById('hasil-jadwal-7hari')) {
+      document.getElementById('hasil-jadwal-7hari').textContent = resData.ideKonten7Hari || '';
+    }
+
+    const boxTombolWa = document.getElementById('box-tombol-wa-order');
+    const btnBukaWa = document.getElementById('btn-buka-wa');
+    if (boxTombolWa && btnBukaWa) {
+      if (resData.linkWa) {
+        boxTombolWa.style.display = 'block';
+        btnBukaWa.href = resData.linkWa;
+      } else {
+        boxTombolWa.style.display = 'none';
+      }
+    }
+
+    gantiTabKonten('foto');
   }
 
-  function tampilkanHasilKonten(nama, kategori, keunggulan) {
+  function tampilkanHasilKonten(nama, kategori, keunggulan, tujuanKonten, suasana, nomorWa) {
     document.getElementById('gen-loading-state').style.display = 'none';
     document.getElementById('gen-result-state').style.display = 'block';
 
@@ -1475,32 +1624,73 @@ Yuk nikmati selagi hangat!`,
 
     let caption = '';
     let hashtags = '';
+    const ctaWa = nomorWa ? `Pemesanan via WhatsApp: https://wa.me/${nomorWa}` : 'Silakan klik tautan di bio untuk informasi dan pemesanan.';
 
     if (kategori === 'kuliner') {
-      caption = `Pilihan tepat untuk penikmat kuliner berkualitas. ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi, ${keunggulan}. Sangat tepat untuk menemani waktu kerja, santai bersama keluarga, maupun suguhan istimewa.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang. Silakan klik tautan di bio untuk informasi dan pemesanan.`;
+      caption = `Pilihan tepat untuk penikmat kuliner berkualitas! ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi: ${keunggulan}. Sangat tepat untuk menemani waktu kerja, santai bersama keluarga, maupun hidangan spesial.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang.\n${ctaWa}`;
       hashtags = `#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enaksekali #reelskuliner`;
     } else if (kategori === 'skincare') {
-      caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nPromo Khusus Hari Ini:\nDapatkan penawaran istimewa untuk pembelian pekan ini. Silakan kunjungi tautan di profil sebelum masa promo berakhir.`;
+      caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nPromo Khusus Hari Ini:\nDapatkan penawaran istimewa untuk pembelian pekan ini.\n${ctaWa}`;
       hashtags = `#skincareroutine #racunskincare #kulitglowing #skincarebpom #beautytips #fypindonesia #viralreels #cantikalami #perawatanwajah #racuntiktok`;
     } else if (kategori === 'fashion') {
-      caption = `Tampil percaya diri dengan busana yang nyaman dan elegan: ${nama}.\n\nDirancang menggunakan material berkualitas yang jatuh rapi di badan. ${keunggulan}. Pilihan serasi baik untuk agenda formal maupun kegiatan santai harian.\n\nPersediaan Terbatas:\nAmankan ukuran dan varian pilihan Anda sekarang juga melalui tautan di profil.`;
+      caption = `Tampil percaya diri dengan busana yang nyaman dan elegan: ${nama}.\n\nDirancang menggunakan material berkualitas yang jatuh rapi di badan: ${keunggulan}. Pilihan serasi baik untuk agenda formal maupun kegiatan santai harian.\n\nPersediaan Terbatas:\nAmankan ukuran dan varian pilihan Anda sekarang juga!\n${ctaWa}`;
       hashtags = `#ootdindonesia #fashionviral #outfitharian #racuntiktok #bajubagus #hijabstyle #reelsfashion #fypoutfit #racunshopee #styleinspo`;
     } else if (kategori === 'herbal') {
-      caption = `Kesehatan adalah investasi terbaik untuk masa depan keluarga. Jaga stamina harian dengan ${nama}.\n\nKhasiat alami murni untuk mendukung daya tahan tubuh secara optimal. ${keunggulan}. Tanpa bahan tambahan yang merugikan, aman untuk konsumsi harian.\n\nPemesanan & Konsultasi:\nHubungi kami melalui tautan di profil untuk mendapatkan produk asli bergaransi.`;
+      caption = `Kesehatan adalah investasi terbaik untuk masa depan keluarga. Jaga stamina harian dengan ${nama}.\n\nKhasiat alami murni untuk mendukung daya tahan tubuh secara optimal: ${keunggulan}. Tanpa bahan tambahan yang merugikan, aman untuk konsumsi harian.\n\nPemesanan & Konsultasi:\n${ctaWa}`;
       hashtags = `#hidupsehat #herbalalami #kesehatantubuh #suplemenalami #madumurni #tipssehat #herbalindonesia #fypkesehatan #sehatberkah #racunsehat`;
     } else {
-      caption = `Solusi fungsional untuk menunjang aktivitas harian Anda: ${nama}.\n\nKualitas teruji, andal, dan ${keunggulan}. Dibuat secara presisi untuk memberikan kemudahan serta efisiensi maksimal.\n\nPromo Perdana:\nDapatkan penawaran harga terbaik khusus hari ini dengan mengunjungi tautan di profil.`;
+      caption = `Solusi fungsional untuk menunjang aktivitas harian Anda: ${nama}.\n\nKualitas teruji, andal, dan ${keunggulan}. Dibuat secara presisi untuk memberikan kemudahan serta efisiensi maksimal.\n\nPromo Perdana:\nDapatkan penawaran harga terbaik khusus hari ini!\n${ctaWa}`;
       hashtags = `#produkviral #racuntiktok #barangunik #solusicerdas #fypindonesia #viralhariini #tokoonline #belanjaonline #murahberkualitas #reelsindonesia`;
     }
 
+    // Skrip Video Reels / TikTok
+    let videoScript = `[DURASI: 20 DETIK]\n\n` +
+      `00:00 - 00:03 (HOOK PEMBUKA)\n` +
+      `• Teks di Layar: "Pecinta ${kategori === 'kuliner' ? 'kuliner' : 'produk berkualitas'} wajib tahu ini!"\n` +
+      `• Visual Kamera HP: Close-up produk ${nama}, perlihatkan detail tekstur asli dan keunggulan visual.\n` +
+      `• Suara/Voiceover: "Jangan lewati video ini kalau kamu cari produk yang benar-benar terpercaya!"\n\n` +
+      `00:03 - 00:12 (BEDAH KUALITAS & MANFAAT)\n` +
+      `• Visual Kamera HP: Tunjukkan produk saat digunakan atau disajikan dalam pencahayaan alami yang memikat.\n` +
+      `• Suara/Voiceover: "Ini dia ${nama}. Keunggulan utamanya: ${keunggulan}. Dibuat dengan standar mutu tinggi."\n\n` +
+      `00:12 - 00:20 (CALL TO ACTION)\n` +
+      `• Visual Kamera HP: Tampilkan kemasan rapi dan teks promo terbatas.\n` +
+      `• Suara/Voiceover: "Khusus pemesanan hari ini ada harga spesial. ${nomorWa ? 'Klik link WhatsApp di profil sekarang!' : 'Ketik MAU di komentar sekarang!'}"`;
+
+    // Status WhatsApp
+    const waKontak = nomorWa ? `\n\nBalas status ini atau klik wa.me/${nomorWa} yaa!` : `\n\nBalas status ini langsung untuk amankan pesanan kamu!`;
+    const waStatus = `Halo semuanyaa! Yang dari kemarin nanyain stok ${nama}...\n\nHari ini stok baru saja siap! Tetap terjaga dengan ${keunggulan}.\n\nSlot hari ini terbatas, siapa cepat dia dapat yaa!${waKontak}`;
+
+    // Rencana Konten 7 Hari
+    const ide7Hari = `📅 RENCANA KONTEN 7 HARI UNTUK MENINGKATKAN OMZET:
+• HARI 1 (Reels/TikTok): Video Hook Penasaran — "3 Alasan Kenapa ${nama} Selalu Dicari Pelanggan".
+• HARI 2 (Instagram Feed): Foto Studio Katalog Premium + Cerita di Balik Bahan Pilihan.
+• HARI 3 (WhatsApp Story): Video Singkat Packing Pesanan — Menunjukkan antusiasme pembeli (Social Proof).
+• HARI 4 (Reels/TikTok): Video Before-After / Review Jujur Pelanggan Pertama.
+• HARI 5 (Instagram Feed & Reels): Edukasi Masalah Konsumen & Kenapa ${nama} Jadi Solusi Terbaik.
+• HARI 6 (WhatsApp Story & Feed): Promo Kilat Akhir Pekan (Beli 2 Lebih Hemat / Gratis Ongkir).
+• HARI 7 (Reels/Story): Video Interaksi Santai / FAQ — Menjawab 3 pertanyaan yang paling sering ditanyakan pelanggan.`;
+
     document.getElementById('hasil-caption').textContent = caption;
     document.getElementById('hasil-hashtag').textContent = hashtags;
+    if (document.getElementById('hasil-video-script')) document.getElementById('hasil-video-script').textContent = videoScript;
+    if (document.getElementById('hasil-wa-status')) document.getElementById('hasil-wa-status').textContent = waStatus;
+    if (document.getElementById('hasil-jadwal-7hari')) document.getElementById('hasil-jadwal-7hari').textContent = ide7Hari;
+
+    const boxTombolWa = document.getElementById('box-tombol-wa-order');
+    const btnBukaWa = document.getElementById('btn-buka-wa');
+    if (boxTombolWa && btnBukaWa) {
+      if (nomorWa) {
+        boxTombolWa.style.display = 'block';
+        btnBukaWa.href = `https://wa.me/${nomorWa}?text=${encodeURIComponent('Halo, saya tertarik dengan ' + nama + '. Boleh minta info detail pemesanan?')}`;
+      } else {
+        boxTombolWa.style.display = 'none';
+      }
+    }
 
     // Refresh canvas jika pengguna sudah mengunggah foto
     if (uploadedFotoImg) {
       gambarStudioCanvas(uploadedFotoImg);
     } else {
-      // Buat sample visual produk jika belum upload
       const canvasEl = document.getElementById('gen-canvas');
       const ctx = canvasEl.getContext('2d');
       gambarStudioCanvas(null);
@@ -1509,6 +1699,8 @@ Yuk nikmati selagi hangat!`,
       ctx.textAlign = 'center';
       ctx.fillText(nama, canvasEl.width/2, canvasEl.height * 0.5);
     }
+
+    gantiTabKonten('foto');
   }
 
   function salinTeks(elementId, btn) {
