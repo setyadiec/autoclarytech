@@ -204,7 +204,8 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         prompt: promptStudio,
         image_url: foto,
-        num_images: 1
+        num_images: 1,
+        aspect_ratio: '1:1'
       }),
       signal: controller.signal
     });
