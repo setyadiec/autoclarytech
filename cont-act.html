@@ -375,11 +375,75 @@
 
       <!-- KOLOM KANAN: HASIL KONTEN KREATOR 360° (FOTO STUDIO + REELS + CAPTION + WA STORY + JADWAL 7 HARI) -->
       <div>
-        <!-- Kotak Animasi Loading Saat Memproses -->
-        <div id="gen-loading-state" style="display:none; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:var(--r); padding:36px 20px; text-align:center;">
-          <div style="width:40px; height:40px; border:4px solid #E2E8F0; border-top-color:#00A896; border-radius:50%; margin:0 auto 16px; animation:spin 1s linear infinite;"></div>
-          <div style="font:800 16px var(--f-judul); color:var(--ink); margin-bottom:6px;" id="gen-loading-teks">Menganalisis anatomi produk &amp; label kemasan...</div>
-          <p style="font-size:12px; color:var(--redup); margin:0;" id="gen-loading-sub">Memasang pencahayaan studio iklan &amp; meracik copywriting psikologis pembeli</p>
+        <!-- Kotak Animasi Loading Saat Memproses (Visual Stepper 4 Fase) -->
+        <div id="gen-loading-state" style="display:none; background:#FFFFFF; border:1.5px solid #CBD5E1; border-radius:var(--r); padding:24px 20px; text-align:left; box-shadow:var(--timbul-kecil);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span style="font:800 15px var(--f-judul); color:var(--ink); display:inline-flex; align-items:center; gap:8px;">
+              <span class="badge-titik" style="background:#059669; animation:pulse 1.5s infinite;"></span>
+              Proses Pembuatan Konten Sedang Berjalan
+            </span>
+            <span id="gen-loading-persen" style="font:800 13px var(--f-mono); color:#065F46; background:#ECFDF5; padding:4px 10px; border-radius:6px; border:1px solid #A7F3D0;">15%</span>
+          </div>
+
+          <!-- Progress Bar Dinamis -->
+          <div style="width:100%; height:8px; background:#E2E8F0; border-radius:999px; overflow:hidden; margin-bottom:18px;">
+            <div id="gen-progress-bar" style="width:15%; height:100%; background:linear-gradient(90deg, #059669 0%, #10B981 100%); transition:width 0.4s ease;"></div>
+          </div>
+
+          <!-- Stepper 4 Tahap Berjenjang -->
+          <div style="display:flex; flex-direction:column; gap:10px;" id="gen-stepper-list">
+            <!-- Tahap 1 -->
+            <div id="step-1" class="step-item" style="display:flex; align-items:flex-start; gap:12px; padding:12px; border-radius:8px; background:#fff; border:1.5px solid #059669; transition:all 0.3s ease;">
+              <div id="step-1-icon" style="width:26px; height:26px; border-radius:50%; background:#ECFDF5; color:#065F46; display:flex; align-items:center; justify-content:center; font:700 12px var(--f-mono); flex-shrink:0;">1</div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <strong style="font-size:13px; color:var(--ink);">Fase 1: Analisis Citra &amp; Kompresi Produk</strong>
+                  <span id="step-1-badge" style="font-size:11px; font-weight:800; color:#08694F;">Sedang Berjalan</span>
+                </div>
+                <div style="font-size:11px; color:var(--redup); margin-top:2px;">Mengoptimalkan foto kamera HP dan menjaga detail label kemasan asli.</div>
+              </div>
+            </div>
+
+            <!-- Tahap 2 -->
+            <div id="step-2" class="step-item" style="display:flex; align-items:flex-start; gap:12px; padding:12px; border-radius:8px; background:#F8FAFC; border:1px solid #E2E8F0; transition:all 0.3s ease;">
+              <div id="step-2-icon" style="width:26px; height:26px; border-radius:50%; background:#E2E8F0; color:#64748B; display:flex; align-items:center; justify-content:center; font:700 12px var(--f-mono); flex-shrink:0;">2</div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <strong style="font-size:13px; color:var(--ink);">Fase 2: AI Studio Awan Render Tata Cahaya</strong>
+                  <span id="step-2-badge" style="font-size:11px; font-weight:800; color:#64748B;">Menunggu</span>
+                </div>
+                <div style="font-size:11px; color:var(--redup); margin-top:2px;">Memasang pencahayaan studio komersial, bayangan kontak alami &amp; latar suasana pilihan.</div>
+              </div>
+            </div>
+
+            <!-- Tahap 3 -->
+            <div id="step-3" class="step-item" style="display:flex; align-items:flex-start; gap:12px; padding:12px; border-radius:8px; background:#F8FAFC; border:1px solid #E2E8F0; transition:all 0.3s ease;">
+              <div id="step-3-icon" style="width:26px; height:26px; border-radius:50%; background:#E2E8F0; color:#64748B; display:flex; align-items:center; justify-content:center; font:700 12px var(--f-mono); flex-shrink:0;">3</div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <strong style="font-size:13px; color:var(--ink);">Fase 3: Pembuatan Paket Konten 360°</strong>
+                  <span id="step-3-badge" style="font-size:11px; font-weight:800; color:#64748B;">Menunggu</span>
+                </div>
+                <div style="font-size:11px; color:var(--redup); margin-top:2px;">Meracik skrip Reels/TikTok, caption jualan, status WA &amp; rencana posting 7 hari.</div>
+              </div>
+            </div>
+
+            <!-- Tahap 4 -->
+            <div id="step-4" class="step-item" style="display:flex; align-items:flex-start; gap:12px; padding:12px; border-radius:8px; background:#F8FAFC; border:1px solid #E2E8F0; transition:all 0.3s ease;">
+              <div id="step-4-icon" style="width:26px; height:26px; border-radius:50%; background:#E2E8F0; color:#64748B; display:flex; align-items:center; justify-content:center; font:700 12px var(--f-mono); flex-shrink:0;">4</div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <strong style="font-size:13px; color:var(--ink);">Fase 4: Finalisasi &amp; Penyajian Hasil Siap Pakai</strong>
+                  <span id="step-4-badge" style="font-size:11px; font-weight:800; color:#64748B;">Menunggu</span>
+                </div>
+                <div style="font-size:11px; color:var(--redup); margin-top:2px;">Menyiapkan foto studio HD, tombol unduhan, dan tautan pemesanan WhatsApp.</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="font-size:11px; color:var(--redup); text-align:center; margin-top:16px;" id="gen-loading-timer">
+            Estimasi waktu total: ~30–40 detik di GPU serverless AI awan
+          </div>
         </div>
 
         <!-- Kotak Hasil Siap Pakai -->
@@ -1442,19 +1506,20 @@ Yuk nikmati selagi hangat!`,
     const loadingState = document.getElementById('gen-loading-state');
     const emptyState = document.getElementById('gen-empty-state');
     const resultState = document.getElementById('gen-result-state');
-    const loadingTeks = document.getElementById('gen-loading-teks');
-    const loadingSub = document.getElementById('gen-loading-sub');
 
     emptyState.style.display = 'none';
     resultState.style.display = 'none';
     loadingState.style.display = 'block';
 
-    loadingTeks.textContent = 'Menghubungkan ke Studio AI Awan (fal.ai)...';
-    loadingSub.textContent = 'Mengompres dan menyiapkan foto produk kamera HP Anda...';
+    // Inisialisasi Stepper: Fase 1 (Analisis & Kompresi Foto)
+    setTahapProses(1, 15, 'Fase 1: Menganalisis anatomi produk dan mengompres foto HP...');
 
     const fotoDataUrl = kompresFotoBase64(uploadedFotoImg);
 
     try {
+      // Masuk Fase 2: Menghubungi Serverless AI Studio fal.ai
+      setTahapProses(2, 25, 'Fase 2: Menghubungkan antrean GPU AI Studio Awan (fal.ai)...');
+
       // Panggil Serverless API contact-generate
       const resp = await fetch('/api/contact-generate', {
         method: 'POST',
@@ -1483,10 +1548,7 @@ Yuk nikmati selagi hangat!`,
       }
 
       if (resp.ok && resData && resData.status === 'queued') {
-        // Polling ke antrean fal.ai
-        loadingTeks.textContent = 'AI Studio Awan sedang merender pencahayaan & bayangan...';
-        loadingSub.textContent = 'Model Flux-Pro Kontext berjalan di cloud GPU (estimasi ~30–40 detik)...';
-
+        // Polling ke antrean GPU fal.ai
         const statusUrl = resData.statusUrl;
         const responseUrl = resData.responseUrl;
         const requestId = resData.requestId;
@@ -1499,6 +1561,10 @@ Yuk nikmati selagi hangat!`,
         while (!selesai && attempts < maxAttempts) {
           await new Promise(r => setTimeout(r, 3000));
           attempts++;
+          const detikBerjalan = attempts * 3;
+          // Hitung progres dinamis bertahap dari 30% hingga 85%
+          const progresDinamis = Math.min(85, 25 + Math.floor(attempts * 2.2));
+          setTahapProses(2, progresDinamis, `Fase 2: Model Flux-Pro Kontext sedang merender pencahayaan studio (${detikBerjalan} detik)...`);
 
           try {
             const pollResp = await fetch(`/api/contact-status?requestId=${encodeURIComponent(requestId)}&statusUrl=${encodeURIComponent(statusUrl)}&responseUrl=${encodeURIComponent(responseUrl)}`);
@@ -1508,8 +1574,6 @@ Yuk nikmati selagi hangat!`,
               imageUrlHasil = pollData.imageUrl;
               selesai = true;
               break;
-            } else if (pollData.status === 'in_progress') {
-              loadingSub.textContent = `Proses render AI awan sedang berjalan... (${attempts * 3} detik)`;
             }
           } catch(pollErr) {
             console.warn('Polling error:', pollErr);
@@ -1517,6 +1581,14 @@ Yuk nikmati selagi hangat!`,
         }
 
         if (selesai && imageUrlHasil) {
+          // Fase 3 Selesai: Penyusunan Paket Konten 360 Derajat
+          setTahapProses(3, 92, 'Fase 3: Merangkum skrip Reels/TikTok, caption feed, status WA & rencana 7 hari...');
+          await new Promise(r => setTimeout(r, 500));
+
+          // Fase 4: Finalisasi & Menampilkan Hasil Siap Pakai
+          setTahapProses(4, 100, 'Fase 4: Finalisasi selesai 100%! Menyajikan seluruh aset siap pakai...');
+          await new Promise(r => setTimeout(r, 400));
+
           // Sukses render AI Awan!
           setSisaKuota(getSisaKuota() - 1);
           tampilkanHasilAiAwan(imageUrlHasil, resData);
@@ -1526,14 +1598,65 @@ Yuk nikmati selagi hangat!`,
 
       // Jika fal.ai pending kredensial atau timeout, fallback anggun ke generator lokal
       console.warn('AI Cloud tidak merespons atau sedang sinkronisasi key; beralih ke generator lokal.');
+      setTahapProses(3, 85, 'Fase 3: Meracik copywriting jualan & naskah promosi...');
+      await new Promise(r => setTimeout(r, 400));
+      setTahapProses(4, 100, 'Fase 4: Menyajikan hasil studio siap pakai...');
       setSisaKuota(getSisaKuota() - 1);
       tampilkanHasilKonten(namaProduk, kategori, keunggulan, tujuanKonten, suasanaDipilih, nomorWa);
 
     } catch (err) {
       console.error('Proses generator error:', err);
       // Fallback lokal jika jaringan offline
+      setTahapProses(3, 85, 'Fase 3: Meracik copywriting jualan & naskah promosi...');
+      await new Promise(r => setTimeout(r, 400));
+      setTahapProses(4, 100, 'Fase 4: Menyajikan hasil studio siap pakai...');
       setSisaKuota(getSisaKuota() - 1);
       tampilkanHasilKonten(namaProduk, kategori, keunggulan, tujuanKonten, suasanaDipilih, nomorWa);
+    }
+  }
+
+  // Pengendali Tampilan Fase / Tahap Stepper Loading
+  function setTahapProses(fase, persen, pesanTimer) {
+    const elPersen = document.getElementById('gen-loading-persen');
+    const elBar = document.getElementById('gen-progress-bar');
+    const elTimer = document.getElementById('gen-loading-timer');
+
+    if (elPersen) elPersen.textContent = (persen || 15) + '%';
+    if (elBar) elBar.style.width = (persen || 15) + '%';
+    if (elTimer && pesanTimer) elTimer.textContent = pesanTimer;
+
+    for (let i = 1; i <= 4; i++) {
+      const stepItem = document.getElementById('step-' + i);
+      const stepIcon = document.getElementById('step-' + i + '-icon');
+      const stepBadge = document.getElementById('step-' + i + '-badge');
+
+      if (!stepItem || !stepIcon || !stepBadge) continue;
+
+      if (i < fase) {
+        stepItem.style.background = '#F0FDF4';
+        stepItem.style.borderColor = '#A7F3D0';
+        stepIcon.style.background = '#059669';
+        stepIcon.style.color = '#FFFFFF';
+        stepIcon.innerHTML = '<svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:3;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        stepBadge.textContent = 'Selesai';
+        stepBadge.style.color = '#059669';
+      } else if (i === fase) {
+        stepItem.style.background = '#FFFFFF';
+        stepItem.style.borderColor = '#059669';
+        stepIcon.style.background = '#ECFDF5';
+        stepIcon.style.color = '#065F46';
+        stepIcon.innerHTML = '<span style="display:inline-block;animation:spin 1.5s linear infinite;">⚙</span>';
+        stepBadge.textContent = 'Sedang Berjalan';
+        stepBadge.style.color = '#08694F';
+      } else {
+        stepItem.style.background = '#F8FAFC';
+        stepItem.style.borderColor = '#E2E8F0';
+        stepIcon.style.background = '#E2E8F0';
+        stepIcon.style.color = '#64748B';
+        stepIcon.textContent = i;
+        stepBadge.textContent = 'Menunggu';
+        stepBadge.style.color = '#64748B';
+      }
     }
   }
 
@@ -1627,19 +1750,19 @@ Yuk nikmati selagi hangat!`,
     const ctaWa = nomorWa ? `Pemesanan via WhatsApp: https://wa.me/${nomorWa}` : 'Silakan klik tautan di bio untuk informasi dan pemesanan.';
 
     if (kategori === 'kuliner') {
-      caption = `Pilihan tepat untuk penikmat kuliner berkualitas! ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi: ${keunggulan}. Sangat tepat untuk menemani waktu kerja, santai bersama keluarga, maupun hidangan spesial.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang.\n${ctaWa}`;
+      caption = `Pilihan tepat untuk penikmat kuliner berkualitas! ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi: ${keunggulan}. Sangat pas untuk menemani waktu kerja, santai bersama keluarga, maupun hidangan spesial.\n\nInformasi & Pemesanan:\n${ctaWa}`;
       hashtags = `#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enaksekali #reelskuliner`;
     } else if (kategori === 'skincare') {
-      caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nPromo Khusus Hari Ini:\nDapatkan penawaran istimewa untuk pembelian pekan ini.\n${ctaWa}`;
+      caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nInformasi & Pemesanan:\n${ctaWa}`;
       hashtags = `#skincareroutine #racunskincare #kulitglowing #skincarebpom #beautytips #fypindonesia #viralreels #cantikalami #perawatanwajah #racuntiktok`;
     } else if (kategori === 'fashion') {
-      caption = `Tampil percaya diri dengan busana yang nyaman dan elegan: ${nama}.\n\nDirancang menggunakan material berkualitas yang jatuh rapi di badan: ${keunggulan}. Pilihan serasi baik untuk agenda formal maupun kegiatan santai harian.\n\nPersediaan Terbatas:\nAmankan ukuran dan varian pilihan Anda sekarang juga!\n${ctaWa}`;
+      caption = `Tampil percaya diri dengan busana yang nyaman dan elegan: ${nama}.\n\nDirancang menggunakan material berkualitas yang jatuh rapi di badan: ${keunggulan}. Pilihan serasi baik untuk agenda formal maupun kegiatan santai harian.\n\nInformasi & Pemesanan:\n${ctaWa}`;
       hashtags = `#ootdindonesia #fashionviral #outfitharian #racuntiktok #bajubagus #hijabstyle #reelsfashion #fypoutfit #racunshopee #styleinspo`;
     } else if (kategori === 'herbal') {
-      caption = `Kesehatan adalah investasi terbaik untuk masa depan keluarga. Jaga stamina harian dengan ${nama}.\n\nKhasiat alami murni untuk mendukung daya tahan tubuh secara optimal: ${keunggulan}. Tanpa bahan tambahan yang merugikan, aman untuk konsumsi harian.\n\nPemesanan & Konsultasi:\n${ctaWa}`;
+      caption = `Kesehatan adalah investasi terbaik untuk masa depan keluarga. Jaga stamina harian dengan ${nama}.\n\nKhasiat alami murni untuk mendukung daya tahan tubuh secara optimal: ${keunggulan}. Tanpa bahan tambahan yang merugikan, aman untuk konsumsi harian.\n\nInformasi & Pemesanan:\n${ctaWa}`;
       hashtags = `#hidupsehat #herbalalami #kesehatantubuh #suplemenalami #madumurni #tipssehat #herbalindonesia #fypkesehatan #sehatberkah #racunsehat`;
     } else {
-      caption = `Solusi fungsional untuk menunjang aktivitas harian Anda: ${nama}.\n\nKualitas teruji, andal, dan ${keunggulan}. Dibuat secara presisi untuk memberikan kemudahan serta efisiensi maksimal.\n\nPromo Perdana:\nDapatkan penawaran harga terbaik khusus hari ini!\n${ctaWa}`;
+      caption = `Solusi fungsional untuk menunjang aktivitas harian Anda: ${nama}.\n\nKualitas teruji, andal, dan ${keunggulan}. Dibuat secara presisi untuk memberikan kemudahan serta efisiensi maksimal.\n\nInformasi & Pemesanan:\n${ctaWa}`;
       hashtags = `#produkviral #racuntiktok #barangunik #solusicerdas #fypindonesia #viralhariini #tokoonline #belanjaonline #murahberkualitas #reelsindonesia`;
     }
 
@@ -1653,12 +1776,13 @@ Yuk nikmati selagi hangat!`,
       `• Visual Kamera HP: Tunjukkan produk saat digunakan atau disajikan dalam pencahayaan alami yang memikat.\n` +
       `• Suara/Voiceover: "Ini dia ${nama}. Keunggulan utamanya: ${keunggulan}. Dibuat dengan standar mutu tinggi."\n\n` +
       `00:12 - 00:20 (CALL TO ACTION)\n` +
-      `• Visual Kamera HP: Tampilkan kemasan rapi dan teks promo terbatas.\n` +
-      `• Suara/Voiceover: "Khusus pemesanan hari ini ada harga spesial. ${nomorWa ? 'Klik link WhatsApp di profil sekarang!' : 'Ketik MAU di komentar sekarang!'}"`;
+      `• Visual Kamera HP: Tampilkan kemasan rapi dan kontak pemesanan.\n` +
+      `• Suara/Voiceover: "Untuk informasi detail dan pemesanan: ${nomorWa ? 'klik link WhatsApp di profil sekarang!' : 'ketik MAU di komentar sekarang!'}"`;
 
     // Status WhatsApp
-    const waKontak = nomorWa ? `\n\nBalas status ini atau klik wa.me/${nomorWa} yaa!` : `\n\nBalas status ini langsung untuk amankan pesanan kamu!`;
-    const waStatus = `Halo semuanyaa! Yang dari kemarin nanyain stok ${nama}...\n\nHari ini stok baru saja siap! Tetap terjaga dengan ${keunggulan}.\n\nSlot hari ini terbatas, siapa cepat dia dapat yaa!${waKontak}`;
+    const waKontak = nomorWa ? `\n\nBisa langsung chat kami via WhatsApp wa.me/${nomorWa} ya!` : `\n\nBisa langsung balas status ini untuk info pemesanan ya!`;
+    const waStatus = `Halo semuanya! Buat yang mencari ${nama} berkualitas...\n\nProduk kami hadir dengan keunggulan: ${keunggulan}.\n\nSiap dipesan untuk melengkapi kebutuhan harian Anda.${waKontak}`;
+
 
     // Rencana Konten 7 Hari
     const ide7Hari = `📅 RENCANA KONTEN 7 HARI UNTUK MENINGKATKAN OMZET:

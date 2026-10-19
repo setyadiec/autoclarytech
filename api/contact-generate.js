@@ -160,18 +160,20 @@ export default async function handler(req, res) {
   const tujuanBersih = String(tujuanKonten || 'hard_sell').trim();
   const waBersih = formatNomorWa(nomorWa);
 
-  // Pemetaan suasana visual studio foto
-  let deskripsiSuasana = 'Meja marmer hitam elegan dengan pencahayaan warm spotlight dramatis';
+  // Pemetaan prompt foto studio komersial per suasana (Model fal-ai/flux-pro/kontext)
+  let promptStudio = '';
   if (suasana === 'kafe_kayu') {
-    deskripsiSuasana = 'Rustic warm wooden cafe table with cozy ambient morning light and blurred cafe background';
+    promptStudio = `High-end commercial advertising food photography of ${namaBersih}, placed neatly on a rustic warm solid wooden dining table with visible natural dark wood grain and rich organic timber texture. Cozy warm ambient cafe morning lighting, gentle natural contact shadows, soft warm rim light, blurred cozy cafe background with warm bokeh, sharp focus on product packaging and details, photorealistic 8k, authentic culinary commercial presentation`;
   } else if (suasana === 'marmer_mewah') {
-    deskripsiSuasana = 'Luxury polished marble counter with dramatic warm spotlight, subtle reflections, and clean minimalist background';
+    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a luxury polished dark marble countertop with subtle natural stone veining. Dramatic warm spotlighting, subtle clean reflections, clean minimalist studio background, sharp focus on product packaging, photorealistic 8k, prestigious commercial showcase`;
   } else if (suasana === 'alami_botanical') {
-    deskripsiSuasana = 'Fresh natural light wooden surface surrounded by lush green tropical botanical leaves and bright morning daylight';
+    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a natural light bamboo or light wooden surface surrounded by fresh green tropical leaves and organic botanical accents. Soft natural morning daylight, gentle shadows, fresh vibrant organic atmosphere, sharp focus on product details, photorealistic 8k, clean eco-friendly commercial aesthetic`;
   } else if (suasana === 'pastel_modern') {
-    deskripsiSuasana = 'Sleek pastel podium with clean contemporary minimalist studio lighting and subtle soft geometric shadows';
+    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a sleek modern pastel podium with contemporary minimalist studio setting. Soft diffused studio lighting, gentle geometric shadows, clean elegant pastel aesthetic, sharp focus on product details, photorealistic 8k, modern commercial presentation`;
   } else if (suasana && typeof suasana === 'string' && suasana.trim().length > 3) {
-    deskripsiSuasana = suasana.trim().slice(0, 300);
+    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on ${suasana.trim().slice(0, 200)}. Natural contact shadows, soft ambient warm rim lighting, sharp focus on packaging details, photorealistic 8k, authentic commercial presentation`;
+  } else {
+    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on a luxury polished dark marble counter with dramatic warm spotlighting. Natural contact shadows, sharp focus on packaging details, photorealistic 8k, authentic commercial presentation`;
   }
 
   // Kunci API fal.ai dari Environment Serverless Vercel
@@ -184,9 +186,6 @@ export default async function handler(req, res) {
       message: 'Layanan AI Awan cont-ACT sedang dalam sinkronisasi kredensial Vercel (FAL_KEY). Mohon hubungi admin atau gunakan simulator visual.'
     });
   }
-
-  // Susun Prompt Foto Studio Komersial (Model fal-ai/flux-pro/kontext)
-  const promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, placed neatly on ${deskripsiSuasana}. Natural contact shadows, soft ambient warm rim lighting, clean reflective surface, sharp focus on packaging details, photorealistic 8k, authentic commercial presentation, award-winning product showcase`;
 
   try {
     // Panggil Queue fal.ai
@@ -227,7 +226,7 @@ export default async function handler(req, res) {
     const sisaKuota = Math.max(0, MAKS_KUOTA_GRATIS - (pemakaianSaatIni + 1));
 
     // Racik Paket Konten Kreator 360 Derajat (Caption, Video Script, Status WA, Rencana 7 Hari, 10 Tagar) via LLM Awan fal.ai
-    const paketKonten = await racikPaketKontenLlm(FAL_KEY, namaBersih, kategoriBersih, keunggulanBersih, deskripsiSuasana, tujuanBersih, waBersih);
+    const paketKonten = await racikPaketKontenLlm(FAL_KEY, namaBersih, kategoriBersih, keunggulanBersih, suasana, tujuanBersih, waBersih);
 
     let linkWa = '';
     if (waBersih) {
@@ -272,13 +271,13 @@ function formatNomorWa(no) {
 // Integrasi LLM Awan fal.ai (fal-ai/any-llm) untuk copywriting presisi & 10 tagar relevan
 async function racikPaketKontenLlm(falKey, nama, kategori, keunggulan, suasana, tujuanKonten, nomorWa) {
   const penjelasanTujuan = {
-    hard_sell: 'Fokus penjualan langsung, urgensi promo terbatas, dorong beli sekarang.',
-    storytelling: 'Fokus cerita proses, kualitas bahan baku pilihan, membangun kepercayaan pembeli.',
+    hard_sell: 'Fokus penjualan langsung, manfaat nyata produk, dan dorong pemesanan segera.',
+    storytelling: 'Fokus cerita proses produksi, kualitas bahan baku pilihan, dan membangun kepercayaan pembeli.',
     edukasi: 'Fokus problem-solution, edukasi masalah konsumen yang tuntas dengan produk ini.'
-  }[tujuanKonten] || 'Meningkatkan penjualan dan minat beli produk.';
+  }[tujuanKonten] || 'Meningkatkan penjualan dan minat beli produk secara jujur.';
 
   const promptLlm = `Kamu adalah Senior Content Creator & Copywriter Khusus Produk UMKM di Indonesia (Instagram Reels, TikTok, dan WhatsApp).
-Tujuan Utama: Menciptakan konten yang terbukti meningkatkan omzet dan closing penjualan produk secara nyata.
+Tujuan Utama: Menciptakan konten yang terbukti meningkatkan omzet dan minat beli produk secara nyata, santun, dan jujur.
 
 Data Produk Klien:
 - Nama Produk: ${nama}
@@ -289,15 +288,23 @@ Data Produk Klien:
 - Kontak Pemesanan: ${nomorWa ? 'WhatsApp ' + nomorWa : 'Tautan di Profil / Bio'}
 
 Tugas: Buat 5 Aset Konten Kreator Siap Pakai:
-1. CAPTION FEED (Instagram/Facebook): Hook memikat pembuka, elaborasi manfaat produk yang menyentuh kebutuhan konsumen, penawaran menarik, dan Call to Action pemesanan yang jelas.
+1. CAPTION FEED (Instagram/Facebook): Hook memikat pembuka, elaborasi manfaat produk yang menyentuh kebutuhan konsumen secara jujur berdasarkan data keunggulan di atas, dan Call to Action pemesanan yang jelas.
 2. SKRIP VIDEO REELS & TIKTOK (15–30 Detik):
    - Hook 3 Detik (Teks di layar & narasi pembuka yang menghentikan scroll)
    - Panduan Visual B-roll Kamera HP (adegan yang harus direkam)
    - Narasi Voiceover
    - CTA Penutup
 3. STATUS WHATSAPP (Story / Chat Broadcast): Teks ringkas, ramah, mengundang calon pembeli membalas chat secara spontan.
+   [ATURAN KERAS STATUS WA]:
+   - DILARANG mengarang promo, diskon, harga potongan, atau klaim stok terbatas fiktif (seperti "lagi ada promo terbatas hari ini aja", "diskon 50%", "stok tinggal 5") KECUALI jika secara eksplisit tertulis di data keunggulan produk.
+   - HANYA ceritakan fakta produk, kualitas rasa/bahan, dan keunggulan nyata dari data klien.
 4. RENCANA KONTEN 7 HARI: Ide posting tematik Hari 1 s.d. Hari 7 (kombinasi Reels, Feed, dan Story) agar pemilik usaha konsisten jualan selama seminggu penuh.
 5. HASHTAGS: Tepat 10 tagar relevan, tertarget, dan populer.
+   [ATURAN KERAS HASHTAGS]:
+   - WAJIB TEPAT 10 TAGAR murni berawalan tanda #.
+   - DILARANG menyertakan nama kota apa pun (seperti #KulinerBandung, #KulinerJakarta, dll).
+   - DILARANG menambahkan teks penjelasan, saran, atau tanda kurung apa pun (seperti "(ganti kota jika perlu)").
+   - HANYA keluarkan 10 tagar murni dipisahkan spasi tunggal.
 
 Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
 ===CAPTION===
@@ -307,7 +314,7 @@ Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
 [Teks skrip video lengkap dengan pembagian Hook 3 Detik, Panduan Visual B-roll, Narasi Suara, dan CTA Penutup]
 
 ===WASTATUS===
-[Teks status WhatsApp ringkas dan ramah]
+[Teks status WhatsApp ringkas dan ramah tanpa klaim promo karangan]
 
 ===IDE7HARI===
 [Rencana konten Hari 1 sampai Hari 7]
@@ -345,13 +352,17 @@ Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
       let ideKonten7Hari = ideMatch ? ideMatch[1].trim() : '';
       let hashtags = hashMatch ? hashMatch[1].trim() : '';
 
-      if (caption && hashtags) {
+      // Sanitasi ketat keluaran LLM
+      const hashtagsBersih = bersihkanHashtags(hashtags, kategori);
+      const waStatusBersih = bersihkanWaStatus(waStatus, nama, keunggulan, nomorWa);
+
+      if (caption && hashtagsBersih) {
         return {
           caption,
           videoScript: videoScript || racikVideoScriptFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa),
-          waStatus: waStatus || racikWaStatusFallback(nama, kategori, keunggulan, nomorWa),
+          waStatus: waStatusBersih,
           ideKonten7Hari: ideKonten7Hari || racikIde7HariFallback(nama, kategori),
-          hashtags
+          hashtags: hashtagsBersih
         };
       }
     }
@@ -363,26 +374,75 @@ Format keluaran WAJIB persis seperti ini (tanpa basa-basi pembuka):
   return racikPaketKontenFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa);
 }
 
+// Sanitasi Hashtag: Menjamin tepat 10 tagar murni tanpa nama kota & tanpa tanda kurung
+function bersihkanHashtags(rawHashtags, kategori) {
+  if (!rawHashtags || typeof rawHashtags !== 'string') {
+    return '#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enaksekali #reelskuliner';
+  }
+
+  // 1. Buang semua teks dalam tanda kurung: (ganti kota jika perlu), dll.
+  let teks = rawHashtags.replace(/\([^)]*\)/g, ' ');
+
+  // 2. Ekstrak seluruh token hashtag (#kata)
+  let tags = teks.match(/#[A-Za-z0-9_]+/g) || [];
+
+  // 3. Buang hashtag yang mengandung nama kota
+  const daftarKota = ['bandung', 'jakarta', 'surabaya', 'jogja', 'yogyakarta', 'semarang', 'solo', 'bali', 'medan', 'makassar', 'malang', 'bogor', 'bekasi', 'tangerang', 'depok'];
+  tags = tags.filter(t => !daftarKota.some(k => t.toLowerCase().includes(k)));
+
+  // 4. Cadangan tagar murni per kategori (bebas kota)
+  const cadanganKategori = {
+    kuliner: ['#kulinerindonesia', '#kulineran', '#cemilanenak', '#makananviral', '#jajanankekinian', '#racuntiktok', '#fypkuliner', '#foodies', '#enaksekali', '#reelskuliner'],
+    skincare: ['#skincareroutine', '#racunskincare', '#kulitglowing', '#skincarebpom', '#beautytips', '#fypindonesia', '#viralreels', '#cantikalami', '#perawatanwajah', '#racuntiktok'],
+    fashion: ['#ootdindonesia', '#fashionviral', '#outfitharian', '#racuntiktok', '#bajubagus', '#hijabstyle', '#reelsfashion', '#fypoutfit', '#racunshopee', '#styleinspo'],
+    herbal: ['#hidupsehat', '#herbalalami', '#kesehatantubuh', '#suplemenalami', '#madumurni', '#tipssehat', '#herbalindonesia', '#fypkesehatan', '#sehatberkah', '#racunsehat']
+  };
+  const cadanganUmum = ['#produkviral', '#racuntiktok', '#barangunik', '#solusicerdas', '#fypindonesia', '#viralhariini', '#tokoonline', '#belanjaonline', '#murahberkualitas', '#reelsindonesia'];
+  const poolCadangan = cadanganKategori[kategori] || cadanganUmum;
+
+  for (const c of poolCadangan) {
+    if (tags.length >= 10) break;
+    if (!tags.some(t => t.toLowerCase() === c.toLowerCase())) {
+      tags.push(c);
+    }
+  }
+
+  // Tepat 10 tagar murni
+  return tags.slice(0, 10).join(' ');
+}
+
+// Sanitasi Status WA: Membersihkan klaim promo fiktif jika tidak ada di input klien
+function bersihkanWaStatus(waRaw, nama, keunggulan, nomorWa) {
+  if (!waRaw || typeof waRaw !== 'string') return racikWaStatusFallback(nama, '', keunggulan, nomorWa);
+  let hasil = waRaw
+    .replace(/Lagi ada promo TERBATAS hari ini aja lho!?/gi, '')
+    .replace(/Promo terbatas hari ini aja lho!?/gi, '')
+    .replace(/Promo terbatas hari ini!?/gi, '')
+    .replace(/Slot hari ini terbatas hanya \d+ porsi/gi, 'Siap dipesan untuk Anda')
+    .trim();
+  return hasil || racikWaStatusFallback(nama, '', keunggulan, nomorWa);
+}
+
 // Helper peracik copywriting jualan formula Hook Menarik + Manfaat + CTA
 function racikPaketKontenFallback(nama, kategori, keunggulan, tujuanKonten, nomorWa) {
   let caption = '';
   let hashtags = '';
-  const ctaText = nomorWa ? `Pemesanan via WhatsApp: https://wa.me/${nomorWa}` : 'Silakan klik tautan di bio untuk informasi dan pemesanan!';
+  const ctaText = nomorWa ? `Pemesanan via WhatsApp: https://wa.me/${nomorWa}` : 'Silakan klik tautan di profil untuk informasi dan pemesanan!';
 
   if (kategori === 'kuliner') {
-    caption = `Pilihan tepat untuk penikmat kuliner berkualitas! ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi: ${keunggulan}. Sangat tepat untuk menemani waktu kerja, kumpul keluarga, maupun hidangan spesial.\n\nPenawaran Terbatas Hari Ini:\nDapatkan harga promo khusus pemesanan sekarang.\n${ctaText}`;
+    caption = `Pilihan tepat untuk penikmat kuliner berkualitas! ${nama} hadir dengan cita rasa istimewa.\n\nDibuat dari bahan-bahan pilihan bermutu tinggi: ${keunggulan}. Sangat pas untuk menemani waktu kerja, santai bersama keluarga, maupun hidangan spesial.\n\nInformasi & Pemesanan:\n${ctaText}`;
     hashtags = `#kulinerindonesia #kulineran #cemilanenak #makananviral #jajanankekinian #racuntiktok #fypkuliner #foodies #enaksekali #reelskuliner`;
   } else if (kategori === 'skincare') {
-    caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nPromo Khusus Hari Ini:\nDapatkan penawaran istimewa untuk pembelian pekan ini.\n${ctaText}`;
+    caption = `Rawat kesehatan kulit wajah Anda dengan perawatan yang tepat. Memperkenalkan ${nama}.\n\nDiformulasikan khusus untuk ${keunggulan}. Formulanya ringan di kulit, nyaman digunakan secara rutin, serta membantu menjaga kesegaran alami wajah.\n\nInformasi & Pemesanan:\n${ctaText}`;
     hashtags = `#skincareroutine #racunskincare #kulitglowing #skincarebpom #beautytips #fypindonesia #viralreels #cantikalami #perawatanwajah #racuntiktok`;
   } else if (kategori === 'fashion') {
-    caption = `Tampil percaya diri dengan busana yang nyaman dan elegan: ${nama}.\n\nDirancang menggunakan material berkualitas yang jatuh rapi di badan: ${keunggulan}. Pilihan serasi baik untuk agenda formal maupun kegiatan santai harian.\n\nPersediaan Terbatas:\nAmankan ukuran dan varian pilihan Anda sekarang juga!\n${ctaText}`;
+    caption = `Tampil percaya diri dengan busana yang nyaman dan elegan: ${nama}.\n\nDirancang menggunakan material berkualitas yang jatuh rapi di badan: ${keunggulan}. Pilihan serasi baik untuk agenda formal maupun kegiatan santai harian.\n\nInformasi & Pemesanan:\n${ctaText}`;
     hashtags = `#ootdindonesia #fashionviral #outfitharian #racuntiktok #bajubagus #hijabstyle #reelsfashion #fypoutfit #racunshopee #styleinspo`;
   } else if (kategori === 'herbal') {
-    caption = `Kesehatan adalah investasi terbaik untuk masa depan keluarga. Jaga stamina harian dengan ${nama}.\n\nKhasiat alami murni untuk mendukung daya tahan tubuh secara optimal: ${keunggulan}. Tanpa bahan tambahan yang merugikan, aman untuk konsumsi harian.\n\nPemesanan & Konsultasi:\n${ctaText}`;
+    caption = `Kesehatan adalah investasi terbaik untuk masa depan keluarga. Jaga stamina harian dengan ${nama}.\n\nKhasiat alami murni untuk mendukung daya tahan tubuh secara optimal: ${keunggulan}. Tanpa bahan tambahan yang merugikan, aman untuk konsumsi harian.\n\nInformasi & Pemesanan:\n${ctaText}`;
     hashtags = `#hidupsehat #herbalalami #kesehatantubuh #suplemenalami #madumurni #tipssehat #herbalindonesia #fypkesehatan #sehatberkah #racunsehat`;
   } else {
-    caption = `Solusi fungsional untuk menunjang aktivitas harian Anda: ${nama}.\n\nKualitas teruji, andal, dan ${keunggulan}. Dibuat secara presisi untuk memberikan kemudahan serta efisiensi maksimal.\n\nPromo Perdana:\nDapatkan penawaran harga terbaik khusus hari ini!\n${ctaText}`;
+    caption = `Solusi fungsional untuk menunjang aktivitas harian Anda: ${nama}.\n\nKualitas teruji, andal, dan ${keunggulan}. Dibuat secara presisi untuk memberikan kemudahan serta efisiensi maksimal.\n\nInformasi & Pemesanan:\n${ctaText}`;
     hashtags = `#produkviral #racuntiktok #barangunik #solusicerdas #fypindonesia #viralhariini #tokoonline #belanjaonline #murahberkualitas #reelsindonesia`;
   }
 
@@ -406,22 +466,22 @@ function racikVideoScriptFallback(nama, kategori, keunggulan, tujuanKonten, nomo
       `• Suara/Voiceover: "Jangan tonton video ini kalau kamu gampang lapar!"\n\n` +
       `00:03 - 00:12 (BEDAH PRODUK & KEUNGGULAN)\n` +
       `• Visual Kamera HP: Tunjukkan potongan produk, saat disajikan, atau dinikmati suapan pertama dengan ekspresi puas.\n` +
-      `• Suara/Voiceover: "Ini dia ${nama}. Dibuat dari bahan pilihan: ${keunggulan}. Rasanya benar-benar bikin nagih sejak gigitan pertama."\n\n` +
-      `00:12 - 00:20 (CALL TO ACTION & PROMO)\n` +
-      `• Visual Kamera HP: Tampilkan kemasan rapi siap kirim dan tulisan promo terbatas.\n` +
-      `• Suara/Voiceover: "Khusus pemesanan hari ini ada harga promo spesial. ${ctaWa}"`;
+      `• Suara/Voiceover: "Ini dia ${nama}. Dibuat dari bahan pilihan: ${keunggulan}. Rasanya benar-benar istimewa sejak gigitan pertama."\n\n` +
+      `00:12 - 00:20 (CALL TO ACTION)\n` +
+      `• Visual Kamera HP: Tampilkan kemasan rapi siap kirim dan kontak pemesanan.\n` +
+      `• Suara/Voiceover: "Untuk informasi detail dan pemesanan: ${ctaWa}"`;
   } else if (kategori === 'skincare') {
     return `[DURASI: 20 DETIK]\n\n` +
       `00:00 - 00:03 (HOOK PEMBUKA)\n` +
       `• Teks di Layar: "Stop salah pilih skincare!"\n` +
       `• Visual Kamera HP: Teteskan atau usap lembut produk ${nama} ke kulit tangan / wajah, perlihatkan tekstur yang cepat meresap.\n` +
-      `• Suara/Voiceover: "Punya masalah kulit kusam yang bikin gak percaya diri?"\n\n` +
+      `• Suara/Voiceover: "Punya masalah kulit kusam yang bikin kurang percaya diri?"\n\n` +
       `00:03 - 00:12 (SOLUSI & BENEFIT)\n` +
       `• Visual Kamera HP: Tunjukkan botol kemasan ${nama} yang elegan dan kulit sehat bercahaya alami.\n` +
       `• Suara/Voiceover: "Cobain rutin pakai ${nama}. Formula ringannya efektif untuk ${keunggulan} tanpa rasa lengket."\n\n` +
       `00:12 - 00:20 (CALL TO ACTION)\n` +
-      `• Visual Kamera HP: Tunjukkan promo paket bundling hari ini.\n` +
-      `• Suara/Voiceover: "Amankan jatah promo sebelum kehabisan slot. ${ctaWa}"`;
+      `• Visual Kamera HP: Tunjukkan paket lengkap produk.\n` +
+      `• Suara/Voiceover: "Dapatkan produk original sekarang juga. ${ctaWa}"`;
   } else {
     return `[DURASI: 20 DETIK]\n\n` +
       `00:00 - 00:03 (HOOK PEMBUKA)\n` +
@@ -432,14 +492,14 @@ function racikVideoScriptFallback(nama, kategori, keunggulan, tujuanKonten, nomo
       `• Visual Kamera HP: Sorot detail kerapian bahan, ketahanan, dan keunggulan utama: ${keunggulan}.\n` +
       `• Suara/Voiceover: "Kini hadir ${nama}. Terbukti ${keunggulan}, praktis, dan bikin hari-hari kamu jauh lebih mudah."\n\n` +
       `00:12 - 00:20 (CALL TO ACTION)\n` +
-      `• Visual Kamera HP: Kemasan rapi dan teks promo terbatas.\n` +
-      `• Suara/Voiceover: "Persediaan terbatas minggu ini. Langsung pesan sekarang lewat ${ctaWa}"`;
+      `• Visual Kamera HP: Kemasan rapi dan kontak pemesanan.\n` +
+      `• Suara/Voiceover: "Siap kirim ke tempat Anda. Langsung pesan sekarang lewat ${ctaWa}"`;
   }
 }
 
 function racikWaStatusFallback(nama, kategori, keunggulan, nomorWa) {
-  const kontak = nomorWa ? `\n\nBalas status ini atau klik wa.me/${nomorWa} yaa!` : `\n\nBalas status ini langsung untuk amankan porsi kamu!`;
-  return `Halo semuanyaa! Yang dari kemarin nanyain stok ${nama} ready kapan...\n\nHari ini baru aja selesai diproduksi segar! Tetap dengan keunggulan: ${keunggulan}.\n\nSlot hari ini terbatas hanya 25 porsi/paket yaa. Siapa cepat dia dapat!${kontak}`;
+  const kontak = nomorWa ? `\n\nBisa langsung chat kami via WhatsApp wa.me/${nomorWa} ya!` : `\n\nBisa langsung balas status ini untuk info pemesanan ya!`;
+  return `Halo semuanya! Buat yang mencari ${nama} berkualitas...\n\nProduk kami dibuat dengan keunggulan: ${keunggulan}.\n\nSiap dipesan untuk menemani aktivitas harian Anda.${kontak}`;
 }
 
 function racikIde7HariFallback(nama, kategori) {
@@ -449,7 +509,8 @@ function racikIde7HariFallback(nama, kategori) {
 • HARI 3 (WhatsApp Story): Video Singkat Packing Pesanan — Menunjukkan antusiasme pembeli (Social Proof).
 • HARI 4 (Reels/TikTok): Video Before-After / Review Jujur Pelanggan Pertama.
 • HARI 5 (Instagram Feed & Reels): Edukasi Masalah Konsumen & Kenapa ${nama} Jadi Solusi Terbaik.
-• HARI 6 (WhatsApp Story & Feed): Promo Kilat Akhir Pekan (Beli 2 Lebih Hemat / Gratis Ongkir).
+• HARI 6 (WhatsApp Story & Feed): Tips & Rekomendasi Penggunaan / Sajian Terbaik.
 • HARI 7 (Reels/Story): Video Interaksi Santai / FAQ — Menjawab 3 pertanyaan yang paling sering ditanyakan pelanggan.`;
 }
+
 
