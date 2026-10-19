@@ -469,8 +469,9 @@
             <div id="gen-preview-box" style="position:relative; border-radius:10px; overflow:hidden; margin-bottom:14px; background:#F8FAFC; border:1px solid #E2E8F0; text-align:center;">
               <canvas id="gen-canvas" width="1080" height="1080" style="width:100%; max-height:360px; object-fit:contain; display:block; margin:0 auto;"></canvas>
               <img id="gen-result-img" src="" alt="Hasil Studio AI Awan" style="width:100%; height:auto; max-height:480px; object-fit:contain; display:none; margin:0 auto; border-radius:8px;">
-              <div id="gen-badge-overlay" style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.5); color:#fff; font-size:10px; padding:3px 8px; border-radius:4px; backdrop-filter:blur(4px);">
-                Studio cont-ACT
+              <div id="gen-badge-overlay" style="position:absolute; bottom:10px; right:10px; display:inline-flex; align-items:center; gap:6px; background:rgba(11,19,41,0.8); color:#FFFFFF; font:700 11px 'Plus Jakarta Sans', sans-serif; padding:5px 10px; border-radius:6px; backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.22); box-shadow:0 2px 8px rgba(0,0,0,0.35); pointer-events:none;">
+                <img src="/assets/logo_icon_mark_bapak.png" alt="Logo ACT" style="width:15px; height:15px; display:block; object-fit:contain;">
+                <span style="letter-spacing:0.02em;">AutoClary<span style="color:#00d2b4;">Tech</span></span>
               </div>
             </div>
             <div>
@@ -1290,6 +1291,8 @@ Yuk nikmati selagi hangat!`,
      STUDIO GENERATOR cont-ACT (APLIKASI WEB ZERO FRICTION)
      ========================================================== */
   let uploadedFotoImg = null;
+  const actLogoWatermarkImg = new Image();
+  actLogoWatermarkImg.src = '/assets/logo_icon_mark_bapak.png';
 
   function handleFotoUpload(e) {
     const file = e.target.files && e.target.files[0];
@@ -1406,11 +1409,24 @@ Yuk nikmati selagi hangat!`,
       ctx.fillRect(w/2 - 60, podiumY - 220, 120, 220);
     }
 
-    // 6. Watermark Studio cont-ACT
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-    ctx.font = 'bold 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('cont-ACT • Foto Studio Produk Medsos', w/2, h - 32);
+    // 6. Watermark Logo Resmi ACT
+    if (actLogoWatermarkImg && actLogoWatermarkImg.complete && actLogoWatermarkImg.naturalWidth > 0) {
+      const logoSize = 36;
+      const text = 'AutoClaryTech';
+      ctx.font = 'bold 24px "Plus Jakarta Sans", -apple-system, sans-serif';
+      const textW = ctx.measureText(text).width;
+      const totalW = logoSize + 12 + textW;
+      const startX = (w - totalW) / 2;
+      ctx.drawImage(actLogoWatermarkImg, startX, h - 52, logoSize, logoSize);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+      ctx.textAlign = 'left';
+      ctx.fillText(text, startX + logoSize + 12, h - 25);
+    } else {
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.font = 'bold 22px "Plus Jakarta Sans", -apple-system, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('AutoClaryTech', w/2, h - 32);
+    }
 
     // Update download button
     const btnDownload = document.getElementById('btn-download-foto');
