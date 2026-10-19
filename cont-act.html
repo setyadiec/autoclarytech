@@ -2027,8 +2027,8 @@ Yuk nikmati selagi hangat!`,
     const waInput = document.getElementById('gen-nomor-wa')?.value?.trim();
 
     currentStudioImgUrl = imageUrl;
-    currentProdukNama = namaInput || 'Produk Unggulan Kami';
-    currentProdukKeunggulan = keunggulanInput || 'Kualitas Terbaik & Terpercaya';
+    currentProdukNama = namaInput || 'Produk Unggulan';
+    currentProdukKeunggulan = keunggulanInput || '';
     currentNomorWa = waInput || '';
 
     // Isi teks penguat produk otomatis
@@ -2036,9 +2036,9 @@ Yuk nikmati selagi hangat!`,
     const elSubInput = document.getElementById('input-teks-sub');
     const elTaglineInput = document.getElementById('input-teks-tagline');
     if (elHeadInput) elHeadInput.value = currentProdukNama;
-    if (elSubInput) elSubInput.value = currentProdukKeunggulan;
+    if (elSubInput) elSubInput.value = currentProdukKeunggulan || currentProdukNama;
     if (elTaglineInput && (!elTaglineInput.value || elTaglineInput.value.trim() === '')) {
-      elTaglineInput.value = 'Perlindungan elegan anti gores dengan material sintetis lembut.';
+      elTaglineInput.value = currentProdukKeunggulan || currentProdukNama;
     }
     updateTeksPenguatPreview();
 
@@ -2140,8 +2140,8 @@ Yuk nikmati selagi hangat!`,
      ========================================================== */
 
   let currentStudioImgUrl = null;
-  let currentProdukNama = 'Produk Unggulan Kami';
-  let currentProdukKeunggulan = 'Kualitas Terbaik & Terpercaya';
+  let currentProdukNama = 'Produk Unggulan';
+  let currentProdukKeunggulan = '';
   let currentNomorWa = '';
   let modeTampilanFoto = 'banner'; // 'banner' atau '360'
   let currentBadgeColor = 'rgba(5, 150, 105, 0.95)';
@@ -2817,9 +2817,10 @@ Yuk nikmati selagi hangat!`,
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'left';
       ctx.fillText(currentProdukNama.slice(0, 25), 40, 125);
+      const subTeksFase1 = currentProdukKeunggulan || currentProdukNama;
       ctx.fillStyle = '#00D2B4';
       ctx.font = '700 20px "Bricolage Grotesque", "Instrument Sans", sans-serif';
-      ctx.fillText(currentProdukKeunggulan.slice(0, 35), 40, 160);
+      ctx.fillText(subTeksFase1.slice(0, 35), 40, 160);
 
       if (currentNomorWa) {
         ctx.font = '600 15px "Bricolage Grotesque", "Instrument Sans", sans-serif';
@@ -2842,15 +2843,16 @@ Yuk nikmati selagi hangat!`,
       ctx.font = '800 14px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'center';
-      ctx.fillText('KEUNGGULAN PRODUK', 135, 73);
+      ctx.fillText(currentProdukKeunggulan ? 'KEUNGGULAN PRODUK' : 'DETAIL PRODUK', 135, 73);
 
       ctx.font = '800 24px "Bricolage Grotesque", "Instrument Sans", sans-serif';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'left';
       ctx.fillText(currentProdukNama.slice(0, 30), 40, 125);
+      const subTeksFase2 = currentProdukKeunggulan || currentProdukNama;
       ctx.fillStyle = '#FDE047';
       ctx.font = '700 20px "Bricolage Grotesque", "Instrument Sans", sans-serif';
-      ctx.fillText(currentProdukKeunggulan.slice(0, 40), 40, 160);
+      ctx.fillText(subTeksFase2.slice(0, 40), 40, 160);
 
       if (currentNomorWa) {
         ctx.font = '600 15px "Bricolage Grotesque", "Instrument Sans", sans-serif';
@@ -2993,15 +2995,15 @@ Yuk nikmati selagi hangat!`,
       btnDownload.querySelector('span').textContent = 'Unduh Foto Polos';
     }
 
-    currentProdukNama = nama || 'Produk Unggulan Kami';
-    currentProdukKeunggulan = keunggulan || 'Kualitas Terbaik & Terpercaya';
+    currentProdukNama = nama || 'Produk Unggulan';
+    currentProdukKeunggulan = keunggulan || '';
     currentNomorWa = nomorWa || '';
 
     // Isi teks penguat produk otomatis
     const elHeadInput = document.getElementById('input-teks-headline');
     const elSubInput = document.getElementById('input-teks-sub');
     if (elHeadInput) elHeadInput.value = currentProdukNama;
-    if (elSubInput) elSubInput.value = currentProdukKeunggulan;
+    if (elSubInput) elSubInput.value = currentProdukKeunggulan || currentProdukNama;
     updateTeksPenguatPreview();
 
     let caption = '';
