@@ -1,11 +1,17 @@
 import { gerbangMutu, putusanTayang } from './_model_router.js';
+import { konfigDb, baca, ubah, terlaluSering } from './_akun.js';
+
+// KEAMANAN (tinjauan 20 Okt 22.1x): (1) URL status/hasil WAJIB https://queue.fal.run/ (sebelumnya FAL_KEY dikirim ke alamat apa pun dari klien = pencurian kunci);
+// (2) gerbang mutu berbayar hanya untuk pekerjaan yang DITERBITKAN server (tabel job_gambar), sekali per pekerjaan, hasilnya disimpan.
+const urlFalAman = (u) => { try { const x = new URL(String(u)); return x.protocol === 'https:' && x.hostname === 'queue.fal.run' ? x.toString() : null; } catch (_) { return null; } };
+const idSah = (r) => /^[0-9a-fA-F-]{8,64}$/.test(String(r || ''));
 
 // Vercel Serverless Function: /api/contact-status
 // Polling status antrean & hasil render Studio AI + Gerbang Mutu — arahan Bapak & Bey 18-20 Okt 2026
 
 export default async function handler(req, res) {
   // CORS Headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'https://www.autoclarytech.com');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 
@@ -25,15 +31,13 @@ export default async function handler(req, res) {
   const queryOrBody = req.method === 'GET' ? req.query : req.body;
   const { statusUrl, responseUrl, requestId } = queryOrBody || {};
 
-  // Susun URL status jika hanya requestId yang dikirimkan
-  const targetStatusUrl = statusUrl || (requestId ? `https://queue.fal.run/fal-ai/flux-pro/kontext/requests/${requestId}/status` : null);
-  const targetResponseUrl = responseUrl || (requestId ? `https://queue.fal.run/fal-ai/flux-pro/kontext/requests/${requestId}` : null);
-
-  if (!targetStatusUrl) {
-    return res.status(400).json({
-      status: 'error',
-      message: 'Parameter statusUrl atau requestId wajib disertakan.'
-    });
+  const targetStatusUrl = urlFalAman(statusUrl);
+  const targetResponseUrl = responseUrl ? urlFalAman(responseUrl) : null;
+  if (!targetStatusUrl || (responseUrl && !targetResponseUrl) || !idSah(requestId)) {
+    return res.status(400).json({ status: 'error', message: 'Parameter statusUrl/requestId tidak valid.' });
+  }
+  if (terlaluSering(req, 'status', 90, 1)) {
+    return res.status(429).json({ status: 'error', message: 'Terlalu sering memeriksa status.' });
   }
 
   try {
@@ -52,11 +56,9 @@ export default async function handler(req, res) {
     clearTimeout(timeout);
 
     if (!checkResp.ok) {
-      const errText = await checkResp.text();
       return res.status(checkResp.status).json({
         status: 'error',
-        message: 'Gagal memeriksa status antrean Studio AI: ' + checkResp.status,
-        detail: errText
+        message: 'Gagal memeriksa status antrean Studio AI: ' + checkResp.status
       });
     }
 
@@ -91,23 +93,35 @@ export default async function handler(req, res) {
       }
 
       if (imageUrl) {
-        // Evaluasi Gerbang Mutu LLM-Vision (Preservasi Produk 100%)
+        // Evaluasi Gerbang Mutu LLM-Vision (Preservasi Produk): BERBAYAR -> hanya untuk pekerjaan sah, sekali per pekerjaan
         let daftarFotoRefs = [];
         if (queryOrBody.fotoRefs) {
           if (Array.isArray(queryOrBody.fotoRefs)) {
             daftarFotoRefs = queryOrBody.fotoRefs;
           } else if (typeof queryOrBody.fotoRefs === 'string') {
-            try {
-              daftarFotoRefs = JSON.parse(queryOrBody.fotoRefs);
-            } catch (_) {}
+            try { daftarFotoRefs = JSON.parse(queryOrBody.fotoRefs); } catch (_) {}
           }
         }
+        daftarFotoRefs = (Array.isArray(daftarFotoRefs) ? daftarFotoRefs : []).slice(0, 4)
+          .filter((x) => typeof x === 'string' && x.length < 2500000 && (x.startsWith('data:image/') || x.startsWith('https://')));
 
         let evaluasiGerbang = null;
         let putusan = null;
-        if (Array.isArray(daftarFotoRefs) && daftarFotoRefs.length > 0) {
-          evaluasiGerbang = await gerbangMutu(FAL_KEY, daftarFotoRefs, imageUrl);
-          putusan = putusanTayang(evaluasiGerbang.verdict);
+        if (daftarFotoRefs.length > 0) {
+          if (konfigDb().siap) {
+            let job = null;
+            try { job = (await baca('job_gambar?select=request_id,gerbang,putusan&request_id=eq.' + encodeURIComponent(requestId) + '&limit=1'))[0] || null; } catch (_) { job = null; }
+            if (job && job.gerbang) {
+              evaluasiGerbang = job.gerbang; putusan = job.putusan;                         // sudah dinilai: pakai hasil tersimpan (tanpa biaya)
+            } else if (job) {
+              evaluasiGerbang = await gerbangMutu(FAL_KEY, daftarFotoRefs, imageUrl);       // pekerjaan sah, belum dinilai -> sekali
+              putusan = putusanTayang(evaluasiGerbang.verdict);
+              try { await ubah('job_gambar?request_id=eq.' + encodeURIComponent(requestId), { gerbang: evaluasiGerbang, putusan }); } catch (_) {}
+            }                                                                                // pekerjaan tak dikenal: TIDAK ada panggilan berbayar
+          } else {
+            evaluasiGerbang = await gerbangMutu(FAL_KEY, daftarFotoRefs, imageUrl);         // mode pengembangan tanpa database
+            putusan = putusanTayang(evaluasiGerbang.verdict);
+          }
         }
 
         return res.status(200).json({

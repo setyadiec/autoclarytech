@@ -28,6 +28,7 @@ async function panggil(metode, jalur, badan) {
 export const rpc = (nama, args) => panggil('POST', '/rest/v1/rpc/' + nama, args);
 export const tulis = (tabel, baris) => panggil('POST', '/rest/v1/' + tabel, baris);
 export const baca = (jalur) => panggil('GET', '/rest/v1/' + jalur);
+export const ubah = (jalur, data) => panggil('PATCH', '/rest/v1/' + jalur, data);
 
 // nomor WA -> 62812..., hanya angka; null bila tidak masuk akal
 export function normalisasiWA(s) {

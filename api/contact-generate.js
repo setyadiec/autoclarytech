@@ -1,4 +1,4 @@
-import { konfigDb, autentikasi, rpc } from './_akun.js';
+import { konfigDb, autentikasi, rpc, tulis } from './_akun.js';
 import crypto from 'node:crypto';
 import { pilihPipaGambar, bangunPromptPreservasi } from './_model_router.js';
 
@@ -89,7 +89,7 @@ async function simpanKuotaPersisten(kunci, hitungBaru, tanggal) {
 
 export default async function handler(req, res) {
   // CORS Headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'https://www.autoclarytech.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 
@@ -133,7 +133,7 @@ export default async function handler(req, res) {
   } = req.body || {};
 
   // Validasi input: mendukung fotos (array multi-foto maks 4) atau foto (single string)
-  const daftarFoto = Array.isArray(fotos) && fotos.length > 0 ? fotos : (foto ? [foto] : []);
+  const daftarFoto = (Array.isArray(fotos) && fotos.length > 0 ? fotos : (foto ? [foto] : [])).slice(0, 4);
   if (daftarFoto.length === 0) {
     return res.status(400).json({
       status: 'error',
@@ -274,6 +274,10 @@ export default async function handler(req, res) {
     }
 
     const falData = await falResp.json();
+
+    if (dbAktif && falData && falData.request_id) {         // tiket pekerjaan sah: dipakai contact-status untuk menjalankan gerbang mutu sekali
+      try { await tulis('job_gambar', { request_id: String(falData.request_id), akun_id: akunId }); } catch (e) { console.log('catat job gagal', String(e.message).slice(0, 80)); }
+    }
 
     // Catat pemakaian kuota persisten ke Supabase & memori
     await simpanKuotaPersisten(serverClientKey, pemakaianSaatIni + 1, skrgTanggal);
