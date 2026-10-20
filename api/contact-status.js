@@ -1,5 +1,7 @@
+import { gerbangMutu, putusanTayang } from './_model_router.js';
+
 // Vercel Serverless Function: /api/contact-status
-// Polling status antrean & hasil render Studio AI — arahan Bapak & Bey 18 Okt 2026
+// Polling status antrean & hasil render Studio AI + Gerbang Mutu — arahan Bapak & Bey 18-20 Okt 2026
 
 export default async function handler(req, res) {
   // CORS Headers
@@ -89,10 +91,31 @@ export default async function handler(req, res) {
       }
 
       if (imageUrl) {
+        // Evaluasi Gerbang Mutu LLM-Vision (Preservasi Produk 100%)
+        let daftarFotoRefs = [];
+        if (queryOrBody.fotoRefs) {
+          if (Array.isArray(queryOrBody.fotoRefs)) {
+            daftarFotoRefs = queryOrBody.fotoRefs;
+          } else if (typeof queryOrBody.fotoRefs === 'string') {
+            try {
+              daftarFotoRefs = JSON.parse(queryOrBody.fotoRefs);
+            } catch (_) {}
+          }
+        }
+
+        let evaluasiGerbang = null;
+        let putusan = null;
+        if (Array.isArray(daftarFotoRefs) && daftarFotoRefs.length > 0) {
+          evaluasiGerbang = await gerbangMutu(FAL_KEY, daftarFotoRefs, imageUrl);
+          putusan = putusanTayang(evaluasiGerbang.verdict);
+        }
+
         return res.status(200).json({
           status: 'completed',
           imageUrl: imageUrl,
-          requestId: requestId || null
+          requestId: requestId || null,
+          gerbangMutu: evaluasiGerbang,
+          putusanTayang: putusan
         });
       } else {
         return res.status(502).json({

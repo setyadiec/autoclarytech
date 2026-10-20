@@ -1,0 +1,324 @@
+/* =====================================================================
+   WIDGET PESAN MELAYANG AUTOCLARYTECH (ACT FLOATING CONTACT HUB - TINGKAT 1)
+   Sangat ringan (~3 KB), modern, responsif, dan bebas dependensi luar.
+   ===================================================================== */
+
+:root {
+  --act-fab-size: 56px;
+  --act-teal: #00D2B4;
+  --act-teal-dark: #08694F;
+  --act-wa: #25D366;
+  --act-tg: #229ED9;
+  --act-email: #475569;
+  --act-bg-card: rgba(17, 24, 39, 0.95);
+  --act-border-card: rgba(255, 255, 255, 0.12);
+  --act-text-main: #F8FAFC;
+  --act-text-sub: #94A3B8;
+}
+
+/* Wadah Utama Widget */
+.act-kontak-wrap {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99999;
+  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Tombol Ikon Melayang (FAB) */
+.act-kontak-fab {
+  width: var(--act-fab-size);
+  height: var(--act-fab-size);
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--act-teal) 0%, var(--act-teal-dark) 100%);
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 210, 180, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0B0F19;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  position: relative;
+  outline: none;
+}
+
+.act-kontak-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 28px rgba(0, 210, 180, 0.45), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.act-kontak-fab:active {
+  transform: scale(0.96);
+}
+
+/* Titik Indikator Online Hijau */
+.act-kontak-pulse {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  background-color: #10B981;
+  border: 2.5px solid #0B0F19;
+  border-radius: 50%;
+}
+
+.act-kontak-pulse::after {
+  content: '';
+  position: absolute;
+  top: -2.5px;
+  left: -2.5px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #10B981;
+  animation: actPulse 2s infinite ease-out;
+}
+
+@keyframes actPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Badge Teaser Mini */
+.act-kontak-teaser {
+  position: absolute;
+  right: calc(var(--act-fab-size) + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--act-bg-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--act-text-main);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--act-border-card);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.act-kontak-wrap.terbuka .act-kontak-teaser {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) translateX(8px);
+}
+
+/* Ikon Animasi Toggle (Chat vs Silang) */
+.act-ikon-chat,
+.act-ikon-silang {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  position: absolute;
+}
+
+.act-ikon-silang {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
+}
+
+.act-kontak-wrap.terbuka .act-ikon-chat {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+}
+
+.act-kontak-wrap.terbuka .act-ikon-silang {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+/* Panel Menu Popover */
+.act-kontak-card {
+  position: absolute;
+  bottom: calc(var(--act-fab-size) + 16px);
+  right: 0;
+  width: 320px;
+  background: var(--act-bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--act-border-card);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px) scale(0.96);
+  transform-origin: bottom right;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.act-kontak-wrap.terbuka .act-kontak-card {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Header Panel */
+.act-card-header {
+  padding: 18px 20px 14px;
+  background: linear-gradient(180deg, rgba(0, 210, 180, 0.12) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.act-header-info h4 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--act-text-main);
+  letter-spacing: -0.01em;
+}
+
+.act-header-status {
+  font-size: 12px;
+  color: var(--act-teal);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.act-status-dot {
+  width: 8px;
+  height: 8px;
+  background: #10B981;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.act-btn-tutup {
+  background: transparent;
+  border: none;
+  color: var(--act-text-sub);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.act-btn-tutup:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Isi Menu Opsi Komunikasi */
+.act-card-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.act-card-sub {
+  font-size: 12px;
+  color: var(--act-text-sub);
+  margin: 0 4px 4px;
+}
+
+/* Item Tombol Saluran */
+.act-opsi-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+.act-opsi-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateX(3px);
+}
+
+.act-opsi-ikon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.act-opsi-wa .act-opsi-ikon {
+  background: rgba(37, 211, 102, 0.15);
+  color: var(--act-wa);
+}
+
+.act-opsi-tg .act-opsi-ikon {
+  background: rgba(34, 158, 217, 0.15);
+  color: var(--act-tg);
+}
+
+.act-opsi-email .act-opsi-ikon {
+  background: rgba(100, 116, 139, 0.2);
+  color: #94A3B8;
+}
+
+.act-opsi-teks {
+  flex: 1;
+}
+
+.act-opsi-judul {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--act-text-main);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.act-opsi-ket {
+  font-size: 11px;
+  color: var(--act-text-sub);
+  display: block;
+}
+
+.act-opsi-panah {
+  color: var(--act-text-sub);
+  opacity: 0.6;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.act-opsi-item:hover .act-opsi-panah {
+  opacity: 1;
+  transform: translateX(2px);
+  color: var(--act-teal);
+}
+
+/* Footer Panel */
+.act-card-footer {
+  padding: 10px 16px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 10px;
+  color: #64748B;
+  letter-spacing: 0.02em;
+}
+
+/* Penyesuaian Mobile */
+@media (max-width: 640px) {
+  .act-kontak-wrap {
+    bottom: 20px;
+    right: 16px;
+  }
+  .act-kontak-card {
+    width: calc(100vw - 32px);
+    right: -4px;
+    bottom: calc(var(--act-fab-size) + 12px);
+  }
+  .act-kontak-teaser {
+    display: none; /* Sembunyikan teaser di layar sempit */
+  }
+}

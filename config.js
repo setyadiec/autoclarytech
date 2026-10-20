@@ -8,6 +8,12 @@ window.SITUS = {
   // Nomor WhatsApp bisnis resmi (format internasional tanpa +)
   waNomor: "6285727240341",
 
+  // Akun Telegram resmi pendukung (dikosongkan sampai ditetapkan resmi oleh Bapak)
+  telegramUser: "",
+
+  // Email dukungan resmi
+  emailResmi: "autoclarytech@gmail.com",
+
   // Penanda sumber yang ikut di pesan WA
   penandaSumber: "LP-AutoClaryTech",
 

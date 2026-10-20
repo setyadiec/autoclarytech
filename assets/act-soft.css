@@ -655,6 +655,7 @@ main { display: block; }
 .kartu-fitur p { font-size: 14.5px; }
 
 /* tanya-jawab lipat */
+details:not([open]) > :not(summary) { display: none !important; }
 .lipat { display: grid; gap: 14px; }
 .lipat details { border-radius: 22px; padding: 4px 22px; box-shadow: var(--tekan); }
 .lipat summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 0; font-weight: 700; color: var(--ink); }

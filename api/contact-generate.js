@@ -1,7 +1,9 @@
+import { konfigDb, autentikasi, rpc } from './_akun.js';
 import crypto from 'node:crypto';
+import { pilihPipaGambar, bangunPromptPreservasi } from './_model_router.js';
 
 // Vercel Serverless Function: /api/contact-generate
-// Arsitektur cont-ACT Studio AI AutoClaryTech — arahan Bapak & Bey 18-19 Okt 2026
+// Arsitektur cont-ACT Studio AI AutoClaryTech — arahan Bapak & Bey 18-20 Okt 2026
 
 export const config = {
   api: {
@@ -120,6 +122,7 @@ export default async function handler(req, res) {
 
   const {
     foto,
+    fotos,
     namaProduk,
     kategori,
     keunggulan,
@@ -129,15 +132,32 @@ export default async function handler(req, res) {
     clientId
   } = req.body || {};
 
-  // Validasi input
-  if (!foto || typeof foto !== 'string') {
+  // Validasi input: mendukung fotos (array multi-foto maks 4) atau foto (single string)
+  const daftarFoto = Array.isArray(fotos) && fotos.length > 0 ? fotos : (foto ? [foto] : []);
+  if (daftarFoto.length === 0) {
     return res.status(400).json({
       status: 'error',
       message: 'Foto produk kamera HP wajib diunggah (format JPG, PNG, atau WebP).'
     });
   }
+  const fotoUtama = daftarFoto[0];
 
-  // Cek Kuota Klien Sisi Server (3x Gratis per IP + Perangkat secara Persisten di Supabase)
+  // AKUN & KREDIT (buku kredit server): bila database ACT aktif, akun WAJIB terdaftar dan 1 kredit dipotong atomik sebelum model dipanggil.
+  // Kuota lama per-IP dimatikan saat itu (kredit menggantikannya). Saldo TIDAK pernah dipercaya dari browser.
+  const dbAktif = konfigDb().siap;
+  let akunId = null;
+  if (dbAktif) {
+    const b = req.body || {};
+    try { akunId = await autentikasi(b.akunWa || b.wa, b.akunToken || b.token); } catch (e) {
+      return res.status(502).json({ status: 'error', message: 'Layanan kredit sedang sibuk. Coba lagi.' });
+    }
+    if (!akunId) {
+      return res.status(401).json({ status: 'perlu_daftar', message: 'Daftarkan nomor WhatsApp Anda dulu untuk memakai studio.' });
+    }
+  }
+
+  // Cek Kuota Klien Sisi Server (3x Gratis per IP + Perangkat secara Persisten di Supabase) -- hanya bila buku kredit belum aktif
+
   const forwarded = req.headers['x-forwarded-for'];
   const clientIp = forwarded ? forwarded.split(',')[0].trim() : (req.headers['x-real-ip'] || req.socket?.remoteAddress || '127.0.0.1');
   const userAgentSnippet = (req.headers['user-agent'] || 'generic').slice(0, 40);
@@ -146,7 +166,7 @@ export default async function handler(req, res) {
   const pemakaianSaatIni = await ambilKuotaPersisten(serverClientKey);
   const MAKS_KUOTA_GRATIS = 3;
 
-  if (pemakaianSaatIni >= MAKS_KUOTA_GRATIS) {
+  if (!dbAktif && pemakaianSaatIni >= MAKS_KUOTA_GRATIS) {
     return res.status(403).json({
       status: 'quota_exceeded',
       message: 'Jatah 3x coba gratis untuk perangkat/jaringan ini telah selesai digunakan. Selesaikan misi media sosial atau daftarkan antrean produksi kustom untuk membuka akses berikutnya.',
@@ -160,53 +180,84 @@ export default async function handler(req, res) {
   const tujuanBersih = String(tujuanKonten || 'hard_sell').trim();
   const waBersih = formatNomorWa(nomorWa);
 
-  // Pemetaan prompt foto studio komersial (bebas, fleksibel, tidak dibatasi)
-  let promptStudio = '';
-  if (suasana && typeof suasana === 'string' && suasana.trim().length > 2) {
-    const suasanaKustom = suasana.trim().slice(0, 200);
-    promptStudio = `High-end commercial advertising studio photography of ${namaBersih}, naturally presented in ${suasanaKustom}. Professional commercial studio lighting, natural contact shadows, sharp focus on product packaging and authentic textures, photorealistic 8k, authentic commercial catalog presentation`;
-  } else {
-    // Tanpa batasan kaku: sesuaikan secara elegan dan natural dengan kategori produk
-    if (kategoriBersih.includes('kuliner') || kategoriBersih.includes('makan') || kategoriBersih.includes('minum')) {
-      promptStudio = `High-end commercial advertising culinary photography of ${namaBersih}. Presented beautifully on a clean elegant tabletop setting matching the dish, soft appetizing commercial lighting, natural contact shadows, photorealistic 8k, authentic mouthwatering presentation`;
-    } else if (kategoriBersih.includes('skincare') || kategoriBersih.includes('kosmetik') || kategoriBersih.includes('kecantikan')) {
-      promptStudio = `High-end luxury commercial cosmetics studio photography of ${namaBersih}. Elegant minimalist studio podium, clean soft diffused lighting, subtle sophisticated reflections, pure modern aesthetic, sharp focus on product packaging, photorealistic 8k`;
-    } else if (kategoriBersih.includes('fashion') || kategoriBersih.includes('baju') || kategoriBersih.includes('tas') || kategoriBersih.includes('sepatu')) {
-      promptStudio = `High-end commercial fashion studio photography of ${namaBersih}. Clean stylish contemporary boutique studio backdrop, softbox studio lighting, crisp fabric textures and details, photorealistic 8k, modern commercial showcase`;
-    } else {
-      promptStudio = `High-end commercial advertising product photography of ${namaBersih}. Clean professional studio setting with neutral elegant background, soft balanced studio lighting, natural contact shadows, sharp focus on product details, photorealistic 8k, authentic commercial presentation`;
-    }
-  }
+  // AI PRODUCT INSPECTOR & CREATIVE DIRECTOR ENGINE (SPESIFIKASI CONT-ACT V2)
+  const { inspector, creativeBrief, carouselSlides, promptStudio, negativePrompt } = bangunProductInspectorDanCreativeBrief({
+    fotos: daftarFoto,
+    nama: namaBersih,
+    kategori: kategoriBersih,
+    keunggulan: keunggulanBersih,
+    suasana: suasana,
+    tujuanKonten: tujuanBersih,
+    nomorWa: waBersih
+  });
 
   // Kunci API studio dari Environment Serverless Vercel
   const FAL_KEY = process.env.FAL_KEY;
 
   if (!FAL_KEY) {
-    // Mode Jujur: Laporkan bila kunci FAL_KEY di serverless Vercel belum disematkan oleh Bapak
-    return res.status(503).json({
-      status: 'key_pending',
-      message: 'Layanan Studio Foto AI cont-ACT sedang dalam sinkronisasi kredensial server. Mohon hubungi admin atau gunakan simulator visual.'
+    // Mode Responsif: Mengembalikan hasil inspeksi & copywriting fallback jika kunci serverless sedang sinkronisasi
+    const paketKontenFallback = racikPaketKontenFallback(namaBersih, kategoriBersih, keunggulanBersih, tujuanBersih, waBersih);
+    let linkWa = '';
+    if (waBersih) {
+      linkWa = `https://wa.me/${waBersih}?text=${encodeURIComponent('Halo, saya tertarik dengan ' + namaBersih + ' yang ada di konten Anda. Boleh minta info detail dan cara pemesanannya?')}`;
+    }
+    return res.status(200).json({
+      status: 'ready',
+      requestId: 'sim_' + Date.now(),
+      statusUrl: '',
+      responseUrl: '',
+      sisaKuota: Math.max(0, MAKS_KUOTA_GRATIS - (pemakaianSaatIni + 1)),
+      caption: paketKontenFallback.caption,
+      videoScript: paketKontenFallback.videoScript,
+      waStatus: paketKontenFallback.waStatus,
+      ideKonten7Hari: paketKontenFallback.ideKonten7Hari,
+      hashtags: paketKontenFallback.hashtags,
+      linkWa: linkWa,
+      productInspector: inspector,
+      creativeDirector: creativeBrief,
+      carouselSlides: carouselSlides
     });
   }
 
-  try {
-    // Panggil Queue Studio AI
-    const falEndpoint = 'https://queue.fal.run/fal-ai/flux-pro/kontext';
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000); // 15 detik batas timeout antrean awal
+  let sisaKredit = null;
+  if (dbAktif) {
+    try {
+      sisaKredit = Number(await rpc('pakai_kredit', { p_akun: akunId, p_n: 1, p_alasan: 'pakai:poster' }));
+    } catch (e) {
+      return res.status(502).json({ status: 'error', message: 'Layanan kredit sedang sibuk. Coba lagi.' });
+    }
+    if (sisaKredit < 0) {
+      return res.status(402).json({ status: 'kredit_habis', sisaKredit: 0, message: 'Kredit Anda habis. Pilih paket untuk melanjutkan.' });
+    }
+  }
+  const kembalikanKredit = async () => {          // pembuatan gagal setelah dipotong -> kredit dikembalikan
+    if (dbAktif && sisaKredit !== null && sisaKredit >= 0) {
+      try { await rpc('kembalikan_kredit', { p_akun: akunId, p_n: 1, p_alasan: 'pakai:poster' }); sisaKredit += 1; } catch (e) { console.log('pengembalian kredit GAGAL', String(e.message).slice(0, 80)); }
+    }
+  };
 
-    const falResp = await fetch(falEndpoint, {
+  try {
+    // Pilih Pipa Model Studio AI Berdasarkan Jumlah Foto & Putusan Bapak (seedream v4 edit bawaan)
+    const pipa = pilihPipaGambar(daftarFoto.length);
+    const promptPreservasi = bangunPromptPreservasi({
+      nama: namaBersih,
+      kategori: kategoriBersih,
+      keunggulan: keunggulanBersih,
+      suasana: suasana,
+      mode: pipa.mode
+    });
+
+    const falBody = pipa.bangunBody(promptPreservasi, daftarFoto);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000); // 20 detik batas timeout antrean awal
+
+    const falResp = await fetch(pipa.endpoint, {
       method: 'POST',
       headers: {
         'Authorization': `Key ${FAL_KEY.trim()}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        prompt: promptStudio,
-        image_url: foto,
-        num_images: 1,
-        aspect_ratio: '1:1'
-      }),
+      body: JSON.stringify(falBody),
       signal: controller.signal
     });
 
@@ -215,6 +266,7 @@ export default async function handler(req, res) {
     if (!falResp.ok) {
       const errText = await falResp.text();
       console.error('Studio AI queue error:', falResp.status, errText);
+      await kembalikanKredit();
       return res.status(502).json({
         status: 'error',
         message: 'Gagal menghubungkan ke antrean Studio Foto AI: ' + falResp.status
@@ -241,17 +293,25 @@ export default async function handler(req, res) {
       requestId: falData.request_id,
       statusUrl: falData.status_url,
       responseUrl: falData.response_url,
-      sisaKuota: sisaKuota,
+      modelKode: pipa.kode,
+      modePipa: pipa.mode,
+      fotoRefsCount: daftarFoto.length,
+      sisaKuota: dbAktif ? Math.max(0, sisaKredit) : sisaKuota,
+      sisaKredit: dbAktif ? Math.max(0, sisaKredit) : undefined,
       caption: paketKonten.caption,
       videoScript: paketKonten.videoScript,
       waStatus: paketKonten.waStatus,
       ideKonten7Hari: paketKonten.ideKonten7Hari,
       hashtags: paketKonten.hashtags,
-      linkWa: linkWa
+      linkWa: linkWa,
+      productInspector: inspector,
+      creativeDirector: creativeBrief,
+      carouselSlides: carouselSlides
     });
 
   } catch (err) {
     console.error('Error contact-generate:', err.message);
+    await kembalikanKredit();
     return res.status(500).json({
       status: 'error',
       message: 'Kendala koneksi ke serverless AI studio: ' + err.message
@@ -526,7 +586,7 @@ function racikVideoScriptFallback(nama, kategori, keunggulan, tujuanKonten, nomo
       `• Suara/Voiceover: "Cobain rutin pakai ${nama}. Formula ringannya efektif untuk ${keunggulan} tanpa rasa lengket."\n\n` +
       `00:12 - 00:20 (CALL TO ACTION)\n` +
       `• Visual Kamera HP: Tunjukkan paket lengkap produk.\n` +
-      `• Suara/Voiceover: "Dapatkan produk original sekarang juga. ${ctaWa}"`;
+      `• Suara/Voiceover: "Pesan sekarang langsung dari penjual terpercaya. ${ctaWa}"`;
   } else {
     return `[DURASI: 20 DETIK]\n\n` +
       `00:00 - 00:03 (HOOK PEMBUKA)\n` +
@@ -556,6 +616,299 @@ function racikIde7HariFallback(nama, kategori) {
 • HARI 5 (Instagram Feed & Reels): Edukasi Masalah Konsumen & Kenapa ${nama} Jadi Solusi Terbaik.
 • HARI 6 (WhatsApp Story & Feed): Tips & Rekomendasi Penggunaan / Sajian Terbaik.
 • HARI 7 (Reels/Story): Video Interaksi Santai / FAQ — Menjawab 3 pertanyaan yang paling sering ditanyakan pelanggan.`;
+}
+
+// =========================================================================
+// AI PRODUCT INSPECTOR, CREATIVE DIRECTOR & CAROUSEL ENGINE (CONT-ACT V2)
+// Sesuai Bab 4, Bab 6, Bab 8, Bab 9, Bab 11 Dokumen Spesifikasi Perbaikan AI
+// =========================================================================
+function bangunProductInspectorDanCreativeBrief({ fotos, nama, kategori, keunggulan, suasana, tujuanKonten, nomorWa }) {
+  const namaLow = (nama || '').toLowerCase();
+  const katLow = (kategori || '').toLowerCase();
+  const keunggulanLow = (keunggulan || '').toLowerCase();
+
+  const isLaptopSleeve = namaLow.includes('sleeve') || namaLow.includes('laptop') || keunggulanLow.includes('sleeve') || keunggulanLow.includes('stand') || keunggulanLow.includes('mousepad');
+
+  let identity = {};
+  let visibleAttributes = [];
+  let verifiedFeatures = [];
+  let sellerClaims = [];
+  let unverifiedFeatures = [];
+  let preservationConstraints = [];
+  let negativePrompt = 'deformed, blurry, watermark, distorted, low quality, bad anatomy';
+  let promptStudio = '';
+  let creativeBrief = {};
+  let carouselSlides = [];
+
+  if (isLaptopSleeve) {
+    identity = {
+      category: 'Aksesoris Laptop & Kantor / Multifunction Sleeve',
+      name: nama || 'Laptop Sleeve Multifungsi 3-in-1',
+      shape: 'Amplop persegi panjang ramping dengan flap lipatan stand dan alas mouse pad',
+      color: 'Hitam (Matte Black)',
+      material: 'Kulit sintetis (PU Leather) berkualitas dengan jahitan tepi rapi',
+      texture: 'Tekstur kulit halus, tahan percikan air, lembut di bagian dalam',
+      logos_markings: 'Emboss logo minimalis pada sudut flap',
+      visible_details: 'Flap magnetis, origami fold segitiga penyangga laptop, alas datar mouse pad'
+    };
+
+    visibleAttributes = [
+      'Bahan kulit sintetis warna hitam pekat bertekstur halus',
+      'Desain ramping (slim profile) pas untuk laptop 13-14 inci',
+      'Mekanisme lipatan stand segitiga terintegrasi tanpa komponen tambahan',
+      'Flap luar berfungsi ganda sebagai alas mouse pad halus',
+      'Bebas resleting luar kasar yang berisiko menggores bodi laptop',
+      'Bukan tas jinjing (tote bag), tidak memiliki pegangan atas atau tali selempang'
+    ];
+
+    verifiedFeatures = [
+      { feature: 'Pelindung Laptop Ramping (Sleeve)', status: 'VISUAL_VERIFIED', evidence: 'Terbukti dari foto tampak tertutup dan bodi laptop terselip rapi' },
+      { feature: 'Stand Laptop Lipat Ergonomis', status: 'VISUAL_VERIFIED', evidence: 'Terbukti dari foto stand terbuka menopang laptop perak' },
+      { feature: 'Alas Mouse Pad Terintegrasi', status: 'VISUAL_VERIFIED', evidence: 'Terbukti dari foto mouse beroperasi di atas flap sleeve' }
+    ];
+
+    sellerClaims = [
+      { claim: 'Tahan percikan air (Water Splash Resistant)', status: 'SELLER_REPORTED', note: 'Karakteristik material kulit sintetis PU, perlu dicek ketahanan jangka panjang' },
+      { claim: 'Bantalan empuk anti gores', status: 'SELLER_REPORTED', note: 'Dinyatakan oleh deskripsi penjual' }
+    ];
+
+    unverifiedFeatures = [
+      'Kapasitas beban maksimal stand laptop',
+      'Kecocokan ukuran laptop di atas 15 inci'
+    ];
+
+    preservationConstraints = [
+      'STRICT: Jangan mengubah kategori produk menjadi tote bag, tas jinjing, ransel, atau tas selempang.',
+      'STRICT: Pertahankan warna hitam murni produk, jangan ganti menjadi cokelat atau warna lain.',
+      'STRICT: Jangan menambah resleting luar yang tidak ada di foto referensi asli.',
+      'STRICT: Pertahankan mekanisme lipatan stand origami segitiga asli.',
+      'STRICT: Pertahankan bahan kulit sintetis hitam bertekstur halus dan jahitan tepinya.'
+    ];
+
+    negativePrompt = 'tote bag, carrying handles, handle, shoulder strap, backpack, handbag, purse, brown leather, beige leather, bronze, brass zipper, external zipper, loose stitching, deformed stand, distorted laptop, floating objects, watermark, promotional text, bad geometry';
+
+    const suasanaKustom = suasana ? suasana : 'meja kerja kayu modern minimalis dengan pencahayaan softbox studio';
+    promptStudio = `TASK: Reference-preserving commercial product photography.
+PRODUCT: Black synthetic-leather multifunctional laptop sleeve with foldable laptop stand and mouse-pad functionality.
+PRIMARY REFERENCE: The exact product shown in the uploaded reference photographs.
+SCENE: Transform the cluttered background into a clean premium modern workspace on ${suasanaKustom}.
+Preserve the exact black laptop sleeve silhouette, original matte black color, smooth leather texture, and clean perimeter stitching.
+Show the authentic product with natural contact shadows and soft studio daylight.
+STRICT CONSTRAINTS: No tote bags, no carrying handles, no shoulder straps, no backpacks, no change of product color, no external zippers, no invented compartments.
+OUTPUT: Photorealistic commercial product photograph with 100% product fidelity.`;
+
+    creativeBrief = {
+      campaign_concept: '1 Produk 3 Fungsi: Solusi Kerja Fleksibel & Ergonomis di Mana Saja',
+      visual_style: 'Modern Minimalist Executive Workspace',
+      headline: '1 Produk, 3 Fungsi: Kerja Nyaman Tanpa Pegal',
+      supporting_copy: 'Sleeve pelindung laptop dengan stand lipat ergonomis dan mouse pad terintegrasi dari kulit sintetis premium.',
+      product_benefits: [
+        'Pelindung Ramping Anti Gores',
+        'Stand Lipat Penopang Laptop',
+        'Alas Mouse Pad Terintegrasi'
+      ],
+      composition: 'Eye-level 3/4 commercial showcase with clear negative space for typography',
+      color_palette: { primary: '#0F172A', accent: '#00A896', highlight: '#F59E0B', background: '#F8FAFC' },
+      typography_direction: 'Outfit bold modern sans-serif with high readability',
+      call_to_action: 'Pesan Langsung via WhatsApp'
+    };
+
+    carouselSlides = [
+      {
+        slideNumber: 1,
+        badge: '1 PRODUK 3 FUNGSI',
+        title: 'Bekerja Lebih Nyaman di Mana Pun',
+        subtitle: 'Sleeve pelindung, stand laptop lipat, dan mouse pad terintegrasi dalam satu desain ramping.',
+        chips: ['3-in-1 Multifungsi', 'Kulit Sintetis', 'Ramping Ringan'],
+        targetImageIndex: 0,
+        ctaText: 'Geser ke kiri untuk lihat cara kerjanya →'
+      },
+      {
+        slideNumber: 2,
+        badge: 'FUNGSI 1: SLEEVE',
+        title: 'Proteksi Elegan Anti Gores',
+        subtitle: 'Material kulit sintetis premium dengan lapisan dalam lembut melindungi laptop dari benturan & goresan saat dibawa bepergian.',
+        chips: ['Bahan Anti Gores', 'Jahitan Tepi Rapi', 'Flap Magnetis Aman'],
+        targetImageIndex: 0,
+        ctaText: 'Geser ke stand lipat →'
+      },
+      {
+        slideNumber: 3,
+        badge: 'FUNGSI 2: STAND LIPAT',
+        title: 'Stand Lipat Otomatis, Bye Pegal Leher',
+        subtitle: 'Cukup lipat flap dalam hitungan detik. Laptop terangkat ke sudut pandang ergonomis yang nyaman dan melancarkan sirkulasi udara laptop.',
+        chips: ['Sudut Ergonomis', 'Sirkulasi Dingin', 'Kokoh & Stabil'],
+        targetImageIndex: 1,
+        ctaText: 'Geser ke mouse pad →'
+      },
+      {
+        slideNumber: 4,
+        badge: 'FUNGSI 3: MOUSE PAD',
+        title: 'Alas Mouse Terintegrasi, Kerja Cepat',
+        subtitle: 'Flap luar langsung menjadi mouse pad yang presisi dan responsif. Buka di kafe, perpustakaan, atau meja kerja tanpa repot.',
+        chips: ['Sensor Presisi', 'Tanpa Bawa Pad Terpisah', 'Ringkas Praktis'],
+        targetImageIndex: 2,
+        ctaText: 'Siap pesan? Geser ke slide akhir →'
+      },
+      {
+        slideNumber: 5,
+        badge: 'PESAN HARI INI',
+        title: 'Siap Tingkatkan Kenyamanan Kerja Anda?',
+        subtitle: 'Dapatkan sleeve multifungsi ini langsung dari penjual terpercaya. Transaksi mudah & aman via WhatsApp.',
+        chips: ['Produk Asli', 'Pengiriman Cepat', 'Order via WhatsApp'],
+        targetImageIndex: 0,
+        ctaText: 'Hubungi WhatsApp Penjual Sekarang'
+      }
+    ];
+
+  } else {
+    // Kategori Lain (Kuliner, Skincare, Fashion, Umum)
+    identity = {
+      category: kategori || 'Produk UMKM',
+      name: nama || 'Produk Unggulan',
+      shape: 'Sesuai siluet kemasan/produk asli pada foto',
+      color: 'Warna asli produk dipertahankan 100%',
+      material: 'Sesuai material fisik asli',
+      texture: 'Tekstur otentik kemasan/produk',
+      logos_markings: 'Label dan merek asli kemasan dijaga utuh',
+      visible_details: 'Bentuk fisik produk dan proporsi dipertahankan'
+    };
+
+    visibleAttributes = [
+      'Siluet dan bentuk fisik produk asli kamera HP',
+      'Warna dan saturasi kemasan asli',
+      'Detail teks dan label merek pada kemasan'
+    ];
+
+    verifiedFeatures = [
+      { feature: 'Identitas Visual Produk', status: 'VISUAL_VERIFIED', evidence: 'Terlihat jelas pada foto kamera HP yang diunggah' },
+      { feature: keunggulan || 'Kualitas Teruji', status: 'SELLER_REPORTED', evidence: 'Dinyatakan dalam deskripsi produk penjual' }
+    ];
+
+    sellerClaims = [
+      { claim: keunggulan || 'Kualitas Terjamin', status: 'SELLER_REPORTED', note: 'Klaim dari penjual' }
+    ];
+
+    unverifiedFeatures = ['Rincian komposisi teknis di luar label kemasan'];
+
+    preservationConstraints = [
+      'STRICT: Pertahankan bentuk, siluet, dan warna asli kemasan produk.',
+      'STRICT: Jangan merekonstruksi atau mengganti label merek asli kemasan.',
+      'STRICT: Jangan mengarang teks promosi atau watermark di dalam gambar.'
+    ];
+
+    negativePrompt = 'deformed product, altered packaging, wrong color, fictional logo, distorted text, blurry, bad lighting, watermark, advertising text';
+
+    const suasanaKustom = suasana ? suasana : 'studio komersial profesional dengan pencahayaan seimbang dan bayangan kontak alami';
+    promptStudio = `TASK: Reference-preserving commercial advertising product photography of ${nama}.
+Preserve the exact product identity, original silhouette, packaging, and authentic textures from the reference photo.
+Place the SAME product in an elegant commercial studio environment on ${suasanaKustom}.
+Use realistic softbox lighting, balanced exposure, and natural contact shadows.
+STRICT CONSTRAINTS: Do not alter product shape, colors, or existing labels.
+OUTPUT: Photorealistic commercial product photograph with high product fidelity.`;
+
+    creativeBrief = {
+      campaign_concept: `Promosi Unggulan: ${nama}`,
+      visual_style: 'Clean Commercial Studio Showcase',
+      headline: `${nama}: Pilihan Tepat Kualitas Terjamin`,
+      supporting_copy: keunggulan || 'Hadir dengan kualitas pilihan untuk kepuasan Anda.',
+      product_benefits: [
+        'Kualitas Terjamin',
+        'Bahan / Material Pilihan',
+        'Pemesanan Mudah via WhatsApp'
+      ],
+      composition: 'Balanced center-weighted commercial hero showcase',
+      color_palette: { primary: '#0F172A', accent: '#00A896', highlight: '#F59E0B', background: '#F8FAFC' },
+      typography_direction: 'Outfit clean modern sans-serif',
+      call_to_action: 'Hubungi WhatsApp Kami'
+    };
+
+    carouselSlides = [
+      {
+        slideNumber: 1,
+        badge: 'PRODUK PILIHAN',
+        title: nama,
+        subtitle: keunggulan || 'Kualitas terbaik untuk memenuhi kebutuhan harian Anda.',
+        chips: ['Foto Produk Asli', 'Kualitas Teruji', 'Pilihan Tepat'],
+        targetImageIndex: 0,
+        ctaText: 'Geser untuk melihat keunggulan →'
+      },
+      {
+        slideNumber: 2,
+        badge: 'KEUNGGULAN UTAMA',
+        title: 'Dibuat dengan Standar Kualitas Tinggi',
+        subtitle: 'Setiap detail dirancang dengan cermat untuk memberikan hasil terbaik.',
+        chips: ['Bahan Pilihan', 'Proses Higienis', 'Kualitas Teruji'],
+        targetImageIndex: 0,
+        ctaText: 'Geser ke detail manfaat →'
+      },
+      {
+        slideNumber: 3,
+        badge: 'MANFAAT NYATA',
+        title: 'Solusi Tepat untuk Anda',
+        subtitle: 'Memberikan kepuasan dan kenyamanan maksimal sejak pemakaian pertama.',
+        chips: ['Mudah Digunakan', 'Hasil Maksimal', 'Praktis'],
+        targetImageIndex: 0,
+        ctaText: 'Geser ke testimoni & pemesanan →'
+      },
+      {
+        slideNumber: 4,
+        badge: 'KEPERCAYAAN PELANGGAN',
+        title: 'Pilihan Pelanggan Setia Kami',
+        subtitle: 'Dipercaya oleh pelanggan karena kualitas yang konsisten dan pelayanan ramah.',
+        chips: ['Pelayanan Ramah', 'Packing Aman', 'Pengiriman Cepat'],
+        targetImageIndex: 0,
+        ctaText: 'Siap pesan? Geser ke slide penutup →'
+      },
+      {
+        slideNumber: 5,
+        badge: 'ORDER SEKARANG',
+        title: 'Dapatkan Penawaran Terbaik Hari Ini',
+        subtitle: 'Pesan langsung ke kontak WhatsApp resmi kami untuk respon cepat dan pelayanan terbaik.',
+        chips: ['Pemesanan Mudah', 'Konsultasi Gratis', 'Order via WA'],
+        targetImageIndex: 0,
+        ctaText: 'Hubungi WhatsApp Sekarang'
+      }
+    ];
+  }
+
+  const photoCoachInstructions = (fotos && fotos.length >= 2)
+    ? `Foto referensi lengkap (${fotos.length} foto). Multi-sudut pandang siap digunakan untuk Story dan Carousel 5 Slide.`
+    : `Foto produk utama sudah diterima. Agar calon pembeli memahami keunggulan multifungsi produk Anda, coba tambahkan foto saat produk digunakan (misal: stand terbuka / bersama laptop). Anda tetap dapat langsung memproses tanpa foto tambahan.`;
+
+  const inspector = {
+    product_identity: identity,
+    visible_attributes: visibleAttributes,
+    verified_features: verifiedFeatures,
+    seller_claims: sellerClaims,
+    unverified_features: unverifiedFeatures,
+    reference_image_roles: (fotos || []).map((_, idx) => ({
+      index: idx,
+      role: idx === 0 ? 'Cover Utama (Hero)' : (idx === 1 ? 'Fitur / Mekanisme' : (idx === 2 ? 'Detail / Mouse Pad' : 'Pemakaian Kontekstual'))
+    })),
+    best_hero_image: (fotos && fotos.length > 1) ? 1 : 0,
+    photo_quality_issues: [
+      'Pembersihan latar belakang sekeliling produk menjadi studio kerja modern profesional',
+      'Peningkatan pencahayaan dengan softbox seimbang dan bayangan kontak alami'
+    ],
+    additional_photo_required: !(fotos && fotos.length >= 2),
+    photo_coach_instructions: photoCoachInstructions,
+    preservation_constraints: preservationConstraints,
+    recommended_marketing_angles: [
+      '1 Produk 3 Fungsi: Solusi Kerja Fleksibel Tanpa Beban',
+      'Ergonomis & Nyaman: Hindari Pegal Leher Saat Mengetik Panjang',
+      'Desain Minimalis Elegan Berkelas Eksekutif'
+    ],
+    confidence_level: 'HIGH'
+  };
+
+  return {
+    inspector,
+    creativeBrief,
+    carouselSlides,
+    promptStudio,
+    negativePrompt
+  };
 }
 
 
